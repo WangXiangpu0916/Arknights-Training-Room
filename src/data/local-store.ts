@@ -1,0 +1,122 @@
+import { app, safeStorage } from 'electron';
+import { appendFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { AccountSnapshot, Settings } from '../domain/types';
+
+const DEFAULT_SETTINGS: Settings = {
+  unlimitedItemIds: [],
+  continuousSort: 'forward',
+  autoRefresh: false,
+};
+
+export interface StoredCredentials {
+  accessToken: string;
+  cred: string;
+  credToken: string;
+}
+
+export class LocalStore {
+  readonly root = app.getPath('userData');
+  readonly gameDataDir = path.join(this.root, 'game-data');
+  private readonly credentialPath = path.join(this.root, 'credentials.bin');
+  private readonly settingsPath = path.join(this.root, 'settings.json');
+  private readonly accountPath = path.join(this.root, 'account-cache.json');
+  private readonly logPath = path.join(this.root, 'app.log');
+
+  async initialize(): Promise<void> {
+    await mkdir(this.root, { recursive: true });
+    await mkdir(this.gameDataDir, { recursive: true });
+  }
+
+  async readSettings(): Promise<Settings> {
+    const value = await this.readJson<Partial<Settings>>(this.settingsPath);
+    return {
+      ...DEFAULT_SETTINGS,
+      ...value,
+      unlimitedItemIds: Array.isArray(value?.unlimitedItemIds)
+        ? value.unlimitedItemIds.filter(x => typeof x === 'string')
+        : [],
+      continuousSort: value?.continuousSort === 'reverse' ? 'reverse' : 'forward',
+    };
+  }
+
+  async writeSettings(settings: Settings): Promise<void> {
+    await this.writeJsonAtomic(this.settingsPath, settings);
+  }
+
+  async readAccount(): Promise<AccountSnapshot | null> {
+    const value = await this.readJson<Partial<AccountSnapshot>>(this.accountPath);
+    if (!value
+      || typeof value.uid !== 'string'
+      || typeof value.syncedAt !== 'string'
+      || !Array.isArray(value.operators)
+      || !value.inventory
+      || typeof value.inventory !== 'object') return null;
+    return value as AccountSnapshot;
+  }
+
+  writeAccount(account: AccountSnapshot): Promise<void> {
+    return this.writeJsonAtomic(this.accountPath, account);
+  }
+
+  async clearAccountCache(): Promise<void> {
+    await rm(this.accountPath, { force: true });
+  }
+
+  async writeCredentials(credentials: StoredCredentials): Promise<void> {
+    if (!safeStorage.isEncryptionAvailable()) {
+      throw new Error('Windows 安全存储当前不可用，拒绝保存森空岛凭据');
+    }
+    const encrypted = safeStorage.encryptString(JSON.stringify(credentials));
+    await writeFile(this.credentialPath, encrypted, { mode: 0o600 });
+  }
+
+  async readCredentials(): Promise<StoredCredentials | null> {
+    try {
+      if (!safeStorage.isEncryptionAvailable()) return null;
+      const encrypted = await readFile(this.credentialPath);
+      const parsed = JSON.parse(safeStorage.decryptString(encrypted)) as Partial<StoredCredentials>;
+      if (typeof parsed.accessToken !== 'string'
+        || typeof parsed.cred !== 'string'
+        || typeof parsed.credToken !== 'string') return null;
+      return parsed as StoredCredentials;
+    } catch {
+      return null;
+    }
+  }
+
+  async clearCredentials(): Promise<void> {
+    await rm(this.credentialPath, { force: true });
+  }
+
+  async log(event: string, detail = ''): Promise<void> {
+    try {
+      const size = await stat(this.logPath).then(x => x.size).catch(() => 0);
+      if (size > 1_000_000) {
+        await rm(`${this.logPath}.1`, { force: true });
+        await rename(this.logPath, `${this.logPath}.1`);
+      }
+      const safeDetail = detail
+        .replace(/[A-Za-z0-9_-]{24,}/g, '[REDACTED]')
+        .slice(0, 2000);
+      await appendFile(this.logPath, `${new Date().toISOString()} ${event} ${safeDetail}\n`, 'utf8');
+    } catch {
+      // 日志失败不得影响规划。
+    }
+  }
+
+  private async readJson<T>(file: string): Promise<T | null> {
+    try {
+      return JSON.parse(await readFile(file, 'utf8')) as T;
+    } catch {
+      return null;
+    }
+  }
+
+  private async writeJsonAtomic(file: string, value: unknown): Promise<void> {
+    const temporary = `${file}.tmp`;
+    await writeFile(temporary, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+    await rm(file, { force: true });
+    await rename(temporary, file);
+  }
+}

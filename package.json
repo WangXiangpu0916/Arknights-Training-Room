@@ -1,0 +1,53 @@
+{
+  "name": "arknights-training-room",
+  "version": "1.0.0",
+  "description": "明日方舟本地专精规划桌面应用",
+  "main": "dist/src/main.js",
+  "author": "Arknights Training Room contributors",
+  "license": "MIT",
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "npm run clean && tsc && node scripts/copy-static.mjs",
+    "start": "npm run build && electron .",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "dist": "npm test && electron-builder --win nsis portable"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/qrcode": "^1.5.5",
+    "electron": "^37.2.6",
+    "electron-builder": "^26.0.12",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "build": {
+    "appId": "io.github.arknights.trainingroom",
+    "productName": "明日方舟专精规划",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "renderer/**/*",
+      "resources/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "build/icon.png"
+    },
+    "asar": true,
+    "nsis": {
+      "artifactName": "明日方舟专精规划-${version}-setup-${arch}.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "明日方舟专精规划"
+    },
+    "portable": {
+      "artifactName": "明日方舟专精规划-${version}-portable-${arch}.${ext}"
+    }
+  }
+}

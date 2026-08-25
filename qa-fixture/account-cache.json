@@ -1,0 +1,25 @@
+{
+  "uid": "123456789",
+  "nickname": "测试博士",
+  "syncedAt": "2026-08-25T03:30:00.000Z",
+  "operators": [
+    {
+      "operatorId": "1035_wisdel",
+      "level": 90,
+      "elitePhase": 2,
+      "skillLevel": 7,
+      "skills": [
+        { "skillId": "skchr_wisdel_1", "masteryLevel": 3 },
+        { "skillId": "skchr_wisdel_2", "masteryLevel": 1 },
+        { "skillId": "skchr_wisdel_3", "masteryLevel": 2 }
+      ]
+    }
+  ],
+  "inventory": {
+    "3303": 50,
+    "30054": 4,
+    "30155": 6,
+    "30014": 10,
+    "31074": 4
+  }
+}
