@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
 import {
   GameData,
   MasteryLevel,
@@ -10,6 +11,8 @@ import {
 } from '../src/domain/types';
 import { CraftingEngine } from '../src/engine/crafting';
 import { MasteryPlanner } from '../src/engine/mastery';
+import { professionFromToolboxId, PRTS_PROFESSIONS } from '../src/domain/professions';
+import { masteryMaterialIds, unlimitedMaterialGroups } from '../src/domain/mastery-materials';
 
 const recipes: Recipe[] = [
   { productItemId: 'B', outputQuantity: 1, ingredients: [{ itemId: 'A', quantity: 3 }] },
@@ -29,7 +32,7 @@ const operator: OperatorDefinition = {
   operatorId: 'op',
   name: '测试干员',
   rarity: 6,
-  profession: 1,
+  profession: '近卫',
   skills: [1, 2, 3].map(index => ({
     skillId: `skill_${index}`,
     operatorId: 'op',
@@ -73,6 +76,91 @@ test('Case 1: 直接库存完全足够', () => {
   const result = makeEngine().fulfill({ A: 5 }, [{ itemId: 'A', quantity: 4 }]);
   assert.equal(result.feasible, true);
   assert.equal(result.remainingInventory.A, 1);
+});
+
+test('职业编号按 PRTS 八职业正确归一化', () => {
+  assert.deepEqual(PRTS_PROFESSIONS, ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种']);
+  assert.deepEqual(
+    [1, 2, 3, 4, 5, 6, 7, 8].map(professionFromToolboxId),
+    ['近卫', '狙击', '重装', '医疗', '辅助', '术师', '特种', '先锋'],
+  );
+
+  const characters = JSON.parse(readFileSync('resources/game-data/character.json', 'utf8'));
+  const representatives = {
+    '112_siege': '先锋',
+    '172_svrash': '近卫',
+    '136_hsguma': '重装',
+    '103_angel': '狙击',
+    '180_amgoat': '术师',
+    '147_shining': '医疗',
+    '291_aglina': '辅助',
+    '250_phatom': '特种',
+  };
+  for (const [operatorId, profession] of Object.entries(representatives)) {
+    assert.equal(professionFromToolboxId(characters[operatorId].profession), profession);
+  }
+});
+
+test('无限供应候选仅包含专精材料及其加工链，不包含职业芯片', () => {
+  const withChip: GameData = {
+    ...gameData,
+    materials: [...materials, { itemId: '3211', name: '先锋芯片', rarity: 2, type: 0 }],
+  };
+  assert.deepEqual([...masteryMaterialIds(withChip)].sort(), ['A', 'B', 'C']);
+
+  const cultivate = JSON.parse(readFileSync('resources/game-data/cultivate.json', 'utf8'));
+  const items = JSON.parse(readFileSync('resources/game-data/item.json', 'utf8'));
+  const realRequirements = new Set<string>();
+  for (const operator of Object.values(cultivate) as any[]) {
+    for (const skill of operator.skills?.elite ?? []) {
+      for (const cost of skill.cost ?? []) Object.keys(cost).forEach(id => realRequirements.add(id));
+    }
+  }
+  const realData: GameData = {
+    ...gameData,
+    operators: [{
+      ...operator,
+      skills: [{ ...operator.skills[0], requirements: {
+        1: [...realRequirements].map(itemId => ({ itemId, quantity: 1 })), 2: [], 3: [],
+      } }],
+    }],
+    materials: Object.entries(items).map(([itemId, item]: [string, any]) => ({
+      itemId,
+      name: itemId,
+      rarity: item.rare,
+      type: item.type,
+      recipe: item.formula ? {
+        productItemId: itemId,
+        outputQuantity: 1,
+        ingredients: Object.entries(item.formula).map(([id, quantity]) => ({ itemId: id, quantity: Number(quantity) })),
+      } : undefined,
+    })),
+  };
+  const eligible = masteryMaterialIds(realData);
+  assert.equal(Object.keys(items).filter(id => /^32[1-8][1-3]$/.test(id)).length, 24);
+  assert.equal([...eligible].some(id => /^32[1-8][1-3]$/.test(id)), false);
+});
+
+test('无限供应仅允许蓝色专精材料，技巧概要单独成组', () => {
+  const data: GameData = {
+    ...gameData,
+    operators: [{
+      ...operator,
+      skills: [{ ...operator.skills[0], requirements: {
+        1: [{ itemId: 'blue', quantity: 1 }, { itemId: 'purple', quantity: 1 }], 2: [], 3: [],
+      } }],
+    }],
+    materials: [
+      { itemId: 'blue', name: '蓝色材料', rarity: 3, type: 0 },
+      { itemId: 'purple', name: '紫色材料', rarity: 4, type: 0 },
+      { itemId: 'book2', name: '技巧概要·卷2', rarity: 3, type: 3 },
+      { itemId: 'book3', name: '技巧概要·卷3', rarity: 4, type: 3 },
+    ],
+  };
+  const groups = unlimitedMaterialGroups(data);
+  assert.deepEqual([...groups.blue], ['blue']);
+  assert.deepEqual([...groups.skillSummaries], ['book2', 'book3']);
+  assert.deepEqual([...groups.allowed].sort(), ['blue', 'book2', 'book3']);
 });
 
 test('Case 2: 高级材料不足时由低级材料补足', () => {

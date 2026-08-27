@@ -56,11 +56,12 @@ function registerIpc(): void {
 
 async function createWindow(): Promise<void> {
   mainWindow = new BrowserWindow({
-    width: 1360,
-    height: 860,
+    width: Number(process.env.ATR_WINDOW_WIDTH) || 1360,
+    height: Number(process.env.ATR_WINDOW_HEIGHT) || 860,
     minWidth: 1040,
     minHeight: 680,
     title: '明日方舟专精规划',
+    icon: path.join(app.getAppPath(), 'build', 'icon.png'),
     backgroundColor: '#101317',
     show: false,
     webPreferences: {
@@ -82,6 +83,12 @@ async function createWindow(): Promise<void> {
     if (process.env.ATR_SCREENSHOT_PAGE) {
       await mainWindow.webContents.executeJavaScript(
         `document.querySelector('[data-page="${process.env.ATR_SCREENSHOT_PAGE}"]')?.click()`,
+      );
+      await new Promise(resolve => setTimeout(resolve, 300));
+    }
+    if (process.env.ATR_SCREENSHOT_MODE) {
+      await mainWindow.webContents.executeJavaScript(
+        `document.querySelector('[data-mode="${process.env.ATR_SCREENSHOT_MODE}"]')?.click()`,
       );
       await new Promise(resolve => setTimeout(resolve, 300));
     }

@@ -67,7 +67,7 @@ GET  zonai.skland.com/api/v1/game/cultivate/player?uid=...
 
 - `SklandClient` 是账号 adapter；未来可由其他账号 provider 替代，只需输出 `AccountSnapshot`。
 - `ToolboxGameDataProvider` 是静态数据 provider；业务引擎只消费统一 `GameData`，不依赖 GitHub 或网页 HTML。
-- PRTS 未作为运行时来源。结构化数据缺字段时应在 provider 层增加校验/补充，不把 HTML 结构渗入规划器。
+- PRTS 仅用于通过 `npm run assets:sync` 同步专精等级与技能原始 PNG 到 `resources/images`；应用运行时不联网访问 PRTS。结构化数据缺字段时仍应在 provider 层增加校验/补充，不把 HTML 结构渗入规划器。
 
 ## 参考实现
 

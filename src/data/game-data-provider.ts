@@ -2,6 +2,7 @@ import { app } from 'electron';
 import { cp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { GameData, Material, MaterialAmount, OperatorDefinition } from '../domain/types';
+import { professionFromToolboxId } from '../domain/professions';
 import { LocalStore } from './local-store';
 
 type Dict<T> = Record<string, T>;
@@ -124,7 +125,7 @@ export class ToolboxGameDataProvider {
         operatorId,
         name: characterNames[operatorId],
         rarity: character.star,
-        profession: character.profession,
+        profession: professionFromToolboxId(character.profession),
         skills: elite.map((skill, index) => ({
           skillId: skill.name,
           operatorId,

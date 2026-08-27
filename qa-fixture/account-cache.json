@@ -10,16 +10,61 @@
       "skillLevel": 7,
       "skills": [
         { "skillId": "skchr_wisdel_1", "masteryLevel": 3 },
-        { "skillId": "skchr_wisdel_2", "masteryLevel": 1 },
+        { "skillId": "skchr_wisdel_2", "masteryLevel": 3 },
         { "skillId": "skchr_wisdel_3", "masteryLevel": 2 }
       ]
+    },
+    {
+      "operatorId": "1028_texas2",
+      "level": 90,
+      "elitePhase": 2,
+      "skillLevel": 7,
+      "skills": [
+        { "skillId": "skchr_texas2_1", "masteryLevel": 3 },
+        { "skillId": "skchr_texas2_2", "masteryLevel": 1 },
+        { "skillId": "skchr_texas2_3", "masteryLevel": 3 }
+      ]
+    },
+    {
+      "operatorId": "1049_catap2",
+      "level": 80,
+      "elitePhase": 2,
+      "skillLevel": 7,
+      "skills": [
+        { "skillId": "skchr_catap2_1", "masteryLevel": 3 },
+        { "skillId": "skchr_catap2_2", "masteryLevel": 0 }
+      ]
+    },
+    {
+      "operatorId": "172_svrash",
+      "level": 90,
+      "elitePhase": 2,
+      "skillLevel": 7,
+      "skills": [
+        { "skillId": "skchr_svrash_1", "masteryLevel": 0 },
+        { "skillId": "skchr_svrash_2", "masteryLevel": 3 },
+        { "skillId": "skchr_svrash_3", "masteryLevel": 3 }
+      ]
+    },
+    {
+      "operatorId": "112_siege",
+      "level": 90,
+      "elitePhase": 2,
+      "skillLevel": 7,
+      "skills": []
     }
   ],
   "inventory": {
     "3303": 50,
-    "30054": 4,
+    "30023": 4,
+    "30044": 4,
+    "30054": 20,
     "30155": 6,
     "30014": 10,
-    "31074": 4
+    "31024": 3,
+    "31064": 6,
+    "31074": 4,
+    "31093": 2,
+    "30115": 4
   }
 }

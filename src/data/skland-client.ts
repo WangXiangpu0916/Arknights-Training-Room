@@ -1,7 +1,7 @@
 import { createHash, createHmac, randomUUID } from 'node:crypto';
 import QRCode from 'qrcode';
 import { AccountSnapshot, MasteryLevel, OwnedOperator } from '../domain/types';
-import { LocalStore, StoredCredentials } from './local-store';
+import type { LocalStore, StoredCredentials } from './local-store';
 
 const APP_CODE = '4ca99fa6b56cc2ba';
 const HG_BASE = 'https://as.hypergryph.com';
@@ -34,6 +34,18 @@ interface RawCharacter {
 interface RawCultivate {
   characters?: RawCharacter[];
   items?: Array<{ id: string; count: number | string }>;
+}
+
+class HttpStatusError extends Error {
+  constructor(readonly status: number, label: string) {
+    super(`${label}：HTTP ${status}`);
+  }
+}
+
+class ApiStatusError extends Error {
+  constructor(readonly status: number | undefined, label: string, message: string) {
+    super(`${label}：${message}`);
+  }
 }
 
 export class SklandClient {
@@ -155,16 +167,42 @@ export class SklandClient {
   private async signedGet<T>(path: string): Promise<T> {
     let credentials = await this.store.readCredentials();
     if (!credentials) throw new Error('尚未连接森空岛');
-    let envelope = await this.rawSignedGet<T>(path, credentials);
-    if (envelope.code === 10000) {
-      credentials = await this.refreshCredToken(credentials);
-      envelope = await this.rawSignedGet<T>(path, credentials);
+
+    let refreshStage = 0;
+    while (true) {
+      let envelope: ApiEnvelope<T>;
+      try {
+        envelope = await this.rawSignedGet<T>(path, credentials);
+      } catch (error) {
+        if (!(error instanceof HttpStatusError) || error.status !== 401) throw error;
+        envelope = { code: refreshStage === 0 ? 10000 : 10002, data: undefined as T };
+      }
+
+      const status = envelope.code ?? envelope.status;
+      if (status === 10000 && refreshStage === 0) {
+        try {
+          credentials = await this.refreshCredToken(credentials);
+          refreshStage = 1;
+          continue;
+        } catch (error) {
+          if (!this.isCredentialFailure(error)) throw error;
+        }
+      }
+      if ((status === 10000 || status === 10002) && refreshStage < 2) {
+        try {
+          credentials = await this.refreshCredentials(credentials);
+          refreshStage = 2;
+          continue;
+        } catch (error) {
+          if (!this.isCredentialFailure(error)) throw error;
+          throw this.reauthenticationRequired();
+        }
+      }
+      if ((status === 10000 || status === 10002) && refreshStage === 2) {
+        throw this.reauthenticationRequired();
+      }
+      return this.unwrap(envelope, '森空岛请求失败');
     }
-    if (envelope.code === 10002) {
-      credentials = await this.refreshCredentials(credentials);
-      envelope = await this.rawSignedGet<T>(path, credentials);
-    }
-    return this.unwrap(envelope, '森空岛请求失败');
   }
 
   private async rawSignedGet<T>(path: string, credentials: StoredCredentials): Promise<ApiEnvelope<T>> {
@@ -185,7 +223,7 @@ export class SklandClient {
         'User-Agent': USER_AGENT,
       },
     });
-    if (!response.ok) throw new Error(`森空岛网络错误：HTTP ${response.status}`);
+    if (!response.ok) throw new HttpStatusError(response.status, '森空岛网络错误');
     return response.json() as Promise<ApiEnvelope<T>>;
   }
 
@@ -222,13 +260,24 @@ export class SklandClient {
       ...init,
       headers: { 'User-Agent': USER_AGENT, ...init.headers },
     });
-    if (!response.ok) throw new Error(`网络请求失败：HTTP ${response.status}`);
+    if (!response.ok) throw new HttpStatusError(response.status, '网络请求失败');
     return this.unwrap(await response.json() as ApiEnvelope<T>, '接口请求失败');
   }
 
   private unwrap<T>(envelope: ApiEnvelope<T>, label: string): T {
     const status = envelope.code ?? envelope.status;
-    if (status !== 0) throw new Error(`${label}：${envelope.message ?? envelope.msg ?? `错误码 ${status}`}`);
+    if (status !== 0) {
+      throw new ApiStatusError(status, label, envelope.message ?? envelope.msg ?? `错误码 ${status}`);
+    }
     return envelope.data;
+  }
+
+  private isCredentialFailure(error: unknown): boolean {
+    return error instanceof ApiStatusError
+      || (error instanceof HttpStatusError && (error.status === 401 || error.status === 403));
+  }
+
+  private reauthenticationRequired(): Error {
+    return new Error('森空岛认证已失效，自动续期失败。请立即重新认证');
   }
 }

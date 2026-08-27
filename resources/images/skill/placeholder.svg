@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="技能图标暂缺">
+  <rect width="128" height="128" rx="8" fill="#20262d"/>
+  <path d="M18 18h92v92H18z" fill="none" stroke="#59636e" stroke-width="4" stroke-dasharray="8 7"/>
+  <path d="M49 49a16 16 0 0 1 30 8c0 13-15 14-15 25" fill="none" stroke="#89949f" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="64" cy="96" r="5" fill="#89949f"/>
+</svg>

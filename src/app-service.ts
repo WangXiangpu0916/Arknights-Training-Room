@@ -4,6 +4,7 @@ import { ToolboxGameDataProvider } from './data/game-data-provider';
 import { SklandClient } from './data/skland-client';
 import { MasteryPlanner } from './engine/mastery';
 import { CraftingEngine } from './engine/crafting';
+import { unlimitedMaterialGroups } from './domain/mastery-materials';
 
 export class AppService {
   private gameData!: GameData;
@@ -27,11 +28,13 @@ export class AppService {
       this.store.readAccount(),
       this.store.readSettings(),
     ]);
+    await this.sanitizeUnlimitedItems();
   }
 
   async state() {
     const loggedIn = Boolean(await this.store.readCredentials());
     const planner = new MasteryPlanner(this.gameData);
+    const unlimitedMaterials = unlimitedMaterialGroups(this.gameData);
     const single = this.account
       ? planner.singleStage(this.account.operators, this.account.inventory, this.settings.unlimitedItemIds)
       : [];
@@ -48,6 +51,8 @@ export class AppService {
       account: this.account,
       gameData: this.gameData,
       settings: this.settings,
+      unlimitedEligibleItemIds: [...unlimitedMaterials.blue],
+      skillSummaryItemIds: [...unlimitedMaterials.skillSummaries],
       single,
       continuous,
       usingCache: Boolean(this.account && this.usingCache),
@@ -79,6 +84,7 @@ export class AppService {
   async updateGameData(): Promise<ReturnType<AppService['state']>> {
     try {
       this.gameData = await this.gameProvider.update();
+      await this.sanitizeUnlimitedItems();
       this.lastError = '';
       await this.store.log('game-data-update-success', this.gameData.version);
     } catch (error) {
@@ -90,7 +96,7 @@ export class AppService {
   }
 
   async updateSettings(patch: Partial<Settings>): Promise<ReturnType<AppService['state']>> {
-    const materialIds = new Set(this.gameData.materials.map(x => x.itemId));
+    const materialIds = unlimitedMaterialGroups(this.gameData).allowed;
     this.settings = {
       ...this.settings,
       ...patch,
@@ -101,6 +107,14 @@ export class AppService {
     };
     await this.store.writeSettings(this.settings);
     return this.state();
+  }
+
+  private async sanitizeUnlimitedItems(): Promise<void> {
+    const eligible = unlimitedMaterialGroups(this.gameData).allowed;
+    const filtered = this.settings.unlimitedItemIds.filter(id => eligible.has(id));
+    if (filtered.length === this.settings.unlimitedItemIds.length) return;
+    this.settings = { ...this.settings, unlimitedItemIds: filtered };
+    await this.store.writeSettings(this.settings);
   }
 
   async logout(): Promise<ReturnType<AppService['state']>> {

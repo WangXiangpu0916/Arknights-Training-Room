@@ -1,12 +1,13 @@
 {
   "name": "arknights-training-room",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "明日方舟本地专精规划桌面应用",
   "main": "dist/src/main.js",
   "author": "Arknights Training Room contributors",
   "license": "MIT",
   "scripts": {
     "clean": "node scripts/clean.mjs",
+    "assets:sync": "node scripts/sync-prts-assets.mjs",
     "build": "npm run clean && tsc && node scripts/copy-static.mjs",
     "start": "npm run build && electron .",
     "test": "npm run build && node --test dist/tests/*.test.js",
@@ -29,6 +30,7 @@
       "output": "release"
     },
     "files": [
+      "build/icon.png",
       "dist/**/*",
       "renderer/**/*",
       "resources/**/*",
