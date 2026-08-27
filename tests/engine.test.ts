@@ -33,6 +33,7 @@ const operator: OperatorDefinition = {
   name: '测试干员',
   rarity: 6,
   profession: '近卫',
+  subProfession: '无畏者',
   skills: [1, 2, 3].map(index => ({
     skillId: `skill_${index}`,
     operatorId: 'op',
@@ -99,6 +100,16 @@ test('职业编号按 PRTS 八职业正确归一化', () => {
   for (const [operatorId, profession] of Object.entries(representatives)) {
     assert.equal(professionFromToolboxId(characters[operatorId].profession), profession);
   }
+});
+
+test('PRTS 职业分支覆盖当前全部可专精干员', () => {
+  const cultivate = JSON.parse(readFileSync('resources/game-data/cultivate.json', 'utf8'));
+  const branches = JSON.parse(readFileSync('resources/game-data/subprofession-cn.json', 'utf8'));
+  const operatorIds = Object.entries(cultivate)
+    .filter(([, value]: [string, any]) => value.skills?.elite?.length)
+    .map(([operatorId]) => operatorId);
+  assert.deepEqual(operatorIds.filter(operatorId => !branches[operatorId]), []);
+  assert.equal(branches['1035_wisdel'], '投掷手');
 });
 
 test('无限供应候选仅包含专精材料及其加工链，不包含职业芯片', () => {

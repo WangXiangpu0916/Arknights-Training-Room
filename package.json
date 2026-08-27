@@ -1,7 +1,8 @@
 {
   "name": "arknights-training-room",
-  "version": "1.0.5",
-  "description": "明日方舟本地专精规划桌面应用",
+  "version": "1.0.9",
+  "description": "训练室：明日方舟本地专精规划桌面应用",
+  "repository": "https://github.com/7aroland/Arknights-Training-Room.git",
   "main": "dist/src/main.js",
   "author": "Arknights Training Room contributors",
   "license": "MIT",
@@ -21,11 +22,12 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "electron-updater": "^6.8.9",
     "qrcode": "^1.5.4"
   },
   "build": {
     "appId": "io.github.arknights.trainingroom",
-    "productName": "明日方舟专精规划",
+    "productName": "训练室",
     "directories": {
       "output": "release"
     },
@@ -33,23 +35,36 @@
       "build/icon.png",
       "dist/**/*",
       "renderer/**/*",
-      "resources/**/*",
+      "resources/images/**/*",
       "package.json"
     ],
+    "extraResources": [
+      {
+        "from": "resources/game-data",
+        "to": "game-data"
+      }
+    ],
     "win": {
-      "icon": "build/icon.png"
+      "icon": "build/icon.png",
+      "target": "nsis"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "7aroland",
+      "repo": "Arknights-Training-Room",
+      "releaseType": "release"
     },
     "asar": true,
     "nsis": {
-      "artifactName": "明日方舟专精规划-${version}-setup-${arch}.${ext}",
+      "artifactName": "Arknights-Training-Room-${version}-Setup-${arch}.${ext}",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "明日方舟专精规划"
+      "shortcutName": "训练室"
     },
     "portable": {
-      "artifactName": "明日方舟专精规划-${version}-portable-${arch}.${ext}"
+      "artifactName": "Arknights-Training-Room-${version}-Portable-${arch}.${ext}"
     }
   }
 }

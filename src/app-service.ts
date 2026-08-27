@@ -46,6 +46,12 @@ export class AppService {
           this.settings.continuousSort,
         )
       : [];
+    const singleReal = this.account
+      ? planner.singleStage(this.account.operators, this.account.inventory, [])
+      : [];
+    const continuousReal = this.account
+      ? planner.continuous(this.account.operators, this.account.inventory, [], this.settings.continuousSort)
+      : [];
     return {
       loggedIn,
       account: this.account,
@@ -55,6 +61,8 @@ export class AppService {
       skillSummaryItemIds: [...unlimitedMaterials.skillSummaries],
       single,
       continuous,
+      singleReal,
+      continuousReal,
       usingCache: Boolean(this.account && this.usingCache),
       lastError: this.lastError,
     };

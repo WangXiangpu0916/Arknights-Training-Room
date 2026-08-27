@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Verify tag matches package version
+        shell: pwsh
+        run: |
+          $expected = "v$((Get-Content package.json | ConvertFrom-Json).version)"
+          if ("${{ github.ref_name }}" -ne $expected) { throw "Tag must be $expected" }
+      - name: Build, test and publish GitHub Release
+        run: npm run dist -- --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

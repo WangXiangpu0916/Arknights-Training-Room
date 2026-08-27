@@ -47,8 +47,7 @@ export class ToolboxGameDataProvider {
       return await this.load();
     } catch {
       await rm(this.store.gameDataDir, { recursive: true, force: true });
-      const bundled = path.join(app.getAppPath(), 'resources', 'game-data');
-      await cp(bundled, this.store.gameDataDir, { recursive: true });
+      await cp(this.bundledGameDataDir(), this.store.gameDataDir, { recursive: true });
       await this.store.log('game-data-cache-recovered', '已回退到内置游戏数据');
       return this.load();
     }
@@ -92,13 +91,14 @@ export class ToolboxGameDataProvider {
   }
 
   private async loadFrom(directory: string): Promise<GameData> {
-    const [characters, cultivate, items, characterNames, materialNames, skillNames, metadata] = await Promise.all([
+    const [characters, cultivate, items, characterNames, materialNames, skillNames, subProfessionNames, metadata] = await Promise.all([
       this.json<Dict<RawCharacter>>(directory, 'character.json'),
       this.json<Dict<RawCultivate>>(directory, 'cultivate.json'),
       this.json<Dict<RawItem>>(directory, 'item.json'),
       this.json<Dict<string>>(directory, 'character-cn.json'),
       this.json<Dict<string>>(directory, 'material-cn.json'),
       this.json<Dict<string>>(directory, 'skill-cn.json'),
+      this.json<Dict<string>>(this.bundledGameDataDir(), 'subprofession-cn.json'),
       this.json<{ version: string; updatedAt: string; sourceCommit?: string }>(directory, 'data-version.json'),
     ]);
 
@@ -126,6 +126,7 @@ export class ToolboxGameDataProvider {
         name: characterNames[operatorId],
         rarity: character.star,
         profession: professionFromToolboxId(character.profession),
+        subProfession: subProfessionNames[operatorId] ?? '未知分支',
         skills: elite.map((skill, index) => ({
           skillId: skill.name,
           operatorId,
@@ -155,5 +156,11 @@ export class ToolboxGameDataProvider {
 
   private async json<T>(directory: string, name: string): Promise<T> {
     return JSON.parse(await readFile(path.join(directory, name), 'utf8')) as T;
+  }
+
+  private bundledGameDataDir(): string {
+    return app.isPackaged
+      ? path.join(process.resourcesPath, 'game-data')
+      : path.join(app.getAppPath(), 'resources', 'game-data');
   }
 }

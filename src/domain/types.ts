@@ -32,6 +32,7 @@ export interface OperatorDefinition {
   name: string;
   rarity: number;
   profession: string;
+  subProfession: string;
   skills: SkillDefinition[];
 }
 

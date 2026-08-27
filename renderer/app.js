@@ -3,15 +3,17 @@ const content = document.querySelector('#content');
 const modal = document.querySelector('#modal');
 const modalContent = document.querySelector('#modal-content');
 let state;
+let updateState;
 let page = 'dashboard';
 let mode = 'single';
-let filters = { search: '', profession: '', rarity: '', skill: '', mastery: '', unlimited: '' };
+let filters = { search: '', profession: '', rarity: '', skill: '', mastery: '', unlimited: 'with' };
 
 const professions = ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种'];
 const unlimitedPriority = new Map(['30103', '30093', '30083', '30073'].map((id, index) => [id, index]));
-const hiddenInventoryMaterials = new Set([
-  ...professions.flatMap(profession => [`${profession}芯片`, `${profession}芯片组`, `${profession}双芯片`]),
-  '芯片助剂', '模组数据块', '数据增补仪', '数据增补条', '采购凭证',
+const inventoryMaterialIds = new Set([
+  '31113', '31103', '31093', '31083', '31073', '31063', '31053',
+  '31043', '31033', '31023', '31013', '30073', '30083', '30093',
+  '30103', '30013', '30063', '30033', '30023', '30043', '30053',
 ]);
 const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]));
 const fmtTime = value => value ? new Date(value).toLocaleString('zh-CN', { hour12: false }) : '从未';
@@ -29,7 +31,7 @@ const showToast = message => {
 };
 
 async function loadState() {
-  state = await api.getState();
+  [state, updateState] = await Promise.all([api.getState(), api.getUpdateState()]);
   render();
 }
 
@@ -78,13 +80,15 @@ function renderDashboard() {
     bindActions();
     return;
   }
-  const list = (mode === 'single' ? state.single : state.continuous).filter(candidate => {
+  const source = filters.unlimited === 'real'
+    ? (mode === 'single' ? state.singleReal : state.continuousReal)
+    : (mode === 'single' ? state.single : state.continuous);
+  const list = source.filter(candidate => {
     return (!filters.search || `${candidate.operator.name}${candidate.skill.name}`.includes(filters.search))
       && (!filters.profession || candidate.operator.profession === filters.profession)
       && (!filters.rarity || String(candidate.operator.rarity) === filters.rarity)
       && (!filters.skill || String(candidate.skill.index) === filters.skill)
-      && (!filters.mastery || String(candidate.from) === filters.mastery)
-      && (!filters.unlimited || String(candidate.usesUnlimited) === filters.unlimited);
+      && (!filters.mastery || String(candidate.from) === filters.mastery);
   });
   const unlimited = new Set(state.settings.unlimitedItemIds);
   const skillSummariesUnlimited = state.skillSummaryItemIds.some(id => unlimited.has(id));
@@ -98,9 +102,9 @@ function renderDashboard() {
       <input data-filter="search" value="${esc(filters.search)}" placeholder="搜索干员或技能">
       ${select('profession', '全部职业', professions.map(name => [name, name]))}
       ${select('rarity', '全部星级', [[6,'六星'],[5,'五星'],[4,'四星'],[3,'三星']])}
-      ${select('skill', '全部技能', [[1,'S1'],[2,'S2'],[3,'S3']])}
+      ${select('skill', '全部技能', [[1,'一技能'],[2,'二技能'],[3,'三技能']])}
       ${select('mastery', '全部当前等级', [[0,'M0'],[1,'M1'],[2,'M2']])}
-      ${select('unlimited', '无限池不限', [['false','仅真实仓库'],['true','使用无限材料']])}
+      <div class="segmented filter-mode" role="group" aria-label="材料供应模式"><button data-supply-mode="with" class="${filters.unlimited === 'with' ? 'active' : ''}">使用无限材料</button><button data-supply-mode="real" class="${filters.unlimited === 'real' ? 'active' : ''}">仅真实仓库</button></div>
     </div>
     <div class="result-summary">找到 ${list.length} 个当前可行候选</div>
     ${list.length ? `<div class="cards">${list.map(candidateCard).join('')}</div>` : `<div class="empty"><div><h2>当前筛选下没有可行专精</h2><p>仓库、专精状态或无限供应设置变化后会自动重新计算。</p></div></div>`}`;
@@ -112,11 +116,11 @@ function select(name, placeholder, options) {
 }
 
 function candidateCard(candidate, index) {
-  return `<article class="candidate">
+  return `<article class="candidate" data-candidate="${mode}:${index}" data-key="${esc(candidate.operator.operatorId)}:${esc(candidate.skill.skillId)}" role="button" tabindex="0" aria-label="查看${esc(candidate.operator.name)}的${esc(candidate.skill.name)}专精材料">
     <div class="candidate-main">
       <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
       <div class="candidate-details">
-        <div class="candidate-heading"><h3>${esc(candidate.operator.name)}</h3><button class="link-button" data-candidate="${mode}:${index}" data-key="${esc(candidate.operator.operatorId)}:${esc(candidate.skill.skillId)}">查看材料 →</button></div>
+        <div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
         <div class="candidate-visuals">
           <div class="mastery-line" aria-label="M${candidate.from} 到 M${candidate.to}">
             <img class="mastery-icon" src="${masteryIcon(candidate.from)}" alt="M${candidate.from}">
@@ -125,7 +129,7 @@ function candidateCard(candidate, index) {
           </div>
           <div class="skill-info">
             <img class="skill-icon" src="${skillIcon(candidate.skill.skillId)}" alt="${esc(candidate.skill.name)}技能图标" data-img-fallback="skill">
-            <div class="skill-copy" title="${esc(candidate.skill.name)}"><strong>${esc(candidate.skill.name)}</strong>${candidate.usesUnlimited ? '<span class="candidate-special">依赖无限材料</span>' : ''}</div>
+            <div class="skill-copy" title="${esc(candidate.skill.name)}"><strong>${esc(candidate.skill.name)}</strong></div>
           </div>
         </div>
       </div>
@@ -141,15 +145,20 @@ function renderOperators() {
     .map(owned => ({ owned, definition: defs.get(owned.operatorId) }))
     .filter(x => x.definition && (!query || x.definition.name.includes(query)))
     .sort((a, b) => b.definition.rarity - a.definition.rarity || a.definition.name.localeCompare(b.definition.name, 'zh-CN'));
-  const available = [...state.single, ...state.continuous];
+  const available = state.single;
   content.innerHTML = `${banners()}<div class="toolbar"><input data-filter="search" value="${esc(query)}" placeholder="搜索已持有干员" style="max-width:360px"><span class="badge muted">已持有 ${rows.length}</span></div>
     <div class="operator-list">${rows.map(({ owned, definition }) => `<article class="operator-row">
       <img class="operator-avatar" src="${avatar(definition.operatorId)}" alt="" data-img-fallback>
       <div><h3>${esc(definition.name)}</h3><div class="operator-meta">${definition.rarity}★ · ${esc(definition.profession)}<br>精英 ${owned.elitePhase} · Lv.${owned.level} · 技能 Rank ${owned.skillLevel}</div></div>
-      <div class="skill-pills">${definition.skills.map(skill => {
+      <div class="operator-skills" aria-label="${esc(definition.name)}技能专精状态">${[...definition.skills].sort((a, b) => a.index - b.index).map(skill => {
         const ownedSkill = owned.skills.find(x => x.skillId === skill.skillId);
         const candidate = available.find(x => x.operator.operatorId === definition.operatorId && x.skill.skillId === skill.skillId);
-        return `<div class="skill-pill ${candidate ? 'can' : ''}"><strong>S${skill.index} · M${ownedSkill?.masteryLevel ?? 0}</strong><br><span class="${candidate ? 'success' : 'operator-meta'}">${candidate ? `可到 M${candidate.to}` : ownedSkill?.masteryLevel === 3 ? '已完成' : '当前不可完成'}</span></div>`;
+        const masteryLevel = ownedSkill?.masteryLevel ?? 0;
+        const status = candidate ? `当前可升级到 M${candidate.to}` : masteryLevel === 3 ? '已完成专精' : '当前不可升级';
+        return `<div class="operator-skill ${candidate ? 'can-upgrade' : ''}" title="${esc(`第${skill.index}技能 · ${skill.name} · M${masteryLevel} · ${status}`)}" aria-label="${esc(`${skill.name}，当前 M${masteryLevel}，${status}`)}">
+          <img src="${skillIcon(skill.skillId)}" alt="${esc(skill.name)}技能图标" data-img-fallback="skill">
+          <span class="operator-skill-mastery">M${masteryLevel}</span>
+        </div>`;
       }).join('')}</div>
     </article>`).join('')}</div>`;
   bindActions();
@@ -158,28 +167,19 @@ function renderOperators() {
 function renderInventory() {
   if (!state.account) return renderDashboard();
   const query = filters.search;
-  const rarity = filters.rarity;
   const unlimited = new Set(state.settings.unlimitedItemIds);
   const unlimitedEligible = new Set(state.unlimitedEligibleItemIds);
   const blueUnlimitedCount = state.settings.unlimitedItemIds.filter(id => unlimitedEligible.has(id)).length;
   const rows = state.gameData.materials
-    .filter(item => !hiddenInventoryMaterials.has(item.name))
-    .filter(item => unlimitedEligible.has(item.itemId)
-      || Object.prototype.hasOwnProperty.call(state.account.inventory, item.itemId)
-      || item.recipe)
-    .filter(item => (!query || item.name.includes(query)) && (!rarity || String(item.rarity) === rarity))
+    .filter(item => inventoryMaterialIds.has(item.itemId))
+    .filter(item => !query || item.name.includes(query))
     .sort((a, b) => {
-      const aEligible = unlimitedEligible.has(a.itemId);
-      const bEligible = unlimitedEligible.has(b.itemId);
-      if (aEligible !== bEligible) return aEligible ? -1 : 1;
-      if (aEligible) return (unlimitedPriority.get(a.itemId) ?? Infinity)
+      return (unlimitedPriority.get(a.itemId) ?? Infinity)
         - (unlimitedPriority.get(b.itemId) ?? Infinity)
         || a.name.localeCompare(b.name, 'zh-CN');
-      return b.rarity - a.rarity || a.name.localeCompare(b.name, 'zh-CN');
     });
-  content.innerHTML = `${banners()}<div class="filters" style="grid-template-columns:minmax(240px,1fr) 180px auto">
+  content.innerHTML = `${banners()}<div class="filters" style="grid-template-columns:minmax(240px,1fr) auto">
     <input data-filter="search" value="${esc(query)}" placeholder="搜索材料">
-    ${select('rarity', '全部材料等级', [[5,'等级 5'],[4,'等级 4'],[3,'等级 3'],[2,'等级 2'],[1,'等级 1']])}
     <span class="badge blue">已设无限 ${blueUnlimitedCount} 项蓝色材料</span>
   </div><div class="table-wrap"><table><thead><tr><th>材料</th><th>等级</th><th>实际数量</th><th>规划状态</th><th>无限供应（仅蓝色）</th><th></th></tr></thead><tbody>
     ${rows.map(item => `<tr><td><div class="material-cell"><img class="item-icon" src="${itemIcon(item.itemId)}" alt="" data-img-fallback><strong>${esc(item.name)}</strong></div></td><td>${item.rarity}</td><td>${state.account.inventory[item.itemId] ?? 0}</td><td class="${unlimited.has(item.itemId) ? 'infinity' : ''}">${unlimited.has(item.itemId) ? '∞' : state.account.inventory[item.itemId] ?? 0}</td><td>${unlimitedEligible.has(item.itemId) ? `<label class="switch"><input type="checkbox" data-unlimited="${esc(item.itemId)}" ${unlimited.has(item.itemId) ? 'checked' : ''}><span></span></label>` : '<span class="operator-meta">—</span>'}</td><td><button class="link-button" data-material="${esc(item.itemId)}">查看配方</button></td></tr>`).join('')}
@@ -188,15 +188,22 @@ function renderInventory() {
 }
 
 function renderSettings() {
-  const eligible = new Set(state.unlimitedEligibleItemIds);
-  const unlimited = new Set(state.settings.unlimitedItemIds);
-  const blueCount = state.settings.unlimitedItemIds.filter(id => eligible.has(id)).length;
-  const skillSummariesUnlimited = state.skillSummaryItemIds.some(id => unlimited.has(id));
+  const updateActions = {
+    idle: '<button class="secondary" data-action="check-update">检查更新</button>',
+    unsupported: '<button class="secondary" disabled>安装版可用</button>',
+    checking: '<button class="secondary" disabled>检查中…</button>',
+    current: '<button class="secondary" data-action="check-update">再次检查</button>',
+    available: `<button class="primary" data-action="download-update">下载 v${esc(updateState.availableVersion)}</button>`,
+    downloading: `<button class="secondary" disabled>下载中 ${Math.round(updateState.progress || 0)}%</button>`,
+    ready: '<button class="primary" data-action="install-update">重启并更新</button>',
+    installing: '<button class="secondary" disabled>正在安装…</button>',
+    error: '<button class="secondary" data-action="check-update">重新检查</button>',
+  };
   content.innerHTML = `${banners()}<div class="settings-grid">
     <section class="setting-card"><div><h3>森空岛账号</h3><p>${state.loggedIn ? `已连接${state.account ? ` · UID ${esc(state.account.uid)}` : ''}` : '未连接。凭据使用 Windows DPAPI 加密保存。'}</p></div><div>${state.loggedIn ? '<button class="secondary" data-action="login">重新认证</button> <button class="danger" data-action="logout">退出 / 删除认证</button>' : '<button class="primary" data-action="login">扫码连接</button>'}</div></section>
     <section class="setting-card"><div><h3>游戏数据</h3><p>最后更新：${esc(fmtTime(state.gameData.updatedAt))}<br>版本：${esc(state.gameData.version)}</p></div><button class="secondary" data-action="update-game">检查并更新</button></section>
     <section class="setting-card"><div><h3>连续专精排序</h3><p>严格使用指定的六档顺序或完全倒序。</p></div><div class="radio-stack"><label><input type="radio" name="sort" value="forward" ${state.settings.continuousSort === 'forward' ? 'checked' : ''}> 连续跨度优先</label><label><input type="radio" name="sort" value="reverse" ${state.settings.continuousSort === 'reverse' ? 'checked' : ''}> 完全反向</label></div></section>
-    <section class="setting-card"><div><h3>无限供应材料</h3><p>当前 ${blueCount} 项蓝色材料；技巧概要${skillSummariesUnlimited ? '已开启' : '未开启'}。真实仓库数量不会被覆盖。</p></div><button class="secondary" data-action="manage-unlimited">管理</button></section>
+    <section class="setting-card"><div><h3>应用更新</h3><p>当前版本 v${esc(updateState.currentVersion)}<br><span class="update-message ${updateState.phase === 'error' ? 'error' : ''}">${esc(updateState.message)}</span></p>${updateState.phase === 'downloading' ? `<div class="update-progress"><span style="width:${Math.max(0, Math.min(100, updateState.progress || 0))}%"></span></div>` : ''}</div><div>${updateActions[updateState.phase] || updateActions.idle}</div></section>
     <section class="setting-card"><div><h3>启动时自动刷新</h3><p>先显示缓存结果，再在后台同步森空岛。</p></div><label class="switch"><input type="checkbox" data-auto-refresh ${state.settings.autoRefresh ? 'checked' : ''}><span></span></label></section>
     <section class="setting-card"><div><h3>缓存</h3><p>清除最近一次账号快照；不会删除登录凭据或内置游戏数据。</p></div><button class="danger" data-action="clear-cache">清理账号缓存</button></section>
   </div>`;
@@ -205,18 +212,27 @@ function renderSettings() {
 
 function bindActions() {
   document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { mode = button.dataset.mode; renderDashboard(); }));
+  document.querySelectorAll('[data-supply-mode]').forEach(button => button.addEventListener('click', () => { filters.unlimited = button.dataset.supplyMode; renderDashboard(); }));
   document.querySelectorAll('[data-filter]').forEach(input => input.addEventListener(input.tagName === 'INPUT' ? 'input' : 'change', event => {
     filters[event.target.dataset.filter] = event.target.value;
     if (page === 'dashboard') renderDashboard();
     if (page === 'operators') renderOperators();
     if (page === 'inventory') renderInventory();
   }));
-  document.querySelectorAll('[data-candidate]').forEach(button => button.addEventListener('click', () => {
-    const [candidateMode] = button.dataset.candidate.split(':');
-    const [operatorId, skillId] = button.dataset.key.split(':');
+  const openCandidate = card => {
+    const [candidateMode] = card.dataset.candidate.split(':');
+    const [operatorId, skillId] = card.dataset.key.split(':');
     const candidate = state[candidateMode].find(x => x.operator.operatorId === operatorId && x.skill.skillId === skillId);
     if (candidate) showCandidate(candidate);
-  }));
+  };
+  document.querySelectorAll('[data-candidate]').forEach(card => {
+    card.addEventListener('click', () => openCandidate(card));
+    card.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      openCandidate(card);
+    });
+  });
   document.querySelectorAll('[data-material]').forEach(button => button.addEventListener('click', () => showMaterial(button.dataset.material)));
   document.querySelectorAll('[data-unlimited]').forEach(input => input.addEventListener('change', async () => {
     const ids = new Set(state.settings.unlimitedItemIds);
@@ -249,7 +265,9 @@ async function handleAction(action, button) {
     if (action === 'login') await beginLogin();
     if (action === 'logout') state = await api.logout();
     if (action === 'update-game') { state = await api.updateGameData(); showToast('游戏数据已更新'); }
-    if (action === 'manage-unlimited') { page = 'inventory'; filters = { ...filters, search: '', rarity: '' }; }
+    if (action === 'check-update') updateState = await api.checkForUpdates();
+    if (action === 'download-update') updateState = await api.downloadUpdate();
+    if (action === 'install-update') updateState = await api.installUpdate();
     if (action === 'clear-cache' && confirm('确定清除账号缓存？登录凭据和无限材料设置会保留。')) state = await api.clearCache();
     render();
   } catch (error) {
@@ -314,4 +332,5 @@ document.querySelector('#refresh-button').addEventListener('click', async event 
 });
 document.querySelectorAll('[data-close-modal]').forEach(x => x.addEventListener('click', () => modal.classList.add('hidden')));
 api.onStateChanged(loadState);
+api.onUpdateStateChanged(next => { updateState = next; if (page === 'settings') renderSettings(); });
 loadState().catch(error => { content.innerHTML = `<div class="error-banner">应用初始化失败：${esc(error.message || error)}</div>`; });

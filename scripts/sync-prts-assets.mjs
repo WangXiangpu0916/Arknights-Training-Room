@@ -8,6 +8,27 @@ const skillDir = path.join(imageRoot, 'skill');
 const masteryDir = path.join(imageRoot, 'mastery');
 const masteryTitles = [0, 1, 2, 3].map(level => `文件:专精 ${level} 大图.png`);
 
+const branchUrl = new URL(api);
+branchUrl.search = new URLSearchParams({
+  action: 'cargoquery',
+  format: 'json',
+  tables: 'chara',
+  fields: 'charId,subProfession',
+  limit: '500',
+});
+const branchResponse = await request(branchUrl);
+if (!branchResponse.ok) throw new Error(`PRTS 职业分支请求失败：HTTP ${branchResponse.status}`);
+const branchPayload = await branchResponse.json();
+const subProfessions = Object.fromEntries((branchPayload.cargoquery ?? []).map(({ title }) => [
+  title.charId.replace(/^char_/, ''),
+  title.subProfession,
+]));
+await writeFile(
+  path.join('resources', 'game-data', 'subprofession-cn.json'),
+  `${JSON.stringify(subProfessions, null, 2)}\n`,
+  'utf8',
+);
+
 await mkdir(skillDir, { recursive: true });
 await mkdir(masteryDir, { recursive: true });
 
@@ -73,7 +94,7 @@ await writeFile(
   `${JSON.stringify({ source: 'https://prts.wiki', syncedAt: new Date().toISOString(), mastery, skills, missing }, null, 2)}\n`,
   'utf8',
 );
-console.log(`PRTS 素材同步完成：专精 ${Object.keys(mastery).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
+console.log(`PRTS 素材同步完成：职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
 if (missing.length) console.log(missing.map(item => `${item.skillId} ${item.name}`).join('\n'));
 
 async function download(url, target) {
