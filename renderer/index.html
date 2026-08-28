@@ -10,10 +10,6 @@
 <body>
   <div id="app">
     <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">TR</div>
-        <div><strong>训练室</strong><small>TRAINING ROOM</small></div>
-      </div>
       <nav>
         <button class="nav active" data-page="dashboard"><span>◈</span>专精规划</button>
         <button class="nav" data-page="operators"><span>◇</span>干员</button>
@@ -29,8 +25,8 @@
           <p id="page-subtitle">基于真实仓库与加工站配方的确定性计算</p>
         </div>
         <div class="top-actions">
-          <span id="sync-badge" class="badge muted">正在读取本地数据</span>
           <button id="refresh-button" class="primary">刷新账号数据</button>
+          <span id="sync-badge" class="sync-status">正在读取本地数据</span>
         </div>
       </header>
       <section id="content" class="content"><div class="loading">正在载入……</div></section>

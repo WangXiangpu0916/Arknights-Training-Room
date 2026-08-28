@@ -1,4 +1,4 @@
-name: Release
+name: Publish test release
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  release:
+  prerelease:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,9 +21,11 @@ jobs:
       - name: Verify tag matches package version
         shell: pwsh
         run: |
-          $expected = "v$((Get-Content package.json | ConvertFrom-Json).version)"
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          if ($version -notmatch '-(alpha|beta|rc)(\.|$)') { throw "Only test/pre-release versions may be published" }
+          $expected = "v$version"
           if ("${{ github.ref_name }}" -ne $expected) { throw "Tag must be $expected" }
-      - name: Build, test and publish GitHub Release
+      - name: Build, test and publish GitHub pre-release
         run: npm run dist -- --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

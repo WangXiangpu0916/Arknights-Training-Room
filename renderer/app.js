@@ -6,7 +6,7 @@ let state;
 let updateState;
 let page = 'dashboard';
 let mode = 'single';
-let filters = { search: '', profession: '', rarity: '', skill: '', mastery: '', unlimited: 'with' };
+let filters = { search: '', profession: '', rarity: '', mastery: '', unlimited: 'with' };
 
 const professions = ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种'];
 const unlimitedPriority = new Map(['30103', '30093', '30083', '30073'].map((id, index) => [id, index]));
@@ -62,7 +62,7 @@ function updateChrome() {
   document.querySelectorAll('.nav').forEach(x => x.classList.toggle('active', x.dataset.page === page));
   const badge = document.querySelector('#sync-badge');
   badge.textContent = state.account ? `最后同步 ${fmtTime(state.account.syncedAt)}` : '尚未同步账号';
-  badge.className = `badge ${state.usingCache ? 'warn' : state.account ? 'ok' : 'muted'}`;
+  badge.className = 'sync-status';
   document.querySelector('#sidebar-status').innerHTML = state.account
     ? `<strong>${esc(state.account.nickname || `UID ${state.account.uid}`)}</strong>${state.usingCache ? '当前使用缓存数据<br>' : ''}游戏数据 ${esc(fmtTime(state.gameData.updatedAt))}`
     : `<strong>尚未连接账号</strong>游戏数据 ${esc(fmtTime(state.gameData.updatedAt))}`;
@@ -87,27 +87,24 @@ function renderDashboard() {
     return (!filters.search || `${candidate.operator.name}${candidate.skill.name}`.includes(filters.search))
       && (!filters.profession || candidate.operator.profession === filters.profession)
       && (!filters.rarity || String(candidate.operator.rarity) === filters.rarity)
-      && (!filters.skill || String(candidate.skill.index) === filters.skill)
       && (!filters.mastery || String(candidate.from) === filters.mastery);
   });
   const unlimited = new Set(state.settings.unlimitedItemIds);
   const skillSummariesUnlimited = state.skillSummaryItemIds.some(id => unlimited.has(id));
-  content.innerHTML = `${banners()}
+  content.innerHTML = `${banners()}<div class="dashboard-layout">
     <div class="toolbar">
       <div class="segmented"><button data-mode="single" class="${mode === 'single' ? 'active' : ''}">单阶段专精</button><button data-mode="continuous" class="${mode === 'continuous' ? 'active' : ''}">连续专精</button></div>
-      ${mode === 'continuous' ? `<span class="badge muted">排序：${state.settings.continuousSort === 'forward' ? '连续跨度优先' : '完全反向'}</span>` : '<span class="badge muted">每个候选独立计算</span>'}
       <label class="dashboard-supply-toggle"><span>技巧概要无限供应</span><span class="switch"><input type="checkbox" data-unlimited-summaries ${skillSummariesUnlimited ? 'checked' : ''}><span></span></span></label>
     </div>
-    <div class="filters">
+    <div class="filters dashboard-filters">
       <input data-filter="search" value="${esc(filters.search)}" placeholder="搜索干员或技能">
       ${select('profession', '全部职业', professions.map(name => [name, name]))}
-      ${select('rarity', '全部星级', [[6,'六星'],[5,'五星'],[4,'四星'],[3,'三星']])}
-      ${select('skill', '全部技能', [[1,'一技能'],[2,'二技能'],[3,'三技能']])}
-      ${select('mastery', '全部当前等级', [[0,'M0'],[1,'M1'],[2,'M2']])}
+      ${select('rarity', '全部星级', [[6,'六星'],[5,'五星'],[4,'四星']])}
+      ${select('mastery', '全部当前等级', mode === 'continuous' ? [[0,'M0'],[1,'M1']] : [[0,'M0'],[1,'M1'],[2,'M2']])}
       <div class="segmented filter-mode" role="group" aria-label="材料供应模式"><button data-supply-mode="with" class="${filters.unlimited === 'with' ? 'active' : ''}">使用无限材料</button><button data-supply-mode="real" class="${filters.unlimited === 'real' ? 'active' : ''}">仅真实仓库</button></div>
     </div>
     <div class="result-summary">找到 ${list.length} 个当前可行候选</div>
-    ${list.length ? `<div class="cards">${list.map(candidateCard).join('')}</div>` : `<div class="empty"><div><h2>当前筛选下没有可行专精</h2><p>仓库、专精状态或无限供应设置变化后会自动重新计算。</p></div></div>`}`;
+    ${list.length ? `<div class="cards">${list.map(candidateCard).join('')}</div>` : `<div class="empty"><div><h2>当前筛选下没有可行专精</h2><p>仓库、专精状态或无限供应设置变化后会自动重新计算。</p></div></div>`}</div>`;
   bindActions();
 }
 
@@ -181,7 +178,7 @@ function renderInventory() {
   content.innerHTML = `${banners()}<div class="filters" style="grid-template-columns:minmax(240px,1fr) auto">
     <input data-filter="search" value="${esc(query)}" placeholder="搜索材料">
     <span class="badge blue">已设无限 ${blueUnlimitedCount} 项蓝色材料</span>
-  </div><div class="table-wrap"><table><thead><tr><th>材料</th><th>等级</th><th>实际数量</th><th>规划状态</th><th>无限供应（仅蓝色）</th><th></th></tr></thead><tbody>
+  </div><div class="table-wrap"><table><thead><tr><th>材料</th><th>等级</th><th>实际数量</th><th>规划状态</th><th>无限供应</th><th></th></tr></thead><tbody>
     ${rows.map(item => `<tr><td><div class="material-cell"><img class="item-icon" src="${itemIcon(item.itemId)}" alt="" data-img-fallback><strong>${esc(item.name)}</strong></div></td><td>${item.rarity}</td><td>${state.account.inventory[item.itemId] ?? 0}</td><td class="${unlimited.has(item.itemId) ? 'infinity' : ''}">${unlimited.has(item.itemId) ? '∞' : state.account.inventory[item.itemId] ?? 0}</td><td>${unlimitedEligible.has(item.itemId) ? `<label class="switch"><input type="checkbox" data-unlimited="${esc(item.itemId)}" ${unlimited.has(item.itemId) ? 'checked' : ''}><span></span></label>` : '<span class="operator-meta">—</span>'}</td><td><button class="link-button" data-material="${esc(item.itemId)}">查看配方</button></td></tr>`).join('')}
     </tbody></table></div>`;
   bindActions();
@@ -211,7 +208,11 @@ function renderSettings() {
 }
 
 function bindActions() {
-  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { mode = button.dataset.mode; renderDashboard(); }));
+  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
+    mode = button.dataset.mode;
+    if (mode === 'continuous' && filters.mastery === '2') filters.mastery = '';
+    renderDashboard();
+  }));
   document.querySelectorAll('[data-supply-mode]').forEach(button => button.addEventListener('click', () => { filters.unlimited = button.dataset.supplyMode; renderDashboard(); }));
   document.querySelectorAll('[data-filter]').forEach(input => input.addEventListener(input.tagName === 'INPUT' ? 'input' : 'change', event => {
     filters[event.target.dataset.filter] = event.target.value;

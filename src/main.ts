@@ -23,7 +23,7 @@ let updateState: UpdateState = {
   currentVersion: app.getVersion(),
   supported: updateSupported,
   phase: updateSupported ? 'idle' : 'unsupported',
-  message: updateSupported ? '可从 GitHub Releases 检查新版本。' : '自动更新仅支持 Windows 安装版。',
+  message: updateSupported ? '可从 GitHub Releases 检查新的测试版本。' : '自动更新仅支持 Windows 安装版。',
 };
 
 if (process.env.ATR_USER_DATA) app.setPath('userData', process.env.ATR_USER_DATA);
@@ -42,10 +42,10 @@ function configureUpdater(): void {
   if (!updateSupported) return;
   autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = false;
-  autoUpdater.allowPrerelease = false;
+  autoUpdater.allowPrerelease = true;
   autoUpdater.on('checking-for-update', () => setUpdateState({ phase: 'checking', message: '正在检查 GitHub Releases…' }));
-  autoUpdater.on('update-not-available', () => setUpdateState({ phase: 'current', message: '当前已是最新版本。', availableVersion: undefined, progress: undefined }));
-  autoUpdater.on('update-available', info => setUpdateState({ phase: 'available', message: `发现新版本 v${info.version}，可选择下载更新。`, availableVersion: info.version, progress: undefined }));
+  autoUpdater.on('update-not-available', () => setUpdateState({ phase: 'current', message: '当前已是最新测试版本。', availableVersion: undefined, progress: undefined }));
+  autoUpdater.on('update-available', info => setUpdateState({ phase: 'available', message: `发现新测试版本 v${info.version}，可选择下载更新。`, availableVersion: info.version, progress: undefined }));
   autoUpdater.on('download-progress', progress => setUpdateState({ phase: 'downloading', message: `正在下载 v${updateState.availableVersion ?? ''}…`, progress: Math.round(progress.percent) }));
   autoUpdater.on('update-downloaded', info => setUpdateState({ phase: 'ready', message: `v${info.version} 已下载，重启应用即可安装。`, availableVersion: info.version, progress: 100 }));
   autoUpdater.on('error', error => setUpdateState({ phase: 'error', message: `更新失败：${error.message}` }));

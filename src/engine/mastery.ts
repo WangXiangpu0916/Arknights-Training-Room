@@ -9,7 +9,7 @@ import {
 import { CraftingEngine } from './crafting';
 
 const SINGLE_ORDER: Record<number, number> = { 2: 0, 1: 1, 0: 2 };
-const CONTINUOUS_FORWARD = ['0-3', '1-3', '2-3', '0-2', '1-2', '0-1'];
+const CONTINUOUS_FORWARD = ['0-3', '1-3', '0-2'];
 
 export class MasteryPlanner {
   private readonly definitions = new Map<string, OperatorDefinition>();
@@ -80,7 +80,7 @@ export class MasteryPlanner {
           for (const root of run.unlimitedRoots) roots.add(root);
           current = next;
         }
-        if (!stages.length) continue;
+        if (current - ownedSkill.masteryLevel < 2) continue;
 
         const finiteEnd = this.continuousEnd(ownedSkill.masteryLevel, skill.requirements, inventory, []);
         candidates.push({

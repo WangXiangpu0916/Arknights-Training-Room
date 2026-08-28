@@ -1,7 +1,7 @@
 {
   "name": "arknights-training-room",
-  "version": "1.0.10",
-  "description": "训练室：明日方舟本地专精规划桌面应用",
+  "version": "1.0.12-beta.1",
+  "description": "训练室（测试版）：明日方舟本地专精规划桌面应用",
   "repository": "https://github.com/7aroland/Arknights-Training-Room.git",
   "main": "dist/src/main.js",
   "author": "Arknights Training Room contributors",
@@ -52,7 +52,7 @@
       "provider": "github",
       "owner": "7aroland",
       "repo": "Arknights-Training-Room",
-      "releaseType": "release"
+      "releaseType": "prerelease"
     },
     "asar": true,
     "nsis": {
