@@ -3,6 +3,8 @@
 > [!WARNING]
 > 本项目目前仅发布测试版，尚未发布任何正式版。包括历史上的 `v1.0.9`、`v1.0.10` 以及当前迭代在内，所有版本均应视为测试版本，可能存在缺陷或不兼容变更。
 
+**[查看并下载最新测试版（GitHub Releases）](https://github.com/WangXiangpu0916/Arknights-Training-Room/releases)**
+
 Windows 10/11 本地桌面测试应用。读取森空岛的真实仓库、持有干员和技能专精状态，按加工站的确定配方进行库存扣除模拟，打开首页即可看到“现在能专精什么”。运行时不使用 LLM、Agent、AI API 或 AI Token。
 
 ## 已实现
