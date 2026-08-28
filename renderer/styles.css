@@ -68,7 +68,7 @@ input, select { width: 100%; border: 1px solid var(--line); background: #101419;
 input:focus, select:focus { border-color: var(--accent-border); box-shadow: 0 0 0 2px var(--accent-soft); }
 .result-summary { color: var(--muted); margin-bottom: 12px; }
 .cards { display: grid; grid-template-columns: minmax(0, 410px); grid-auto-rows: 1fr; gap: 14px; justify-content: start; }
-.candidate { --rarity-line: var(--accent); min-width: 0; cursor: pointer; outline: none; background-color: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--rarity-line); border-radius: 7px; padding: 14px; transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease; }
+.candidate { --rarity-line: var(--accent); min-width: 0; cursor: pointer; outline: none; content-visibility: auto; contain-intrinsic-size: auto 72px; background-color: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--rarity-line); border-radius: 7px; padding: 14px; transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease; }
 .candidate.rarity-4 { --rarity-line: #BF96ED; }
 .candidate.rarity-5 { --rarity-line: #EFD691; }
 .candidate.rarity-6 { --rarity-line: transparent; background-image: linear-gradient(180deg, #C82A36 0%, #FF9433 100%); background-position: left top; background-size: 3px 100%; background-repeat: no-repeat; background-origin: border-box; }

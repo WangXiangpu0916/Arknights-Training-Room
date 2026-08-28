@@ -76,18 +76,22 @@ function readCardLayout(grid) {
   const gridRect = grid.getBoundingClientRect();
   return new Map([...grid.children].map(card => {
     const rect = card.getBoundingClientRect();
-    const parts = new Map([...card.querySelectorAll('[data-card-motion]')].map(part => {
-      const partRect = part.getBoundingClientRect();
-      return [part.dataset.cardMotion, {
-        left: partRect.left - rect.left,
-        top: partRect.top - rect.top,
-      }];
-    }));
+    const nearby = rect.bottom >= -180 && rect.top <= innerHeight + 180;
+    const parts = nearby
+      ? new Map([...card.querySelectorAll('[data-card-motion]')].map(part => {
+          const partRect = part.getBoundingClientRect();
+          return [part.dataset.cardMotion, {
+            left: partRect.left - rect.left,
+            top: partRect.top - rect.top,
+          }];
+        }))
+      : new Map();
     return [card.dataset.key, {
       left: rect.left - gridRect.left,
       top: rect.top - gridRect.top,
       width: rect.width,
       visible: rect.bottom >= 0 && rect.top <= innerHeight,
+      nearby,
       parts,
     }];
   }));
@@ -156,10 +160,10 @@ function startDashboardGridMotion() {
         for (const [cardIndex, card] of [...grid.children].entries()) {
           const first = motion.positions.get(card.dataset.key);
           const last = nextPositions.get(card.dataset.key);
-          if (!first || !last || (!first.visible && !last.visible)) continue;
+          if (!first || !last || (!first.nearby && !last.nearby)) continue;
           const deltaX = gridColumnOffset(motion.layout, cardIndex) - last.left;
           const deltaY = first.top - last.top;
-          animateMove(card, deltaX, deltaY);
+          if (first.visible || last.visible) animateMove(card, deltaX, deltaY);
 
           const currentTrackWidth = motion.layout.tracks[cardIndex % motion.layout.count];
           for (const part of card.querySelectorAll('[data-card-motion]')) {
@@ -250,11 +254,11 @@ function select(name, placeholder, options) {
 function candidateCard(candidate, index) {
   return `<article class="candidate rarity-${candidate.operator.rarity}" data-candidate="${mode}:${index}" data-key="${esc(candidate.operator.operatorId)}:${esc(candidate.skill.skillId)}" role="button" tabindex="0" aria-label="查看${esc(candidate.operator.name)}的${esc(candidate.skill.name)}专精材料">
     <div class="candidate-main">
-      <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-card-motion="avatar" data-img-fallback>
+      <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
       <div class="candidate-details">
-        <div class="candidate-heading" data-card-motion="identity"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
+        <div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
         <div class="candidate-visuals">
-          <div class="mastery-line" data-card-motion="mastery" aria-label="M${candidate.from} 到 M${candidate.to}">
+          <div class="mastery-line" aria-label="M${candidate.from} 到 M${candidate.to}">
             <img class="mastery-icon" src="${masteryIcon(candidate.from)}" alt="M${candidate.from}">
             <span class="arrow" aria-hidden="true">→</span>
             <img class="mastery-icon" src="${masteryIcon(candidate.to)}" alt="M${candidate.to}">

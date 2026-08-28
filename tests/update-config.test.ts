@@ -94,11 +94,13 @@ test('候选卡片仅在实际列数变化时使用原生 FLIP 平滑重排', ()
 test('候选卡片关键内部区域与外层使用同参数的嵌套 FLIP', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   assert.match(renderer, /querySelectorAll\('\[data-card-motion\]'\)/);
-  assert.match(renderer, /data-card-motion="avatar"/);
-  assert.match(renderer, /data-card-motion="identity"/);
-  assert.match(renderer, /data-card-motion="mastery"/);
+  assert.doesNotMatch(renderer, /data-card-motion="avatar"|data-card-motion="identity"/);
+  assert.doesNotMatch(renderer, /data-card-motion="mastery"/);
   assert.match(renderer, /data-card-motion="skill" data-card-motion-anchor="right"/);
   assert.match(renderer, /firstPart\.left \+ currentTrackWidth - first\.width/);
+  assert.match(renderer, /const nearby = rect\.bottom >= -180 && rect\.top <= innerHeight \+ 180/);
+  assert.match(renderer, /const parts = nearby\s*\? new Map/);
+  assert.match(renderer, /if \(first\.visible \|\| last\.visible\) animateMove\(card, deltaX, deltaY\)/);
   assert.match(renderer, /animateMove\(card, deltaX, deltaY\)[\s\S]*animateMove\(part, partDeltaX, partDeltaY\)/);
 });
 
@@ -138,6 +140,7 @@ test('仓库仅展示 21 种蓝色材料且设置页不再重复管理无限供�
 
 test('专精卡片按头像边界对齐图标并保持技能名称单行滚动', () => {
   const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(styles, /\.candidate \{[^}]*content-visibility: auto;[^}]*contain-intrinsic-size: auto 72px/);
   assert.match(styles, /grid-template-columns: 72px minmax\(0, 1fr\) 56px/);
   assert.match(styles, /\.candidate-avatar \{[^}]*width: 72px; height: 72px/);
   assert.match(styles, /\.mastery-icon \{[^}]*height: 51px; width: auto/);
