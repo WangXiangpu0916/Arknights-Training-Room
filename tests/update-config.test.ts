@@ -39,7 +39,7 @@ test('干员技能图标、三列卡片与独立主区域滚动保持在展示�
 test('专精候选整卡打开材料详情且不再显示查看材料按钮', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
-  assert.match(renderer, /class="candidate" data-candidate=/);
+  assert.match(renderer, /class="candidate rarity-\$\{candidate\.operator\.rarity\}" data-candidate=/);
   assert.match(renderer, /role="button" tabindex="0"/);
   assert.doesNotMatch(renderer, />查看材料 →<\/button>/);
   assert.match(renderer, /event\.key !== 'Enter' && event\.key !== ' '/);
@@ -63,4 +63,14 @@ test('专精卡片按头像边界对齐图标并保持技能名称单行滚动',
   assert.match(styles, /\.skill-icon \{[^}]*width: 56px; height: 56px/);
   assert.match(styles, /\.skill-copy \{[^}]*overflow: hidden; white-space: nowrap/);
   assert.match(styles, /@keyframes skill-name-scroll/);
+});
+
+test('专精候选竖线直接按真实星级使用游戏稀有度配色', () => {
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(renderer, /candidate rarity-\$\{candidate\.operator\.rarity\}/);
+  assert.match(styles, /\.candidate\.rarity-4 \{ --rarity-line: #BF96ED; \}/);
+  assert.match(styles, /\.candidate\.rarity-5 \{ --rarity-line: #EFD691; \}/);
+  assert.match(styles, /\.candidate\.rarity-6 \{[^}]*linear-gradient\(180deg, #C82A36 0%, #FF9433 100%\)[^}]*background-size: 3px 100%/);
+  assert.doesNotMatch(styles, /\.candidate\.rarity-6 \{[^}]*linear-gradient\(90deg/);
 });

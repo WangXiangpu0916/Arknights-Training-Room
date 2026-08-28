@@ -52,6 +52,16 @@
       "elitePhase": 2,
       "skillLevel": 7,
       "skills": []
+    },
+    {
+      "operatorId": "141_nights",
+      "level": 70,
+      "elitePhase": 2,
+      "skillLevel": 7,
+      "skills": [
+        { "skillId": "skcom_atk_up_2", "masteryLevel": 0 },
+        { "skillId": "skchr_nights_2", "masteryLevel": 3 }
+      ]
     }
   ],
   "inventory": {
@@ -65,6 +75,8 @@
     "31064": 6,
     "31074": 4,
     "31093": 2,
-    "30115": 4
+    "30115": 4,
+    "30043": 2,
+    "30064": 1
   }
 }
