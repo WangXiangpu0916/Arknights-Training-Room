@@ -151,8 +151,9 @@ async function createWindow(): Promise<void> {
       await new Promise(resolve => setTimeout(resolve, 300));
     }
     if (process.env.ATR_SCREENSHOT_MODE) {
+      const continuous = process.env.ATR_SCREENSHOT_MODE === 'continuous';
       await mainWindow.webContents.executeJavaScript(
-        `document.querySelector('[data-mode="${process.env.ATR_SCREENSHOT_MODE}"]')?.click()`,
+        `(() => { const input = document.querySelector('[data-continuous-mode]'); if (input && input.checked !== ${continuous}) input.click(); })()`,
       );
       await new Promise(resolve => setTimeout(resolve, 300));
     }

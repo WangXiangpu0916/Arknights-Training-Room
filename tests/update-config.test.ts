@@ -26,9 +26,9 @@ test('GitHub Releases 更新配置只发布可自动更新的测试版 NSIS 产�
   assert.match(workflow, /gh release create[\s\S]*--prerelease/);
 });
 
-test('专精规划默认使用无限材料且不再显示旧筛选和依赖标签', () => {
+test('专精规划默认使用真实仓库且不再显示旧筛选和依赖标签', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
-  assert.match(renderer, /unlimited: 'with'/);
+  assert.match(renderer, /unlimited: 'real'/);
   assert.doesNotMatch(renderer, /无限池不限|依赖无限材料/);
 });
 
@@ -37,6 +37,7 @@ test('专精规划筛选器和模式提示按当前规则精简', () => {
   assert.doesNotMatch(renderer, /全部技能|一技能|二技能|三技能/);
   assert.doesNotMatch(renderer, /三星|每个候选独立计算|排序：/);
   assert.match(renderer, /mode === 'continuous' \? \[\[0,'M0'\],\[1,'M1'\]\] : \[\[0,'M0'\],\[1,'M1'\],\[2,'M2'\]\]/);
+  assert.match(renderer, /mode = event\.target\.checked \? 'continuous' : 'single'/);
   assert.match(renderer, /mode === 'continuous' && filters\.mastery === '2'\) filters\.mastery = ''/);
 });
 
@@ -80,7 +81,7 @@ test('候选卡片仅在实际列数变化时使用原生 FLIP 平滑重排', ()
   assert.match(renderer, /new ResizeObserver/);
   assert.match(renderer, /if \(nextLayout\.count === motion\.layout\.count\) \{\s*motion\.layout = nextLayout;\s*return/);
   assert.match(renderer, /gridColumnOffset\(motion\.layout, cardIndex\) - last\.left/);
-  assert.match(renderer, /const nextPositions = readCardLayout\(grid\);\s*cancelAnimations\(\)/);
+  assert.match(renderer, /cancelAnimations\(\);\s*const nextPositions = readCardLayout\(grid\)/);
   assert.match(renderer, /requestAnimationFrame/);
   assert.match(renderer, /translate3d\(\$\{deltaX\}px, \$\{deltaY\}px, 0\)/);
   assert.match(renderer, /duration: 220, easing: 'cubic-bezier\(0\.2, 0, 0, 1\)'/);
@@ -90,14 +91,30 @@ test('候选卡片仅在实际列数变化时使用原生 FLIP 平滑重排', ()
   assert.doesNotMatch(renderer, /Framer|GSAP|anime\.js/);
 });
 
-test('专精筛选栏让搜索框弹性伸缩并限制筛选控件宽度', () => {
+test('候选卡片关键内部区域与外层使用同参数的嵌套 FLIP', () => {
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  assert.match(renderer, /querySelectorAll\('\[data-card-motion\]'\)/);
+  assert.match(renderer, /data-card-motion="avatar"/);
+  assert.match(renderer, /data-card-motion="identity"/);
+  assert.match(renderer, /data-card-motion="mastery"/);
+  assert.match(renderer, /data-card-motion="skill" data-card-motion-anchor="right"/);
+  assert.match(renderer, /firstPart\.left \+ currentTrackWidth - first\.width/);
+  assert.match(renderer, /animateMove\(card, deltaX, deltaY\)[\s\S]*animateMove\(part, partDeltaX, partDeltaY\)/);
+});
+
+test('专精顶部控制区固定为筛选行与三个统一模式开关', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
   assert.match(renderer, /class="filters dashboard-filters"/);
-  assert.match(styles, /\.dashboard-filters \{[^}]*display: flex;[^}]*flex-wrap: wrap;[^}]*max-width: 1240px/);
-  assert.match(styles, /\.dashboard-filters > input \{[^}]*flex: 1 1 260px;[^}]*min-width: 220px;[^}]*max-width: 520px/);
-  assert.match(styles, /\.dashboard-filters > select \{[^}]*min-width: 118px;[^}]*max-width: 144px/);
-  assert.match(styles, /\.dashboard-filters > \.filter-mode \{[^}]*min-width: 225px;[^}]*max-width: 260px/);
+  assert.match(styles, /\.dashboard-filters \{[^}]*grid-template-columns: minmax\(220px, 520px\) repeat\(3, minmax\(118px, 144px\)\)/);
+  assert.match(renderer, /class="dashboard-mode-row"[\s\S]*连续专精模式[\s\S]*技巧概要视为无限[\s\S]*使用无限池材料/);
+  assert.match(styles, /\.dashboard-mode-row \{[^}]*display: flex;[^}]*flex-wrap: nowrap/);
+  assert.match(styles, /\.dashboard-mode-toggle \{[^}]*min-height: 38px;[^}]*padding: 6px 10px/);
+  assert.match(styles, /\.filters:not\(\.dashboard-filters\) \{ grid-template-columns: repeat\(3, 1fr\)/);
+  assert.match(renderer, /filters\.unlimited = event\.target\.checked \? 'with' : 'real'/);
+  assert.doesNotMatch(renderer, /data-mode=|data-supply-mode=|技巧概要无限供应|仅真实仓库<\/button>/);
+  const main = readFileSync('src/main.ts', 'utf8');
+  assert.match(main, /ATR_SCREENSHOT_MODE === 'continuous'[\s\S]*querySelector\('\[data-continuous-mode\]'\)/);
 });
 
 test('专精候选整卡打开材料详情且不再显示查看材料按钮', () => {

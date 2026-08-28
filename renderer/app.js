@@ -6,7 +6,7 @@ let state;
 let updateState;
 let page = 'dashboard';
 let mode = 'single';
-let filters = { search: '', profession: '', rarity: '', mastery: '', unlimited: 'with' };
+let filters = { search: '', profession: '', rarity: '', mastery: '', unlimited: 'real' };
 let dashboardGridMotion = null;
 
 const professions = ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种'];
@@ -76,10 +76,19 @@ function readCardLayout(grid) {
   const gridRect = grid.getBoundingClientRect();
   return new Map([...grid.children].map(card => {
     const rect = card.getBoundingClientRect();
+    const parts = new Map([...card.querySelectorAll('[data-card-motion]')].map(part => {
+      const partRect = part.getBoundingClientRect();
+      return [part.dataset.cardMotion, {
+        left: partRect.left - rect.left,
+        top: partRect.top - rect.top,
+      }];
+    }));
     return [card.dataset.key, {
       left: rect.left - gridRect.left,
       top: rect.top - gridRect.top,
+      width: rect.width,
       visible: rect.bottom >= 0 && rect.top <= innerHeight,
+      parts,
     }];
   }));
 }
@@ -109,10 +118,24 @@ function startDashboardGridMotion() {
   };
 
   const cancelAnimations = () => {
-    for (const [card, animation] of motion.animations) {
-      motion.animations.delete(card);
+    for (const [element, animation] of motion.animations) {
+      motion.animations.delete(element);
       animation.cancel();
     }
+  };
+
+  const animateMove = (element, deltaX, deltaY) => {
+    if (Math.abs(deltaX) < 0.5 && Math.abs(deltaY) < 0.5) return;
+    const animation = element.animate([
+      { transform: `translate3d(${deltaX}px, ${deltaY}px, 0)` },
+      { transform: 'translate3d(0, 0, 0)' },
+    ], { duration: 220, easing: 'cubic-bezier(0.2, 0, 0, 1)' });
+    motion.animations.set(element, animation);
+    const cleanup = () => {
+      if (motion.animations.get(element) !== animation) return;
+      motion.animations.delete(element);
+    };
+    animation.finished.then(cleanup, cleanup);
   };
 
   motion.observer = new ResizeObserver(() => {
@@ -127,8 +150,8 @@ function startDashboardGridMotion() {
         return;
       }
 
-      const nextPositions = readCardLayout(grid);
       cancelAnimations();
+      const nextPositions = readCardLayout(grid);
       if (!reducedMotion.matches) {
         for (const [cardIndex, card] of [...grid.children].entries()) {
           const first = motion.positions.get(card.dataset.key);
@@ -136,18 +159,20 @@ function startDashboardGridMotion() {
           if (!first || !last || (!first.visible && !last.visible)) continue;
           const deltaX = gridColumnOffset(motion.layout, cardIndex) - last.left;
           const deltaY = first.top - last.top;
-          if (Math.abs(deltaX) < 0.5 && Math.abs(deltaY) < 0.5) continue;
+          animateMove(card, deltaX, deltaY);
 
-          const animation = card.animate([
-            { transform: `translate3d(${deltaX}px, ${deltaY}px, 0)` },
-            { transform: 'translate3d(0, 0, 0)' },
-          ], { duration: 220, easing: 'cubic-bezier(0.2, 0, 0, 1)' });
-          motion.animations.set(card, animation);
-          const cleanup = () => {
-            if (motion.animations.get(card) !== animation) return;
-            motion.animations.delete(card);
-          };
-          animation.finished.then(cleanup, cleanup);
+          const currentTrackWidth = motion.layout.tracks[cardIndex % motion.layout.count];
+          for (const part of card.querySelectorAll('[data-card-motion]')) {
+            const firstPart = first.parts.get(part.dataset.cardMotion);
+            const lastPart = last.parts.get(part.dataset.cardMotion);
+            if (!firstPart || !lastPart) continue;
+            const firstLeft = part.dataset.cardMotionAnchor === 'right'
+              ? firstPart.left + currentTrackWidth - first.width
+              : firstPart.left;
+            const partDeltaX = firstLeft - lastPart.left;
+            const partDeltaY = firstPart.top - lastPart.top;
+            animateMove(part, partDeltaX, partDeltaY);
+          }
         }
       }
       motion.layout = nextLayout;
@@ -201,16 +226,16 @@ function renderDashboard() {
   const unlimited = new Set(state.settings.unlimitedItemIds);
   const skillSummariesUnlimited = state.skillSummaryItemIds.some(id => unlimited.has(id));
   content.innerHTML = `${banners()}<div class="dashboard-layout">
-    <div class="toolbar">
-      <div class="segmented"><button data-mode="single" class="${mode === 'single' ? 'active' : ''}">单阶段专精</button><button data-mode="continuous" class="${mode === 'continuous' ? 'active' : ''}">连续专精</button></div>
-      <label class="dashboard-supply-toggle"><span>技巧概要无限供应</span><span class="switch"><input type="checkbox" data-unlimited-summaries ${skillSummariesUnlimited ? 'checked' : ''}><span></span></span></label>
-    </div>
     <div class="filters dashboard-filters">
       <input data-filter="search" value="${esc(filters.search)}" placeholder="搜索干员或技能">
       ${select('profession', '全部职业', professions.map(name => [name, name]))}
       ${select('rarity', '全部星级', [[6,'六星'],[5,'五星'],[4,'四星']])}
       ${select('mastery', '全部当前等级', mode === 'continuous' ? [[0,'M0'],[1,'M1']] : [[0,'M0'],[1,'M1'],[2,'M2']])}
-      <div class="segmented filter-mode" role="group" aria-label="材料供应模式"><button data-supply-mode="with" class="${filters.unlimited === 'with' ? 'active' : ''}">使用无限材料</button><button data-supply-mode="real" class="${filters.unlimited === 'real' ? 'active' : ''}">仅真实仓库</button></div>
+    </div>
+    <div class="dashboard-mode-row">
+      <label class="dashboard-mode-toggle"><span>连续专精模式</span><span class="switch"><input type="checkbox" data-continuous-mode ${mode === 'continuous' ? 'checked' : ''}><span></span></span></label>
+      <label class="dashboard-mode-toggle"><span>技巧概要视为无限</span><span class="switch"><input type="checkbox" data-unlimited-summaries ${skillSummariesUnlimited ? 'checked' : ''}><span></span></span></label>
+      <label class="dashboard-mode-toggle"><span>使用无限池材料</span><span class="switch"><input type="checkbox" data-unlimited-materials ${filters.unlimited === 'with' ? 'checked' : ''}><span></span></span></label>
     </div>
     <div class="result-summary">找到 ${list.length} 个当前可行候选</div>
     ${list.length ? `<div class="cards">${list.map(candidateCard).join('')}</div>` : `<div class="empty"><div><h2>当前筛选下没有可行专精</h2><p>仓库、专精状态或无限供应设置变化后会自动重新计算。</p></div></div>`}</div>`;
@@ -225,16 +250,16 @@ function select(name, placeholder, options) {
 function candidateCard(candidate, index) {
   return `<article class="candidate rarity-${candidate.operator.rarity}" data-candidate="${mode}:${index}" data-key="${esc(candidate.operator.operatorId)}:${esc(candidate.skill.skillId)}" role="button" tabindex="0" aria-label="查看${esc(candidate.operator.name)}的${esc(candidate.skill.name)}专精材料">
     <div class="candidate-main">
-      <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
+      <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-card-motion="avatar" data-img-fallback>
       <div class="candidate-details">
-        <div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
+        <div class="candidate-heading" data-card-motion="identity"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
         <div class="candidate-visuals">
-          <div class="mastery-line" aria-label="M${candidate.from} 到 M${candidate.to}">
+          <div class="mastery-line" data-card-motion="mastery" aria-label="M${candidate.from} 到 M${candidate.to}">
             <img class="mastery-icon" src="${masteryIcon(candidate.from)}" alt="M${candidate.from}">
             <span class="arrow" aria-hidden="true">→</span>
             <img class="mastery-icon" src="${masteryIcon(candidate.to)}" alt="M${candidate.to}">
           </div>
-          <div class="skill-info">
+          <div class="skill-info" data-card-motion="skill" data-card-motion-anchor="right">
             <img class="skill-icon" src="${skillIcon(candidate.skill.skillId)}" alt="${esc(candidate.skill.name)}技能图标" data-img-fallback="skill">
             <div class="skill-copy" title="${esc(candidate.skill.name)}"><strong>${esc(candidate.skill.name)}</strong></div>
           </div>
@@ -318,12 +343,15 @@ function renderSettings() {
 }
 
 function bindActions() {
-  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => {
-    mode = button.dataset.mode;
+  document.querySelector('[data-continuous-mode]')?.addEventListener('change', event => {
+    mode = event.target.checked ? 'continuous' : 'single';
     if (mode === 'continuous' && filters.mastery === '2') filters.mastery = '';
     renderDashboard();
-  }));
-  document.querySelectorAll('[data-supply-mode]').forEach(button => button.addEventListener('click', () => { filters.unlimited = button.dataset.supplyMode; renderDashboard(); }));
+  });
+  document.querySelector('[data-unlimited-materials]')?.addEventListener('change', event => {
+    filters.unlimited = event.target.checked ? 'with' : 'real';
+    renderDashboard();
+  });
   document.querySelectorAll('[data-filter]').forEach(input => input.addEventListener(input.tagName === 'INPUT' ? 'input' : 'change', event => {
     filters[event.target.dataset.filter] = event.target.value;
     if (page === 'dashboard') renderDashboard();
