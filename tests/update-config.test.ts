@@ -7,7 +7,7 @@ test('GitHub Releases 更新配置只发布可自动更新的测试版 NSIS 产�
   assert.match(pkg.version, /-(?:alpha|beta|rc)(?:\.|$)/);
   assert.deepEqual(pkg.build.publish, {
     provider: 'github',
-    owner: '7aroland',
+    owner: 'WangXiangpu0916',
     repo: 'Arknights-Training-Room',
     releaseType: 'prerelease',
   });
@@ -22,6 +22,8 @@ test('GitHub Releases 更新配置只发布可自动更新的测试版 NSIS 产�
   const workflow = readFileSync('.github/workflows/release.yml', 'utf8');
   assert.match(main, /autoUpdater\.allowPrerelease = true/);
   assert.match(workflow, /Only test\/pre-release versions may be published/);
+  assert.match(workflow, /gh release view/);
+  assert.match(workflow, /gh release create[\s\S]*--prerelease/);
 });
 
 test('专精规划默认使用无限材料且不再显示旧筛选和依赖标签', () => {

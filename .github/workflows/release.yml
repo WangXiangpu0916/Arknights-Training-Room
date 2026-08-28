@@ -25,6 +25,15 @@ jobs:
           if ($version -notmatch '-(alpha|beta|rc)(\.|$)') { throw "Only test/pre-release versions may be published" }
           $expected = "v$version"
           if ("${{ github.ref_name }}" -ne $expected) { throw "Tag must be $expected" }
+      - name: Create GitHub pre-release if needed
+        shell: pwsh
+        run: |
+          gh release view "${{ github.ref_name }}" 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create "${{ github.ref_name }}" --prerelease --title "${{ github.ref_name }}" --notes-file release-notes.md
+          }
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build, test and publish GitHub pre-release
         run: npm run dist -- --publish always
         env:
