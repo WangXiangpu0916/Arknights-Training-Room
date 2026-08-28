@@ -7,6 +7,7 @@ let updateState;
 let page = 'dashboard';
 let mode = 'single';
 let filters = { search: '', profession: '', rarity: '', mastery: '', unlimited: 'with' };
+let dashboardGridMotion = null;
 
 const professions = ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种'];
 const unlimitedPriority = new Map(['30103', '30093', '30083', '30073'].map((id, index) => [id, index]));
@@ -43,11 +44,118 @@ function setBusy(button, busy, text = '处理中…') {
 }
 
 function render() {
+  stopDashboardGridMotion();
   updateChrome();
   if (page === 'dashboard') renderDashboard();
   if (page === 'operators') renderOperators();
   if (page === 'inventory') renderInventory();
   if (page === 'settings') renderSettings();
+}
+
+function readGridColumnLayout(grid) {
+  const style = getComputedStyle(grid);
+  const columns = style.gridTemplateColumns.trim();
+  const tracks = columns && columns !== 'none'
+    ? columns.split(/\s+/).map(value => Number.parseFloat(value) || 0)
+    : [];
+  return { count: tracks.length, tracks, gap: Number.parseFloat(style.columnGap) || 0 };
+}
+
+function gridColumnCount(grid) {
+  return readGridColumnLayout(grid).count;
+}
+
+function gridColumnOffset(layout, cardIndex) {
+  const column = cardIndex % layout.count;
+  let offset = column * layout.gap;
+  for (let index = 0; index < column; index += 1) offset += layout.tracks[index];
+  return offset;
+}
+
+function readCardLayout(grid) {
+  const gridRect = grid.getBoundingClientRect();
+  return new Map([...grid.children].map(card => {
+    const rect = card.getBoundingClientRect();
+    return [card.dataset.key, {
+      left: rect.left - gridRect.left,
+      top: rect.top - gridRect.top,
+      visible: rect.bottom >= 0 && rect.top <= innerHeight,
+    }];
+  }));
+}
+
+function stopDashboardGridMotion() {
+  if (!dashboardGridMotion) return;
+  dashboardGridMotion.observer.disconnect();
+  if (dashboardGridMotion.frame) cancelAnimationFrame(dashboardGridMotion.frame);
+  for (const [card, animation] of dashboardGridMotion.animations) {
+    dashboardGridMotion.animations.delete(card);
+    animation.cancel();
+  }
+  dashboardGridMotion = null;
+}
+
+function startDashboardGridMotion() {
+  const grid = content.querySelector('.cards');
+  if (!grid) return;
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const motion = {
+    grid,
+    layout: readGridColumnLayout(grid),
+    positions: readCardLayout(grid),
+    animations: new Map(),
+    frame: 0,
+    observer: null,
+  };
+
+  const cancelAnimations = () => {
+    for (const [card, animation] of motion.animations) {
+      motion.animations.delete(card);
+      animation.cancel();
+    }
+  };
+
+  motion.observer = new ResizeObserver(() => {
+    if (motion.frame) return;
+    motion.frame = requestAnimationFrame(() => {
+      motion.frame = 0;
+      if (dashboardGridMotion !== motion || !grid.isConnected) return;
+      const nextLayout = readGridColumnLayout(grid);
+      if (!nextLayout.count) return;
+      if (nextLayout.count === motion.layout.count) {
+        motion.layout = nextLayout;
+        return;
+      }
+
+      const nextPositions = readCardLayout(grid);
+      cancelAnimations();
+      if (!reducedMotion.matches) {
+        for (const [cardIndex, card] of [...grid.children].entries()) {
+          const first = motion.positions.get(card.dataset.key);
+          const last = nextPositions.get(card.dataset.key);
+          if (!first || !last || (!first.visible && !last.visible)) continue;
+          const deltaX = gridColumnOffset(motion.layout, cardIndex) - last.left;
+          const deltaY = first.top - last.top;
+          if (Math.abs(deltaX) < 0.5 && Math.abs(deltaY) < 0.5) continue;
+
+          const animation = card.animate([
+            { transform: `translate3d(${deltaX}px, ${deltaY}px, 0)` },
+            { transform: 'translate3d(0, 0, 0)' },
+          ], { duration: 220, easing: 'cubic-bezier(0.2, 0, 0, 1)' });
+          motion.animations.set(card, animation);
+          const cleanup = () => {
+            if (motion.animations.get(card) !== animation) return;
+            motion.animations.delete(card);
+          };
+          animation.finished.then(cleanup, cleanup);
+        }
+      }
+      motion.layout = nextLayout;
+      motion.positions = nextPositions;
+    });
+  });
+  motion.observer.observe(grid);
+  dashboardGridMotion = motion;
 }
 
 function updateChrome() {
@@ -75,6 +183,7 @@ function banners() {
 }
 
 function renderDashboard() {
+  stopDashboardGridMotion();
   if (!state.account) {
     content.innerHTML = `${banners()}<div class="empty"><div><h2>连接森空岛后开始规划</h2><p>应用会读取仓库、已持有干员和每个技能的当前专精等级。</p><button class="primary" data-action="login">使用森空岛 App 扫码连接</button></div></div>`;
     bindActions();
@@ -106,6 +215,7 @@ function renderDashboard() {
     <div class="result-summary">找到 ${list.length} 个当前可行候选</div>
     ${list.length ? `<div class="cards">${list.map(candidateCard).join('')}</div>` : `<div class="empty"><div><h2>当前筛选下没有可行专精</h2><p>仓库、专精状态或无限供应设置变化后会自动重新计算。</p></div></div>`}</div>`;
   bindActions();
+  startDashboardGridMotion();
 }
 
 function select(name, placeholder, options) {

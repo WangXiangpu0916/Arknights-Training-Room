@@ -73,6 +73,23 @@ test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保�
   assert.match(styles, /\.sidebar \{[^}]*height: 100vh;[^}]*overflow: hidden/);
 });
 
+test('候选卡片仅在实际列数变化时使用原生 FLIP 平滑重排', () => {
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(renderer, /const style = getComputedStyle\(grid\);\s*const columns = style\.gridTemplateColumns/);
+  assert.match(renderer, /new ResizeObserver/);
+  assert.match(renderer, /if \(nextLayout\.count === motion\.layout\.count\) \{\s*motion\.layout = nextLayout;\s*return/);
+  assert.match(renderer, /gridColumnOffset\(motion\.layout, cardIndex\) - last\.left/);
+  assert.match(renderer, /const nextPositions = readCardLayout\(grid\);\s*cancelAnimations\(\)/);
+  assert.match(renderer, /requestAnimationFrame/);
+  assert.match(renderer, /translate3d\(\$\{deltaX\}px, \$\{deltaY\}px, 0\)/);
+  assert.match(renderer, /duration: 220, easing: 'cubic-bezier\(0\.2, 0, 0, 1\)'/);
+  assert.match(renderer, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)/);
+  assert.match(renderer, /animation\.finished\.then\(cleanup, cleanup\)/);
+  assert.doesNotMatch(styles, /will-change:\s*transform/);
+  assert.doesNotMatch(renderer, /Framer|GSAP|anime\.js/);
+});
+
 test('专精筛选栏让搜索框弹性伸缩并限制筛选控件宽度', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
