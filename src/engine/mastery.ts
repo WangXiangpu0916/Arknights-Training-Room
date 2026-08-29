@@ -42,6 +42,7 @@ export class MasteryPlanner {
     }
     return candidates.sort((a, b) =>
       SINGLE_ORDER[a.from] - SINGLE_ORDER[b.from]
+      || b.operator.rarity - a.operator.rarity
       || a.operator.name.localeCompare(b.operator.name, 'zh-CN')
       || a.skill.index - b.skill.index,
     );
@@ -99,6 +100,7 @@ export class MasteryPlanner {
     const ranks = order === 'forward' ? CONTINUOUS_FORWARD : [...CONTINUOUS_FORWARD].reverse();
     return candidates.sort((a, b) =>
       ranks.indexOf(`${a.from}-${a.to}`) - ranks.indexOf(`${b.from}-${b.to}`)
+      || b.operator.rarity - a.operator.rarity
       || a.operator.name.localeCompare(b.operator.name, 'zh-CN')
       || a.skill.index - b.skill.index,
     );

@@ -7,6 +7,8 @@ import { LocalStore } from './data/local-store';
 
 let mainWindow: BrowserWindow | null = null;
 let service: AppService;
+const FIXED_WINDOW_WIDTH = 1530;
+const FIXED_WINDOW_HEIGHT = 800;
 
 type UpdatePhase = 'idle' | 'unsupported' | 'checking' | 'current' | 'available' | 'downloading' | 'ready' | 'installing' | 'error';
 type UpdateState = {
@@ -119,11 +121,19 @@ function registerIpc(): void {
 }
 
 async function createWindow(): Promise<void> {
+  const width = process.env.ATR_SCREENSHOT ? Number(process.env.ATR_WINDOW_WIDTH) || FIXED_WINDOW_WIDTH : FIXED_WINDOW_WIDTH;
+  const height = process.env.ATR_SCREENSHOT ? Number(process.env.ATR_WINDOW_HEIGHT) || FIXED_WINDOW_HEIGHT : FIXED_WINDOW_HEIGHT;
   mainWindow = new BrowserWindow({
-    width: Number(process.env.ATR_WINDOW_WIDTH) || 1360,
-    height: Number(process.env.ATR_WINDOW_HEIGHT) || 860,
-    minWidth: 1040,
-    minHeight: 680,
+    width,
+    height,
+    minWidth: width,
+    maxWidth: width,
+    minHeight: height,
+    maxHeight: height,
+    resizable: false,
+    maximizable: false,
+    minimizable: true,
+    fullscreenable: false,
     title: '训练室',
     icon: path.join(app.getAppPath(), 'build', 'icon.png'),
     backgroundColor: '#101317',
@@ -141,7 +151,22 @@ async function createWindow(): Promise<void> {
     return { action: 'deny' };
   });
   await mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
-  mainWindow.once('ready-to-show', () => mainWindow?.show());
+  if (process.env.ATR_WINDOW_POLICY_REPORT) {
+    await writeFile(process.env.ATR_WINDOW_POLICY_REPORT, JSON.stringify({
+      bounds: mainWindow.getBounds(),
+      minimumSize: mainWindow.getMinimumSize(),
+      maximumSize: mainWindow.getMaximumSize(),
+      resizable: mainWindow.isResizable(),
+      maximizable: mainWindow.isMaximizable(),
+      minimizable: mainWindow.isMinimizable(),
+      movable: mainWindow.isMovable(),
+      closable: mainWindow.isClosable(),
+      fullscreenable: mainWindow.isFullScreenable(),
+    }, null, 2));
+  }
+  mainWindow.once('ready-to-show', () => {
+    if (!process.env.ATR_QA_HIDDEN) mainWindow?.show();
+  });
   if (process.env.ATR_SCREENSHOT) {
     await new Promise(resolve => setTimeout(resolve, 700));
     if (process.env.ATR_SCREENSHOT_PAGE) {

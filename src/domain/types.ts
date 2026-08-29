@@ -33,6 +33,16 @@ export interface OperatorDefinition {
   rarity: number;
   profession: string;
   subProfession: string;
+  searchPinyin?: string;
+  searchPinyinInitials?: string;
+  gender?: string;
+  position?: string;
+  obtainMethods?: string[];
+  races?: string[];
+  birthPlaces?: string[];
+  organizations?: string[];
+  teams?: string[];
+  birthdayMonth?: number;
   skills: SkillDefinition[];
 }
 

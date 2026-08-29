@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { operatorMetadata } from './sync-prts-metadata.mjs';
 
 const api = 'https://prts.wiki/api.php';
 const headers = { 'User-Agent': 'Arknights-Training-Room/1.0' };
@@ -94,7 +95,7 @@ await writeFile(
   `${JSON.stringify({ source: 'https://prts.wiki', syncedAt: new Date().toISOString(), mastery, skills, missing }, null, 2)}\n`,
   'utf8',
 );
-console.log(`PRTS 素材同步完成：职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
+console.log(`PRTS 素材同步完成：干员资料 ${Object.keys(operatorMetadata).length}，职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
 if (missing.length) console.log(missing.map(item => `${item.skillId} ${item.name}`).join('\n'));
 
 async function download(url, target) {

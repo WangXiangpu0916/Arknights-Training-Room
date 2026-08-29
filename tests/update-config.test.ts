@@ -38,7 +38,7 @@ test('专精规划筛选器和模式提示按当前规则精简', () => {
   assert.doesNotMatch(renderer, /三星|每个候选独立计算|排序：/);
   assert.match(renderer, /mode === 'continuous' \? \[\[0,'M0'\],\[1,'M1'\]\] : \[\[0,'M0'\],\[1,'M1'\],\[2,'M2'\]\]/);
   assert.match(renderer, /mode = event\.target\.checked \? 'continuous' : 'single'/);
-  assert.match(renderer, /mode === 'continuous' && filters\.mastery === '2'\) filters\.mastery = ''/);
+  assert.match(renderer, /mode === 'continuous' && dashboardFilters\.mastery === '2'\) dashboardFilters\.mastery = ''/);
 });
 
 test('应用主题使用青蓝重点色并降低最后同步信息权重', () => {
@@ -60,48 +60,29 @@ test('应用主题使用青蓝重点色并降低最后同步信息权重', () =>
 test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保持在展示层', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
-  assert.match(renderer, /const available = state\.single/);
+  assert.match(renderer, /const available = new Map\(currentMasteryCandidates\(\)/);
+  assert.match(renderer, /function currentMasteryCandidates\(\)/);
   assert.match(renderer, /class="operator-skill \$\{candidate \? 'can-upgrade' : ''\}"/);
   assert.match(renderer, /operator-skill-mastery">M\$\{masteryLevel\}/);
   assert.doesNotMatch(renderer, /class="skill-pills"|class="skill-pill/);
-  assert.match(styles, /\.dashboard-layout \{[^}]*container-type: inline-size;[^}]*max-width: 1680px/);
-  assert.match(styles, /\.cards \{[^}]*grid-template-columns: minmax\(0, 410px\);[^}]*justify-content: start/);
-  assert.match(styles, /@container \(min-width: 674px\) \{\s*\.cards \{ grid-template-columns: repeat\(2, minmax\(0, 410px\)\)/);
-  assert.match(styles, /@container \(min-width: 1018px\) \{\s*\.cards \{ grid-template-columns: repeat\(3, minmax\(0, 410px\)\)/);
-  assert.match(styles, /@container \(min-width: 1362px\) \{\s*\.cards \{ grid-template-columns: repeat\(4, minmax\(0, 410px\)\)/);
+  assert.match(styles, /\.dashboard-layout \{[^}]*max-width: 1680px/);
+  assert.match(styles, /\.cards \{[^}]*grid-template-columns: repeat\(3, minmax\(0, 410px\)\);[^}]*justify-content: start/);
+  assert.doesNotMatch(styles, /@container|repeat\(2, minmax\(0, 410px\)\)|repeat\(4, minmax\(0, 410px\)\)/);
   assert.doesNotMatch(styles, /\.cards \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(styles, /main \{[^}]*height: 100vh;[^}]*overflow-y: auto/);
   assert.match(styles, /\.sidebar \{[^}]*height: 100vh;[^}]*overflow: hidden/);
 });
 
-test('候选卡片仅在实际列数变化时使用原生 FLIP 平滑重排', () => {
+test('固定窗口锁定 1530×800 且不再运行 resize-only FLIP', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
-  const styles = readFileSync('renderer/styles.css', 'utf8');
-  assert.match(renderer, /const style = getComputedStyle\(grid\);\s*const columns = style\.gridTemplateColumns/);
-  assert.match(renderer, /new ResizeObserver/);
-  assert.match(renderer, /if \(nextLayout\.count === motion\.layout\.count\) \{\s*motion\.layout = nextLayout;\s*return/);
-  assert.match(renderer, /gridColumnOffset\(motion\.layout, cardIndex\) - last\.left/);
-  assert.match(renderer, /cancelAnimations\(\);\s*const nextPositions = readCardLayout\(grid\)/);
-  assert.match(renderer, /requestAnimationFrame/);
-  assert.match(renderer, /translate3d\(\$\{deltaX\}px, \$\{deltaY\}px, 0\)/);
-  assert.match(renderer, /duration: 220, easing: 'cubic-bezier\(0\.2, 0, 0, 1\)'/);
-  assert.match(renderer, /matchMedia\('\(prefers-reduced-motion: reduce\)'\)/);
-  assert.match(renderer, /animation\.finished\.then\(cleanup, cleanup\)/);
-  assert.doesNotMatch(styles, /will-change:\s*transform/);
-  assert.doesNotMatch(renderer, /Framer|GSAP|anime\.js/);
-});
-
-test('候选卡片关键内部区域与外层使用同参数的嵌套 FLIP', () => {
-  const renderer = readFileSync('renderer/app.js', 'utf8');
-  assert.match(renderer, /querySelectorAll\('\[data-card-motion\]'\)/);
-  assert.doesNotMatch(renderer, /data-card-motion="avatar"|data-card-motion="identity"/);
-  assert.doesNotMatch(renderer, /data-card-motion="mastery"/);
-  assert.match(renderer, /data-card-motion="skill" data-card-motion-anchor="right"/);
-  assert.match(renderer, /firstPart\.left \+ currentTrackWidth - first\.width/);
-  assert.match(renderer, /const nearby = rect\.bottom >= -180 && rect\.top <= innerHeight \+ 180/);
-  assert.match(renderer, /const parts = nearby\s*\? new Map/);
-  assert.match(renderer, /if \(first\.visible \|\| last\.visible\) animateMove\(card, deltaX, deltaY\)/);
-  assert.match(renderer, /animateMove\(card, deltaX, deltaY\)[\s\S]*animateMove\(part, partDeltaX, partDeltaY\)/);
+  const main = readFileSync('src/main.ts', 'utf8');
+  assert.match(main, /FIXED_WINDOW_WIDTH = 1530/);
+  assert.match(main, /FIXED_WINDOW_HEIGHT = 800/);
+  assert.match(main, /resizable: false/);
+  assert.match(main, /maximizable: false/);
+  assert.match(main, /minimizable: true/);
+  assert.match(main, /fullscreenable: false/);
+  assert.doesNotMatch(renderer, /ResizeObserver|gridColumnCount|data-card-motion|requestAnimationFrame/);
 });
 
 test('专精顶部控制区固定为筛选行与三个统一模式开关', () => {
@@ -112,8 +93,8 @@ test('专精顶部控制区固定为筛选行与三个统一模式开关', () =>
   assert.match(renderer, /class="dashboard-mode-row"[\s\S]*连续专精模式[\s\S]*技巧概要视为无限[\s\S]*使用无限池材料/);
   assert.match(styles, /\.dashboard-mode-row \{[^}]*display: flex;[^}]*flex-wrap: nowrap/);
   assert.match(styles, /\.dashboard-mode-toggle \{[^}]*min-height: 38px;[^}]*padding: 6px 10px/);
-  assert.match(styles, /\.filters:not\(\.dashboard-filters\) \{ grid-template-columns: repeat\(3, 1fr\)/);
-  assert.match(renderer, /filters\.unlimited = event\.target\.checked \? 'with' : 'real'/);
+  assert.match(styles, /\.operator-filter-row \{[^}]*repeat\(6, minmax\(112px, 1fr\)\)/);
+  assert.match(renderer, /dashboardFilters\.unlimited = event\.target\.checked \? 'with' : 'real'/);
   assert.doesNotMatch(renderer, /data-mode=|data-supply-mode=|技巧概要无限供应|仅真实仓库<\/button>/);
   const main = readFileSync('src/main.ts', 'utf8');
   assert.match(main, /ATR_SCREENSHOT_MODE === 'continuous'[\s\S]*querySelector\('\[data-continuous-mode\]'\)/);

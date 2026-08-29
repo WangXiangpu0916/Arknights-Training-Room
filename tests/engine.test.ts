@@ -112,6 +112,19 @@ test('PRTS 职业分支覆盖当前全部可专精干员', () => {
   assert.equal(branches['1035_wisdel'], '投掷手');
 });
 
+test('PRTS 本地干员资料覆盖可专精干员并包含拼音索引', () => {
+  const cultivate = JSON.parse(readFileSync('resources/game-data/cultivate.json', 'utf8'));
+  const profiles = JSON.parse(readFileSync('resources/game-data/operator-metadata.json', 'utf8'));
+  const operatorIds = Object.entries(cultivate)
+    .filter(([, value]: [string, any]) => value.skills?.elite?.length)
+    .map(([operatorId]) => operatorId);
+  assert.deepEqual(operatorIds.filter(operatorId => !profiles[operatorId]), []);
+  assert.equal(profiles['002_amiya'].pinyin, 'amiya');
+  assert.equal(profiles['4132_ascln'].pinyin, 'asikalun');
+  assert.equal(profiles['4132_ascln'].pinyinInitials, 'askl');
+  assert.deepEqual(profiles['4132_ascln'].organizations, ['罗德岛', 'S.W.E.E.P.']);
+});
+
 test('无限供应候选仅包含专精材料及其加工链，不包含职业芯片', () => {
   const withChip: GameData = {
     ...gameData,
@@ -270,6 +283,51 @@ test('Case 13: 两个候选基于同一初始仓库独立计算', () => {
 test('Case 14: 单阶段固定排序', () => {
   const result = new MasteryPlanner(gameData).singleStage([owned([0, 2, 1])], { A: 20 }, []);
   assert.deepEqual(result.map(x => `${x.from}-${x.to}`), ['2-3', '1-2', '0-1']);
+});
+
+test('专精等级是第一排序键，同等级按星级降序且结果稳定', () => {
+  const specs = [
+    { id: 'six-m1', rarity: 6, level: 1 as MasteryLevel },
+    { id: 'five-m2', rarity: 5, level: 2 as MasteryLevel },
+    { id: 'four-m2', rarity: 4, level: 2 as MasteryLevel },
+    { id: 'six-m2', rarity: 6, level: 2 as MasteryLevel },
+    { id: 'five-m1', rarity: 5, level: 1 as MasteryLevel },
+  ];
+  const definitions = specs.map(({ id, rarity }) => ({
+    ...operator,
+    operatorId: id,
+    name: id,
+    rarity,
+    skills: [{ ...operator.skills[0], operatorId: id, skillId: `${id}-skill` }],
+  }));
+  const ownedOperators = specs.map(({ id, level }) => ({
+    ...owned([]),
+    operatorId: id,
+    skills: [{ skillId: `${id}-skill`, masteryLevel: level }],
+  }));
+  const planner = new MasteryPlanner({ ...gameData, operators: definitions });
+  const actual = planner.singleStage(ownedOperators, { A: 100, B: 100, C: 100 }, []);
+  assert.deepEqual(actual.map(candidate => candidate.operator.operatorId), [
+    'six-m2', 'five-m2', 'four-m2', 'six-m1', 'five-m1',
+  ]);
+});
+
+test('连续专精保留路线优先级，同路线按星级降序', () => {
+  const definitions = [4, 6, 5].map(rarity => ({
+    ...operator,
+    operatorId: `r${rarity}`,
+    name: `r${rarity}`,
+    rarity,
+    skills: [{ ...operator.skills[0], operatorId: `r${rarity}`, skillId: `r${rarity}-skill` }],
+  }));
+  const ownedOperators = definitions.map(definition => ({
+    ...owned([]),
+    operatorId: definition.operatorId,
+    skills: [{ skillId: definition.skills[0].skillId, masteryLevel: 0 as MasteryLevel }],
+  }));
+  const planner = new MasteryPlanner({ ...gameData, operators: definitions });
+  const actual = planner.continuous(ownedOperators, { A: 100, B: 100, C: 100 }, [], 'forward');
+  assert.deepEqual(actual.map(candidate => candidate.operator.rarity), [6, 5, 4]);
 });
 
 test('Case 15: 连续专精只保留跨度至少两级的路线并按指定顺序排序', () => {

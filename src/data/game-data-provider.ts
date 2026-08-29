@@ -27,6 +27,20 @@ interface RawCultivate {
   };
 }
 
+interface OperatorMetadata {
+  name?: string;
+  pinyin?: string;
+  pinyinInitials?: string;
+  gender?: string;
+  position?: string;
+  obtainMethods?: string[];
+  races?: string[];
+  birthPlaces?: string[];
+  organizations?: string[];
+  teams?: string[];
+  birthdayMonth?: number;
+}
+
 const FILES = [
   ['data/character.json', 'character.json'],
   ['data/cultivate.json', 'cultivate.json'],
@@ -91,7 +105,7 @@ export class ToolboxGameDataProvider {
   }
 
   private async loadFrom(directory: string): Promise<GameData> {
-    const [characters, cultivate, items, characterNames, materialNames, skillNames, subProfessionNames, metadata] = await Promise.all([
+    const [characters, cultivate, items, characterNames, materialNames, skillNames, subProfessionNames, operatorMetadata, metadata] = await Promise.all([
       this.json<Dict<RawCharacter>>(directory, 'character.json'),
       this.json<Dict<RawCultivate>>(directory, 'cultivate.json'),
       this.json<Dict<RawItem>>(directory, 'item.json'),
@@ -99,6 +113,7 @@ export class ToolboxGameDataProvider {
       this.json<Dict<string>>(directory, 'material-cn.json'),
       this.json<Dict<string>>(directory, 'skill-cn.json'),
       this.json<Dict<string>>(this.bundledGameDataDir(), 'subprofession-cn.json'),
+      this.json<Dict<OperatorMetadata>>(this.bundledGameDataDir(), 'operator-metadata.json'),
       this.json<{ version: string; updatedAt: string; sourceCommit?: string }>(directory, 'data-version.json'),
     ]);
 
@@ -121,12 +136,23 @@ export class ToolboxGameDataProvider {
       const character = characters[operatorId];
       const elite = raw.skills?.elite ?? [];
       if (!character || !elite.length || !characterNames[operatorId]) continue;
+      const profile = operatorMetadata[operatorId] ?? {};
       operators.push({
         operatorId,
         name: characterNames[operatorId],
         rarity: character.star,
         profession: professionFromToolboxId(character.profession),
         subProfession: subProfessionNames[operatorId] ?? '未知分支',
+        searchPinyin: profile.pinyin ?? '',
+        searchPinyinInitials: profile.pinyinInitials ?? '',
+        gender: profile.gender ?? '',
+        position: profile.position ?? '',
+        obtainMethods: profile.obtainMethods ?? [],
+        races: profile.races ?? [],
+        birthPlaces: profile.birthPlaces ?? [],
+        organizations: profile.organizations ?? [],
+        teams: profile.teams ?? [],
+        birthdayMonth: profile.birthdayMonth,
         skills: elite.map((skill, index) => ({
           skillId: skill.name,
           operatorId,

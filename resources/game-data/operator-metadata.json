@@ -1,0 +1,9776 @@
+{
+  "002_amiya": {
+    "name": "阿米娅",
+    "pinyin": "amiya",
+    "pinyinInitials": "amy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "卡特斯",
+      "奇美拉"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "003_kalts": {
+    "name": "凯尔希",
+    "pinyin": "kaierxi",
+    "pinyinInitials": "kex",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "罗德岛"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "009_12fce": {
+    "name": "12F",
+    "pinyin": "12f",
+    "pinyinInitials": "12f",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "主线剧情"
+    ],
+    "races": [
+      "萨弗拉"
+    ],
+    "birthPlaces": [
+      "不明"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "010_chen": {
+    "name": "陈",
+    "pinyin": "chen",
+    "pinyinInitials": "c",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "龙"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "龙门近卫局"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "017_huang": {
+    "name": "煌",
+    "pinyin": "huang",
+    "pinyinInitials": "h",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": []
+  },
+  "1001_amiya2": {
+    "name": "阿米娅(近卫)",
+    "pinyin": "amiyajinwei",
+    "pinyinInitials": "amyjw",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "卡特斯",
+      "奇美拉"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "1011_lava2": {
+    "name": "炎狱炎熔",
+    "pinyin": "yanyuyanrong",
+    "pinyinInitials": "yyyr",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "1012_skadi2": {
+    "name": "浊心斯卡蒂",
+    "pinyin": "zhuoxinsikadi",
+    "pinyinInitials": "zxskd",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "阿戈尔"
+    ],
+    "organizations": [
+      "阿戈尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "1013_chen2": {
+    "name": "假日威龙陈",
+    "pinyin": "jiariweilongchen",
+    "pinyinInitials": "jrwlc",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "龙"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "1014_nearl2": {
+    "name": "耀骑士临光",
+    "pinyin": "yaoqishilinguang",
+    "pinyinInitials": "yqslg",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "1015_aglna2": {
+    "name": "予愿安洁莉娜",
+    "pinyin": "yuyuananjielina",
+    "pinyinInitials": "yyajln",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "1016_agoat2": {
+    "name": "纯烬艾雅法拉",
+    "pinyin": "chunjinaiyafala",
+    "pinyinInitials": "cjayfl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "1019_siege2": {
+    "name": "维娜·维多利亚",
+    "pinyin": "weinaweiduoliya",
+    "pinyinInitials": "wnwdly",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "阿斯兰"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "101_sora": {
+    "name": "空",
+    "pinyin": "kong",
+    "pinyinInitials": "k",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "因经纪公司要求不公开"
+    ],
+    "birthPlaces": [
+      "因经纪公司要求不公开"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "企鹅物流"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "1020_reed2": {
+    "name": "焰影苇草",
+    "pinyin": "yanyingweicao",
+    "pinyinInitials": "yywc",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "德拉克"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚",
+      "塔拉"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "1021_kroos2": {
+    "name": "寒芒克洛丝",
+    "pinyin": "hanmangkeluosi",
+    "pinyinInitials": "hmkls",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "1022_flwr2": {
+    "name": "撷英调香师",
+    "pinyin": "xieyingtiaoxiangshi",
+    "pinyinInitials": "xytxs",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "1023_ghost2": {
+    "name": "归溟幽灵鲨",
+    "pinyin": "guimingyoulingsha",
+    "pinyinInitials": "gmyls",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "阿戈尔"
+    ],
+    "organizations": [
+      "阿戈尔",
+      "深海猎人"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "1024_hbisc2": {
+    "name": "濯尘芙蓉",
+    "pinyin": "zhuochenfurong",
+    "pinyinInitials": "zcfr",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "1026_gvial2": {
+    "name": "百炼嘉维尔",
+    "pinyin": "bailianjiaweier",
+    "pinyinInitials": "bljwe",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "阿达克利斯"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "1027_greyy2": {
+    "name": "承曦格雷伊",
+    "pinyin": "chengxigeleiyi",
+    "pinyinInitials": "cxgly",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "1028_texas2": {
+    "name": "缄默德克萨斯",
+    "pinyin": "jianmodekesasi",
+    "pinyinInitials": "jmdkss",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "企鹅物流"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "1029_yato2": {
+    "name": "麒麟R夜刀",
+    "pinyin": "qilinryedao",
+    "pinyinInitials": "qlryd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "鬼"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动组A4"
+    ],
+    "birthdayMonth": 5
+  },
+  "102_texas": {
+    "name": "德克萨斯",
+    "pinyin": "dekesasi",
+    "pinyinInitials": "dkss",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访",
+      "常驻赠送"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "企鹅物流"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "1030_noirc2": {
+    "name": "火龙S黑角",
+    "pinyin": "huolongsheijiao",
+    "pinyinInitials": "hlshj",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "鬼"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动组A4"
+    ],
+    "birthdayMonth": 8
+  },
+  "1031_slent2": {
+    "name": "淬羽赫默",
+    "pinyin": "cuiyuhemo",
+    "pinyinInitials": "cyhm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "1032_excu2": {
+    "name": "圣约送葬人",
+    "pinyin": "shengyuesongzangren",
+    "pinyinInitials": "syszr",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "1033_swire2": {
+    "name": "琳琅诗怀雅",
+    "pinyin": "linlangshihuaiya",
+    "pinyinInitials": "llshy",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "1034_jesca2": {
+    "name": "涤火杰西卡",
+    "pinyin": "dihuojiexika",
+    "pinyinInitials": "dhjxk",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "黑钢国际"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "1035_wisdel": {
+    "name": "维什戴尔",
+    "pinyin": "weishendaier",
+    "pinyinInitials": "wsde",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "巴别塔"
+    ],
+    "teams": []
+  },
+  "1036_fang2": {
+    "name": "历阵锐枪芬",
+    "pinyin": "lizhenruiqiangfen",
+    "pinyinInitials": "lzrqf",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "1037_amiya3": {
+    "name": "阿米娅(医疗)",
+    "pinyin": "amiyayiliao",
+    "pinyinInitials": "amyyl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "卡特斯",
+      "奇美拉"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "1038_whitw2": {
+    "name": "荒芜拉普兰德",
+    "pinyin": "huangwulapulande",
+    "pinyinInitials": "hwlpld",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "1039_thorn2": {
+    "name": "引星棘刺",
+    "pinyin": "yinxingjici",
+    "pinyinInitials": "yxjc",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "103_angel": {
+    "name": "能天使",
+    "pinyin": "nengtianshi",
+    "pinyinInitials": "nts",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "企鹅物流"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "1040_blaze2": {
+    "name": "烛煌",
+    "pinyin": "zhuhuang",
+    "pinyinInitials": "zh",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "1041_angel2": {
+    "name": "新约能天使",
+    "pinyin": "xinyuenengtianshi",
+    "pinyinInitials": "xynts",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "企鹅物流"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "1042_phatm2": {
+    "name": "酒神",
+    "pinyin": "jiushen",
+    "pinyinInitials": "js",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "1043_leizi2": {
+    "name": "司霆惊蛰",
+    "pinyin": "sitingjingzhe",
+    "pinyinInitials": "stjz",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "麒麟"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "1044_hsgma2": {
+    "name": "斩业星熊",
+    "pinyin": "zhanyexingxiong",
+    "pinyinInitials": "zyxx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "鬼"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "龙门近卫局"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "1045_svash2": {
+    "name": "凛御银灰",
+    "pinyin": "linyuyinhui",
+    "pinyinInitials": "lyyh",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "1046_sbell2": {
+    "name": "圣聆初雪",
+    "pinyin": "shenglingchuxue",
+    "pinyinInitials": "slcx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "1047_halo2": {
+    "name": "溯光星源",
+    "pinyin": "suguangxingyuan",
+    "pinyinInitials": "sgxy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "1048_orchd2": {
+    "name": "焰狐龙梓兰",
+    "pinyin": "yanhulongzilan",
+    "pinyinInitials": "yhlzl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A6"
+    ],
+    "birthdayMonth": 1
+  },
+  "1049_catap2": {
+    "name": "雷狼龙S空爆",
+    "pinyin": "leilanglongskongbao",
+    "pinyinInitials": "lllskb",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A6"
+    ],
+    "birthdayMonth": 8
+  },
+  "1050_chen3": {
+    "name": "赤刃明霄陈",
+    "pinyin": "chirenmingxiaochen",
+    "pinyinInitials": "crmxc",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "龙"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "1051_headb2": {
+    "name": "怒潮凛冬",
+    "pinyin": "nuchaolindong",
+    "pinyinInitials": "ncld",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [
+      "乌萨斯学生自治团"
+    ],
+    "birthdayMonth": 7
+  },
+  "1052_kalts2": {
+    "name": "凯尔希·思衡托",
+    "pinyin": "kaierxisihengtuo",
+    "pinyinInitials": "kexsht",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "罗德岛"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "106_franka": {
+    "name": "芙兰卡",
+    "pinyin": "fulanka",
+    "pinyinInitials": "flk",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "黑钢国际"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "107_liskam": {
+    "name": "雷蛇",
+    "pinyin": "leishe",
+    "pinyinInitials": "ls",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "瓦伊凡"
+    ],
+    "birthPlaces": [
+      "瓦伊凡"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "黑钢国际"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "108_silent": {
+    "name": "赫默",
+    "pinyin": "hemo",
+    "pinyinInitials": "hm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "109_fmout": {
+    "name": "远山",
+    "pinyin": "yuanshan",
+    "pinyinInitials": "ys",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "萨米"
+    ],
+    "organizations": [
+      "萨米"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "110_deepcl": {
+    "name": "深海色",
+    "pinyin": "shenhaise",
+    "pinyinInitials": "shs",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "阿戈尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "112_siege": {
+    "name": "推进之王",
+    "pinyin": "tuijinzhiwang",
+    "pinyinInitials": "tjzw",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿斯兰"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚",
+      "格拉斯哥帮"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "113_cqbw": {
+    "name": "W",
+    "pinyin": "w",
+    "pinyinInitials": "w",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "巴别塔"
+    ],
+    "teams": []
+  },
+  "115_headbr": {
+    "name": "凛冬",
+    "pinyin": "lindong",
+    "pinyinInitials": "ld",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [
+      "乌萨斯学生自治团"
+    ],
+    "birthdayMonth": 7
+  },
+  "117_myrrh": {
+    "name": "末药",
+    "pinyin": "moyao",
+    "pinyinInitials": "my",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "118_yuki": {
+    "name": "白雪",
+    "pinyin": "baixue",
+    "pinyinInitials": "bx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿纳缇"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "120_hibisc": {
+    "name": "芙蓉",
+    "pinyin": "furong",
+    "pinyinInitials": "fr",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A1"
+    ],
+    "birthdayMonth": 6
+  },
+  "121_lava": {
+    "name": "炎熔",
+    "pinyin": "yanrong",
+    "pinyinInitials": "yr",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A1"
+    ],
+    "birthdayMonth": 6
+  },
+  "122_beagle": {
+    "name": "米格鲁",
+    "pinyin": "migelu",
+    "pinyinInitials": "mgl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A1"
+    ],
+    "birthdayMonth": 3
+  },
+  "123_fang": {
+    "name": "芬",
+    "pinyin": "fen",
+    "pinyinInitials": "f",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A1"
+    ],
+    "birthdayMonth": 12
+  },
+  "124_kroos": {
+    "name": "克洛丝",
+    "pinyin": "keluosi",
+    "pinyinInitials": "kls",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A1"
+    ],
+    "birthdayMonth": 11
+  },
+  "126_shotst": {
+    "name": "流星",
+    "pinyin": "liuxing",
+    "pinyinInitials": "lx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "127_estell": {
+    "name": "艾丝黛尔",
+    "pinyin": "aisidaier",
+    "pinyinInitials": "asde",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募"
+    ],
+    "races": [
+      "阿达克利斯"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "128_plosis": {
+    "name": "白面鸮",
+    "pinyin": "baimianxiao",
+    "pinyinInitials": "bmx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "129_bluep": {
+    "name": "蓝毒",
+    "pinyin": "landu",
+    "pinyinInitials": "ld",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "安努拉"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "130_doberm": {
+    "name": "杜宾",
+    "pinyin": "dubin",
+    "pinyinInitials": "db",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "131_flameb": {
+    "name": "炎客",
+    "pinyin": "yanke",
+    "pinyinInitials": "yk",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "133_mm": {
+    "name": "梅",
+    "pinyin": "mei",
+    "pinyinInitials": "m",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "134_ifrit": {
+    "name": "伊芙利特",
+    "pinyin": "yifulite",
+    "pinyinInitials": "yflt",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "135_halo": {
+    "name": "星源",
+    "pinyin": "xingyuan",
+    "pinyinInitials": "xy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "136_hsguma": {
+    "name": "星熊",
+    "pinyin": "xingxiong",
+    "pinyinInitials": "xx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "鬼"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "龙门近卫局"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "137_brownb": {
+    "name": "猎蜂",
+    "pinyin": "liefeng",
+    "pinyinInitials": "lf",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "140_whitew": {
+    "name": "拉普兰德",
+    "pinyin": "lapulande",
+    "pinyinInitials": "lpld",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "141_nights": {
+    "name": "夜烟",
+    "pinyin": "yeyan",
+    "pinyinInitials": "yy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "143_ghost": {
+    "name": "幽灵鲨",
+    "pinyin": "youlingsha",
+    "pinyinInitials": "yls",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "阿戈尔"
+    ],
+    "organizations": [
+      "阿戈尔",
+      "深海猎人"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "144_red": {
+    "name": "红",
+    "pinyin": "hong",
+    "pinyinInitials": "h",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛",
+      "S.W.E.E.P."
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "145_prove": {
+    "name": "普罗旺斯",
+    "pinyin": "puluowangsi",
+    "pinyinInitials": "plws",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "147_shining": {
+    "name": "闪灵",
+    "pinyin": "shanling",
+    "pinyinInitials": "sl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [],
+    "teams": [
+      "使徒"
+    ],
+    "birthdayMonth": 10
+  },
+  "148_nearl": {
+    "name": "临光",
+    "pinyin": "linguang",
+    "pinyinInitials": "lg",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [],
+    "teams": [
+      "使徒"
+    ],
+    "birthdayMonth": 4
+  },
+  "149_scave": {
+    "name": "清道夫",
+    "pinyin": "qingdaofu",
+    "pinyinInitials": "qdf",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛",
+      "S.W.E.E.P."
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "1502_crosly": {
+    "name": "弑君者",
+    "pinyin": "shijunzhe",
+    "pinyinInitials": "sjz",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "瑞柏巴"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "150_snakek": {
+    "name": "蛇屠箱",
+    "pinyin": "shetuxiang",
+    "pinyinInitials": "stx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "匹特拉姆"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": []
+  },
+  "151_myrtle": {
+    "name": "桃金娘",
+    "pinyin": "taojinniang",
+    "pinyinInitials": "tjn",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "杜林"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "154_morgan": {
+    "name": "摩根",
+    "pinyin": "mogen",
+    "pinyinInitials": "mg",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚",
+      "格拉斯哥帮"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "155_tiger": {
+    "name": "因陀罗",
+    "pinyin": "yintuoluo",
+    "pinyinInitials": "ytl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "不明"
+    ],
+    "organizations": [
+      "维多利亚",
+      "格拉斯哥帮"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "157_dagda": {
+    "name": "达格达",
+    "pinyin": "dageda",
+    "pinyinInitials": "dgd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚",
+      "格拉斯哥帮"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "158_milu": {
+    "name": "守林人",
+    "pinyin": "shoulinren",
+    "pinyinInitials": "slr",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "159_peacok": {
+    "name": "断罪者",
+    "pinyin": "duanzuizhe",
+    "pinyinInitials": "dzz",
+    "gender": "断罪",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未知（疑似黎博利）"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "米诺斯"
+    ],
+    "teams": []
+  },
+  "163_hpsts": {
+    "name": "火神",
+    "pinyin": "huoshen",
+    "pinyinInitials": "hs",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "米诺斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "164_nightm": {
+    "name": "夜魔",
+    "pinyin": "yemo",
+    "pinyinInitials": "ym",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "166_skfire": {
+    "name": "天火",
+    "pinyin": "tianhuo",
+    "pinyinInitials": "th",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "171_bldsk": {
+    "name": "华法琳",
+    "pinyin": "huafalin",
+    "pinyinInitials": "hfl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "172_svrash": {
+    "name": "银灰",
+    "pinyin": "yinhui",
+    "pinyinInitials": "yh",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格",
+      "喀兰贸易"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "173_slchan": {
+    "name": "崖心",
+    "pinyin": "yaxin",
+    "pinyinInitials": "yx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "174_slbell": {
+    "name": "初雪",
+    "pinyin": "chuxue",
+    "pinyinInitials": "cx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "179_cgbird": {
+    "name": "夜莺",
+    "pinyin": "yeying",
+    "pinyinInitials": "yy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [],
+    "teams": [
+      "使徒"
+    ],
+    "birthdayMonth": 5
+  },
+  "180_amgoat": {
+    "name": "艾雅法拉",
+    "pinyin": "aiyafala",
+    "pinyinInitials": "ayfl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "181_flower": {
+    "name": "调香师",
+    "pinyin": "tiaoxiangshi",
+    "pinyinInitials": "txs",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "183_skgoat": {
+    "name": "地灵",
+    "pinyin": "diling",
+    "pinyinInitials": "dl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "185_frncat": {
+    "name": "慕斯",
+    "pinyin": "musi",
+    "pinyinInitials": "ms",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "187_ccheal": {
+    "name": "嘉维尔",
+    "pinyin": "jiaweier",
+    "pinyinInitials": "jwe",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "信用交易所"
+    ],
+    "races": [
+      "阿达克利斯"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "188_helage": {
+    "name": "赫拉格",
+    "pinyin": "helage",
+    "pinyinInitials": "hlg",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "190_clour": {
+    "name": "红云",
+    "pinyin": "hongyun",
+    "pinyinInitials": "hy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "不明"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "192_falco": {
+    "name": "翎羽",
+    "pinyin": "lingyu",
+    "pinyinInitials": "ly",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "193_frostl": {
+    "name": "霜叶",
+    "pinyin": "shuangye",
+    "pinyinInitials": "sy",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "194_leto": {
+    "name": "烈夏",
+    "pinyin": "liexia",
+    "pinyinInitials": "lx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [
+      "乌萨斯学生自治团"
+    ],
+    "birthdayMonth": 3
+  },
+  "195_glassb": {
+    "name": "真理",
+    "pinyin": "zhenli",
+    "pinyinInitials": "zl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [
+      "乌萨斯学生自治团"
+    ],
+    "birthdayMonth": 9
+  },
+  "196_sunbr": {
+    "name": "古米",
+    "pinyin": "gumi",
+    "pinyinInitials": "gm",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [
+      "乌萨斯学生自治团"
+    ],
+    "birthdayMonth": 10
+  },
+  "197_poca": {
+    "name": "早露",
+    "pinyin": "zaolu",
+    "pinyinInitials": "zl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [
+      "乌萨斯学生自治团"
+    ],
+    "birthdayMonth": 10
+  },
+  "198_blackd": {
+    "name": "讯使",
+    "pinyin": "xunshi",
+    "pinyinInitials": "xs",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "信用交易所"
+    ],
+    "races": [
+      "依特拉"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格",
+      "喀兰贸易"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "199_yak": {
+    "name": "角峰",
+    "pinyin": "jiaofeng",
+    "pinyinInitials": "jf",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格",
+      "喀兰贸易"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "2012_typhon": {
+    "name": "提丰",
+    "pinyin": "tifeng",
+    "pinyinInitials": "tf",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "萨米"
+    ],
+    "organizations": [
+      "萨米"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "2013_cerber": {
+    "name": "刻俄柏",
+    "pinyin": "keebai",
+    "pinyinInitials": "keb",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "2014_nian": {
+    "name": "年",
+    "pinyin": "nian",
+    "pinyinInitials": "n",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎",
+      "炎-岁"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "2015_dusk": {
+    "name": "夕",
+    "pinyin": "xi",
+    "pinyinInitials": "x",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎",
+      "炎-岁"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "201_moeshd": {
+    "name": "可颂",
+    "pinyin": "kesong",
+    "pinyinInitials": "ks",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "企鹅物流"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "2023_ling": {
+    "name": "令",
+    "pinyin": "ling",
+    "pinyinInitials": "l",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎",
+      "炎-岁"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "2024_chyue": {
+    "name": "重岳",
+    "pinyin": "zhongyue",
+    "pinyinInitials": "zy",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎",
+      "炎-岁"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "2025_shu": {
+    "name": "黍",
+    "pinyin": "shu",
+    "pinyinInitials": "s",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎",
+      "炎-岁"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "2026_yu": {
+    "name": "余",
+    "pinyin": "yu",
+    "pinyinInitials": "y",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎",
+      "炎-岁"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "2027_wang": {
+    "name": "望",
+    "pinyin": "wang",
+    "pinyinInitials": "w",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎",
+      "炎-岁"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "202_demkni": {
+    "name": "塞雷娅",
+    "pinyin": "saileiya",
+    "pinyinInitials": "sly",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "瓦伊凡"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "204_platnm": {
+    "name": "白金",
+    "pinyin": "baijin",
+    "pinyinInitials": "bj",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "206_gnosis": {
+    "name": "灵知",
+    "pinyin": "lingzhi",
+    "pinyinInitials": "lz",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格",
+      "喀兰贸易"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "208_melan": {
+    "name": "玫兰莎",
+    "pinyin": "meilansha",
+    "pinyinInitials": "mls",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A4"
+    ],
+    "birthdayMonth": 3
+  },
+  "209_ardign": {
+    "name": "卡缇",
+    "pinyin": "kati",
+    "pinyinInitials": "kt",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A4"
+    ],
+    "birthdayMonth": 8
+  },
+  "210_stward": {
+    "name": "史都华德",
+    "pinyin": "shidouhuade",
+    "pinyinInitials": "sdhd",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A4"
+    ],
+    "birthdayMonth": 12
+  },
+  "211_adnach": {
+    "name": "安德切尔",
+    "pinyin": "andeqieer",
+    "pinyinInitials": "adqe",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "主线剧情"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A4"
+    ],
+    "birthdayMonth": 5
+  },
+  "212_ansel": {
+    "name": "安赛尔",
+    "pinyin": "ansaier",
+    "pinyinInitials": "ase",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A4"
+    ],
+    "birthdayMonth": 1
+  },
+  "213_mostma": {
+    "name": "莫斯提马",
+    "pinyin": "mositima",
+    "pinyinInitials": "mstm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "214_kafka": {
+    "name": "卡夫卡",
+    "pinyin": "kafuka",
+    "pinyinInitials": "kfk",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "215_mantic": {
+    "name": "狮蝎",
+    "pinyin": "shixie",
+    "pinyinInitials": "sx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "曼提柯"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": []
+  },
+  "218_cuttle": {
+    "name": "安哲拉",
+    "pinyin": "anzhela",
+    "pinyinInitials": "azl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "阿戈尔",
+      "深海猎人"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "219_meteo": {
+    "name": "陨星",
+    "pinyin": "yunxing",
+    "pinyinInitials": "yx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "220_grani": {
+    "name": "格拉尼",
+    "pinyin": "gelani",
+    "pinyinInitials": "gln",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "222_bpipe": {
+    "name": "风笛",
+    "pinyin": "fengdi",
+    "pinyinInitials": "fd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "瓦伊凡"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "225_haak": {
+    "name": "阿",
+    "pinyin": "a",
+    "pinyinInitials": "a",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [
+      "鲤氏侦探事务所"
+    ],
+    "birthdayMonth": 3
+  },
+  "226_hmau": {
+    "name": "吽",
+    "pinyin": "hong",
+    "pinyinInitials": "h",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [
+      "鲤氏侦探事务所"
+    ],
+    "birthdayMonth": 7
+  },
+  "230_savage": {
+    "name": "暴行",
+    "pinyin": "baoxing",
+    "pinyinInitials": "bx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "预约奖励",
+      "周年奖励"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "235_jesica": {
+    "name": "杰西卡",
+    "pinyin": "jiexika",
+    "pinyinInitials": "jxk",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "黑钢国际"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "236_rope": {
+    "name": "暗索",
+    "pinyin": "ansuo",
+    "pinyinInitials": "as",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "237_gravel": {
+    "name": "砾",
+    "pinyin": "li",
+    "pinyinInitials": "l",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "240_wyvern": {
+    "name": "香草",
+    "pinyin": "xiangcao",
+    "pinyinInitials": "xc",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "瓦伊凡"
+    ],
+    "birthPlaces": [
+      "瓦伊凡"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "黑钢国际"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "241_panda": {
+    "name": "食铁兽",
+    "pinyin": "shitieshou",
+    "pinyinInitials": "sts",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "242_otter": {
+    "name": "梅尔",
+    "pinyin": "meier",
+    "pinyinInitials": "me",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿纳缇"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "243_waaifu": {
+    "name": "槐琥",
+    "pinyin": "huaihu",
+    "pinyinInitials": "hh",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [
+      "鲤氏侦探事务所"
+    ],
+    "birthdayMonth": 12
+  },
+  "245_cello": {
+    "name": "塑心",
+    "pinyin": "suxin",
+    "pinyinInitials": "sx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "248_mgllan": {
+    "name": "麦哲伦",
+    "pinyin": "maizhelun",
+    "pinyinInitials": "mzl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "249_mlyss": {
+    "name": "缪尔赛思",
+    "pinyin": "miuersaisi",
+    "pinyinInitials": "mess",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "精灵"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "250_phatom": {
+    "name": "傀影",
+    "pinyin": "kuiying",
+    "pinyinInitials": "ky",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "252_bibeak": {
+    "name": "柏喙",
+    "pinyin": "baihui",
+    "pinyinInitials": "bh",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "凭证交易所(高级/通用)"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "萨米"
+    ],
+    "organizations": [
+      "萨米"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "253_greyy": {
+    "name": "格雷伊",
+    "pinyin": "geleiyi",
+    "pinyinInitials": "gly",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "玻利瓦尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "254_vodfox": {
+    "name": "巫恋",
+    "pinyin": "wulian",
+    "pinyinInitials": "wl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "258_podego": {
+    "name": "波登可",
+    "pinyin": "bodengke",
+    "pinyinInitials": "bdk",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "260_durnar": {
+    "name": "坚雷",
+    "pinyin": "jianlei",
+    "pinyinInitials": "jl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "信用交易所"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "261_sddrag": {
+    "name": "苇草",
+    "pinyin": "weicao",
+    "pinyinInitials": "wc",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "德拉克"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "263_skadi": {
+    "name": "斯卡蒂",
+    "pinyin": "sikadi",
+    "pinyinInitials": "skd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "阿戈尔"
+    ],
+    "organizations": [
+      "阿戈尔",
+      "深海猎人"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "264_f12yin": {
+    "name": "山",
+    "pinyin": "shan",
+    "pinyinInitials": "s",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "265_sophia": {
+    "name": "鞭刃",
+    "pinyin": "bianren",
+    "pinyinInitials": "br",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "271_spikes": {
+    "name": "芳汀",
+    "pinyin": "fangting",
+    "pinyinInitials": "ft",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "272_strong": {
+    "name": "孑",
+    "pinyin": "jie",
+    "pinyinInitials": "j",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "274_astesi": {
+    "name": "星极",
+    "pinyin": "xingji",
+    "pinyinInitials": "xj",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "275_breeze": {
+    "name": "微风",
+    "pinyin": "weifeng",
+    "pinyinInitials": "wf",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "277_sqrrel": {
+    "name": "阿消",
+    "pinyin": "axiao",
+    "pinyinInitials": "ax",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "278_orchid": {
+    "name": "梓兰",
+    "pinyin": "zilan",
+    "pinyinInitials": "zl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访",
+      "主线剧情"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A6"
+    ],
+    "birthdayMonth": 1
+  },
+  "279_excu": {
+    "name": "送葬人",
+    "pinyin": "songzangren",
+    "pinyinInitials": "szr",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "281_popka": {
+    "name": "泡普卡",
+    "pinyin": "paopuka",
+    "pinyinInitials": "ppk",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A6"
+    ],
+    "birthdayMonth": 7
+  },
+  "282_catap": {
+    "name": "空爆",
+    "pinyin": "kongbao",
+    "pinyinInitials": "kb",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A6"
+    ],
+    "birthdayMonth": 8
+  },
+  "283_midn": {
+    "name": "月见夜",
+    "pinyin": "yuejianye",
+    "pinyinInitials": "yjy",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A6"
+    ],
+    "birthdayMonth": 5
+  },
+  "284_spot": {
+    "name": "斑点",
+    "pinyin": "bandian",
+    "pinyinInitials": "bd",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "瑞柏巴"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动预备组A6"
+    ],
+    "birthdayMonth": 4
+  },
+  "285_medic2": {
+    "name": "Lancet-2",
+    "pinyin": "lancet2",
+    "pinyinInitials": "lancet2",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "主线剧情"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "286_cast3": {
+    "name": "Castle-3",
+    "pinyin": "castle3",
+    "pinyinInitials": "castle3",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "289_gyuki": {
+    "name": "缠丸",
+    "pinyin": "chanwan",
+    "pinyinInitials": "cw",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "鬼"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "290_vigna": {
+    "name": "红豆",
+    "pinyin": "hongdou",
+    "pinyinInitials": "hd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "291_aglina": {
+    "name": "安洁莉娜",
+    "pinyin": "anjielina",
+    "pinyinInitials": "ajln",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "293_thorns": {
+    "name": "棘刺",
+    "pinyin": "jici",
+    "pinyinInitials": "jc",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "294_ayer": {
+    "name": "断崖",
+    "pinyin": "duanya",
+    "pinyinInitials": "dy",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "297_hamoni": {
+    "name": "和弦",
+    "pinyin": "hexian",
+    "pinyinInitials": "hx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚",
+      "塔拉"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "298_susuro": {
+    "name": "苏苏洛",
+    "pinyin": "susuluo",
+    "pinyinInitials": "ssl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "300_phenxi": {
+    "name": "菲亚梅塔",
+    "pinyin": "feiyameita",
+    "pinyinInitials": "fymt",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "301_cutter": {
+    "name": "刻刀",
+    "pinyin": "kedao",
+    "pinyinInitials": "kd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "302_glaze": {
+    "name": "安比尔",
+    "pinyin": "anbier",
+    "pinyinInitials": "abe",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "304_zebra": {
+    "name": "暴雨",
+    "pinyin": "baoyu",
+    "pinyinInitials": "by",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "306_leizi": {
+    "name": "惊蛰",
+    "pinyin": "jingzhe",
+    "pinyinInitials": "jz",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "麒麟"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "308_swire": {
+    "name": "诗怀雅",
+    "pinyin": "shihuaiya",
+    "pinyinInitials": "shy",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门",
+      "龙门近卫局"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "311_mudrok": {
+    "name": "泥岩",
+    "pinyin": "niyan",
+    "pinyinInitials": "ny",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "322_lmlee": {
+    "name": "老鲤",
+    "pinyin": "laoli",
+    "pinyinInitials": "ll",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "龙"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [
+      "鲤氏侦探事务所"
+    ],
+    "birthdayMonth": 10
+  },
+  "325_bison": {
+    "name": "拜松",
+    "pinyin": "baisong",
+    "pinyinInitials": "bs",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "326_glacus": {
+    "name": "格劳克斯",
+    "pinyin": "gelaokesi",
+    "pinyinInitials": "glks",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "阿戈尔地区"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "328_cammou": {
+    "name": "卡达",
+    "pinyin": "kada",
+    "pinyinInitials": "kd",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "332_archet": {
+    "name": "空弦",
+    "pinyin": "kongxian",
+    "pinyinInitials": "kx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "333_sidero": {
+    "name": "铸铁",
+    "pinyin": "zhutie",
+    "pinyinInitials": "zt",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "米诺斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "336_folivo": {
+    "name": "稀音",
+    "pinyin": "xiyin",
+    "pinyinInitials": "xy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "凭证交易所(高级/通用)"
+    ],
+    "races": [
+      "皮洛萨"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "337_utage": {
+    "name": "宴",
+    "pinyin": "yan",
+    "pinyinInitials": "y",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "不明"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "338_iris": {
+    "name": "爱丽丝",
+    "pinyin": "ailisi",
+    "pinyinInitials": "als",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "340_shwaz": {
+    "name": "黑",
+    "pinyin": "hei",
+    "pinyinInitials": "h",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "汐斯塔"
+    ],
+    "teams": []
+  },
+  "341_sntlla": {
+    "name": "寒檀",
+    "pinyin": "hantan",
+    "pinyinInitials": "ht",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "萨米"
+    ],
+    "organizations": [
+      "萨米"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "343_tknogi": {
+    "name": "月禾",
+    "pinyin": "yuehe",
+    "pinyinInitials": "yh",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "344_beewax": {
+    "name": "蜜蜡",
+    "pinyin": "mila",
+    "pinyinInitials": "ml",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "345_folnic": {
+    "name": "亚叶",
+    "pinyin": "yaye",
+    "pinyinInitials": "yy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "346_aosta": {
+    "name": "奥斯塔",
+    "pinyin": "aosita",
+    "pinyinInitials": "ast",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [
+      "贾维团伙"
+    ],
+    "birthdayMonth": 5
+  },
+  "347_jaksel": {
+    "name": "杰克",
+    "pinyin": "jieke",
+    "pinyinInitials": "jk",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "348_ceylon": {
+    "name": "锡兰",
+    "pinyin": "xilan",
+    "pinyinInitials": "xl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "汐斯塔（独立城邦）"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "汐斯塔"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "349_chiave": {
+    "name": "贾维",
+    "pinyin": "jiawei",
+    "pinyinInitials": "jw",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [
+      "贾维团伙"
+    ],
+    "birthdayMonth": 9
+  },
+  "350_surtr": {
+    "name": "史尔特尔",
+    "pinyin": "shierteer",
+    "pinyinInitials": "sete",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "不明"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "355_ethan": {
+    "name": "伊桑",
+    "pinyin": "yisang",
+    "pinyinInitials": "ys",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "萨弗拉"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "356_broca": {
+    "name": "布洛卡",
+    "pinyin": "buluoka",
+    "pinyinInitials": "blk",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [
+      "贾维团伙"
+    ],
+    "birthdayMonth": 2
+  },
+  "358_lisa": {
+    "name": "铃兰",
+    "pinyin": "linglan",
+    "pinyinInitials": "ll",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "362_saga": {
+    "name": "嵯峨",
+    "pinyin": "cuoe",
+    "pinyinInitials": "ce",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "363_toddi": {
+    "name": "熔泉",
+    "pinyin": "rongquan",
+    "pinyinInitials": "rq",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "瓦伊凡"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "365_aprl": {
+    "name": "四月",
+    "pinyin": "siyue",
+    "pinyinInitials": "sy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "366_acdrop": {
+    "name": "酸糖",
+    "pinyin": "suantang",
+    "pinyinInitials": "st",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "367_swllow": {
+    "name": "灰喉",
+    "pinyin": "huihou",
+    "pinyinInitials": "hh",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "369_bena": {
+    "name": "贝娜",
+    "pinyin": "beina",
+    "pinyinInitials": "bn",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "373_lionhd": {
+    "name": "莱恩哈特",
+    "pinyin": "laienhate",
+    "pinyinInitials": "leht",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "376_therex": {
+    "name": "THRM-EX",
+    "pinyin": "thrmex",
+    "pinyinInitials": "thrmex",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "主线剧情",
+      "活动获得"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "377_gdglow": {
+    "name": "澄闪",
+    "pinyin": "chengshan",
+    "pinyinInitials": "cs",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "378_asbest": {
+    "name": "石棉",
+    "pinyin": "shimian",
+    "pinyinInitials": "sm",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "萨弗拉"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "379_sesa": {
+    "name": "慑砂",
+    "pinyin": "shesha",
+    "pinyinInitials": "ss",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "瓦伊凡"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "381_bubble": {
+    "name": "泡泡",
+    "pinyin": "paopao",
+    "pinyinInitials": "pp",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "塞拉托"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "383_snsant": {
+    "name": "雪雉",
+    "pinyin": "xuezhi",
+    "pinyinInitials": "xz",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "385_finlpp": {
+    "name": "清流",
+    "pinyin": "qingliu",
+    "pinyinInitials": "ql",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限时礼包",
+      "公开招募"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "388_mint": {
+    "name": "薄绿",
+    "pinyin": "baol",
+    "pinyinInitials": "bl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "391_rosmon": {
+    "name": "迷迭香",
+    "pinyin": "midiexiang",
+    "pinyinInitials": "mdx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "394_hadiya": {
+    "name": "哈蒂娅",
+    "pinyin": "hadiya",
+    "pinyinInitials": "hdy",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4000_jnight": {
+    "name": "正义骑士号",
+    "pinyin": "zhengyiqishihao",
+    "pinyinInitials": "zyqsh",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "活动获得"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [
+      "卡西米尔",
+      "红松骑士团"
+    ],
+    "teams": []
+  },
+  "4004_pudd": {
+    "name": "布丁",
+    "pinyin": "buding",
+    "pinyinInitials": "bd",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4006_melnte": {
+    "name": "玫拉",
+    "pinyin": "meila",
+    "pinyinInitials": "ml",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4009_irene": {
+    "name": "艾丽妮",
+    "pinyin": "ailini",
+    "pinyinInitials": "aln",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "400_weedy": {
+    "name": "温蒂",
+    "pinyin": "wendi",
+    "pinyinInitials": "wd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "4010_etlchi": {
+    "name": "隐德来希",
+    "pinyin": "yindelaixi",
+    "pinyinInitials": "ydlx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4011_lessng": {
+    "name": "止颂",
+    "pinyin": "zhisong",
+    "pinyinInitials": "zs",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4013_kjera": {
+    "name": "耶拉",
+    "pinyin": "yela",
+    "pinyinInitials": "yl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4014_lunacu": {
+    "name": "子月",
+    "pinyin": "ziyue",
+    "pinyinInitials": "zy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "4015_spuria": {
+    "name": "空构",
+    "pinyin": "konggou",
+    "pinyinInitials": "kg",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4016_kazema": {
+    "name": "风丸",
+    "pinyin": "fengwan",
+    "pinyinInitials": "fw",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4017_puzzle": {
+    "name": "谜图",
+    "pinyin": "mitu",
+    "pinyinInitials": "mt",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "瓦伊凡"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4019_ncdeer": {
+    "name": "九色鹿",
+    "pinyin": "jiuselu",
+    "pinyinInitials": "jsl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "401_elysm": {
+    "name": "极境",
+    "pinyin": "jijing",
+    "pinyinInitials": "jj",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "4023_rfalcn": {
+    "name": "红隼",
+    "pinyin": "hongsun",
+    "pinyinInitials": "hs",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": []
+  },
+  "4025_aprot2": {
+    "name": "暮落",
+    "pinyin": "muluo",
+    "pinyinInitials": "ml",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4026_vulpis": {
+    "name": "忍冬",
+    "pinyin": "rendong",
+    "pinyinInitials": "rd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "4027_heyak": {
+    "name": "霍尔海雅",
+    "pinyin": "huoerhaiya",
+    "pinyinInitials": "hehy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "402_tuye": {
+    "name": "图耶",
+    "pinyin": "tuye",
+    "pinyinInitials": "ty",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "凭证交易所(高级/通用)"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4031_liesel": {
+    "name": "复奏",
+    "pinyin": "fuzou",
+    "pinyinInitials": "fz",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4032_provs": {
+    "name": "但书",
+    "pinyin": "danshu",
+    "pinyinInitials": "ds",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "4036_forcer": {
+    "name": "见行者",
+    "pinyin": "jianxingzhe",
+    "pinyinInitials": "jxz",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "4037_demetr": {
+    "name": "贝洛内",
+    "pinyin": "beiluonei",
+    "pinyinInitials": "bln",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4039_horn": {
+    "name": "号角",
+    "pinyin": "haojiao",
+    "pinyinInitials": "hj",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "4040_rockr": {
+    "name": "洛洛",
+    "pinyin": "luoluo",
+    "pinyinInitials": "ll",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4041_chnut": {
+    "name": "褐果",
+    "pinyin": "heguo",
+    "pinyinInitials": "hg",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "杜林"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4042_lumen": {
+    "name": "流明",
+    "pinyin": "liuming",
+    "pinyinInitials": "lm",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4043_erato": {
+    "name": "埃拉托",
+    "pinyin": "ailatuo",
+    "pinyinInitials": "alt",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "凭证交易所(高级/通用)"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "米诺斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4045_heidi": {
+    "name": "海蒂",
+    "pinyin": "haidi",
+    "pinyinInitials": "hd",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4046_ebnhlz": {
+    "name": "黑键",
+    "pinyin": "heijian",
+    "pinyinInitials": "hj",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4047_pianst": {
+    "name": "车尔尼",
+    "pinyin": "cheerni",
+    "pinyinInitials": "cen",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "4048_doroth": {
+    "name": "多萝西",
+    "pinyin": "duoluoxi",
+    "pinyinInitials": "dlx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "4051_akkord": {
+    "name": "协律",
+    "pinyin": "xiel",
+    "pinyinInitials": "xl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4052_surfer": {
+    "name": "寻澜",
+    "pinyin": "xunlan",
+    "pinyinInitials": "xl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "黑钢国际"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "4054_malist": {
+    "name": "至简",
+    "pinyin": "zhijian",
+    "pinyinInitials": "zj",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "杜林"
+    ],
+    "birthPlaces": [
+      "杜林"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4055_bgsnow": {
+    "name": "鸿雪",
+    "pinyin": "hongxue",
+    "pinyinInitials": "hx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4056_titi": {
+    "name": "缇缇",
+    "pinyin": "titi",
+    "pinyinInitials": "tt",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4058_pepe": {
+    "name": "佩佩",
+    "pinyin": "peipei",
+    "pinyinInitials": "pp",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "限定寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "405_absin": {
+    "name": "苦艾",
+    "pinyin": "kuai",
+    "pinyinInitials": "ka",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [
+      "乌萨斯学生自治团"
+    ],
+    "birthdayMonth": 11
+  },
+  "4062_totter": {
+    "name": "铅踝",
+    "pinyin": "qianhuai",
+    "pinyinInitials": "qh",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4063_quartz": {
+    "name": "石英",
+    "pinyin": "shiying",
+    "pinyinInitials": "sy",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4064_mlynar": {
+    "name": "玛恩纳",
+    "pinyin": "maenna",
+    "pinyinInitials": "men",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4065_judge": {
+    "name": "斥罪",
+    "pinyin": "chizui",
+    "pinyinInitials": "cz",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4066_highmo": {
+    "name": "海沫",
+    "pinyin": "haimo",
+    "pinyinInitials": "hm",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4067_lolxh": {
+    "name": "罗小黑",
+    "pinyin": "luoxiaohei",
+    "pinyinInitials": "lxh",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "4071_peper": {
+    "name": "明椒",
+    "pinyin": "mingjiao",
+    "pinyinInitials": "mj",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4072_ironmn": {
+    "name": "白铁",
+    "pinyin": "baitie",
+    "pinyinInitials": "bt",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4077_palico": {
+    "name": "泰拉大陆调查团",
+    "pinyin": "tailadaludiaochatuan",
+    "pinyinInitials": "tldldct",
+    "gender": "未知",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "4078_bdhkgt": {
+    "name": "截云",
+    "pinyin": "jieyun",
+    "pinyinInitials": "jy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "阿纳萨"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4079_haini": {
+    "name": "海霓",
+    "pinyin": "haini",
+    "pinyinInitials": "hn",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "阿戈尔"
+    ],
+    "organizations": [
+      "阿戈尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "4080_lin": {
+    "name": "林",
+    "pinyin": "lin",
+    "pinyinInitials": "l",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "龙门"
+    ],
+    "organizations": [
+      "炎-龙门"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "4081_warmy": {
+    "name": "温米",
+    "pinyin": "wenmi",
+    "pinyinInitials": "wm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4082_qiubai": {
+    "name": "仇白",
+    "pinyin": "choubai",
+    "pinyinInitials": "cb",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "4083_chimes": {
+    "name": "铎铃",
+    "pinyin": "duoling",
+    "pinyinInitials": "dl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4087_ines": {
+    "name": "伊内丝",
+    "pinyin": "yineisi",
+    "pinyinInitials": "yns",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "巴别塔"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "4088_hodrer": {
+    "name": "赫德雷",
+    "pinyin": "hedelei",
+    "pinyinInitials": "hdl",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "巴别塔"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4091_ulika": {
+    "name": "U-Official",
+    "pinyin": "uofficial",
+    "pinyinInitials": "uofficial",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "4093_frston": {
+    "name": "Friston-3",
+    "pinyin": "friston3",
+    "pinyinInitials": "friston3",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "活动获得"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "4098_vvana": {
+    "name": "薇薇安娜",
+    "pinyin": "weiweianna",
+    "pinyinInitials": "wwan",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4100_caper": {
+    "name": "跃跃",
+    "pinyin": "yueyue",
+    "pinyinInitials": "yy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "玻利瓦尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "4102_threye": {
+    "name": "凛视",
+    "pinyin": "linshi",
+    "pinyinInitials": "ls",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "萨米"
+    ],
+    "organizations": [
+      "萨米"
+    ],
+    "teams": []
+  },
+  "4104_coldst": {
+    "name": "冰酿",
+    "pinyin": "bingniang",
+    "pinyinInitials": "bn",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4105_almond": {
+    "name": "杏仁",
+    "pinyin": "xingren",
+    "pinyinInitials": "xr",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "黑钢国际"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "4106_bryota": {
+    "name": "苍苔",
+    "pinyin": "cangtai",
+    "pinyinInitials": "ct",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "汐斯塔"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "汐斯塔"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "4107_vrdant": {
+    "name": "维荻",
+    "pinyin": "weidi",
+    "pinyinInitials": "wd",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4109_baslin": {
+    "name": "深律",
+    "pinyin": "shenl",
+    "pinyinInitials": "sl",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4110_delphn": {
+    "name": "戴菲恩",
+    "pinyin": "daifeien",
+    "pinyinInitials": "dfe",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "4114_harold": {
+    "name": "哈洛德",
+    "pinyin": "haluode",
+    "pinyinInitials": "hld",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "4116_blkkgt": {
+    "name": "锏",
+    "pinyin": "jian",
+    "pinyinInitials": "j",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "谢拉格",
+      "喀兰贸易"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4117_ray": {
+    "name": "莱伊",
+    "pinyin": "laiyi",
+    "pinyinInitials": "ly",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4119_wanqin": {
+    "name": "万顷",
+    "pinyin": "wanqing",
+    "pinyinInitials": "wq",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "411_tomimi": {
+    "name": "特米米",
+    "pinyin": "temimi",
+    "pinyinInitials": "tmm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "阿达克利斯"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "4121_zuole": {
+    "name": "左乐",
+    "pinyin": "zuole",
+    "pinyinInitials": "zl",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4122_grabds": {
+    "name": "小满",
+    "pinyin": "xiaoman",
+    "pinyinInitials": "xm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "4123_ela": {
+    "name": "艾拉",
+    "pinyin": "aila",
+    "pinyinInitials": "al",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "彩虹小队"
+    ],
+    "birthdayMonth": 11
+  },
+  "4124_iana": {
+    "name": "双月",
+    "pinyin": "shuangyue",
+    "pinyinInitials": "sy",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "彩虹小队"
+    ],
+    "birthdayMonth": 8
+  },
+  "4125_rdoc": {
+    "name": "医生",
+    "pinyin": "yisheng",
+    "pinyinInitials": "ys",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "彩虹小队"
+    ],
+    "birthdayMonth": 9
+  },
+  "4126_fuze": {
+    "name": "导火索",
+    "pinyin": "daohuosuo",
+    "pinyinInitials": "dhs",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "彩虹小队"
+    ],
+    "birthdayMonth": 10
+  },
+  "4130_luton": {
+    "name": "露托",
+    "pinyin": "lutuo",
+    "pinyinInitials": "lt",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "玻利瓦尔"
+    ],
+    "teams": []
+  },
+  "4131_odda": {
+    "name": "奥达",
+    "pinyin": "aoda",
+    "pinyinInitials": "ad",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "4132_ascln": {
+    "name": "阿斯卡纶",
+    "pinyin": "asikalun",
+    "pinyinInitials": "askl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛",
+      "S.W.E.E.P."
+    ],
+    "teams": []
+  },
+  "4133_logos": {
+    "name": "逻各斯",
+    "pinyin": "luogesi",
+    "pinyinInitials": "lgs",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "4134_cetsyr": {
+    "name": "魔王",
+    "pinyin": "mowang",
+    "pinyinInitials": "mw",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4136_phonor": {
+    "name": "PhonoR-0",
+    "pinyin": "phonor0",
+    "pinyinInitials": "phonor0",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "活动获得"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "4137_udflow": {
+    "name": "深巡",
+    "pinyin": "shenxun",
+    "pinyinInitials": "sx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "阿戈尔"
+    ],
+    "organizations": [
+      "阿戈尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4138_narant": {
+    "name": "娜仁图亚",
+    "pinyin": "narentuya",
+    "pinyinInitials": "nrty",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "4139_papyrs": {
+    "name": "莎草",
+    "pinyin": "suocao",
+    "pinyinInitials": "sc",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4140_lasher": {
+    "name": "衡沙",
+    "pinyin": "hengsha",
+    "pinyinInitials": "hs",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4141_marcil": {
+    "name": "玛露西尔",
+    "pinyin": "maluxier",
+    "pinyinInitials": "mlxe",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "精灵"
+    ],
+    "birthPlaces": [
+      "北方大陆（自称）"
+    ],
+    "organizations": [],
+    "teams": [
+      "莱欧斯小队"
+    ],
+    "birthdayMonth": 4
+  },
+  "4142_laios": {
+    "name": "莱欧斯",
+    "pinyin": "laiousi",
+    "pinyinInitials": "los",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "长身人（自称）"
+    ],
+    "birthPlaces": [
+      "北方大陆（自称）"
+    ],
+    "organizations": [],
+    "teams": [
+      "莱欧斯小队"
+    ],
+    "birthdayMonth": 11
+  },
+  "4143_sensi": {
+    "name": "森西",
+    "pinyin": "senxi",
+    "pinyinInitials": "sx",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "矮人（自称）"
+    ],
+    "birthPlaces": [
+      "伊兹甘达（自称）"
+    ],
+    "organizations": [],
+    "teams": [
+      "莱欧斯小队"
+    ],
+    "birthdayMonth": 10
+  },
+  "4144_chilc": {
+    "name": "齐尔查克",
+    "pinyin": "qierchake",
+    "pinyinInitials": "qeck",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "半身人（自称）"
+    ],
+    "birthPlaces": [
+      "东方大陆（自称）"
+    ],
+    "organizations": [],
+    "teams": [
+      "莱欧斯小队"
+    ],
+    "birthdayMonth": 5
+  },
+  "4145_ulpia": {
+    "name": "乌尔比安",
+    "pinyin": "wuerbian",
+    "pinyinInitials": "weba",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "阿戈尔"
+    ],
+    "organizations": [
+      "阿戈尔",
+      "深海猎人"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4146_nymph": {
+    "name": "妮芙",
+    "pinyin": "nifu",
+    "pinyinInitials": "nf",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4147_mitm": {
+    "name": "渡桥",
+    "pinyin": "duqiao",
+    "pinyinInitials": "dq",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "4148_philae": {
+    "name": "菲莱",
+    "pinyin": "feilai",
+    "pinyinInitials": "fl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "4151_tinman": {
+    "name": "锡人",
+    "pinyin": "xiren",
+    "pinyinInitials": "xr",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": []
+  },
+  "4155_talr": {
+    "name": "裁度",
+    "pinyin": "caidu",
+    "pinyinInitials": "cd",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "415_flint": {
+    "name": "燧石",
+    "pinyin": "suishi",
+    "pinyinInitials": "ss",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "4162_cathy": {
+    "name": "凯瑟琳",
+    "pinyin": "kaiselin",
+    "pinyinInitials": "ksl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4163_rosesa": {
+    "name": "瑰盐",
+    "pinyin": "guiyan",
+    "pinyinInitials": "gy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4164_tecno": {
+    "name": "特克诺",
+    "pinyin": "tekenuo",
+    "pinyinInitials": "tkn",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "杜林"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "玻利瓦尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4165_ctrail": {
+    "name": "云迹",
+    "pinyin": "yunji",
+    "pinyinInitials": "yj",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4166_varkis": {
+    "name": "摆渡人",
+    "pinyin": "baiduren",
+    "pinyinInitials": "bdr",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "米诺斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "416_zumama": {
+    "name": "森蚺",
+    "pinyin": "senran",
+    "pinyinInitials": "sr",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "4171_wulfen": {
+    "name": "钼铅",
+    "pinyin": "muqian",
+    "pinyinInitials": "mq",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4172_xingzh": {
+    "name": "行箸",
+    "pinyin": "xingzhu",
+    "pinyinInitials": "xz",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4173_nowell": {
+    "name": "诺威尔",
+    "pinyin": "nuoweier",
+    "pinyinInitials": "nwe",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4177_brigid": {
+    "name": "水灯心",
+    "pinyin": "shuidengxin",
+    "pinyinInitials": "sdx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚",
+      "塔拉"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "4178_alanna": {
+    "name": "阿兰娜",
+    "pinyin": "alanna",
+    "pinyinInitials": "aln",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨弗拉"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4179_monstr": {
+    "name": "Mon3tr",
+    "pinyin": "mon3tr",
+    "pinyinInitials": "mon3tr",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "罗德岛"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4182_oblvns": {
+    "name": "丰川祥子",
+    "pinyin": "fengchuanxiangzi",
+    "pinyinInitials": "fcxz",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "Ave Mujica"
+    ],
+    "birthdayMonth": 2
+  },
+  "4183_mortis": {
+    "name": "若叶睦",
+    "pinyin": "ruoyemu",
+    "pinyinInitials": "rym",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "Ave Mujica"
+    ],
+    "birthdayMonth": 1
+  },
+  "4184_dolris": {
+    "name": "三角初华",
+    "pinyin": "sanjiaochuhua",
+    "pinyinInitials": "sjch",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "Ave Mujica"
+    ],
+    "birthdayMonth": 6
+  },
+  "4185_amoris": {
+    "name": "祐天寺若麦",
+    "pinyin": "youtiansiruomai",
+    "pinyinInitials": "ytsrm",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "Ave Mujica"
+    ],
+    "birthdayMonth": 6
+  },
+  "4186_tmoris": {
+    "name": "八幡海铃",
+    "pinyin": "bafanhailing",
+    "pinyinInitials": "bfhl",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "Ave Mujica"
+    ],
+    "birthdayMonth": 4
+  },
+  "4187_graceb": {
+    "name": "聆音",
+    "pinyin": "lingyin",
+    "pinyinInitials": "ly",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "玻利瓦尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "4188_confes": {
+    "name": "CONFESS-47",
+    "pinyin": "confess47",
+    "pinyinInitials": "confess47",
+    "gender": "未知",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "活动获得"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": []
+  },
+  "4191_tippi": {
+    "name": "蒂比",
+    "pinyin": "dibi",
+    "pinyinInitials": "db",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4193_lemuen": {
+    "name": "蕾缪安",
+    "pinyin": "leimiuan",
+    "pinyinInitials": "lma",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "4194_rmixer": {
+    "name": "信仰搅拌机",
+    "pinyin": "xinyangjiaobanji",
+    "pinyinInitials": "xyjbj",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4195_radian": {
+    "name": "电弧",
+    "pinyin": "dianhu",
+    "pinyinInitials": "dh",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "4196_reckpr": {
+    "name": "录武官",
+    "pinyin": "luwuguan",
+    "pinyinInitials": "lwg",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4198_christ": {
+    "name": "Miss.Christine",
+    "pinyin": "misschristine",
+    "pinyinInitials": "misschristine",
+    "gender": "女士",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": []
+  },
+  "4199_makiri": {
+    "name": "松桐",
+    "pinyin": "songtong",
+    "pinyinInitials": "st",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4202_haruka": {
+    "name": "遥",
+    "pinyin": "yao",
+    "pinyinInitials": "y",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "4203_kichi": {
+    "name": "吉星",
+    "pinyin": "jixing",
+    "pinyinInitials": "jx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4204_mantra": {
+    "name": "真言",
+    "pinyin": "zhenyan",
+    "pinyinInitials": "zy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4207_branch": {
+    "name": "折桠",
+    "pinyin": "zheya",
+    "pinyinInitials": "zy",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "4208_wintim": {
+    "name": "冬时",
+    "pinyin": "dongshi",
+    "pinyinInitials": "ds",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "420_flamtl": {
+    "name": "焰尾",
+    "pinyin": "yanwei",
+    "pinyinInitials": "yw",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔",
+      "红松骑士团"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "4211_snhunt": {
+    "name": "雪猎",
+    "pinyin": "xuelie",
+    "pinyinInitials": "xl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "4212_nasti": {
+    "name": "娜斯提",
+    "pinyin": "nasiti",
+    "pinyinInitials": "nst",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "莱茵生命"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4213_skybx": {
+    "name": "天空盒",
+    "pinyin": "tiankonghe",
+    "pinyinInitials": "tkh",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "萨弗拉"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4214_cairn": {
+    "name": "响石",
+    "pinyin": "xiangshi",
+    "pinyinInitials": "xs",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4215_buddy": {
+    "name": "罗德岛隐秘队",
+    "pinyin": "luodedaoyinmidui",
+    "pinyinInitials": "lddymd",
+    "gender": "未知",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "421_crow": {
+    "name": "羽毛笔",
+    "pinyin": "yumaobi",
+    "pinyinInitials": "ymb",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访",
+      "公开招募"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "玻利瓦尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4221_ju": {
+    "name": "矩",
+    "pinyin": "ju",
+    "pinyinInitials": "j",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": []
+  },
+  "4222_taraxa": {
+    "name": "风絮",
+    "pinyin": "fengxu",
+    "pinyinInitials": "fx",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4223_botany": {
+    "name": "伯塔尼",
+    "pinyin": "botani",
+    "pinyinInitials": "btn",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "4224_turdus": {
+    "name": "乌啾",
+    "pinyin": "wujiu",
+    "pinyinInitials": "wj",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4225_tanya": {
+    "name": "裂响",
+    "pinyin": "liexiang",
+    "pinyinInitials": "lx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "4226_veen": {
+    "name": "维伊",
+    "pinyin": "weiyi",
+    "pinyinInitials": "wy",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "主线剧情"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "乌萨斯"
+    ],
+    "organizations": [
+      "乌萨斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4227_gallus": {
+    "name": "GALLUS²",
+    "pinyin": "gallus",
+    "pinyinInitials": "gallus",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "活动获得"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": []
+  },
+  "4228_closur": {
+    "name": "可露希尔",
+    "pinyin": "keluxier",
+    "pinyinInitials": "klxe",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4229_aphris": {
+    "name": "谬因",
+    "pinyin": "miuyin",
+    "pinyinInitials": "my",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "422_aurora": {
+    "name": "极光",
+    "pinyin": "jiguang",
+    "pinyinInitials": "jg",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "乌萨斯"
+    ],
+    "birthPlaces": [
+      "谢拉格"
+    ],
+    "organizations": [
+      "谢拉格"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "4230_mcnist": {
+    "name": "机械师",
+    "pinyin": "jixieshi",
+    "pinyinInitials": "jxs",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "埃拉菲亚"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "4234_pedro": {
+    "name": "佩德洛",
+    "pinyin": "peideluo",
+    "pinyinInitials": "pdl",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "玻利瓦尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "4235_thumpy": {
+    "name": "珊比",
+    "pinyin": "shanbi",
+    "pinyinInitials": "sb",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "4236_tmslot": {
+    "name": "时隙",
+    "pinyin": "shixi",
+    "pinyinInitials": "sx",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "阿纳缇"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "4237_jcinta": {
+    "name": "嘉辛塔",
+    "pinyin": "jiaxinta",
+    "pinyinInitials": "jxt",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "卡特斯"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "423_blemsh": {
+    "name": "瑕光",
+    "pinyin": "xiaguang",
+    "pinyinInitials": "xg",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 7
+  },
+  "426_billro": {
+    "name": "卡涅利安",
+    "pinyin": "kanielian",
+    "pinyinInitials": "knla",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "萨尔贡"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "427_vigil": {
+    "name": "伺夜",
+    "pinyin": "siye",
+    "pinyinInitials": "sy",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "430_fartth": {
+    "name": "远牙",
+    "pinyin": "yuanya",
+    "pinyinInitials": "yy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔",
+      "红松骑士团"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "431_ashlok": {
+    "name": "灰毫",
+    "pinyin": "huihao",
+    "pinyinInitials": "hh",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔",
+      "红松骑士团"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "433_windft": {
+    "name": "掠风",
+    "pinyin": "lefeng",
+    "pinyinInitials": "lf",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "436_whispr": {
+    "name": "絮雨",
+    "pinyin": "xuyu",
+    "pinyinInitials": "xy",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "437_mizuki": {
+    "name": "水月",
+    "pinyin": "shuiyue",
+    "pinyinInitials": "sy",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访",
+      "公开招募"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "440_pinecn": {
+    "name": "松果",
+    "pinyin": "songguo",
+    "pinyinInitials": "sg",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "445_wscoot": {
+    "name": "骋风",
+    "pinyin": "chengfeng",
+    "pinyinInitials": "cf",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "446_aroma": {
+    "name": "阿罗玛",
+    "pinyin": "aluoma",
+    "pinyinInitials": "alm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "鲁珀"
+    ],
+    "birthPlaces": [
+      "叙拉古"
+    ],
+    "organizations": [
+      "叙拉古"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "449_glider": {
+    "name": "蜜莓",
+    "pinyin": "mimei",
+    "pinyinInitials": "mm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "450_necras": {
+    "name": "死芒",
+    "pinyin": "simang",
+    "pinyinInitials": "sm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "德拉克"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚",
+      "塔拉"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "451_robin": {
+    "name": "罗宾",
+    "pinyin": "luobin",
+    "pinyinInitials": "lb",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "阿纳缇"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "452_bstalk": {
+    "name": "豆苗",
+    "pinyin": "doumiao",
+    "pinyinInitials": "dm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "瑞柏巴"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "455_nothin": {
+    "name": "乌有",
+    "pinyin": "wuyou",
+    "pinyinInitials": "wy",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "456_ash": {
+    "name": "灰烬",
+    "pinyin": "huijin",
+    "pinyinInitials": "hj",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "彩虹小队"
+    ],
+    "birthdayMonth": 12
+  },
+  "457_blitz": {
+    "name": "闪击",
+    "pinyin": "shanji",
+    "pinyinInitials": "sj",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "彩虹小队"
+    ],
+    "birthdayMonth": 4
+  },
+  "458_rfrost": {
+    "name": "霜华",
+    "pinyin": "shuanghua",
+    "pinyinInitials": "sh",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "联动寻访"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "彩虹小队"
+    ],
+    "birthdayMonth": 5
+  },
+  "459_tachak": {
+    "name": "战车",
+    "pinyin": "zhanche",
+    "pinyinInitials": "zc",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得"
+    ],
+    "races": [
+      "未知"
+    ],
+    "birthPlaces": [
+      "未知"
+    ],
+    "organizations": [],
+    "teams": [
+      "彩虹小队"
+    ],
+    "birthdayMonth": 11
+  },
+  "464_cement": {
+    "name": "洋灰",
+    "pinyin": "yanghui",
+    "pinyinInitials": "yh",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "札拉克"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 10
+  },
+  "466_qanik": {
+    "name": "雪绒",
+    "pinyin": "xuerong",
+    "pinyinInitials": "xr",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "沃尔珀"
+    ],
+    "birthPlaces": [
+      "萨米"
+    ],
+    "organizations": [
+      "萨米"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "469_indigo": {
+    "name": "深靛",
+    "pinyin": "shendian",
+    "pinyinInitials": "sd",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "伊比利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "472_pasngr": {
+    "name": "异客",
+    "pinyin": "yike",
+    "pinyinInitials": "yk",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "萨尔贡"
+    ],
+    "teams": [],
+    "birthdayMonth": 9
+  },
+  "473_mberry": {
+    "name": "桑葚",
+    "pinyin": "sangshen",
+    "pinyinInitials": "ss",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "炎"
+    ],
+    "organizations": [
+      "炎"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "474_glady": {
+    "name": "歌蕾蒂娅",
+    "pinyin": "geleidiya",
+    "pinyinInitials": "gldy",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "未公开"
+    ],
+    "birthPlaces": [
+      "阿戈尔"
+    ],
+    "organizations": [
+      "阿戈尔",
+      "深海猎人"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "475_akafyu": {
+    "name": "赤冬",
+    "pinyin": "chidong",
+    "pinyinInitials": "cd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "476_blkngt": {
+    "name": "夜半",
+    "pinyin": "yeban",
+    "pinyinInitials": "yb",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "萨弗拉"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "478_kirara": {
+    "name": "绮良",
+    "pinyin": "qiliang",
+    "pinyinInitials": "ql",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿戈尔"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "东"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "479_sleach": {
+    "name": "琴柳",
+    "pinyin": "qinliu",
+    "pinyinInitials": "ql",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "瓦伊凡"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "484_robrta": {
+    "name": "罗比菈塔",
+    "pinyin": "luobilata",
+    "pinyinInitials": "lblt",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "阿纳缇"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "485_pallas": {
+    "name": "帕拉斯",
+    "pinyin": "palasi",
+    "pinyinInitials": "pls",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募",
+      "中坚寻访"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "米诺斯"
+    ],
+    "organizations": [
+      "米诺斯"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "486_takila": {
+    "name": "龙舌兰",
+    "pinyin": "longshelan",
+    "pinyinInitials": "lsl",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "玻利瓦尔"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "487_bobb": {
+    "name": "波卜",
+    "pinyin": "bobu",
+    "pinyinInitials": "bb",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "佩洛"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 3
+  },
+  "488_buildr": {
+    "name": "青枳",
+    "pinyin": "qingzhi",
+    "pinyinInitials": "qz",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "汐斯塔"
+    ],
+    "organizations": [
+      "哥伦比亚",
+      "汐斯塔"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "489_serum": {
+    "name": "蚀清",
+    "pinyin": "shiqing",
+    "pinyinInitials": "sq",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "哥伦比亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "491_humus": {
+    "name": "休谟斯",
+    "pinyin": "xiumosi",
+    "pinyinInitials": "xms",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访",
+      "中坚寻访"
+    ],
+    "races": [
+      "丰蹄"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "492_quercu": {
+    "name": "夏栎",
+    "pinyin": "xiali",
+    "pinyinInitials": "xl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "中坚寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "493_firwhl": {
+    "name": "火哨",
+    "pinyin": "huoshao",
+    "pinyinInitials": "hs",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "雷姆必拓"
+    ],
+    "organizations": [
+      "雷姆必拓"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "494_vendla": {
+    "name": "刺玫",
+    "pinyin": "cimei",
+    "pinyinInitials": "cm",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "菲林"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "维多利亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 5
+  },
+  "496_wildmn": {
+    "name": "野鬃",
+    "pinyin": "yezong",
+    "pinyinInitials": "yz",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "库兰塔"
+    ],
+    "birthPlaces": [
+      "卡西米尔"
+    ],
+    "organizations": [
+      "卡西米尔",
+      "红松骑士团"
+    ],
+    "teams": [],
+    "birthdayMonth": 8
+  },
+  "497_ctable": {
+    "name": "晓歌",
+    "pinyin": "xiaoge",
+    "pinyinInitials": "xg",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "标准寻访"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "玻利瓦尔"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 4
+  },
+  "498_inside": {
+    "name": "隐现",
+    "pinyin": "yinxian",
+    "pinyinInitials": "yx",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "活动获得",
+      "记录修复奖励"
+    ],
+    "races": [
+      "萨科塔"
+    ],
+    "birthPlaces": [
+      "拉特兰"
+    ],
+    "organizations": [
+      "拉特兰"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "499_kaitou": {
+    "name": "折光",
+    "pinyin": "zheguang",
+    "pinyinInitials": "zg",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "凭证交易所(采购)"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "莱塔尼亚"
+    ],
+    "teams": [],
+    "birthdayMonth": 1
+  },
+  "500_noirc": {
+    "name": "黑角",
+    "pinyin": "heijiao",
+    "pinyinInitials": "hj",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募"
+    ],
+    "races": [
+      "鬼"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动组A4"
+    ],
+    "birthdayMonth": 8
+  },
+  "501_durin": {
+    "name": "杜林",
+    "pinyin": "dulin",
+    "pinyinInitials": "dl",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募",
+      "主线剧情"
+    ],
+    "races": [
+      "杜林"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动组A4"
+    ],
+    "birthdayMonth": 12
+  },
+  "502_nblade": {
+    "name": "夜刀",
+    "pinyin": "yedao",
+    "pinyinInitials": "yd",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "公开招募"
+    ],
+    "races": [
+      "鬼"
+    ],
+    "birthPlaces": [
+      "东国"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动组A4"
+    ],
+    "birthdayMonth": 5
+  },
+  "503_rang": {
+    "name": "巡林者",
+    "pinyin": "xunlinzhe",
+    "pinyinInitials": "xlz",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "公开招募"
+    ],
+    "races": [
+      "萨弗拉"
+    ],
+    "birthPlaces": [
+      "未公开"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [
+      "行动组A4"
+    ],
+    "birthdayMonth": 7
+  },
+  "504_rguard": {
+    "name": "预备干员-近战",
+    "pinyin": "yubeiganyuanjinzhan",
+    "pinyinInitials": "ybgyjz",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "505_rcast": {
+    "name": "预备干员-术师",
+    "pinyin": "yubeiganyuanshushi",
+    "pinyinInitials": "ybgyss",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "506_rmedic": {
+    "name": "预备干员-后勤",
+    "pinyin": "yubeiganyuanhouqin",
+    "pinyinInitials": "ybgyhq",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "507_rsnipe": {
+    "name": "预备干员-狙击",
+    "pinyin": "yubeiganyuanjuji",
+    "pinyinInitials": "ybgyjj",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "508_aguard": {
+    "name": "Sharp",
+    "pinyin": "sharp",
+    "pinyinInitials": "sharp",
+    "gender": "男",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "哥伦比亚"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 12
+  },
+  "509_acast": {
+    "name": "Pith",
+    "pinyin": "pith",
+    "pinyinInitials": "pith",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [
+      "黎博利"
+    ],
+    "birthPlaces": [
+      "维多利亚"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 6
+  },
+  "510_amedic": {
+    "name": "Touch",
+    "pinyin": "touch",
+    "pinyinInitials": "touch",
+    "gender": "女",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [
+      "卡普里尼"
+    ],
+    "birthPlaces": [
+      "莱塔尼亚"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "511_asnipe": {
+    "name": "Stormeye",
+    "pinyin": "stormeye",
+    "pinyinInitials": "stormeye",
+    "gender": "男",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [
+      "萨卡兹"
+    ],
+    "birthPlaces": [
+      "卡兹戴尔"
+    ],
+    "organizations": [
+      "罗德岛",
+      "罗德岛-精英干员"
+    ],
+    "teams": [],
+    "birthdayMonth": 2
+  },
+  "512_aprot": {
+    "name": "暮落",
+    "pinyin": "muluo",
+    "pinyinInitials": "ml",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "513_apionr": {
+    "name": "郁金香",
+    "pinyin": "yujinxiang",
+    "pinyinInitials": "yjx",
+    "gender": "女",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [
+      "斐迪亚"
+    ],
+    "birthPlaces": [
+      "伊比利亚"
+    ],
+    "organizations": [
+      "罗德岛"
+    ],
+    "teams": [],
+    "birthdayMonth": 11
+  },
+  "514_rdfend": {
+    "name": "预备干员-重装",
+    "pinyin": "yubeiganyuanzhongzhuang",
+    "pinyinInitials": "ybgyzz",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "600_cpione": {
+    "name": "预备干员-先锋(卫戍协议)",
+    "pinyin": "yubeiganyuanxianfengweishuxieyi",
+    "pinyinInitials": "ybgyxfwsxy",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "601_cguard": {
+    "name": "预备干员-近卫(卫戍协议)",
+    "pinyin": "yubeiganyuanjinweiweishuxieyi",
+    "pinyinInitials": "ybgyjwwsxy",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "602_cdfend": {
+    "name": "预备干员-重装(卫戍协议)",
+    "pinyin": "yubeiganyuanzhongzhuangweishuxieyi",
+    "pinyinInitials": "ybgyzzwsxy",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "603_csnipe": {
+    "name": "预备干员-狙击(卫戍协议)",
+    "pinyin": "yubeiganyuanjujiweishuxieyi",
+    "pinyinInitials": "ybgyjjwsxy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "604_ccast": {
+    "name": "预备干员-术师(卫戍协议)",
+    "pinyin": "yubeiganyuanshushiweishuxieyi",
+    "pinyinInitials": "ybgysswsxy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "605_cmedic": {
+    "name": "预备干员-医疗(卫戍协议)",
+    "pinyin": "yubeiganyuanyiliaoweishuxieyi",
+    "pinyinInitials": "ybgyylwsxy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "606_csuppo": {
+    "name": "预备干员-辅助(卫戍协议)",
+    "pinyin": "yubeiganyuanfuzhuweishuxieyi",
+    "pinyinInitials": "ybgyfzwsxy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "607_cspec": {
+    "name": "预备干员-特种(卫戍协议)",
+    "pinyin": "yubeiganyuantezhongweishuxieyi",
+    "pinyinInitials": "ybgytzwsxy",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "608_acpion": {
+    "name": "郁金香(卫戍协议)",
+    "pinyin": "yujinxiangweishuxieyi",
+    "pinyinInitials": "yjxwsxy",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "609_acguad": {
+    "name": "Sharp(卫戍协议)",
+    "pinyin": "sharpweishuxieyi",
+    "pinyinInitials": "sharpwsxy",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "610_acfend": {
+    "name": "Mechanist(卫戍协议)",
+    "pinyin": "mechanistweishuxieyi",
+    "pinyinInitials": "mechanistwsxy",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "611_acnipe": {
+    "name": "Stormeye(卫戍协议)",
+    "pinyin": "stormeyeweishuxieyi",
+    "pinyinInitials": "stormeyewsxy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "612_accast": {
+    "name": "Pith(卫戍协议)",
+    "pinyin": "pithweishuxieyi",
+    "pinyinInitials": "pithwsxy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "613_acmedc": {
+    "name": "Touch(卫戍协议)",
+    "pinyin": "touchweishuxieyi",
+    "pinyinInitials": "touchwsxy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "614_acsupo": {
+    "name": "Raidian(卫戍协议)",
+    "pinyin": "raidianweishuxieyi",
+    "pinyinInitials": "raidianwsxy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "615_acspec": {
+    "name": "Misery(卫戍协议)",
+    "pinyin": "miseryweishuxieyi",
+    "pinyinInitials": "miserywsxy",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "616_pithst": {
+    "name": "盟约·辅助干员",
+    "pinyin": "mengyuefuzhuganyuan",
+    "pinyinInitials": "myfzgy",
+    "gender": "",
+    "position": "远程位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  },
+  "617_sharp2": {
+    "name": "领主·Sharp",
+    "pinyin": "lingzhusharp",
+    "pinyinInitials": "lzsharp",
+    "gender": "",
+    "position": "近战位",
+    "obtainMethods": [
+      "无"
+    ],
+    "races": [],
+    "birthPlaces": [],
+    "organizations": [],
+    "teams": []
+  }
+}

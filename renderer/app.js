@@ -6,8 +6,10 @@ let state;
 let updateState;
 let page = 'dashboard';
 let mode = 'single';
-let filters = { search: '', profession: '', rarity: '', mastery: '', unlimited: 'real' };
-let dashboardGridMotion = null;
+let dashboardFilters = { search: '', profession: '', rarity: '', mastery: '', unlimited: 'real' };
+let inventorySearch = '';
+const operatorFilters = OperatorFilters.createState();
+let operatorSearchComposing = false;
 
 const professions = ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种'];
 const unlimitedPriority = new Map(['30103', '30093', '30083', '30073'].map((id, index) => [id, index]));
@@ -44,147 +46,11 @@ function setBusy(button, busy, text = '处理中…') {
 }
 
 function render() {
-  stopDashboardGridMotion();
   updateChrome();
   if (page === 'dashboard') renderDashboard();
   if (page === 'operators') renderOperators();
   if (page === 'inventory') renderInventory();
   if (page === 'settings') renderSettings();
-}
-
-function readGridColumnLayout(grid) {
-  const style = getComputedStyle(grid);
-  const columns = style.gridTemplateColumns.trim();
-  const tracks = columns && columns !== 'none'
-    ? columns.split(/\s+/).map(value => Number.parseFloat(value) || 0)
-    : [];
-  return { count: tracks.length, tracks, gap: Number.parseFloat(style.columnGap) || 0 };
-}
-
-function gridColumnCount(grid) {
-  return readGridColumnLayout(grid).count;
-}
-
-function gridColumnOffset(layout, cardIndex) {
-  const column = cardIndex % layout.count;
-  let offset = column * layout.gap;
-  for (let index = 0; index < column; index += 1) offset += layout.tracks[index];
-  return offset;
-}
-
-function readCardLayout(grid) {
-  const gridRect = grid.getBoundingClientRect();
-  return new Map([...grid.children].map(card => {
-    const rect = card.getBoundingClientRect();
-    const nearby = rect.bottom >= -180 && rect.top <= innerHeight + 180;
-    const parts = nearby
-      ? new Map([...card.querySelectorAll('[data-card-motion]')].map(part => {
-          const partRect = part.getBoundingClientRect();
-          return [part.dataset.cardMotion, {
-            left: partRect.left - rect.left,
-            top: partRect.top - rect.top,
-          }];
-        }))
-      : new Map();
-    return [card.dataset.key, {
-      left: rect.left - gridRect.left,
-      top: rect.top - gridRect.top,
-      width: rect.width,
-      visible: rect.bottom >= 0 && rect.top <= innerHeight,
-      nearby,
-      parts,
-    }];
-  }));
-}
-
-function stopDashboardGridMotion() {
-  if (!dashboardGridMotion) return;
-  dashboardGridMotion.observer.disconnect();
-  if (dashboardGridMotion.frame) cancelAnimationFrame(dashboardGridMotion.frame);
-  for (const [card, animation] of dashboardGridMotion.animations) {
-    dashboardGridMotion.animations.delete(card);
-    animation.cancel();
-  }
-  dashboardGridMotion = null;
-}
-
-function startDashboardGridMotion() {
-  const grid = content.querySelector('.cards');
-  if (!grid) return;
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const motion = {
-    grid,
-    layout: readGridColumnLayout(grid),
-    positions: readCardLayout(grid),
-    animations: new Map(),
-    frame: 0,
-    observer: null,
-  };
-
-  const cancelAnimations = () => {
-    for (const [element, animation] of motion.animations) {
-      motion.animations.delete(element);
-      animation.cancel();
-    }
-  };
-
-  const animateMove = (element, deltaX, deltaY) => {
-    if (Math.abs(deltaX) < 0.5 && Math.abs(deltaY) < 0.5) return;
-    const animation = element.animate([
-      { transform: `translate3d(${deltaX}px, ${deltaY}px, 0)` },
-      { transform: 'translate3d(0, 0, 0)' },
-    ], { duration: 220, easing: 'cubic-bezier(0.2, 0, 0, 1)' });
-    motion.animations.set(element, animation);
-    const cleanup = () => {
-      if (motion.animations.get(element) !== animation) return;
-      motion.animations.delete(element);
-    };
-    animation.finished.then(cleanup, cleanup);
-  };
-
-  motion.observer = new ResizeObserver(() => {
-    if (motion.frame) return;
-    motion.frame = requestAnimationFrame(() => {
-      motion.frame = 0;
-      if (dashboardGridMotion !== motion || !grid.isConnected) return;
-      const nextLayout = readGridColumnLayout(grid);
-      if (!nextLayout.count) return;
-      if (nextLayout.count === motion.layout.count) {
-        motion.layout = nextLayout;
-        return;
-      }
-
-      cancelAnimations();
-      const nextPositions = readCardLayout(grid);
-      if (!reducedMotion.matches) {
-        for (const [cardIndex, card] of [...grid.children].entries()) {
-          const first = motion.positions.get(card.dataset.key);
-          const last = nextPositions.get(card.dataset.key);
-          if (!first || !last || (!first.nearby && !last.nearby)) continue;
-          const deltaX = gridColumnOffset(motion.layout, cardIndex) - last.left;
-          const deltaY = first.top - last.top;
-          if (first.visible || last.visible) animateMove(card, deltaX, deltaY);
-
-          const currentTrackWidth = motion.layout.tracks[cardIndex % motion.layout.count];
-          for (const part of card.querySelectorAll('[data-card-motion]')) {
-            const firstPart = first.parts.get(part.dataset.cardMotion);
-            const lastPart = last.parts.get(part.dataset.cardMotion);
-            if (!firstPart || !lastPart) continue;
-            const firstLeft = part.dataset.cardMotionAnchor === 'right'
-              ? firstPart.left + currentTrackWidth - first.width
-              : firstPart.left;
-            const partDeltaX = firstLeft - lastPart.left;
-            const partDeltaY = firstPart.top - lastPart.top;
-            animateMove(part, partDeltaX, partDeltaY);
-          }
-        }
-      }
-      motion.layout = nextLayout;
-      motion.positions = nextPositions;
-    });
-  });
-  motion.observer.observe(grid);
-  dashboardGridMotion = motion;
 }
 
 function updateChrome() {
@@ -212,26 +78,23 @@ function banners() {
 }
 
 function renderDashboard() {
-  stopDashboardGridMotion();
   if (!state.account) {
     content.innerHTML = `${banners()}<div class="empty"><div><h2>连接森空岛后开始规划</h2><p>应用会读取仓库、已持有干员和每个技能的当前专精等级。</p><button class="primary" data-action="login">使用森空岛 App 扫码连接</button></div></div>`;
     bindActions();
     return;
   }
-  const source = filters.unlimited === 'real'
-    ? (mode === 'single' ? state.singleReal : state.continuousReal)
-    : (mode === 'single' ? state.single : state.continuous);
+  const source = currentMasteryCandidates();
   const list = source.filter(candidate => {
-    return (!filters.search || `${candidate.operator.name}${candidate.skill.name}`.includes(filters.search))
-      && (!filters.profession || candidate.operator.profession === filters.profession)
-      && (!filters.rarity || String(candidate.operator.rarity) === filters.rarity)
-      && (!filters.mastery || String(candidate.from) === filters.mastery);
+    return (!dashboardFilters.search || `${candidate.operator.name}${candidate.skill.name}`.includes(dashboardFilters.search))
+      && (!dashboardFilters.profession || candidate.operator.profession === dashboardFilters.profession)
+      && (!dashboardFilters.rarity || String(candidate.operator.rarity) === dashboardFilters.rarity)
+      && (!dashboardFilters.mastery || String(candidate.from) === dashboardFilters.mastery);
   });
   const unlimited = new Set(state.settings.unlimitedItemIds);
   const skillSummariesUnlimited = state.skillSummaryItemIds.some(id => unlimited.has(id));
   content.innerHTML = `${banners()}<div class="dashboard-layout">
     <div class="filters dashboard-filters">
-      <input data-filter="search" value="${esc(filters.search)}" placeholder="搜索干员或技能">
+      <input data-dashboard-filter="search" value="${esc(dashboardFilters.search)}" placeholder="搜索干员或技能">
       ${select('profession', '全部职业', professions.map(name => [name, name]))}
       ${select('rarity', '全部星级', [[6,'六星'],[5,'五星'],[4,'四星']])}
       ${select('mastery', '全部当前等级', mode === 'continuous' ? [[0,'M0'],[1,'M1']] : [[0,'M0'],[1,'M1'],[2,'M2']])}
@@ -239,16 +102,20 @@ function renderDashboard() {
     <div class="dashboard-mode-row">
       <label class="dashboard-mode-toggle"><span>连续专精模式</span><span class="switch"><input type="checkbox" data-continuous-mode ${mode === 'continuous' ? 'checked' : ''}><span></span></span></label>
       <label class="dashboard-mode-toggle"><span>技巧概要视为无限</span><span class="switch"><input type="checkbox" data-unlimited-summaries ${skillSummariesUnlimited ? 'checked' : ''}><span></span></span></label>
-      <label class="dashboard-mode-toggle"><span>使用无限池材料</span><span class="switch"><input type="checkbox" data-unlimited-materials ${filters.unlimited === 'with' ? 'checked' : ''}><span></span></span></label>
+      <label class="dashboard-mode-toggle"><span>使用无限池材料</span><span class="switch"><input type="checkbox" data-unlimited-materials ${dashboardFilters.unlimited === 'with' ? 'checked' : ''}><span></span></span></label>
     </div>
     <div class="result-summary">找到 ${list.length} 个当前可行候选</div>
     ${list.length ? `<div class="cards">${list.map(candidateCard).join('')}</div>` : `<div class="empty"><div><h2>当前筛选下没有可行专精</h2><p>仓库、专精状态或无限供应设置变化后会自动重新计算。</p></div></div>`}</div>`;
   bindActions();
-  startDashboardGridMotion();
+}
+
+function currentMasteryCandidates() {
+  if (dashboardFilters.unlimited === 'real') return mode === 'single' ? state.singleReal : state.continuousReal;
+  return mode === 'single' ? state.single : state.continuous;
 }
 
 function select(name, placeholder, options) {
-  return `<select data-filter="${name}"><option value="">${placeholder}</option>${options.map(([value, label]) => `<option value="${esc(value)}" ${String(filters[name]) === String(value) ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select>`;
+  return `<select data-dashboard-filter="${name}"><option value="">${placeholder}</option>${options.map(([value, label]) => `<option value="${esc(value)}" ${String(dashboardFilters[name]) === String(value) ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select>`;
 }
 
 function candidateCard(candidate, index) {
@@ -263,7 +130,7 @@ function candidateCard(candidate, index) {
             <span class="arrow" aria-hidden="true">→</span>
             <img class="mastery-icon" src="${masteryIcon(candidate.to)}" alt="M${candidate.to}">
           </div>
-          <div class="skill-info" data-card-motion="skill" data-card-motion-anchor="right">
+          <div class="skill-info">
             <img class="skill-icon" src="${skillIcon(candidate.skill.skillId)}" alt="${esc(candidate.skill.name)}技能图标" data-img-fallback="skill">
             <div class="skill-copy" title="${esc(candidate.skill.name)}"><strong>${esc(candidate.skill.name)}</strong></div>
           </div>
@@ -275,34 +142,150 @@ function candidateCard(candidate, index) {
 
 function renderOperators() {
   if (!state.account) return renderDashboard();
-  const defs = new Map(state.gameData.operators.map(x => [x.operatorId, x]));
-  const query = filters.search;
-  const rows = state.account.operators
-    .map(owned => ({ owned, definition: defs.get(owned.operatorId) }))
-    .filter(x => x.definition && (!query || x.definition.name.includes(query)))
-    .sort((a, b) => b.definition.rarity - a.definition.rarity || a.definition.name.localeCompare(b.definition.name, 'zh-CN'));
-  const available = state.single;
-  content.innerHTML = `${banners()}<div class="toolbar"><input data-filter="search" value="${esc(query)}" placeholder="搜索已持有干员" style="max-width:360px"><span class="badge muted">已持有 ${rows.length}</span></div>
-    <div class="operator-list">${rows.map(({ owned, definition }) => `<article class="operator-row">
-      <img class="operator-avatar" src="${avatar(definition.operatorId)}" alt="" data-img-fallback>
-      <div><h3>${esc(definition.name)}</h3><div class="operator-meta">${definition.rarity}★ · ${esc(definition.profession)}<br>精英 ${owned.elitePhase} · Lv.${owned.level} · 技能 Rank ${owned.skillLevel}</div></div>
-      <div class="operator-skills" aria-label="${esc(definition.name)}技能专精状态">${[...definition.skills].sort((a, b) => a.index - b.index).map(skill => {
-        const ownedSkill = owned.skills.find(x => x.skillId === skill.skillId);
-        const candidate = available.find(x => x.operator.operatorId === definition.operatorId && x.skill.skillId === skill.skillId);
-        const masteryLevel = ownedSkill?.masteryLevel ?? 0;
-        const status = candidate ? `当前可升级到 M${candidate.to}` : masteryLevel === 3 ? '已完成专精' : '当前不可升级';
-        return `<div class="operator-skill ${candidate ? 'can-upgrade' : ''}" title="${esc(`第${skill.index}技能 · ${skill.name} · M${masteryLevel} · ${status}`)}" aria-label="${esc(`${skill.name}，当前 M${masteryLevel}，${status}`)}">
-          <img src="${skillIcon(skill.skillId)}" alt="${esc(skill.name)}技能图标" data-img-fallback="skill">
-          <span class="operator-skill-mastery">M${masteryLevel}</span>
-        </div>`;
-      }).join('')}</div>
-    </article>`).join('')}</div>`;
+  const rows = ownedOperatorRows();
+  content.innerHTML = `${banners()}<section class="operator-filter-section" aria-label="干员搜索和筛选">
+    <input class="operator-search" data-operator-search value="${esc(operatorFilters.search)}" placeholder="搜索已持有干员" autocomplete="off" spellcheck="false">
+    <div class="operator-filter-row">
+      ${operatorFilterMenu('rarity', '稀有度', rows, value => `${value}★`, true)}
+      ${operatorFilterMenu('gender', '性别', rows)}
+      ${operatorFilterMenu('position', '位置', rows)}
+      ${operatorFilterMenu('obtainMethods', '获得方式', rows)}
+      ${operatorFilterMenu('profession', '职业标签', rows)}
+      ${operatorFilterMenu('subProfession', '职业分支', rows)}
+      <button class="operator-more-toggle" type="button" data-operator-more aria-expanded="${operatorFilters.moreExpanded}">更多筛选 <span aria-hidden="true">${operatorFilters.moreExpanded ? '▲' : '▼'}</span></button>
+      <button class="operator-reset" type="button" data-operator-reset ${OperatorFilters.hasActive(operatorFilters) ? '' : 'disabled'}>清除筛选</button>
+    </div>
+    <div class="operator-filter-row operator-more-filters" data-operator-more-panel ${operatorFilters.moreExpanded ? '' : 'hidden'}>
+      ${operatorFilterMenu('races', '种族', rows)}
+      ${operatorFilterMenu('birthPlaces', '出身', rows)}
+      ${operatorFilterMenu('organizations', '组织', rows)}
+      ${operatorFilterMenu('teams', '团队', rows)}
+      ${operatorFilterMenu('birthdayMonth', '生日月份', rows, value => `${value} 月`)}
+    </div>
+  </section>
+  <div class="operator-result-summary result-summary" data-operator-result-summary aria-live="polite"></div>
+  <div class="operator-list" data-operator-list></div>`;
+  updateOperatorResults(rows);
+  bindOperatorActions(rows);
   bindActions();
+}
+
+function ownedOperatorRows() {
+  const defs = new Map(state.gameData.operators.map(operator => [operator.operatorId, operator]));
+  return state.account.operators
+    .map(owned => ({ owned, definition: defs.get(owned.operatorId) }))
+    .filter(row => row.definition)
+    .sort((a, b) => b.definition.rarity - a.definition.rarity
+      || a.definition.name.localeCompare(b.definition.name, 'zh-CN')
+      || a.definition.operatorId.localeCompare(b.definition.operatorId));
+}
+
+function operatorFilterMenu(key, label, rows, format = value => value, descending = false) {
+  const selected = operatorFilters.selected[key];
+  const values = OperatorFilters.valuesForRows(rows, key);
+  if (descending) values.reverse();
+  const count = selected.size;
+  return `<details class="operator-filter-menu ${count ? 'has-value' : ''}" data-operator-filter-menu="${key}">
+    <summary>${esc(label)}<span data-operator-filter-count="${key}">${count ? ` ${count}` : ''}</span></summary>
+    <div class="operator-filter-popover" role="group" aria-label="${esc(label)}">
+      ${values.length ? values.map(value => `<label title="${esc(format(value))}"><input type="checkbox" data-operator-filter="${key}" value="${esc(value)}" ${selected.has(value) ? 'checked' : ''}><span>${esc(format(value))}</span></label>`).join('') : '<span class="operator-filter-empty">暂无资料</span>'}
+    </div>
+  </details>`;
+}
+
+function updateOperatorResults(allRows = ownedOperatorRows()) {
+  const rows = OperatorFilters.filterRows(allRows, operatorFilters);
+  const summary = content.querySelector('[data-operator-result-summary]');
+  const list = content.querySelector('[data-operator-list]');
+  if (!summary || !list) return;
+  summary.textContent = OperatorFilters.hasActive(operatorFilters)
+    ? `已持有 ${allRows.length} · 当前显示 ${rows.length}`
+    : `已持有 ${allRows.length}`;
+  list.innerHTML = rows.length ? operatorRowsHtml(rows) : '<div class="empty"><div><h2>当前搜索和筛选下没有干员</h2><p>调整条件或清除筛选后再试。</p></div></div>';
+  bindImageFallbacks(list);
+}
+
+function operatorRowsHtml(rows) {
+  const available = new Map(currentMasteryCandidates().map(candidate => [
+    `${candidate.operator.operatorId}\u0000${candidate.skill.skillId}`,
+    candidate,
+  ]));
+  return rows.map(({ owned, definition }) => `<article class="operator-row">
+    <img class="operator-avatar" src="${avatar(definition.operatorId)}" alt="${esc(definition.name)}头像" data-img-fallback>
+    <div><h3>${esc(definition.name)}</h3><div class="operator-meta">${definition.rarity}★ · ${esc(definition.profession)}<br>精英 ${owned.elitePhase} · Lv.${owned.level} · 技能 Rank ${owned.skillLevel}</div></div>
+    <div class="operator-skills" aria-label="${esc(definition.name)}技能专精状态">${[...definition.skills].sort((a, b) => a.index - b.index).map(skill => {
+      const ownedSkill = owned.skills.find(item => item.skillId === skill.skillId);
+      const candidate = available.get(`${definition.operatorId}\u0000${skill.skillId}`);
+      const masteryLevel = ownedSkill?.masteryLevel ?? 0;
+      const status = candidate ? `当前可升级到 M${candidate.to}` : masteryLevel === 3 ? '已完成专精' : '当前不可升级';
+      return `<div class="operator-skill ${candidate ? 'can-upgrade' : ''}" data-operator-skill="${esc(`${definition.operatorId}:${skill.skillId}`)}" title="${esc(`第${skill.index}技能 · ${skill.name} · M${masteryLevel} · ${status}`)}" aria-label="${esc(`${skill.name}，当前 M${masteryLevel}，${status}`)}">
+        <img src="${skillIcon(skill.skillId)}" alt="${esc(skill.name)}技能图标" data-img-fallback="skill">
+        <span class="operator-skill-mastery">M${masteryLevel}</span>
+      </div>`;
+    }).join('')}</div>
+  </article>`).join('');
+}
+
+function bindOperatorActions(rows) {
+  const search = content.querySelector('[data-operator-search]');
+  search.addEventListener('compositionstart', () => { operatorSearchComposing = true; });
+  search.addEventListener('compositionend', event => {
+    operatorSearchComposing = false;
+    operatorFilters.search = event.target.value;
+    updateOperatorResults(rows);
+    updateOperatorFilterControls();
+  });
+  search.addEventListener('input', event => {
+    operatorFilters.search = event.target.value;
+    if (operatorSearchComposing || event.isComposing) return;
+    updateOperatorResults(rows);
+    updateOperatorFilterControls();
+  });
+  content.querySelectorAll('[data-operator-filter]').forEach(input => input.addEventListener('change', event => {
+    const selected = operatorFilters.selected[event.target.dataset.operatorFilter];
+    event.target.checked ? selected.add(event.target.value) : selected.delete(event.target.value);
+    updateOperatorResults(rows);
+    updateOperatorFilterControls();
+  }));
+  content.querySelector('[data-operator-more]').addEventListener('click', () => {
+    operatorFilters.moreExpanded = !operatorFilters.moreExpanded;
+    const panel = content.querySelector('[data-operator-more-panel]');
+    panel.hidden = !operatorFilters.moreExpanded;
+    updateOperatorFilterControls();
+  });
+  content.querySelector('[data-operator-reset]').addEventListener('click', () => {
+    OperatorFilters.reset(operatorFilters);
+    operatorFilters.moreExpanded = false;
+    search.value = '';
+    content.querySelectorAll('[data-operator-filter]').forEach(input => { input.checked = false; });
+    content.querySelector('[data-operator-more-panel]').hidden = true;
+    updateOperatorResults(rows);
+    updateOperatorFilterControls();
+    search.focus();
+  });
+}
+
+function updateOperatorFilterControls() {
+  for (const key of OperatorFilters.DIMENSIONS) {
+    const count = operatorFilters.selected[key].size;
+    const menu = content.querySelector(`[data-operator-filter-menu="${key}"]`);
+    const counter = content.querySelector(`[data-operator-filter-count="${key}"]`);
+    menu?.classList.toggle('has-value', Boolean(count));
+    if (counter) counter.textContent = count ? ` ${count}` : '';
+  }
+  const active = OperatorFilters.hasActive(operatorFilters);
+  const reset = content.querySelector('[data-operator-reset]');
+  if (reset) reset.disabled = !active;
+  const more = content.querySelector('[data-operator-more]');
+  if (more) {
+    more.setAttribute('aria-expanded', String(operatorFilters.moreExpanded));
+    more.innerHTML = `更多筛选 <span aria-hidden="true">${operatorFilters.moreExpanded ? '▲' : '▼'}</span>`;
+  }
 }
 
 function renderInventory() {
   if (!state.account) return renderDashboard();
-  const query = filters.search;
+  const query = inventorySearch;
   const unlimited = new Set(state.settings.unlimitedItemIds);
   const unlimitedEligible = new Set(state.unlimitedEligibleItemIds);
   const blueUnlimitedCount = state.settings.unlimitedItemIds.filter(id => unlimitedEligible.has(id)).length;
@@ -315,12 +298,16 @@ function renderInventory() {
         || a.name.localeCompare(b.name, 'zh-CN');
     });
   content.innerHTML = `${banners()}<div class="filters" style="grid-template-columns:minmax(240px,1fr) auto">
-    <input data-filter="search" value="${esc(query)}" placeholder="搜索材料">
+    <input data-inventory-search value="${esc(query)}" placeholder="搜索材料">
     <span class="badge blue">已设无限 ${blueUnlimitedCount} 项蓝色材料</span>
   </div><div class="table-wrap"><table><thead><tr><th>材料</th><th>等级</th><th>实际数量</th><th>规划状态</th><th>无限供应</th><th></th></tr></thead><tbody>
-    ${rows.map(item => `<tr><td><div class="material-cell"><img class="item-icon" src="${itemIcon(item.itemId)}" alt="" data-img-fallback><strong>${esc(item.name)}</strong></div></td><td>${item.rarity}</td><td>${state.account.inventory[item.itemId] ?? 0}</td><td class="${unlimited.has(item.itemId) ? 'infinity' : ''}">${unlimited.has(item.itemId) ? '∞' : state.account.inventory[item.itemId] ?? 0}</td><td>${unlimitedEligible.has(item.itemId) ? `<label class="switch"><input type="checkbox" data-unlimited="${esc(item.itemId)}" ${unlimited.has(item.itemId) ? 'checked' : ''}><span></span></label>` : '<span class="operator-meta">—</span>'}</td><td><button class="link-button" data-material="${esc(item.itemId)}">查看配方</button></td></tr>`).join('')}
+    ${inventoryRowsHtml(rows, unlimited, unlimitedEligible)}
     </tbody></table></div>`;
   bindActions();
+}
+
+function inventoryRowsHtml(rows, unlimited, unlimitedEligible) {
+  return rows.map(item => `<tr><td><div class="material-cell"><img class="item-icon" src="${itemIcon(item.itemId)}" alt="" data-img-fallback><strong>${esc(item.name)}</strong></div></td><td>${item.rarity}</td><td>${state.account.inventory[item.itemId] ?? 0}</td><td class="${unlimited.has(item.itemId) ? 'infinity' : ''}">${unlimited.has(item.itemId) ? '∞' : state.account.inventory[item.itemId] ?? 0}</td><td>${unlimitedEligible.has(item.itemId) ? `<label class="switch"><input type="checkbox" data-unlimited="${esc(item.itemId)}" ${unlimited.has(item.itemId) ? 'checked' : ''}><span></span></label>` : '<span class="operator-meta">—</span>'}</td><td><button class="link-button" data-material="${esc(item.itemId)}">查看配方</button></td></tr>`).join('');
 }
 
 function renderSettings() {
@@ -349,19 +336,33 @@ function renderSettings() {
 function bindActions() {
   document.querySelector('[data-continuous-mode]')?.addEventListener('change', event => {
     mode = event.target.checked ? 'continuous' : 'single';
-    if (mode === 'continuous' && filters.mastery === '2') filters.mastery = '';
+    if (mode === 'continuous' && dashboardFilters.mastery === '2') dashboardFilters.mastery = '';
     renderDashboard();
   });
   document.querySelector('[data-unlimited-materials]')?.addEventListener('change', event => {
-    filters.unlimited = event.target.checked ? 'with' : 'real';
+    dashboardFilters.unlimited = event.target.checked ? 'with' : 'real';
     renderDashboard();
   });
-  document.querySelectorAll('[data-filter]').forEach(input => input.addEventListener(input.tagName === 'INPUT' ? 'input' : 'change', event => {
-    filters[event.target.dataset.filter] = event.target.value;
-    if (page === 'dashboard') renderDashboard();
-    if (page === 'operators') renderOperators();
-    if (page === 'inventory') renderInventory();
+  document.querySelectorAll('[data-dashboard-filter]').forEach(input => input.addEventListener(input.tagName === 'INPUT' ? 'input' : 'change', event => {
+    dashboardFilters[event.target.dataset.dashboardFilter] = event.target.value;
+    renderDashboard();
   }));
+  document.querySelector('[data-inventory-search]')?.addEventListener('input', event => {
+    inventorySearch = event.target.value;
+    const rows = content.querySelector('tbody');
+    if (!rows) return;
+    const unlimited = new Set(state.settings.unlimitedItemIds);
+    const unlimitedEligible = new Set(state.unlimitedEligibleItemIds);
+    const materials = state.gameData.materials
+      .filter(item => inventoryMaterialIds.has(item.itemId))
+      .filter(item => !inventorySearch || item.name.includes(inventorySearch))
+      .sort((a, b) => (unlimitedPriority.get(a.itemId) ?? Infinity)
+        - (unlimitedPriority.get(b.itemId) ?? Infinity)
+        || a.name.localeCompare(b.name, 'zh-CN'));
+    rows.innerHTML = inventoryRowsHtml(materials, unlimited, unlimitedEligible);
+    bindInventoryRowActions(rows);
+    bindImageFallbacks(rows);
+  });
   const openCandidate = card => {
     const [candidateMode] = card.dataset.candidate.split(':');
     const [operatorId, skillId] = card.dataset.key.split(':');
@@ -376,13 +377,7 @@ function bindActions() {
       openCandidate(card);
     });
   });
-  document.querySelectorAll('[data-material]').forEach(button => button.addEventListener('click', () => showMaterial(button.dataset.material)));
-  document.querySelectorAll('[data-unlimited]').forEach(input => input.addEventListener('change', async () => {
-    const ids = new Set(state.settings.unlimitedItemIds);
-    input.checked ? ids.add(input.dataset.unlimited) : ids.delete(input.dataset.unlimited);
-    state = await api.updateSettings({ unlimitedItemIds: [...ids] });
-    render();
-  }));
+  bindInventoryRowActions();
   document.querySelector('[data-unlimited-summaries]')?.addEventListener('change', async event => {
     const ids = new Set(state.settings.unlimitedItemIds);
     for (const id of state.skillSummaryItemIds) event.target.checked ? ids.add(id) : ids.delete(id);
@@ -392,14 +387,37 @@ function bindActions() {
   document.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click', () => handleAction(button.dataset.action, button)));
   document.querySelectorAll('input[name="sort"]').forEach(input => input.addEventListener('change', async () => { state = await api.updateSettings({ continuousSort: input.value }); render(); }));
   document.querySelector('[data-auto-refresh]')?.addEventListener('change', async event => { state = await api.updateSettings({ autoRefresh: event.target.checked }); render(); });
-  document.querySelectorAll('[data-img-fallback]').forEach(img => img.addEventListener('error', () => {
+  bindImageFallbacks();
+}
+
+function bindInventoryRowActions(root = document) {
+  root.querySelectorAll('[data-material]:not([data-material-bound])').forEach(button => {
+    button.dataset.materialBound = 'true';
+    button.addEventListener('click', () => showMaterial(button.dataset.material));
+  });
+  root.querySelectorAll('[data-unlimited]:not([data-unlimited-bound])').forEach(input => {
+    input.dataset.unlimitedBound = 'true';
+    input.addEventListener('change', async () => {
+      const ids = new Set(state.settings.unlimitedItemIds);
+      input.checked ? ids.add(input.dataset.unlimited) : ids.delete(input.dataset.unlimited);
+      state = await api.updateSettings({ unlimitedItemIds: [...ids] });
+      render();
+    });
+  });
+}
+
+function bindImageFallbacks(root = document) {
+  root.querySelectorAll('[data-img-fallback]:not([data-fallback-bound])').forEach(img => {
+    img.dataset.fallbackBound = 'true';
+    img.addEventListener('error', () => {
     if (img.dataset.imgFallback === 'skill') {
       img.src = skillPlaceholder;
       img.classList.add('missing');
       return;
     }
     img.style.visibility = 'hidden';
-  }, { once: true }));
+    }, { once: true });
+  });
 }
 
 async function handleAction(action, button) {
