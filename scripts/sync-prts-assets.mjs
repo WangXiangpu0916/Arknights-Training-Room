@@ -8,9 +8,12 @@ const imageRoot = path.join('resources', 'images');
 const skillDir = path.join(imageRoot, 'skill');
 const masteryDir = path.join(imageRoot, 'mastery');
 const eliteDir = path.join(imageRoot, 'elite');
+const moduleTypeDir = path.join(imageRoot, 'module', 'type');
+const moduleStageDir = path.join(imageRoot, 'module', 'stage');
 const masteryTitles = [0, 1, 2, 3].map(level => `文件:专精 ${level} 大图.png`);
 const masteryBadgeTitles = [0, 1, 2, 3].map(level => `文件:专精_${level}_角标.png`);
 const eliteTitles = [0, 1, 2].map(level => `文件:精英 ${level} 大图.png`);
+const moduleStageTitles = [1, 2, 3].map(level => `文件:模组等级 ${level}.png`);
 
 const branchUrl = new URL(api);
 branchUrl.search = new URLSearchParams({
@@ -36,16 +39,21 @@ await writeFile(
 await mkdir(skillDir, { recursive: true });
 await mkdir(masteryDir, { recursive: true });
 await mkdir(eliteDir, { recursive: true });
+await mkdir(moduleTypeDir, { recursive: true });
+await mkdir(moduleStageDir, { recursive: true });
 
 const skillNames = JSON.parse(await readFile(path.join('resources', 'game-data', 'skill-cn.json'), 'utf8'));
 const cultivate = JSON.parse(await readFile(path.join('resources', 'game-data', 'cultivate.json'), 'utf8'));
+const moduleMetadata = JSON.parse(await readFile(path.join('resources', 'game-data', 'uniequip-metadata.json'), 'utf8'));
 const skillIds = [...new Set(Object.values(cultivate).flatMap(operator =>
   (operator.skills?.elite ?? []).map(skill => skill.name),
 ))].sort();
+const moduleTypeIds = [...new Set(Object.values(moduleMetadata).map(module => module.typeIcon).filter(Boolean))].sort();
 const titles = [
   ...masteryTitles,
   ...masteryBadgeTitles,
   ...eliteTitles,
+  ...moduleStageTitles,
   ...new Set(skillIds.map(id => `文件:技能 ${skillNames[id]}.png`)),
 ];
 
@@ -72,6 +80,7 @@ for (let index = 0; index < titles.length; index += 50) {
 const mastery = {};
 const masteryBadges = {};
 const elite = {};
+const moduleStages = {};
 for (const [level, title] of masteryTitles.entries()) {
   const image = images.get(title);
   if (!image) throw new Error(`PRTS 缺少必需素材：${title}`);
@@ -98,6 +107,25 @@ for (const [level, title] of eliteTitles.entries()) {
   await download(image.url, localPath);
   elite[level] = manifestEntry(title, image, localPath);
 }
+for (const [index, title] of moduleStageTitles.entries()) {
+  const level = index + 1;
+  const image = images.get(title);
+  if (!image) throw new Error(`PRTS 缺少必需素材：${title}`);
+  const localPath = path.join(moduleStageDir, `${level}.png`);
+  await download(image.url, localPath);
+  moduleStages[level] = manifestEntry(title, image, localPath);
+}
+const moduleTypes = {};
+let nextModuleType = 0;
+await Promise.all(Array.from({ length: 6 }, async () => {
+  while (nextModuleType < moduleTypeIds.length) {
+    const typeIcon = moduleTypeIds[nextModuleType++];
+    const sourceUrl = `https://torappu.prts.wiki/assets/uniequip_type/${typeIcon.toLowerCase()}.png`;
+    const localPath = path.join(moduleTypeDir, `${typeIcon.toLowerCase()}.png`);
+    await download(sourceUrl, localPath);
+    moduleTypes[typeIcon] = { sourceUrl, localPath: localPath.replaceAll('\\', '/') };
+  }
+}));
 const skills = {};
 const missing = [];
 let nextSkill = 0;
@@ -118,10 +146,10 @@ await Promise.all(Array.from({ length: 6 }, async () => {
 
 await writeFile(
   path.join(imageRoot, 'prts-assets.json'),
-  `${JSON.stringify({ source: 'https://prts.wiki', syncedAt: new Date().toISOString(), mastery, masteryBadges, elite, skills, missing }, null, 2)}\n`,
+  `${JSON.stringify({ source: 'https://prts.wiki', syncedAt: new Date().toISOString(), mastery, masteryBadges, elite, moduleStages, moduleTypes, skills, missing }, null, 2)}\n`,
   'utf8',
 );
-console.log(`PRTS 素材同步完成：干员资料 ${Object.keys(operatorMetadata).length}，职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，角标 ${Object.keys(masteryBadges).length}，精英 ${Object.keys(elite).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
+console.log(`PRTS 素材同步完成：干员资料 ${Object.keys(operatorMetadata).length}，职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，角标 ${Object.keys(masteryBadges).length}，精英 ${Object.keys(elite).length}，模组阶段 ${Object.keys(moduleStages).length}，模组类型 ${Object.keys(moduleTypes).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
 if (missing.length) console.log(missing.map(item => `${item.skillId} ${item.name}`).join('\n'));
 
 async function download(url, target) {

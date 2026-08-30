@@ -39,7 +39,7 @@ export class ModulePlanner {
           requested.push({ from: level - 1, to: level, requirements });
         }
         const planned = fulfillStages(this.recipes, inventory, requested, unlimitedIds);
-        if (!planned.length) continue;
+        if (!planned.length || (continuous && planned.length < 2)) continue;
         const finite = fulfillStages(this.recipes, inventory, requested);
         const stages = (planned.length > finite.length ? planned : finite).slice(0, planned.length);
         const usesUnlimited = planned.length > finite.length;

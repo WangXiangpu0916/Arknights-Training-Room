@@ -42,17 +42,17 @@ for (const itemId of Object.keys(JSON.parse(await readFile(path.join(root, 'reso
 account.inventory['4001'] = 99_999_999;
 const promotionFixture = account.operators.find(operator => operator.operatorId === '002_amiya');
 if (promotionFixture) {
-  promotionFixture.elitePhase = 1;
-  promotionFixture.level = 70;
+  promotionFixture.elitePhase = 0;
+  promotionFixture.level = 50;
 }
 await writeFile(path.join(runtime, 'account-cache.json'), `${JSON.stringify(account, null, 2)}\n`, 'utf8');
 
 const env = {
   ...process.env,
   ATR_USER_DATA: runtime,
-  ATR_QA_HIDDEN: '1',
   ATR_WINDOW_POLICY_REPORT: windowPolicyPath,
 };
+if (!process.env.ATR_QA_SCREENSHOTS) env.ATR_QA_HIDDEN = '1';
 delete env.ELECTRON_RUN_AS_NODE;
 const child = spawn(executable, launchArguments, {
   cwd: root,
@@ -106,6 +106,12 @@ async function waitFor(expression, message) {
     body: document.body?.innerText?.slice(0, 1200),
   }))()`).catch(error => ({ diagnosticError: error.message }));
   throw new Error([message, JSON.stringify(pageDiagnostic), ...protocolDiagnostics, childOutput].filter(Boolean).join('\n'));
+}
+
+async function captureScreen(name) {
+  await new Promise(resolve => setTimeout(resolve, 120));
+  const screenshot = await send('Page.captureScreenshot', { format: 'png', fromSurface: true, captureBeyondViewport: false });
+  await writeFile(path.join(output, name), Buffer.from(screenshot.data, 'base64'));
 }
 
 async function setSearch(value) {
@@ -406,6 +412,48 @@ try {
     }))()`);
   }
 
+  const plannerVisuals = {};
+  await evaluate(`document.querySelector('.nav[data-page="promotion"]').click()`);
+  await waitFor(`Boolean(document.querySelector('.promotion-plan-card') && [...document.querySelectorAll('.promotion-plan-card img')].every(image => image.complete && image.naturalWidth > 0))`, 'Promotion planner visuals did not load');
+  plannerVisuals.promotionSingle = await evaluate(`(() => ({
+    cards: document.querySelectorAll('.promotion-plan-card').length,
+    rightTargets: document.querySelectorAll('.promotion-plan-card .plan-target').length,
+    transitions: document.querySelectorAll('.promotion-plan-card .elite-card-transition').length,
+    imagesLoaded: [...document.querySelectorAll('.promotion-plan-card .elite-card-transition img')].every(image => image.complete && image.naturalWidth > 0),
+  }))()`);
+  await captureScreen('promotion-planner-single.png');
+  await evaluate(`document.querySelector('[data-planner-toggle="continuous"][data-planner-kind="promotion"]').click()`);
+  await waitFor(`Boolean(document.querySelector('.promotion-plan-card'))`, 'Continuous promotion planner did not render a multi-stage candidate');
+  plannerVisuals.promotionContinuous = await evaluate(`(() => ({
+    cards: document.querySelectorAll('.promotion-plan-card').length,
+    allMultiStage: currentPlanCandidates('promotion').every(candidate => candidate.stages.length >= 2),
+  }))()`);
+  await captureScreen('promotion-planner-continuous.png');
+
+  await evaluate(`document.querySelector('.nav[data-page="modules"]').click()`);
+  await waitFor(`Boolean(document.querySelector('.module-plan-card') && [...document.querySelectorAll('.module-plan-card img')].every(image => image.complete && image.naturalWidth > 0))`, 'Module planner visuals did not load');
+  plannerVisuals.moduleSingle = await evaluate(`(() => ({
+    cards: document.querySelectorAll('.module-plan-card').length,
+    noteRemoved: !document.querySelector('#content').innerText.includes('模组开启仍需在游戏内完成对应任务；此处核对精英/等级门槛、现有模组等级与材料。'),
+    typeImagesLoaded: [...document.querySelectorAll('.module-plan-card .module-type-icon img')].every(image => image.complete && image.naturalWidth > 0),
+    stageImagesLoaded: [...document.querySelectorAll('.module-plan-card .module-stage-icon img')].every(image => image.complete && image.naturalWidth > 0),
+    codesUppercase: [...document.querySelectorAll('.module-plan-card .module-type-code')].every(node => /^[A-Z]+-[A-Z]$/.test(node.textContent)),
+  }))()`);
+  await captureScreen('module-planner-single.png');
+  await evaluate(`document.querySelector('[data-planner-toggle="continuous"][data-planner-kind="module"]').click()`);
+  await waitFor(`Boolean(document.querySelector('.module-plan-card'))`, 'Continuous module planner did not render a multi-stage candidate');
+  plannerVisuals.moduleContinuous = await evaluate(`(() => ({
+    cards: document.querySelectorAll('.module-plan-card').length,
+    allMultiStage: currentPlanCandidates('module').every(candidate => candidate.stages.length >= 2),
+    includesSupportedSpan: currentPlanCandidates('module').some(candidate => candidate.to - candidate.from >= 2),
+  }))()`);
+  await captureScreen('module-planner-continuous.png');
+  await evaluate(`document.querySelector('.module-plan-card').click()`);
+  await waitFor(`!document.querySelector('#modal').classList.contains('hidden') && Boolean(document.querySelector('#modal .module-modal-heading'))`, 'Module detail modal did not render');
+  await waitFor(`[...document.querySelectorAll('#modal .module-modal-heading img')].every(image => image.complete && image.naturalWidth > 0)`, 'Module detail modal images did not load');
+  await captureScreen('module-planner-detail.png');
+  await evaluate(`document.querySelector('[data-close-modal]').click()`);
+
   const windowPolicy = JSON.parse(await readFile(windowPolicyPath, 'utf8'));
   console.log('QA phase: page overflow and window policy');
 
@@ -437,6 +485,10 @@ try {
   if (pages.dashboard.cardWidth < 337 || pages.dashboard.cardWidth > 338 || pages.dashboard.masterySkillGap < 28 || pages.dashboard.masterySkillGap > 40) failures.push('dashboard card geometry');
   if (!pages.promotion.cardWidth || pages.promotion.cardWidth < 337 || pages.promotion.cardWidth > 338) failures.push('promotion card geometry');
   if (!pages.modules.cardWidth || pages.modules.cardWidth < 337 || pages.modules.cardWidth > 338) failures.push('module card geometry');
+  if (!plannerVisuals.promotionSingle.cards || plannerVisuals.promotionSingle.rightTargets || !plannerVisuals.promotionSingle.transitions || !plannerVisuals.promotionSingle.imagesLoaded) failures.push('promotion planner visuals');
+  if (!plannerVisuals.promotionContinuous.cards || !plannerVisuals.promotionContinuous.allMultiStage) failures.push('promotion continuous visuals');
+  if (!plannerVisuals.moduleSingle.cards || !plannerVisuals.moduleSingle.noteRemoved || !plannerVisuals.moduleSingle.typeImagesLoaded || !plannerVisuals.moduleSingle.stageImagesLoaded || !plannerVisuals.moduleSingle.codesUppercase) failures.push('module planner visuals');
+  if (!plannerVisuals.moduleContinuous.cards || !plannerVisuals.moduleContinuous.allMultiStage || !plannerVisuals.moduleContinuous.includesSupportedSpan) failures.push('module continuous visuals');
   if (windowPolicy.bounds.width !== 1360 || windowPolicy.bounds.height !== 800
     || windowPolicy.minimumSize.join('x') !== '1360x800'
     || windowPolicy.maximumSize.join('x') !== '1360x800'
@@ -464,6 +516,7 @@ try {
     optionCounts,
     highlightSync,
     pages,
+    plannerVisuals,
   };
   await writeFile(path.join(output, 'operators-search-filter-qa.json'), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   console.log(JSON.stringify(report, null, 2));

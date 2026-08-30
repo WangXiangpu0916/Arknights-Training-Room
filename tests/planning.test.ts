@@ -43,6 +43,8 @@ test('精英化规划覆盖 E0→E1、E1→E2、材料不足和已 E2', () => {
   assert.equal(planner.singleStage([owned({ elitePhase: 2 })], { A: 99, B: 99, '4001': 999 }, []).length, 0);
   const continuous = planner.continuous([owned({ level: 50 })], { A: 2, B: 3, EXP: 16, '4001': 458 }, []);
   assert.deepEqual(continuous.map(item => [item.from, item.to, item.stages.length]), [[0, 2, 2]]);
+  assert.equal(planner.continuous([owned({ level: 50 })], { A: 2, EXP: 16, '4001': 258 }, []).length, 0);
+  assert.equal(planner.continuous([owned({ elitePhase: 1, level: 80 })], { B: 3, '4001': 200 }, []).length, 0);
 });
 
 test('模组规划覆盖无模组、单/多模组、等级门槛、材料和当前等级', () => {
@@ -53,7 +55,10 @@ test('模组规划覆盖无模组、单/多模组、等级门槛、材料和当�
   assert.deepEqual(planner.candidates([owned({ elitePhase: 2, level: 60, modules: [{ moduleId: 'mod-x', level: 1 }] })], { B: 2 }).map(item => [item.module.moduleId, item.from, item.to]), [['mod-x', 1, 2]]);
   assert.equal(planner.candidates([owned({ elitePhase: 2, level: 60, modules: [{ moduleId: 'mod-x', level: 3 }, { moduleId: 'mod-y', level: 3 }] })], { A: 99, B: 99, C: 99 }).length, 0);
   assert.equal(new ModulePlanner({ ...gameData, operators: [{ ...operator, modules: [] }] }).candidates([owned({ elitePhase: 2, level: 60 })], { A: 99 }).length, 0);
-  assert.deepEqual(planner.continuous([owned({ elitePhase: 2, level: 60 })], { A: 2, B: 2, C: 2 }, []).map(item => [item.module.moduleId, item.from, item.to]), [['mod-x', 0, 3], ['mod-y', 0, 1]]);
+  assert.deepEqual(planner.continuous([owned({ elitePhase: 2, level: 60 })], { A: 2, B: 2, C: 2 }, []).map(item => [item.module.moduleId, item.from, item.to]), [['mod-x', 0, 3]]);
+  assert.deepEqual(planner.continuous([owned({ elitePhase: 2, level: 60 })], { A: 2, B: 2 }, []).map(item => [item.module.moduleId, item.from, item.to]), [['mod-x', 0, 2]]);
+  assert.deepEqual(planner.continuous([owned({ elitePhase: 2, level: 60, modules: [{ moduleId: 'mod-x', level: 1 }] })], { B: 2, C: 2 }, []).map(item => [item.module.moduleId, item.from, item.to]), [['mod-x', 1, 3]]);
+  assert.equal(planner.continuous([owned({ elitePhase: 2, level: 60, modules: [{ moduleId: 'mod-x', level: 2 }] })], { C: 2 }, []).length, 0);
 });
 
 test('递归可合成数量按完整依赖链共享库存且防循环', () => {

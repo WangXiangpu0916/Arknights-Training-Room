@@ -79,7 +79,7 @@ GET  zonai.skland.com/api/v1/game/cultivate/player?uid=...
 
 - `SklandClient` 是账号 adapter；未来可由其他账号 provider 替代，只需输出 `AccountSnapshot`。
 - `ToolboxGameDataProvider` 是静态数据 provider；业务引擎只消费统一 `GameData`，不依赖 GitHub 或网页 HTML。
-- PRTS 用于通过 `npm run assets:sync` 同步专精等级、技能、精英阶段和 8 个职业图标，以及通过 Cargo 写入干员标签和材料用途/描述。模组图片由 PRTS 静态资源按真实模组 ID 懒加载；其余规划数据不依赖网页 HTML。结构化数据缺字段时仍应在 provider 层增加校验/补充，不把 HTML 结构渗入规划器。
+- PRTS 用于通过 `npm run assets:sync` 同步专精等级、技能、精英阶段、模组 STAGE 与 `typeIcon` 原始 PNG，以及通过 Cargo 写入干员标签和材料用途/描述。模组类型图标按 `typeIcon` 代码映射到 `resources/images/module/type/{typeIcon}.png`，模组等级映射到 `resources/images/module/stage/{1|2|3}.png`，运行时仅引用本地素材；其余规划数据不依赖网页 HTML。结构化数据缺字段时仍应在 provider 层增加校验/补充，不把 HTML 结构渗入规划器。
 
 ## 参考实现
 

@@ -56,7 +56,17 @@ const masteryIcon = level => `../../resources/images/mastery/m${level}.png`;
 const masteryBadge = level => `../../resources/images/mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`;
 const eliteIcon = level => `../../resources/images/elite/e${Number(level)}.png`;
 const professionIcon = name => `../../resources/images/profession-hd/${encodeURIComponent(name)}.png`;
-const moduleIcon = id => `https://torappu.prts.wiki/assets/uniequip_img/${encodeURIComponent(id)}.png`;
+const moduleTypeIcon = typeIcon => `../../resources/images/module/type/${encodeURIComponent(String(typeIcon).toLowerCase())}.png`;
+const moduleStageIcons = Object.freeze({
+  1: '../../resources/images/module/stage/1.png',
+  2: '../../resources/images/module/stage/2.png',
+  3: '../../resources/images/module/stage/3.png',
+});
+const moduleTypeCode = typeIcon => String(typeIcon || '').toUpperCase();
+const moduleStage = (level, compact = false) => Number(level) === 0
+  ? `<span class="module-uninstalled${compact ? ' compact' : ''}">未装配</span>`
+  : `<span class="module-stage-icon${compact ? ' compact' : ''}"><img src="${moduleStageIcons[Number(level)]}" alt="模组阶段 ${Number(level)}"></span>`;
+const moduleStageTransition = (from, to, compact = false) => `<div class="module-stage-transition${compact ? ' compact' : ''}" aria-label="模组从${Number(from) === 0 ? '未装配' : `阶段 ${Number(from)}`}升级到阶段 ${Number(to)}">${moduleStage(from, compact)}<span class="stage-arrow">→</span>${moduleStage(to, compact)}</div>`;
 const skillPlaceholder = '../../resources/images/skill/placeholder.svg';
 const materialMap = () => new Map(state.gameData.materials.map(x => [x.itemId, x]));
 const showToast = message => {
@@ -120,12 +130,11 @@ function renderPromotionPlanner() {
 }
 
 function promotionCard(candidate) {
-  return `<article class="candidate plan-card rarity-${candidate.operator.rarity}" data-plan-kind="promotion" data-plan-key="${esc(candidate.operator.operatorId)}" role="button" tabindex="0">
+  return `<article class="candidate plan-card promotion-plan-card rarity-${candidate.operator.rarity}" data-plan-kind="promotion" data-plan-key="${esc(candidate.operator.operatorId)}" role="button" tabindex="0">
     <div class="candidate-main">
       <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
       <div class="candidate-details"><div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
-        <div class="candidate-visuals"><div class="plan-level">精英 ${candidate.from} · Lv.${candidate.currentLevel}<span>→</span>精英 ${candidate.to}</div>
-          <div class="plan-target"><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"><strong>精英 ${candidate.to}</strong></div></div></div>
+        <div class="candidate-visuals"><div class="promotion-card-progress"><div class="elite-transition elite-card-transition"><img src="${eliteIcon(candidate.from)}" alt="精英 ${candidate.from}"><span>→</span><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"></div><small>当前 Lv.${candidate.currentLevel}</small></div></div></div>
     </div>
   </article>`;
 }
@@ -134,7 +143,6 @@ function renderModulePlanner() {
   if (!state.account) return renderDashboard();
   const list = currentPlanCandidates('module');
   content.innerHTML = `${banners()}${plannerControls('module')}<div class="result-summary">找到 ${list.length} 个当前可开启或升级模组</div>
-    <p class="planner-note">模组开启仍需在游戏内完成对应任务；此处核对精英/等级门槛、现有模组等级与材料。</p>
     ${list.length ? `<div class="cards planner-cards module-planner-cards">${list.map(moduleCard).join('')}</div>` : '<div class="empty"><div><h2>当前筛选下没有可规划的模组</h2><p>无模组、等级门槛不足、材料不足或所有模组均已 3 级。</p></div></div>'}`;
   bindActions();
 }
@@ -144,8 +152,8 @@ function moduleCard(candidate) {
     <div class="candidate-main">
       <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
       <div class="candidate-details"><div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
-        <div class="candidate-visuals"><div class="plan-level">模组 Lv.${candidate.from}<span>→</span>Lv.${candidate.to}</div>
-          <div class="plan-target module-target"><img src="${moduleIcon(candidate.module.moduleId)}" alt="${esc(candidate.module.name)}模组图标" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-img-fallback><div class="module-name" title="${esc(candidate.module.name)}"><strong>${esc(candidate.module.name)}</strong></div><small>${esc(candidate.module.typeLabel)}</small></div></div></div>
+        <div class="candidate-visuals">${moduleStageTransition(candidate.from, candidate.to)}
+          <div class="plan-target module-target"><span class="module-type-icon"><img src="${moduleTypeIcon(candidate.module.typeIcon)}" alt="${esc(moduleTypeCode(candidate.module.typeIcon))} 模组类型图标" loading="lazy" decoding="async" data-img-fallback></span><strong class="module-type-code">${esc(moduleTypeCode(candidate.module.typeIcon))}</strong><div class="module-name" title="${esc(candidate.module.name)}"><small>${esc(candidate.module.name)}</small></div></div></div></div>
     </div>
   </article>`;
 }
@@ -153,7 +161,7 @@ function moduleCard(candidate) {
 function plannerControls(kind) {
   const filters = plannerFilters[kind];
   const currentLabel = kind === 'promotion' ? '全部当前精英阶段' : '全部当前模组等级';
-  const levels = kind === 'promotion' ? [[0, '精英 0'], [1, '精英 1']] : [[0, 'Lv.0'], [1, 'Lv.1'], [2, 'Lv.2']];
+  const levels = kind === 'promotion' ? [[0, '精英 0'], [1, '精英 1']] : [[0, '未装配'], [1, '阶段 1'], [2, '阶段 2']];
   return `<div class="dashboard-layout planner-layout"><div class="filters dashboard-filters planner-filters">
     <input data-planner-filter="search" data-planner-kind="${kind}" value="${esc(filters.search)}" placeholder="${kind === 'promotion' ? '搜索干员' : '搜索干员或模组'}">
     ${plannerSelect(kind, 'profession', '全部职业', professions.map(name => [name, name]))}
@@ -174,7 +182,7 @@ function currentPlanCandidates(kind) {
   const source = state[kind === 'promotion' ? 'promotions' : 'modules'];
   const key = `${filters.continuous ? 'continuous' : 'single'}${filters.unlimited === 'real' ? 'Real' : ''}`;
   return (source?.[key] || []).filter(candidate => {
-    const searchable = kind === 'promotion' ? candidate.operator.name : `${candidate.operator.name}${candidate.module.name}${candidate.module.typeLabel}`;
+    const searchable = kind === 'promotion' ? candidate.operator.name : `${candidate.operator.name}${candidate.module.name}${candidate.module.typeLabel}${candidate.module.typeIcon}${moduleTypeCode(candidate.module.typeIcon)}`;
     return (!filters.search || searchable.includes(filters.search))
       && (!filters.profession || candidate.operator.profession === filters.profession)
       && (!filters.rarity || String(candidate.operator.rarity) === filters.rarity)
@@ -821,8 +829,8 @@ function showPlanCandidate(candidate, kind) {
     : `${candidate.operator.name} · ${candidate.module.name} · ${candidate.module.typeLabel}`;
   const transition = kind === 'promotion'
     ? `<div class="elite-transition modal-transition"><img src="${eliteIcon(candidate.from)}" alt="精英 ${candidate.from}"><span>→</span><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"></div>`
-    : `<div class="module-modal-heading"><img src="${moduleIcon(candidate.module.moduleId)}" alt="${esc(candidate.module.name)}"><strong>Lv.${candidate.from} → Lv.${candidate.to}</strong></div>`;
-  const stages = candidate.stages.map(stage => `<section class="stage-block"><h3>${kind === 'promotion' ? `精英 ${stage.from} → 精英 ${stage.to}` : `模组 Lv.${stage.from} → Lv.${stage.to}`}</h3>
+    : `<div class="module-modal-heading"><div class="module-modal-type"><span class="module-type-icon"><img src="${moduleTypeIcon(candidate.module.typeIcon)}" alt="${esc(moduleTypeCode(candidate.module.typeIcon))} 模组类型图标"></span><strong>${esc(moduleTypeCode(candidate.module.typeIcon))}</strong><small>${esc(candidate.module.name)}</small></div>${moduleStageTransition(candidate.from, candidate.to)}</div>`;
+  const stages = candidate.stages.map(stage => `<section class="stage-block"><h3${kind === 'module' ? ' class="module-stage-heading"' : ''}>${kind === 'promotion' ? `精英 ${stage.from} → 精英 ${stage.to}` : moduleStageTransition(stage.from, stage.to, true)}</h3>
     ${kind === 'promotion' && stage.experienceRequired ? `<div class="material-line"><span>干员经验</span><strong>${stage.experienceRequired.toLocaleString('zh-CN')}</strong><span>库存折算 ${candidate.experienceAvailable.toLocaleString('zh-CN')}</span></div>` : ''}
     ${stage.requirements.map(requirement => {
       const step = stage.craft.steps.find(item => item.itemId === requirement.itemId);

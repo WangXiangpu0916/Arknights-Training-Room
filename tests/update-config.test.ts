@@ -181,14 +181,19 @@ test('精英化与模组规划是同级页面并使用真实图标和独立状�
   assert.match(html, /data-page="modules"[^>]*>[^<]*<span>[^<]*<\/span>模组规划/);
   assert.match(renderer, /state\[kind === 'promotion' \? 'promotions' : 'modules'\]/);
   assert.match(renderer, /resources\/images\/elite\/e\$\{Number\(level\)\}\.png/);
-  assert.match(renderer, /torappu\.prts\.wiki\/assets\/uniequip_img/);
+  assert.match(renderer, /resources\/images\/module\/type\/\$\{encodeURIComponent\(String\(typeIcon\)\.toLowerCase\(\)\)\}\.png/);
+  assert.match(renderer, /resources\/images\/module\/stage\/1\.png/);
+  assert.match(renderer, /candidate\.module\.typeIcon/);
   assert.match(renderer, /candidate\.module\.moduleId/);
   assert.match(renderer, /candidate\.module\.typeLabel/);
   assert.match(renderer, /data-planner-filter="search"/);
   assert.match(renderer, /data-planner-toggle="continuous"/);
   assert.match(renderer, /data-planner-toggle="unlimited"/);
-  assert.doesNotMatch(renderer, /ready-badge|材料已就绪/);
+  assert.doesNotMatch(renderer, /ready-badge|材料已就绪|torappu\.prts\.wiki\/assets\/uniequip_img|模组开启仍需在游戏内完成对应任务；此处核对/);
   assert.match(styles, /\.plan-card \.candidate-main \{ grid-template-columns: 72px/);
+  assert.match(styles, /\.module-type-icon \{/);
+  assert.match(styles, /\.module-stage-icon \{/);
+  assert.match(styles, /\.promotion-plan-card \.candidate-main \{ grid-template-columns: 72px minmax\(0, 1fr\); \}/);
 });
 
 test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS 文本', () => {

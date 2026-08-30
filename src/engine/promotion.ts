@@ -59,7 +59,7 @@ export class PromotionPlanner {
         });
       }
       const planned = fulfillStages(this.recipes, inventory, requested, unlimitedIds);
-      if (!planned.length) continue;
+      if (!planned.length || (continuous && planned.length < 2)) continue;
       const finite = fulfillStages(this.recipes, inventory, requested);
       const stages = (planned.length > finite.length ? planned : finite).slice(0, planned.length);
       const usesUnlimited = planned.length > finite.length;
