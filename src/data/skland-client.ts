@@ -26,6 +26,7 @@ interface RawBinding {
 interface RawCharacter {
   id: string;
   level?: number;
+  exp?: number;
   evolvePhase?: number;
   mainSkillLevel?: number;
   skills?: Array<{ id: string; level: number }>;
@@ -136,12 +137,14 @@ export class SklandClient {
       const current = merged.get(operatorId) ?? {
         operatorId,
         level: Number(raw.level ?? 0),
+        experience: Math.max(0, Number(raw.exp ?? 0)),
         elitePhase: Number(raw.evolvePhase ?? 0),
         skillLevel: Number(raw.mainSkillLevel ?? 0),
         skills: [],
         modules: [],
       };
       current.level = Math.max(current.level, Number(raw.level ?? 0));
+      current.experience = Math.max(current.experience ?? 0, Number(raw.exp ?? 0));
       current.elitePhase = Math.max(current.elitePhase, Number(raw.evolvePhase ?? 0));
       current.skillLevel = Math.max(current.skillLevel, Number(raw.mainSkillLevel ?? 0));
       for (const skill of raw.skills ?? []) {

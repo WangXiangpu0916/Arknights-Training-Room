@@ -35,7 +35,7 @@ test('专精规划默认使用真实仓库且不再显示旧筛选和依赖标�
 test('专精规划筛选器和模式提示按当前规则精简', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   assert.doesNotMatch(renderer, /全部技能|一技能|二技能|三技能/);
-  assert.doesNotMatch(renderer, /三星|每个候选独立计算|排序：/);
+  assert.doesNotMatch(renderer, /每个候选独立计算|排序：/);
   assert.match(renderer, /mode === 'continuous' \? \[\[0,'M0'\],\[1,'M1'\]\] : \[\[0,'M0'\],\[1,'M1'\],\[2,'M2'\]\]/);
   assert.match(renderer, /mode = event\.target\.checked \? 'continuous' : 'single'/);
   assert.match(renderer, /mode === 'continuous' && dashboardFilters\.mastery === '2'\) dashboardFilters\.mastery = ''/);
@@ -176,23 +176,29 @@ test('专精候选竖线直接按真实星级使用游戏稀有度配色', () =>
 test('精英化与模组规划是同级页面并使用真实图标和独立状态', () => {
   const html = readFileSync('renderer/index.html', 'utf8');
   const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
   assert.match(html, /data-page="promotion"[^>]*>[^<]*<span>[^<]*<\/span>精英化规划/);
   assert.match(html, /data-page="modules"[^>]*>[^<]*<span>[^<]*<\/span>模组规划/);
-  assert.match(renderer, /state\.promotions/);
-  assert.match(renderer, /state\.modules/);
+  assert.match(renderer, /state\[kind === 'promotion' \? 'promotions' : 'modules'\]/);
   assert.match(renderer, /resources\/images\/elite\/e\$\{Number\(level\)\}\.png/);
   assert.match(renderer, /torappu\.prts\.wiki\/assets\/uniequip_img/);
   assert.match(renderer, /candidate\.module\.moduleId/);
+  assert.match(renderer, /candidate\.module\.typeLabel/);
+  assert.match(renderer, /data-planner-filter="search"/);
+  assert.match(renderer, /data-planner-toggle="continuous"/);
+  assert.match(renderer, /data-planner-toggle="unlimited"/);
+  assert.doesNotMatch(renderer, /ready-badge|材料已就绪/);
+  assert.match(styles, /\.plan-card \.candidate-main \{ grid-template-columns: 72px/);
 });
 
-test('仓库详情栏共享页面滚动并展示动态 PRTS 文本与固定可合成标签', () => {
+test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS 文本', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
   assert.match(renderer, /detail\.material\.purpose/);
   assert.match(renderer, /detail\.material\.description/);
   assert.match(renderer, /可合成 × \$\{detail\.craftable\}/);
-  assert.match(styles, /\.inventory-detail \{[^}]*position: static;[^}]*overflow: visible/);
-  assert.doesNotMatch(styles, /\.inventory-detail \{[^}]*overflow: auto/);
+  assert.match(styles, /\.inventory-detail \{[^}]*position: sticky;[^}]*top: 130px;[^}]*overflow-y: auto/);
+  assert.match(readFileSync('src/app-service.ts', 'utf8'), /recursiveCraftableQuantity/);
   assert.match(styles, /\.craftable-badge \{[^}]*position: absolute/);
   assert.match(styles, /\.inventory-copy-block p \{[^}]*overflow-wrap: anywhere;[^}]*word-break: break-word/);
   const metadata = JSON.parse(readFileSync('resources/game-data/material-metadata.json', 'utf8'));
@@ -223,13 +229,21 @@ test('更新异常被记录并转换成短消息，设置卡片可断开任意�
   assert.match(styles, /\.setting-card \{[^}]*grid-template-columns: minmax\(0, 1fr\) auto/);
 });
 
-test('干员卡片区分 Rank 与专精并提供全星级徽标、标签和职业水印', () => {
+test('干员列表区分 Rank 与专精并提供默认培养排序、紧凑技能和职业图标', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
   assert.match(renderer, /Rank \$\{owned\.skillLevel\}/);
   assert.match(renderer, /masteryBadge\(masteryLevel\)/);
   assert.match(renderer, /definition\.position, \.\.\.\(definition\.tags \|\| \[\]\)/);
   assert.match(renderer, /operator-watermark/);
+  assert.match(renderer, /professionIcon\(definition\.profession\)/);
+  assert.match(renderer, /definition\.skills\.length > 3 \? 'many-skills'/);
+  assert.match(styles, /\.operator-list \{[^}]*gap: 0;[^}]*border-top/);
+  assert.match(styles, /\.operator-row \{[^}]*border-bottom: 1px solid var\(--line\);[^}]*border-radius: 0/);
+  assert.match(styles, /\.operator-skills\.many-skills \{[^}]*grid-template-columns: repeat\(4, 54px\)/);
+  const filters = readFileSync('renderer/operator-filter.js', 'utf8');
+  assert.match(filters, /sort: 'training-desc'/);
+  assert.match(filters, /PROFESSION_ORDER/);
   for (const rarity of [1, 2, 3, 4, 5, 6]) assert.match(styles, new RegExp(`\\.rarity-badge\\.rarity-${rarity}`));
   assert.match(styles, /\.rarity-badge\.rarity-6 \{[^}]*linear-gradient/);
 });

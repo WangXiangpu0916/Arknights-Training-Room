@@ -5,7 +5,7 @@ import { SklandClient } from './data/skland-client';
 import { MasteryPlanner } from './engine/mastery';
 import { PromotionPlanner } from './engine/promotion';
 import { ModulePlanner } from './engine/module';
-import { directCraftableQuantity } from './engine/crafting';
+import { recursiveCraftableQuantity } from './engine/crafting';
 import { unlimitedMaterialGroups } from './domain/mastery-materials';
 
 export class AppService {
@@ -67,12 +67,18 @@ export class AppService {
       continuous,
       singleReal,
       continuousReal,
-      promotions: this.account
-        ? promotionPlanner.candidates(this.account.operators, this.account.inventory)
-        : [],
-      modules: this.account
-        ? modulePlanner.candidates(this.account.operators, this.account.inventory)
-        : [],
+      promotions: this.account ? {
+        single: promotionPlanner.singleStage(this.account.operators, this.account.inventory, this.settings.unlimitedItemIds),
+        continuous: promotionPlanner.continuous(this.account.operators, this.account.inventory, this.settings.unlimitedItemIds),
+        singleReal: promotionPlanner.singleStage(this.account.operators, this.account.inventory, []),
+        continuousReal: promotionPlanner.continuous(this.account.operators, this.account.inventory, []),
+      } : { single: [], continuous: [], singleReal: [], continuousReal: [] },
+      modules: this.account ? {
+        single: modulePlanner.singleStage(this.account.operators, this.account.inventory, this.settings.unlimitedItemIds),
+        continuous: modulePlanner.continuous(this.account.operators, this.account.inventory, this.settings.unlimitedItemIds),
+        singleReal: modulePlanner.singleStage(this.account.operators, this.account.inventory, []),
+        continuousReal: modulePlanner.continuous(this.account.operators, this.account.inventory, []),
+      } : { single: [], continuous: [], singleReal: [], continuousReal: [] },
       usingCache: Boolean(this.account && this.usingCache),
       lastError: this.lastError,
     };
@@ -159,7 +165,8 @@ export class AppService {
     if (!material) throw new Error(`未知材料：${itemId}`);
     const inventory = this.account?.inventory ?? {};
     const unlimited = new Set(this.settings.unlimitedItemIds);
-    const craftable = directCraftableQuantity(inventory, material.recipe);
+    const recipes = this.gameData.materials.flatMap(item => item.recipe ? [item.recipe] : []);
+    const craftable = recursiveCraftableQuantity(inventory, material.recipe, recipes);
     const parents = this.gameData.materials.filter(x =>
       x.recipe?.ingredients.some(ingredient => ingredient.itemId === itemId),
     );

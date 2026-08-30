@@ -1,7 +1,7 @@
 import { app } from 'electron';
 import { cp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { GameData, Material, MaterialAmount, OperatorDefinition } from '../domain/types';
+import { GameData, Material, MaterialAmount, OperatorDefinition, ProgressionData } from '../domain/types';
 import { professionFromToolboxId } from '../domain/professions';
 import { LocalStore } from './local-store';
 
@@ -51,6 +51,12 @@ interface OperatorMetadata {
 interface MaterialMetadata {
   purpose?: string;
   description?: string;
+}
+
+interface ModuleMetadata {
+  typeIcon: string;
+  typeLabel: string;
+  requirements: Record<1 | 2 | 3, MaterialAmount[]>;
 }
 
 const FILES = [
@@ -118,7 +124,7 @@ export class ToolboxGameDataProvider {
   }
 
   private async loadFrom(directory: string): Promise<GameData> {
-    const [characters, cultivate, items, characterNames, materialNames, skillNames, moduleNames, subProfessionNames, operatorMetadata, materialMetadata, metadata] = await Promise.all([
+    const [characters, cultivate, items, characterNames, materialNames, skillNames, moduleNames, subProfessionNames, operatorMetadata, materialMetadata, moduleMetadata, progression, metadata] = await Promise.all([
       this.json<Dict<RawCharacter>>(directory, 'character.json'),
       this.json<Dict<RawCultivate>>(directory, 'cultivate.json'),
       this.json<Dict<RawItem>>(directory, 'item.json'),
@@ -129,6 +135,8 @@ export class ToolboxGameDataProvider {
       this.json<Dict<string>>(this.bundledGameDataDir(), 'subprofession-cn.json'),
       this.json<Dict<OperatorMetadata>>(this.bundledGameDataDir(), 'operator-metadata.json'),
       this.json<Dict<MaterialMetadata>>(this.bundledGameDataDir(), 'material-metadata.json'),
+      this.json<Dict<ModuleMetadata>>(this.bundledGameDataDir(), 'uniequip-metadata.json'),
+      this.json<ProgressionData>(this.bundledGameDataDir(), 'progression.json'),
       this.json<{ version: string; updatedAt: string; sourceCommit?: string }>(directory, 'data-version.json'),
     ]);
 
@@ -147,6 +155,7 @@ export class ToolboxGameDataProvider {
           }
         : undefined,
     }));
+    materials.push({ itemId: progression.lmdItemId, name: '龙门币', rarity: 1, type: 4 });
 
     const operators: OperatorDefinition[] = [];
     for (const [operatorId, raw] of Object.entries(cultivate)) {
@@ -179,7 +188,9 @@ export class ToolboxGameDataProvider {
         modules: (raw.uniequip ?? []).map(module => ({
           moduleId: module.id,
           name: moduleNames[module.id] ?? module.id,
-          requirements: {
+          typeIcon: moduleMetadata[module.id]?.typeIcon ?? '',
+          typeLabel: moduleMetadata[module.id]?.typeLabel ?? '特殊模组',
+          requirements: moduleMetadata[module.id]?.requirements ?? {
             1: this.amounts(module.cost[0] ?? {}),
             2: this.amounts(module.cost[1] ?? {}),
             3: this.amounts(module.cost[2] ?? {}),
@@ -205,6 +216,7 @@ export class ToolboxGameDataProvider {
       sourceCommit: metadata.sourceCommit,
       operators,
       materials,
+      progression,
     };
   }
 

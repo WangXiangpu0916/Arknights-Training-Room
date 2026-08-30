@@ -60,6 +60,7 @@ const gameData: GameData = {
   updatedAt: '2026-08-25T00:00:00Z',
   operators: [operator],
   materials,
+  progression: { characterExpMap: [[], [], []], characterUpgradeCostMap: [[], [], []], evolveGoldCost: [], expItems: {}, lmdItemId: '4001' },
 };
 
 function owned(levels: MasteryLevel[], overrides: Partial<OwnedOperator> = {}): OwnedOperator {

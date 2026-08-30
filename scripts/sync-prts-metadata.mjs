@@ -110,7 +110,46 @@ await writeFile(
   `${JSON.stringify(moduleNames, null, 2)}\n`,
   'utf8',
 );
-console.log(`PRTS 材料资料同步完成：${Object.keys(materialMetadata).length}；模组名称 ${Object.keys(moduleNames).length}`);
+
+const officialRoot = 'https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata/excel';
+const [moduleDataResponse, constantsResponse, itemsResponse] = await Promise.all([
+  request(`${officialRoot}/uniequip_table.json`),
+  request(`${officialRoot}/gamedata_const.json`),
+  request(`${officialRoot}/item_table.json`),
+]);
+for (const [label, response] of [['模组', moduleDataResponse], ['成长常量', constantsResponse], ['物品', itemsResponse]]) {
+  if (!response.ok) throw new Error(`${label}数据请求失败：HTTP ${response.status}`);
+}
+const [moduleData, constants, officialItems] = await Promise.all([
+  moduleDataResponse.json(), constantsResponse.json(), itemsResponse.json(),
+]);
+const moduleMetadata = Object.fromEntries(Object.values(moduleData.equipDict ?? {})
+  .filter(module => module.type === 'ADVANCED' && moduleNames[module.uniEquipId])
+  .map(module => [module.uniEquipId, {
+    typeIcon: module.typeIcon,
+    typeLabel: moduleTypeLabel(module.typeIcon),
+    requirements: Object.fromEntries([1, 2, 3].map(level => [level,
+      (module.itemCost?.[level] ?? []).map(item => ({ itemId: item.id, quantity: item.count })),
+    ])),
+  }]));
+await writeFile(
+  path.join('resources', 'game-data', 'uniequip-metadata.json'),
+  `${JSON.stringify(moduleMetadata, null, 2)}\n`,
+  'utf8',
+);
+const progression = {
+  characterExpMap: constants.characterExpMap,
+  characterUpgradeCostMap: constants.characterUpgradeCostMap,
+  evolveGoldCost: constants.evolveGoldCost,
+  expItems: Object.fromEntries(Object.entries(officialItems.expItems ?? {}).map(([id, item]) => [id, item.gainExp])),
+  lmdItemId: '4001',
+};
+await writeFile(
+  path.join('resources', 'game-data', 'progression.json'),
+  `${JSON.stringify(progression, null, 2)}\n`,
+  'utf8',
+);
+console.log(`PRTS 材料资料同步完成：${Object.keys(materialMetadata).length}；模组名称 ${Object.keys(moduleNames).length}；模组类型 ${Object.keys(moduleMetadata).length}`);
 
 async function request(url) {
   let error;
@@ -166,4 +205,10 @@ function plainText(value) {
     .replace(/&amp;/g, '&')
     .replace(/\s*\n\s*/g, '\n')
     .trim();
+}
+
+function moduleTypeLabel(typeIcon) {
+  const suffix = String(typeIcon ?? '').split('-').at(-1)?.toLowerCase();
+  return ({ x: 'X 型模组', y: 'Y 型模组', d: 'Δ 型模组', a: 'α 型模组', b: 'β 型模组' })[suffix]
+    ?? '特殊模组';
 }

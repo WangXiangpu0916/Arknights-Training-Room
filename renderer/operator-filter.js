@@ -5,9 +5,11 @@
   ];
 
   const SORT_MODES = [
-    'implementation-asc', 'implementation-desc', 'name-asc', 'name-desc',
+    'training-desc', 'implementation-asc', 'implementation-desc', 'name-asc', 'name-desc',
     'rarity-asc', 'rarity-desc',
   ];
+  const PROFESSION_ORDER = new Map(['近卫', '狙击', '重装', '医疗', '辅助', '术师', '特种', '先锋']
+    .map((name, index) => [name, index]));
 
   const VALUE_ALIASES = {
     obtainMethods: new Map([
@@ -38,7 +40,7 @@
   function createState() {
     return {
       search: '',
-      sort: 'implementation-asc',
+      sort: 'training-desc',
       selected: Object.fromEntries(DIMENSIONS.map(key => [key, new Set()])),
     };
   }
@@ -101,9 +103,18 @@
       || a.definition.operatorId.localeCompare(b.definition.operatorId);
   }
 
+  function compareTraining(a, b) {
+    return (b.owned.elitePhase ?? 0) - (a.owned.elitePhase ?? 0)
+      || (b.owned.level ?? 0) - (a.owned.level ?? 0)
+      || (PROFESSION_ORDER.get(a.definition.profession) ?? 99) - (PROFESSION_ORDER.get(b.definition.profession) ?? 99)
+      || String(a.definition.searchPinyin ?? '').localeCompare(String(b.definition.searchPinyin ?? ''), 'en')
+      || compareIdentity(a, b);
+  }
+
   function sortRows(rows, mode) {
     const selectedMode = SORT_MODES.includes(mode) ? mode : SORT_MODES[0];
     return [...rows].sort((a, b) => {
+      if (selectedMode === 'training-desc') return compareTraining(a, b);
       if (selectedMode === 'implementation-asc') return compareImplementation(a, b) || compareIdentity(a, b);
       if (selectedMode === 'implementation-desc') return compareImplementation(a, b, -1) || compareIdentity(a, b);
       if (selectedMode === 'name-asc') return compareIdentity(a, b);

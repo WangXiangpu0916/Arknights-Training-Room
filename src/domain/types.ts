@@ -24,6 +24,8 @@ export interface Material {
 export interface ModuleDefinition {
   moduleId: string;
   name: string;
+  typeIcon: string;
+  typeLabel: string;
   requirements: Record<1 | 2 | 3, MaterialAmount[]>;
 }
 
@@ -66,6 +68,7 @@ export interface OwnedSkill {
 export interface OwnedOperator {
   operatorId: string;
   level: number;
+  experience?: number;
   elitePhase: number;
   skillLevel: number;
   skills: OwnedSkill[];
@@ -128,19 +131,50 @@ export interface MasteryCandidate {
 
 export interface PromotionCandidate {
   operator: OperatorDefinition;
+  currentLevel: number;
+  from: number;
+  to: number;
+  stages: PromotionStagePlan[];
+  requirements: MaterialAmount[];
+  craft: CraftResult;
+  experienceRequired: number;
+  experienceAvailable: number;
+  usesUnlimited: boolean;
+  unlimitedRoots: string[];
+  remainingInventory: Record<string, number>;
+}
+
+export interface ModuleCandidate {
+  operator: OperatorDefinition;
+  currentLevel: number;
+  module: ModuleDefinition;
+  from: number;
+  to: number;
+  stages: PlanStage[];
+  requirements: MaterialAmount[];
+  craft: CraftResult;
+  usesUnlimited: boolean;
+  unlimitedRoots: string[];
+  remainingInventory: Record<string, number>;
+}
+
+export interface PlanStage {
   from: number;
   to: number;
   requirements: MaterialAmount[];
   craft: CraftResult;
 }
 
-export interface ModuleCandidate {
-  operator: OperatorDefinition;
-  module: ModuleDefinition;
-  from: number;
-  to: number;
-  requirements: MaterialAmount[];
-  craft: CraftResult;
+export interface PromotionStagePlan extends PlanStage {
+  experienceRequired: number;
+}
+
+export interface ProgressionData {
+  characterExpMap: number[][];
+  characterUpgradeCostMap: number[][];
+  evolveGoldCost: number[][];
+  expItems: Record<string, number>;
+  lmdItemId: string;
 }
 
 export interface GameData {
@@ -149,4 +183,5 @@ export interface GameData {
   sourceCommit?: string;
   operators: OperatorDefinition[];
   materials: Material[];
+  progression: ProgressionData;
 }

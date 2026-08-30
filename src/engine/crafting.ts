@@ -16,6 +16,25 @@ export function directCraftableQuantity(inventory: Inventory, recipe?: Recipe): 
   return Math.max(0, batches) * recipe.outputQuantity;
 }
 
+export function recursiveCraftableQuantity(inventory: Inventory, recipe: Recipe | undefined, recipes: Recipe[]): number {
+  if (!recipe?.ingredients.length || !Number.isSafeInteger(recipe.outputQuantity) || recipe.outputQuantity <= 0) return 0;
+  const available = { ...inventory, [recipe.productItemId]: 0 };
+  const feasible = (quantity: number) => new CraftingEngine(recipes)
+    .fulfill(available, [{ itemId: recipe.productItemId, quantity }]).feasible;
+  let low = 0;
+  let high = recipe.outputQuantity;
+  while (feasible(high) && high <= Math.floor(Number.MAX_SAFE_INTEGER / 2)) {
+    low = high;
+    high *= 2;
+  }
+  while (low + 1 < high) {
+    const middle = low + Math.floor((high - low) / 2);
+    if (feasible(middle)) low = middle;
+    else high = middle;
+  }
+  return low;
+}
+
 interface MutableRun {
   inventory: Inventory;
   roots: Set<string>;

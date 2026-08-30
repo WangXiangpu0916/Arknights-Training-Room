@@ -32,7 +32,8 @@ const operators = [
     organizations: ['莱塔尼亚'], teams: [], birthdayMonth: 10,
   },
 ];
-const rows = operators.map((definition, index) => ({ definition, owned: { operatorId: definition.operatorId, index } }));
+const training = [{ elitePhase: 1, level: 70 }, { elitePhase: 2, level: 90 }, { elitePhase: 2, level: 90 }];
+const rows = operators.map((definition, index) => ({ definition, owned: { operatorId: definition.operatorId, ...training[index] } }));
 
 test('中文、完整拼音、首字母和大小写均可搜索', () => {
   assert.equal(OperatorFilters.matchesSearch(operators[0], '阿米娅'), true);
@@ -86,8 +87,10 @@ test('特殊档案文本按语义归类，不会污染原始 metadata', () => {
   assert.equal(special.gender, '断罪');
 });
 
-test('六种排序只改变顺序，不改变行集合', () => {
+test('培养状态为默认排序且不插入星级，其他六种排序保持可用', () => {
+  assert.equal(OperatorFilters.createState().sort, 'training-desc');
   const expected = {
+    'training-desc': ['艾雅法拉', '阿斯卡纶', '阿米娅'],
     'implementation-asc': ['阿米娅', '艾雅法拉', '阿斯卡纶'],
     'implementation-desc': ['阿斯卡纶', '阿米娅', '艾雅法拉'],
     'name-asc': ['阿米娅', '阿斯卡纶', '艾雅法拉'],

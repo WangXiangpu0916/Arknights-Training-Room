@@ -39,6 +39,12 @@ for (const operatorId of ['002_amiya', '4132_ascln', '180_amgoat', '485_pallas',
 for (const itemId of Object.keys(JSON.parse(await readFile(path.join(root, 'resources', 'game-data', 'item.json'), 'utf8')))) {
   account.inventory[itemId] = 999;
 }
+account.inventory['4001'] = 99_999_999;
+const promotionFixture = account.operators.find(operator => operator.operatorId === '002_amiya');
+if (promotionFixture) {
+  promotionFixture.elitePhase = 1;
+  promotionFixture.level = 70;
+}
 await writeFile(path.join(runtime, 'account-cache.json'), `${JSON.stringify(account, null, 2)}\n`, 'utf8');
 
 const env = {
@@ -94,7 +100,12 @@ async function waitFor(expression, message) {
     if (await evaluate(expression)) return;
     await new Promise(resolve => setTimeout(resolve, 100));
   }
-  throw new Error([message, ...protocolDiagnostics, childOutput].filter(Boolean).join('\n'));
+  const pageDiagnostic = await evaluate(`(() => ({
+    title: document.querySelector('#page-title')?.textContent,
+    content: document.querySelector('#content')?.innerText?.slice(0, 1200),
+    body: document.body?.innerText?.slice(0, 1200),
+  }))()`).catch(error => ({ diagnosticError: error.message }));
+  throw new Error([message, JSON.stringify(pageDiagnostic), ...protocolDiagnostics, childOutput].filter(Boolean).join('\n'));
 }
 
 async function setSearch(value) {
@@ -155,7 +166,9 @@ try {
   });
   await send('Runtime.enable');
   await send('Page.enable');
-  await waitFor(`Boolean(document.querySelector('.nav[data-page="operators"]'))`, 'Application did not render');
+  await waitFor(`Boolean(document.querySelector('.nav[data-page="operators"]')
+    && document.querySelector('#sidebar-status strong')
+    && !document.querySelector('#content .loading'))`, 'Application did not finish loading');
   await evaluate(`document.querySelector('.nav[data-page="operators"]').click()`);
   await waitFor(`Boolean(document.querySelector('[data-operator-search]'))`, 'Operators page did not render');
   const masteryBadgeLayout = await evaluate(`(() => {
@@ -312,7 +325,7 @@ try {
   console.log('QA phase: multi/select-all/other');
 
   const sortChecks = {};
-  for (const mode of ['implementation-asc', 'implementation-desc', 'name-asc', 'name-desc', 'rarity-asc', 'rarity-desc']) {
+  for (const mode of ['training-desc', 'implementation-asc', 'implementation-desc', 'name-asc', 'name-desc', 'rarity-asc', 'rarity-desc']) {
     sortChecks[mode] = await evaluate(`(() => {
       document.querySelector('[data-operator-sort="${mode}"]').click();
       const actual = [...document.querySelectorAll('.operator-row h3')].map(node => node.textContent);
@@ -422,6 +435,8 @@ try {
   if (Object.values(pages).some(page => page.horizontalOverflow)) failures.push('horizontal overflow');
   if (pages.dashboard.columns !== 3) failures.push('dashboard columns');
   if (pages.dashboard.cardWidth < 337 || pages.dashboard.cardWidth > 338 || pages.dashboard.masterySkillGap < 28 || pages.dashboard.masterySkillGap > 40) failures.push('dashboard card geometry');
+  if (!pages.promotion.cardWidth || pages.promotion.cardWidth < 337 || pages.promotion.cardWidth > 338) failures.push('promotion card geometry');
+  if (!pages.modules.cardWidth || pages.modules.cardWidth < 337 || pages.modules.cardWidth > 338) failures.push('module card geometry');
   if (windowPolicy.bounds.width !== 1360 || windowPolicy.bounds.height !== 800
     || windowPolicy.minimumSize.join('x') !== '1360x800'
     || windowPolicy.maximumSize.join('x') !== '1360x800'

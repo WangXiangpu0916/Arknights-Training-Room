@@ -7,6 +7,10 @@ let updateState;
 let page = 'dashboard';
 let mode = 'single';
 let dashboardFilters = { search: '', profession: '', rarity: '', mastery: '', unlimited: 'real' };
+const plannerFilters = {
+  promotion: { search: '', profession: '', rarity: '', level: '', continuous: false, unlimited: 'real' },
+  module: { search: '', profession: '', rarity: '', level: '', continuous: false, unlimited: 'real' },
+};
 let inventorySearch = '';
 let inventorySelectedId = null;
 let inventoryDetailRequest = 0;
@@ -30,6 +34,7 @@ const moreOperatorFilterGroups = [
   ['birthdayMonth', '生日月份', value => `${value} 月`],
 ];
 const operatorSortModes = [
+  ['training-desc', '培养状态'],
   ['implementation-asc', '实装顺序'],
   ['implementation-desc', '实装倒序'],
   ['name-asc', '名称升序'],
@@ -50,6 +55,7 @@ const skillIcon = id => `../../resources/images/skill/${encodeURIComponent(id)}.
 const masteryIcon = level => `../../resources/images/mastery/m${level}.png`;
 const masteryBadge = level => `../../resources/images/mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`;
 const eliteIcon = level => `../../resources/images/elite/e${Number(level)}.png`;
+const professionIcon = name => `../../resources/images/profession/${encodeURIComponent(name)}.png`;
 const moduleIcon = id => `https://torappu.prts.wiki/assets/uniequip_img/${encodeURIComponent(id)}.png`;
 const skillPlaceholder = '../../resources/images/skill/placeholder.svg';
 const materialMap = () => new Map(state.gameData.materials.map(x => [x.itemId, x]));
@@ -106,37 +112,74 @@ function updateChrome() {
 
 function renderPromotionPlanner() {
   if (!state.account) return renderDashboard();
-  const list = state.promotions || [];
-  content.innerHTML = `${banners()}<div class="result-summary">找到 ${list.length} 个当前可精英化干员</div>
-    ${list.length ? `<div class="planner-cards">${list.map(promotionCard).join('')}</div>` : '<div class="empty"><div><h2>当前没有可执行的精英化</h2><p>材料不足、未达到下一阶段或干员已精英 2。</p></div></div>'}`;
+  const list = currentPlanCandidates('promotion');
+  content.innerHTML = `${banners()}${plannerControls('promotion')}
+    <div class="result-summary">找到 ${list.length} 个当前可精英化干员</div>
+    ${list.length ? `<div class="cards planner-cards">${list.map(promotionCard).join('')}</div>` : '<div class="empty"><div><h2>当前筛选下没有可执行的精英化</h2><p>经验、龙门币、材料或精英阶段条件尚未满足。</p></div></div>'}`;
   bindActions();
 }
 
 function promotionCard(candidate) {
-  return `<article class="planner-card rarity-${candidate.operator.rarity}" data-plan-kind="promotion" data-plan-key="${esc(candidate.operator.operatorId)}" role="button" tabindex="0">
-    <img class="planner-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
-    <div class="planner-copy"><div class="planner-name"><strong>${esc(candidate.operator.name)}</strong><span>${esc(candidate.operator.profession)} · ${esc(candidate.operator.subProfession)}</span></div>
-      <div class="elite-transition" aria-label="精英 ${candidate.from} 到精英 ${candidate.to}"><img src="${eliteIcon(candidate.from)}" alt="精英 ${candidate.from}"><span>→</span><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"></div></div>
-    <span class="ready-badge">材料已就绪</span>
+  return `<article class="candidate plan-card rarity-${candidate.operator.rarity}" data-plan-kind="promotion" data-plan-key="${esc(candidate.operator.operatorId)}" role="button" tabindex="0">
+    <div class="candidate-main">
+      <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
+      <div class="candidate-details"><div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
+        <div class="candidate-visuals"><div class="plan-level">精英 ${candidate.from} · Lv.${candidate.currentLevel}<span>→</span>精英 ${candidate.to}</div>
+          <div class="plan-target"><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"><strong>精英 ${candidate.to}</strong></div></div></div>
+    </div>
   </article>`;
 }
 
 function renderModulePlanner() {
   if (!state.account) return renderDashboard();
-  const list = state.modules || [];
-  content.innerHTML = `${banners()}<div class="result-summary">找到 ${list.length} 个当前可开启或升级模组</div>
+  const list = currentPlanCandidates('module');
+  content.innerHTML = `${banners()}${plannerControls('module')}<div class="result-summary">找到 ${list.length} 个当前可开启或升级模组</div>
     <p class="planner-note">模组开启仍需在游戏内完成对应任务；此处核对精英/等级门槛、现有模组等级与材料。</p>
-    ${list.length ? `<div class="planner-cards module-planner-cards">${list.map(moduleCard).join('')}</div>` : '<div class="empty"><div><h2>当前没有材料就绪的模组</h2><p>无模组、等级门槛不足、材料不足或所有模组均已 3 级。</p></div></div>'}`;
+    ${list.length ? `<div class="cards planner-cards module-planner-cards">${list.map(moduleCard).join('')}</div>` : '<div class="empty"><div><h2>当前筛选下没有可规划的模组</h2><p>无模组、等级门槛不足、材料不足或所有模组均已 3 级。</p></div></div>'}`;
   bindActions();
 }
 
 function moduleCard(candidate) {
-  return `<article class="planner-card module-plan-card rarity-${candidate.operator.rarity}" data-plan-kind="module" data-plan-key="${esc(candidate.operator.operatorId)}:${esc(candidate.module.moduleId)}" role="button" tabindex="0">
-    <img class="planner-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
-    <img class="module-art" src="${moduleIcon(candidate.module.moduleId)}" alt="${esc(candidate.module.name)}模组图标" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-img-fallback>
-    <div class="planner-copy"><div class="planner-name"><strong>${esc(candidate.operator.name)}</strong><span>${esc(candidate.module.name)}</span></div><div class="module-level">Lv.${candidate.from} <span>→</span> Lv.${candidate.to}</div></div>
-    <span class="ready-badge">材料已就绪</span>
+  return `<article class="candidate plan-card module-plan-card rarity-${candidate.operator.rarity}" data-plan-kind="module" data-plan-key="${esc(candidate.operator.operatorId)}:${esc(candidate.module.moduleId)}" role="button" tabindex="0">
+    <div class="candidate-main">
+      <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
+      <div class="candidate-details"><div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
+        <div class="candidate-visuals"><div class="plan-level">模组 Lv.${candidate.from}<span>→</span>Lv.${candidate.to}</div>
+          <div class="plan-target module-target"><img src="${moduleIcon(candidate.module.moduleId)}" alt="${esc(candidate.module.name)}模组图标" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-img-fallback><div class="module-name" title="${esc(candidate.module.name)}"><strong>${esc(candidate.module.name)}</strong></div><small>${esc(candidate.module.typeLabel)}</small></div></div></div>
+    </div>
   </article>`;
+}
+
+function plannerControls(kind) {
+  const filters = plannerFilters[kind];
+  const currentLabel = kind === 'promotion' ? '全部当前精英阶段' : '全部当前模组等级';
+  const levels = kind === 'promotion' ? [[0, '精英 0'], [1, '精英 1']] : [[0, 'Lv.0'], [1, 'Lv.1'], [2, 'Lv.2']];
+  return `<div class="dashboard-layout planner-layout"><div class="filters dashboard-filters planner-filters">
+    <input data-planner-filter="search" data-planner-kind="${kind}" value="${esc(filters.search)}" placeholder="${kind === 'promotion' ? '搜索干员' : '搜索干员或模组'}">
+    ${plannerSelect(kind, 'profession', '全部职业', professions.map(name => [name, name]))}
+    ${plannerSelect(kind, 'rarity', '全部星级', [[6, '六星'], [5, '五星'], [4, '四星'], [3, '三星']])}
+    ${plannerSelect(kind, 'level', currentLabel, levels)}
+  </div><div class="dashboard-mode-row">
+    <label class="dashboard-mode-toggle"><span>连续规划模式</span><span class="switch"><input type="checkbox" data-planner-toggle="continuous" data-planner-kind="${kind}" ${filters.continuous ? 'checked' : ''}><span></span></span></label>
+    <label class="dashboard-mode-toggle"><span>使用无限池材料</span><span class="switch"><input type="checkbox" data-planner-toggle="unlimited" data-planner-kind="${kind}" ${filters.unlimited === 'with' ? 'checked' : ''}><span></span></span></label>
+  </div></div>`;
+}
+
+function plannerSelect(kind, name, placeholder, options) {
+  return `<select data-planner-filter="${name}" data-planner-kind="${kind}"><option value="">${placeholder}</option>${options.map(([value, label]) => `<option value="${esc(value)}" ${String(plannerFilters[kind][name]) === String(value) ? 'selected' : ''}>${esc(label)}</option>`).join('')}</select>`;
+}
+
+function currentPlanCandidates(kind) {
+  const filters = plannerFilters[kind];
+  const source = state[kind === 'promotion' ? 'promotions' : 'modules'];
+  const key = `${filters.continuous ? 'continuous' : 'single'}${filters.unlimited === 'real' ? 'Real' : ''}`;
+  return (source?.[key] || []).filter(candidate => {
+    const searchable = kind === 'promotion' ? candidate.operator.name : `${candidate.operator.name}${candidate.module.name}${candidate.module.typeLabel}`;
+    return (!filters.search || searchable.includes(filters.search))
+      && (!filters.profession || candidate.operator.profession === filters.profession)
+      && (!filters.rarity || String(candidate.operator.rarity) === filters.rarity)
+      && (!filters.level || String(candidate.from) === filters.level);
+  });
 }
 
 function banners() {
@@ -280,7 +323,7 @@ function operatorRowsHtml(rows) {
       <div class="operator-status"><span class="rarity-badge rarity-${definition.rarity}">${definition.rarity}★</span><span><img src="${eliteIcon(owned.elitePhase)}" alt="">精英 ${owned.elitePhase} · Lv.${owned.level}</span><span class="rank-badge">Rank ${owned.skillLevel}</span></div>
       <div class="operator-tags">${[definition.position, ...(definition.tags || [])].filter(Boolean).map(tag => `<span>${esc(tag)}</span>`).join('')}</div>
     </div>
-    <div class="operator-skills" aria-label="${esc(definition.name)}技能专精状态">${[...definition.skills].sort((a, b) => a.index - b.index).map(skill => {
+    <div class="operator-skills ${definition.skills.length > 3 ? 'many-skills' : ''}" aria-label="${esc(definition.name)}技能专精状态">${[...definition.skills].sort((a, b) => a.index - b.index).map(skill => {
       const ownedSkill = owned.skills.find(item => item.skillId === skill.skillId);
       const candidate = available.get(`${definition.operatorId}\u0000${skill.skillId}`);
       const masteryLevel = ownedSkill?.masteryLevel ?? 0;
@@ -290,7 +333,7 @@ function operatorRowsHtml(rows) {
         <span class="mastery-badge" aria-hidden="true"><img class="operator-skill-mastery" src="${masteryBadge(masteryLevel)}" alt=""></span>
       </div>`;
     }).join('')}</div>
-    <div class="operator-watermark" aria-hidden="true"><strong>${esc(definition.profession)}</strong><span>${esc(definition.subProfession)}</span></div>
+    <div class="operator-watermark" aria-hidden="true"><img src="${professionIcon(definition.profession)}" alt=""></div>
   </article>`).join('');
 }
 
@@ -610,6 +653,17 @@ function renderSettings() {
 }
 
 function bindActions() {
+  document.querySelectorAll('[data-planner-filter]').forEach(input => input.addEventListener(input.tagName === 'INPUT' ? 'input' : 'change', event => {
+    const kind = event.target.dataset.plannerKind;
+    plannerFilters[kind][event.target.dataset.plannerFilter] = event.target.value;
+    kind === 'promotion' ? renderPromotionPlanner() : renderModulePlanner();
+  }));
+  document.querySelectorAll('[data-planner-toggle]').forEach(input => input.addEventListener('change', event => {
+    const kind = event.target.dataset.plannerKind;
+    const key = event.target.dataset.plannerToggle;
+    plannerFilters[kind][key] = key === 'continuous' ? event.target.checked : event.target.checked ? 'with' : 'real';
+    kind === 'promotion' ? renderPromotionPlanner() : renderModulePlanner();
+  }));
   document.querySelector('[data-continuous-mode]')?.addEventListener('change', event => {
     mode = event.target.checked ? 'continuous' : 'single';
     if (mode === 'continuous' && dashboardFilters.mastery === '2') dashboardFilters.mastery = '';
@@ -653,8 +707,8 @@ function bindActions() {
   const openPlan = card => {
     const key = card.dataset.planKey;
     const candidate = card.dataset.planKind === 'promotion'
-      ? (state.promotions || []).find(item => item.operator.operatorId === key)
-      : (state.modules || []).find(item => `${item.operator.operatorId}:${item.module.moduleId}` === key);
+      ? currentPlanCandidates('promotion').find(item => item.operator.operatorId === key)
+      : currentPlanCandidates('module').find(item => `${item.operator.operatorId}:${item.module.moduleId}` === key);
     if (candidate) showPlanCandidate(candidate, card.dataset.planKind);
   };
   document.querySelectorAll('[data-plan-kind]').forEach(card => {
@@ -764,14 +818,18 @@ function showPlanCandidate(candidate, kind) {
   const materials = materialMap();
   const title = kind === 'promotion'
     ? `${candidate.operator.name} · 精英 ${candidate.from} → 精英 ${candidate.to}`
-    : `${candidate.operator.name} · ${candidate.module.name}`;
+    : `${candidate.operator.name} · ${candidate.module.name} · ${candidate.module.typeLabel}`;
   const transition = kind === 'promotion'
     ? `<div class="elite-transition modal-transition"><img src="${eliteIcon(candidate.from)}" alt="精英 ${candidate.from}"><span>→</span><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"></div>`
     : `<div class="module-modal-heading"><img src="${moduleIcon(candidate.module.moduleId)}" alt="${esc(candidate.module.name)}"><strong>Lv.${candidate.from} → Lv.${candidate.to}</strong></div>`;
-  showModal(`<h2>${esc(title)}</h2>${transition}<section class="stage-block"><h3>所需材料</h3>${candidate.requirements.map(requirement => {
-    const step = candidate.craft.steps.find(item => item.itemId === requirement.itemId);
-    return `<div class="material-line"><span>${esc(materials.get(requirement.itemId)?.name || requirement.itemId)} ×${requirement.quantity}</span><span>实际 ${state.account.inventory[requirement.itemId] ?? 0}</span><span class="${step?.batches ? 'infinity' : 'success'}">${step?.batches ? `加工 ${step.batches} 次` : '满足'}</span></div>${step ? craftTree(step, materials) : ''}`;
-  }).join('')}</section>${kind === 'module' && candidate.from === 0 ? '<p class="planner-note">材料与等级门槛已满足；首次开启前仍需在游戏内完成该模组任务。</p>' : ''}`);
+  const stages = candidate.stages.map(stage => `<section class="stage-block"><h3>${kind === 'promotion' ? `精英 ${stage.from} → 精英 ${stage.to}` : `模组 Lv.${stage.from} → Lv.${stage.to}`}</h3>
+    ${kind === 'promotion' && stage.experienceRequired ? `<div class="material-line"><span>干员经验</span><strong>${stage.experienceRequired.toLocaleString('zh-CN')}</strong><span>库存折算 ${candidate.experienceAvailable.toLocaleString('zh-CN')}</span></div>` : ''}
+    ${stage.requirements.map(requirement => {
+      const step = stage.craft.steps.find(item => item.itemId === requirement.itemId);
+      return `<div class="material-line"><span>${esc(materials.get(requirement.itemId)?.name || requirement.itemId)} ×${requirement.quantity}</span><span>实际 ${state.account.inventory[requirement.itemId] ?? 0}</span><span class="${step?.unlimitedRoots.length || step?.batches ? 'infinity' : 'success'}">${step?.unlimitedRoots.length ? '∞ 供应' : step?.batches ? `加工 ${step.batches} 次` : '满足'}</span></div>${step ? craftTree(step, materials) : ''}`;
+    }).join('')}</section>`).join('');
+  const totals = candidate.stages.length > 1 ? `<section class="stage-block"><h3>连续规划总计</h3>${kind === 'promotion' && candidate.experienceRequired ? `<div class="material-line"><span>干员经验</span><strong>${candidate.experienceRequired.toLocaleString('zh-CN')}</strong><span></span></div>` : ''}${candidate.requirements.map(requirement => `<div class="material-line"><span>${esc(materials.get(requirement.itemId)?.name || requirement.itemId)}</span><strong>×${requirement.quantity}</strong><span></span></div>`).join('')}</section>` : '';
+  showModal(`<h2>${esc(title)}</h2>${transition}${candidate.usesUnlimited ? `<p><span class="badge blue">依赖无限：${candidate.unlimitedRoots.map(id => esc(materials.get(id)?.name || id)).join('、')}</span></p>` : ''}${stages}${totals}${kind === 'module' && candidate.from === 0 ? '<p class="planner-note">材料与等级门槛已满足；首次开启前仍需在游戏内完成该模组任务。</p>' : ''}`);
 }
 
 function craftTree(step, materials) {
@@ -782,7 +840,11 @@ function craftTree(step, materials) {
 
 function showModal(html) { modalContent.innerHTML = html; modal.classList.remove('hidden'); }
 
-document.querySelectorAll('.nav').forEach(button => button.addEventListener('click', () => { page = button.dataset.page; render(); }));
+document.querySelectorAll('.nav').forEach(button => button.addEventListener('click', () => {
+  page = button.dataset.page;
+  document.querySelector('main').scrollTop = 0;
+  render();
+}));
 document.querySelector('#refresh-button').addEventListener('click', async event => {
   const button = event.currentTarget;
   try { setBusy(button, true, '同步中…'); state = await api.refreshAccount(); showToast('账号数据已刷新'); render(); }

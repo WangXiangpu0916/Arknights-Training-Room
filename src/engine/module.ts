@@ -1,5 +1,5 @@
 import { GameData, ModuleCandidate, OwnedOperator } from '../domain/types';
-import { CraftingEngine } from './crafting';
+import { fulfillStages, totalRequirements } from './planning';
 
 const unlockLevelByRarity: Record<number, number> = { 4: 40, 5: 50, 6: 60 };
 
@@ -13,6 +13,18 @@ export class ModulePlanner {
   }
 
   candidates(ownedOperators: OwnedOperator[], inventory: Record<string, number>): ModuleCandidate[] {
+    return this.singleStage(ownedOperators, inventory, []);
+  }
+
+  singleStage(ownedOperators: OwnedOperator[], inventory: Record<string, number>, unlimitedIds: string[]): ModuleCandidate[] {
+    return this.plan(ownedOperators, inventory, unlimitedIds, false);
+  }
+
+  continuous(ownedOperators: OwnedOperator[], inventory: Record<string, number>, unlimitedIds: string[]): ModuleCandidate[] {
+    return this.plan(ownedOperators, inventory, unlimitedIds, true);
+  }
+
+  private plan(ownedOperators: OwnedOperator[], inventory: Record<string, number>, unlimitedIds: string[], continuous: boolean): ModuleCandidate[] {
     const candidates: ModuleCandidate[] = [];
     for (const owned of ownedOperators) {
       const operator = this.definitions.get(owned.operatorId);
@@ -20,11 +32,26 @@ export class ModulePlanner {
       for (const module of operator.modules ?? []) {
         const from = Math.max(0, Math.min(3, owned.modules?.find(item => item.moduleId === module.moduleId)?.level ?? 0));
         if (from >= 3) continue;
-        const to = from + 1;
-        const requirements = module.requirements[to as 1 | 2 | 3] ?? [];
-        if (!requirements.length) continue;
-        const craft = new CraftingEngine(this.recipes).fulfill(inventory, requirements);
-        if (craft.feasible) candidates.push({ operator, module, from, to, requirements, craft });
+        const requested = [];
+        for (let level = from + 1; level <= (continuous ? 3 : from + 1); level++) {
+          const requirements = module.requirements[level as 1 | 2 | 3] ?? [];
+          if (!requirements.length) break;
+          requested.push({ from: level - 1, to: level, requirements });
+        }
+        const planned = fulfillStages(this.recipes, inventory, requested, unlimitedIds);
+        if (!planned.length) continue;
+        const finite = fulfillStages(this.recipes, inventory, requested);
+        const stages = (planned.length > finite.length ? planned : finite).slice(0, planned.length);
+        const usesUnlimited = planned.length > finite.length;
+        const last = stages.at(-1)!;
+        candidates.push({
+          operator, currentLevel: owned.level, module, from, to: last.to, stages,
+          requirements: totalRequirements(stages),
+          craft: last.craft,
+          usesUnlimited,
+          unlimitedRoots: usesUnlimited ? [...new Set(stages.flatMap(stage => stage.craft.unlimitedRoots))].sort() : [],
+          remainingInventory: last.craft.remainingInventory,
+        });
       }
     }
     return candidates.sort((a, b) => b.from - a.from

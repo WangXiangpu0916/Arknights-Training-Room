@@ -1,5 +1,5 @@
 (function exposeInventoryCatalog(root) {
-  const excludedItemIds = new Set(['mod_unlock_token', 'mod_update_token_1', 'mod_update_token_2']);
+  const excludedItemIds = new Set(['mod_unlock_token', 'mod_update_token_1', 'mod_update_token_2', '4001']);
   const pinnedMaterialIds = ['30103', '30093', '30083', '30073'];
   const pinnedMaterialOrder = new Map(pinnedMaterialIds.map((id, index) => [id, index]));
   const skillSummaryIds = ['3303', '3302', '3301'];
