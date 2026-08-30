@@ -8,6 +8,7 @@ const imageRoot = path.join('resources', 'images');
 const skillDir = path.join(imageRoot, 'skill');
 const masteryDir = path.join(imageRoot, 'mastery');
 const masteryTitles = [0, 1, 2, 3].map(level => `文件:专精 ${level} 大图.png`);
+const masteryBadgeTitles = [0, 1, 2, 3].map(level => `文件:专精_${level}_角标.png`);
 
 const branchUrl = new URL(api);
 branchUrl.search = new URLSearchParams({
@@ -40,6 +41,7 @@ const skillIds = [...new Set(Object.values(cultivate).flatMap(operator =>
 ))].sort();
 const titles = [
   ...masteryTitles,
+  ...masteryBadgeTitles,
   ...new Set(skillIds.map(id => `文件:技能 ${skillNames[id]}.png`)),
 ];
 
@@ -64,12 +66,20 @@ for (let index = 0; index < titles.length; index += 50) {
 }
 
 const mastery = {};
+const masteryBadges = {};
 for (const [level, title] of masteryTitles.entries()) {
   const image = images.get(title);
   if (!image) throw new Error(`PRTS 缺少必需素材：${title}`);
   const localPath = path.join(masteryDir, `m${level}.png`);
   await download(image.url, localPath);
   mastery[level] = manifestEntry(title, image, localPath);
+}
+for (const [level, title] of masteryBadgeTitles.entries()) {
+  const image = images.get(title);
+  if (!image) throw new Error(`PRTS 缺少必需素材：${title}`);
+  const localPath = path.join(masteryDir, `专精_${level}_角标.png`);
+  await download(image.url, localPath);
+  masteryBadges[level] = manifestEntry(title, image, localPath);
 }
 
 const skills = {};
@@ -92,10 +102,10 @@ await Promise.all(Array.from({ length: 6 }, async () => {
 
 await writeFile(
   path.join(imageRoot, 'prts-assets.json'),
-  `${JSON.stringify({ source: 'https://prts.wiki', syncedAt: new Date().toISOString(), mastery, skills, missing }, null, 2)}\n`,
+  `${JSON.stringify({ source: 'https://prts.wiki', syncedAt: new Date().toISOString(), mastery, masteryBadges, skills, missing }, null, 2)}\n`,
   'utf8',
 );
-console.log(`PRTS 素材同步完成：干员资料 ${Object.keys(operatorMetadata).length}，职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
+console.log(`PRTS 素材同步完成：干员资料 ${Object.keys(operatorMetadata).length}，职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，角标 ${Object.keys(masteryBadges).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
 if (missing.length) console.log(missing.map(item => `${item.skillId} ${item.name}`).join('\n'));
 
 async function download(url, target) {

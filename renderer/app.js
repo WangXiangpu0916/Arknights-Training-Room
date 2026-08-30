@@ -8,22 +8,47 @@ let page = 'dashboard';
 let mode = 'single';
 let dashboardFilters = { search: '', profession: '', rarity: '', mastery: '', unlimited: 'real' };
 let inventorySearch = '';
+let inventorySelectedId = null;
+let inventoryDetailRequest = 0;
 const operatorFilters = OperatorFilters.createState();
 let operatorSearchComposing = false;
 
 const professions = ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种'];
-const unlimitedPriority = new Map(['30103', '30093', '30083', '30073'].map((id, index) => [id, index]));
-const inventoryMaterialIds = new Set([
-  '31113', '31103', '31093', '31083', '31073', '31063', '31053',
-  '31043', '31033', '31023', '31013', '30073', '30083', '30093',
-  '30103', '30013', '30063', '30033', '30023', '30043', '30053',
-]);
+const commonOperatorFilterGroups = [
+  ['profession', '职业'],
+  ['subProfession', '职业分支'],
+  ['rarity', '稀有度', value => `${value}★`, true],
+  ['position', '位置'],
+  ['gender', '性别'],
+  ['obtainMethods', '获得方式'],
+];
+const moreOperatorFilterGroups = [
+  ['organizations', '势力 / 组织'],
+  ['birthPlaces', '出身地'],
+  ['races', '种族'],
+  ['teams', '团队'],
+  ['birthdayMonth', '生日月份', value => `${value} 月`],
+];
+const operatorSortModes = [
+  ['implementation-asc', '实装顺序'],
+  ['implementation-desc', '实装倒序'],
+  ['name-asc', '名称升序'],
+  ['name-desc', '名称降序'],
+  ['rarity-asc', '稀有度升序'],
+  ['rarity-desc', '稀有度降序'],
+];
+const inventorySectionLabels = {
+  materials: '常规材料',
+  chips: '职业芯片',
+  skills: '技巧概要',
+};
 const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]));
 const fmtTime = value => value ? new Date(value).toLocaleString('zh-CN', { hour12: false }) : '从未';
 const avatar = id => `../../resources/images/avatar/${encodeURIComponent(id)}.png`;
 const itemIcon = id => `../../resources/images/item/${encodeURIComponent(id)}.png`;
 const skillIcon = id => `../../resources/images/skill/${encodeURIComponent(id)}.png`;
 const masteryIcon = level => `../../resources/images/mastery/m${level}.png`;
+const masteryBadge = level => `../../resources/images/mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`;
 const skillPlaceholder = '../../resources/images/skill/placeholder.svg';
 const materialMap = () => new Map(state.gameData.materials.map(x => [x.itemId, x]));
 const showToast = message => {
@@ -145,22 +170,12 @@ function renderOperators() {
   const rows = ownedOperatorRows();
   content.innerHTML = `${banners()}<section class="operator-filter-section" aria-label="干员搜索和筛选">
     <input class="operator-search" data-operator-search value="${esc(operatorFilters.search)}" placeholder="搜索已持有干员" autocomplete="off" spellcheck="false">
-    <div class="operator-filter-row">
-      ${operatorFilterMenu('rarity', '稀有度', rows, value => `${value}★`, true)}
-      ${operatorFilterMenu('gender', '性别', rows)}
-      ${operatorFilterMenu('position', '位置', rows)}
-      ${operatorFilterMenu('obtainMethods', '获得方式', rows)}
-      ${operatorFilterMenu('profession', '职业标签', rows)}
-      ${operatorFilterMenu('subProfession', '职业分支', rows)}
-      <button class="operator-more-toggle" type="button" data-operator-more aria-expanded="${operatorFilters.moreExpanded}">更多筛选 <span aria-hidden="true">${operatorFilters.moreExpanded ? '▲' : '▼'}</span></button>
-      <button class="operator-reset" type="button" data-operator-reset ${OperatorFilters.hasActive(operatorFilters) ? '' : 'disabled'}>清除筛选</button>
-    </div>
-    <div class="operator-filter-row operator-more-filters" data-operator-more-panel ${operatorFilters.moreExpanded ? '' : 'hidden'}>
-      ${operatorFilterMenu('races', '种族', rows)}
-      ${operatorFilterMenu('birthPlaces', '出身', rows)}
-      ${operatorFilterMenu('organizations', '组织', rows)}
-      ${operatorFilterMenu('teams', '团队', rows)}
-      ${operatorFilterMenu('birthdayMonth', '生日月份', rows, value => `${value} 月`)}
+    ${operatorFilterRegion('common', '筛选', commonOperatorFilterGroups, rows)}
+    ${operatorFilterRegion('more', '更多筛选', moreOperatorFilterGroups, rows)}
+    <div class="operator-sort-row" role="group" aria-label="排序方式">
+      <span class="operator-sort-label">排序方式</span>
+      ${operatorSortModes.map(([value, label]) => `<button type="button" class="operator-sort-option ${operatorFilters.sort === value ? 'active' : ''}" data-operator-sort="${value}" aria-pressed="${operatorFilters.sort === value}">${label}</button>`).join('')}
+      <button class="operator-reset" type="button" data-operator-reset ${OperatorFilters.hasActive(operatorFilters) ? '' : 'disabled'}>清除全部筛选</button>
     </div>
   </section>
   <div class="operator-result-summary result-summary" data-operator-result-summary aria-live="polite"></div>
@@ -174,33 +189,39 @@ function ownedOperatorRows() {
   const defs = new Map(state.gameData.operators.map(operator => [operator.operatorId, operator]));
   return state.account.operators
     .map(owned => ({ owned, definition: defs.get(owned.operatorId) }))
-    .filter(row => row.definition)
-    .sort((a, b) => b.definition.rarity - a.definition.rarity
-      || a.definition.name.localeCompare(b.definition.name, 'zh-CN')
-      || a.definition.operatorId.localeCompare(b.definition.operatorId));
+    .filter(row => row.definition);
 }
 
-function operatorFilterMenu(key, label, rows, format = value => value, descending = false) {
+function operatorFilterRegion(id, label, groups, rows) {
+  return `<section class="operator-filter-region" data-operator-filter-region="${id}">
+    <button class="operator-filter-trigger" type="button" data-operator-panel-trigger aria-expanded="false">${label}<span data-operator-region-count="${id}"></span><span aria-hidden="true">▾</span></button>
+    <div class="operator-filter-panel" data-operator-filter-panel hidden>
+      ${groups.map(([key, groupLabel, format = value => value, descending = false]) => operatorFilterGroup(key, groupLabel, rows, format, descending)).join('')}
+    </div>
+  </section>`;
+}
+
+function operatorFilterGroup(key, label, rows, format = value => value, descending = false) {
   const selected = operatorFilters.selected[key];
   const values = OperatorFilters.valuesForRows(rows, key);
   if (descending) values.reverse();
-  const count = selected.size;
-  return `<details class="operator-filter-menu ${count ? 'has-value' : ''}" data-operator-filter-menu="${key}">
-    <summary>${esc(label)}<span data-operator-filter-count="${key}">${count ? ` ${count}` : ''}</span></summary>
-    <div class="operator-filter-popover" role="group" aria-label="${esc(label)}">
-      ${values.length ? values.map(value => `<label title="${esc(format(value))}"><input type="checkbox" data-operator-filter="${key}" value="${esc(value)}" ${selected.has(value) ? 'checked' : ''}><span>${esc(format(value))}</span></label>`).join('') : '<span class="operator-filter-empty">暂无资料</span>'}
+  return `<div class="operator-filter-group" data-operator-filter-group="${key}" role="group" aria-label="${esc(label)}">
+    <div class="operator-filter-group-heading"><strong>${esc(label)}</strong><span data-operator-filter-count="${key}"></span></div>
+    <div class="operator-filter-options">
+      <button type="button" class="operator-filter-action" data-operator-filter-action="all" data-filter-key="${key}">全选</button>
+      <button type="button" class="operator-filter-action" data-operator-filter-action="clear" data-filter-key="${key}">清除</button>
+      ${values.length ? values.map(value => `<button type="button" class="operator-filter-option ${selected.has(value) ? 'active' : ''}" data-operator-filter-option data-filter-key="${key}" value="${esc(value)}" aria-pressed="${selected.has(value)}">${esc(format(value))}</button>`).join('') : '<span class="operator-filter-empty">暂无资料</span>'}
     </div>
-  </details>`;
+  </div>`;
 }
 
 function updateOperatorResults(allRows = ownedOperatorRows()) {
-  const rows = OperatorFilters.filterRows(allRows, operatorFilters);
+  const filteredRows = OperatorFilters.filterRows(allRows, operatorFilters);
+  const rows = OperatorFilters.sortRows(filteredRows, operatorFilters.sort);
   const summary = content.querySelector('[data-operator-result-summary]');
   const list = content.querySelector('[data-operator-list]');
   if (!summary || !list) return;
-  summary.textContent = OperatorFilters.hasActive(operatorFilters)
-    ? `已持有 ${allRows.length} · 当前显示 ${rows.length}`
-    : `已持有 ${allRows.length}`;
+  summary.textContent = `已持有总数 ${allRows.length} · 当前显示 ${rows.length}`;
   list.innerHTML = rows.length ? operatorRowsHtml(rows) : '<div class="empty"><div><h2>当前搜索和筛选下没有干员</h2><p>调整条件或清除筛选后再试。</p></div></div>';
   bindImageFallbacks(list);
 }
@@ -219,8 +240,8 @@ function operatorRowsHtml(rows) {
       const masteryLevel = ownedSkill?.masteryLevel ?? 0;
       const status = candidate ? `当前可升级到 M${candidate.to}` : masteryLevel === 3 ? '已完成专精' : '当前不可升级';
       return `<div class="operator-skill ${candidate ? 'can-upgrade' : ''}" data-operator-skill="${esc(`${definition.operatorId}:${skill.skillId}`)}" title="${esc(`第${skill.index}技能 · ${skill.name} · M${masteryLevel} · ${status}`)}" aria-label="${esc(`${skill.name}，当前 M${masteryLevel}，${status}`)}">
-        <img src="${skillIcon(skill.skillId)}" alt="${esc(skill.name)}技能图标" data-img-fallback="skill">
-        <span class="operator-skill-mastery">M${masteryLevel}</span>
+        <img class="operator-skill-icon" src="${skillIcon(skill.skillId)}" alt="${esc(skill.name)}技能图标" data-img-fallback="skill">
+        <span class="mastery-badge" aria-hidden="true"><img class="operator-skill-mastery" src="${masteryBadge(masteryLevel)}" alt=""></span>
       </div>`;
     }).join('')}</div>
   </article>`).join('');
@@ -241,73 +262,271 @@ function bindOperatorActions(rows) {
     updateOperatorResults(rows);
     updateOperatorFilterControls();
   });
-  content.querySelectorAll('[data-operator-filter]').forEach(input => input.addEventListener('change', event => {
-    const selected = operatorFilters.selected[event.target.dataset.operatorFilter];
-    event.target.checked ? selected.add(event.target.value) : selected.delete(event.target.value);
+  content.querySelectorAll('[data-operator-filter-option]').forEach(button => button.addEventListener('click', event => {
+    const selected = operatorFilters.selected[event.currentTarget.dataset.filterKey];
+    selected.has(event.currentTarget.value) ? selected.delete(event.currentTarget.value) : selected.add(event.currentTarget.value);
     updateOperatorResults(rows);
     updateOperatorFilterControls();
   }));
-  content.querySelector('[data-operator-more]').addEventListener('click', () => {
-    operatorFilters.moreExpanded = !operatorFilters.moreExpanded;
-    const panel = content.querySelector('[data-operator-more-panel]');
-    panel.hidden = !operatorFilters.moreExpanded;
+  content.querySelectorAll('[data-operator-filter-action]').forEach(button => button.addEventListener('click', event => {
+    const key = event.currentTarget.dataset.filterKey;
+    const selected = operatorFilters.selected[key];
+    selected.clear();
+    if (event.currentTarget.dataset.operatorFilterAction === 'all') {
+      content.querySelectorAll(`[data-operator-filter-option][data-filter-key="${key}"]`).forEach(option => selected.add(option.value));
+    }
+    updateOperatorResults(rows);
     updateOperatorFilterControls();
-  });
+  }));
+  content.querySelectorAll('[data-operator-sort]').forEach(button => button.addEventListener('click', event => {
+    operatorFilters.sort = event.currentTarget.dataset.operatorSort;
+    updateOperatorResults(rows);
+    updateOperatorFilterControls();
+  }));
+  bindOperatorFilterPanels();
   content.querySelector('[data-operator-reset]').addEventListener('click', () => {
     OperatorFilters.reset(operatorFilters);
-    operatorFilters.moreExpanded = false;
     search.value = '';
-    content.querySelectorAll('[data-operator-filter]').forEach(input => { input.checked = false; });
-    content.querySelector('[data-operator-more-panel]').hidden = true;
     updateOperatorResults(rows);
     updateOperatorFilterControls();
     search.focus();
   });
 }
 
+function bindOperatorFilterPanels() {
+  content.querySelectorAll('[data-operator-filter-region]').forEach(region => {
+    const panel = region.querySelector('[data-operator-filter-panel]');
+    const trigger = region.querySelector('[data-operator-panel-trigger]');
+    const setOpen = open => {
+      region.classList.toggle('open', open);
+      panel.hidden = !open;
+      trigger.setAttribute('aria-expanded', String(open));
+    };
+    trigger.addEventListener('click', () => setOpen(!region.classList.contains('open')));
+  });
+}
+
 function updateOperatorFilterControls() {
   for (const key of OperatorFilters.DIMENSIONS) {
     const count = operatorFilters.selected[key].size;
-    const menu = content.querySelector(`[data-operator-filter-menu="${key}"]`);
     const counter = content.querySelector(`[data-operator-filter-count="${key}"]`);
-    menu?.classList.toggle('has-value', Boolean(count));
-    if (counter) counter.textContent = count ? ` ${count}` : '';
+    const group = content.querySelector(`[data-operator-filter-group="${key}"]`);
+    group?.classList.toggle('has-value', Boolean(count));
+    if (counter) counter.textContent = count ? `已选 ${count}` : '';
+    content.querySelectorAll(`[data-operator-filter-option][data-filter-key="${key}"]`).forEach(button => {
+      const active = operatorFilters.selected[key].has(button.value);
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+  }
+  for (const [id, groups] of [['common', commonOperatorFilterGroups], ['more', moreOperatorFilterGroups]]) {
+    const count = groups.reduce((sum, [key]) => sum + operatorFilters.selected[key].size, 0);
+    const counter = content.querySelector(`[data-operator-region-count="${id}"]`);
+    if (counter) counter.textContent = count ? ` · 已选 ${count}` : '';
   }
   const active = OperatorFilters.hasActive(operatorFilters);
   const reset = content.querySelector('[data-operator-reset]');
   if (reset) reset.disabled = !active;
-  const more = content.querySelector('[data-operator-more]');
-  if (more) {
-    more.setAttribute('aria-expanded', String(operatorFilters.moreExpanded));
-    more.innerHTML = `更多筛选 <span aria-hidden="true">${operatorFilters.moreExpanded ? '▲' : '▼'}</span>`;
+  content.querySelectorAll('[data-operator-sort]').forEach(button => {
+    const selected = button.dataset.operatorSort === operatorFilters.sort;
+    button.classList.toggle('active', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+}
+
+function inventorySections(query = inventorySearch) {
+  return InventoryCatalog.buildSections(state.gameData.materials, query);
+}
+
+function inventoryVisibleIds(sections) {
+  return new Set(['materials', 'chips', 'skills'].flatMap(key => sections[key].map(item => item.itemId)));
+}
+
+function firstInventoryItemId(sections) {
+  for (const key of ['materials', 'chips', 'skills']) {
+    if (sections[key].length) return sections[key][0].itemId;
   }
+  return null;
+}
+
+function syncInventorySelection(sections) {
+  const visible = inventoryVisibleIds(sections);
+  if (!inventorySelectedId || !visible.has(inventorySelectedId)) inventorySelectedId = firstInventoryItemId(sections);
+}
+
+function formatInventoryQty(quantity) {
+  const value = Number(quantity) || 0;
+  return value >= 10000 ? `${Math.round(value / 1000) / 10}万` : String(value);
+}
+
+function renderInventoryIconCell(item, selectedId) {
+  const quantity = state.account.inventory[item.itemId] ?? 0;
+  const selected = item.itemId === selectedId;
+  return `<button type="button" class="inventory-icon-cell${selected ? ' selected' : ''}" data-inventory-item="${esc(item.itemId)}" title="${esc(item.name)}" aria-pressed="${selected}">
+    <span class="inventory-icon-frame">
+      <img class="inventory-icon-image" src="${itemIcon(item.itemId)}" alt="" data-img-fallback>
+      <span class="inventory-icon-qty">${formatInventoryQty(quantity)}</span>
+    </span>
+  </button>`;
+}
+
+function splitMaterialRows(rows) {
+  const pinnedSet = new Set(InventoryCatalog.pinnedMaterialIds);
+  const pinned = [];
+  const rest = [];
+  for (const item of rows) {
+    if (pinnedSet.has(item.itemId)) pinned.push(item);
+    else rest.push(item);
+  }
+  return { pinned, rest };
+}
+
+function renderMaterialsSectionHtml(rows, selectedId) {
+  const { pinned, rest } = splitMaterialRows(rows);
+  const pinnedHtml = pinned.length
+    ? `<div class="inventory-icon-grid inventory-icon-grid-pinned">${pinned.map(item => renderInventoryIconCell(item, selectedId)).join('')}</div>`
+    : '';
+  const restHtml = rest.length
+    ? `<div class="inventory-icon-grid">${rest.map(item => renderInventoryIconCell(item, selectedId)).join('')}</div>`
+    : '';
+  return `<div class="inventory-material-grids">${pinnedHtml}${restHtml}</div>`;
+}
+
+function renderInventoryListHtml(sections, selectedId) {
+  return ['materials', 'chips', 'skills'].flatMap(key => {
+    const rows = sections[key];
+    if (!rows.length) return [];
+    const gridHtml = key === 'materials'
+      ? renderMaterialsSectionHtml(rows, selectedId)
+      : `<div class="inventory-icon-grid" data-inventory-section="${key}">${rows.map(item => renderInventoryIconCell(item, selectedId)).join('')}</div>`;
+    return [`<section class="inventory-section">
+      <h3 class="inventory-section-title">${inventorySectionLabels[key]}</h3>
+      ${gridHtml}
+    </section>`];
+  }).join('');
+}
+
+function renderInventoryDetailEmpty() {
+  return `<div class="inventory-detail-empty">
+    <p class="inventory-detail-empty-title">选择材料</p>
+    <p class="operator-meta">点击左侧图标查看材料详情、无限供应设置与合成配方。</p>
+  </div>`;
+}
+
+function renderInventoryDetailLoading(itemId) {
+  const item = materialMap().get(itemId);
+  if (!item) return renderInventoryDetailEmpty();
+  const quantity = state.account.inventory[itemId] ?? 0;
+  return `<div class="inventory-detail-body">
+    <div class="inventory-detail-header">
+      <span class="inventory-detail-icon"><img src="${itemIcon(itemId)}" alt="" data-img-fallback></span>
+      <h2 class="inventory-detail-name">${esc(item.name)}</h2>
+    </div>
+    <dl class="inventory-detail-meta">
+      <div class="inventory-detail-row"><dt>当前数量</dt><dd>${quantity}</dd></div>
+    </dl>
+    <p class="operator-meta inventory-detail-loading">正在加载配方…</p>
+  </div>`;
+}
+
+function renderRecipeVisual(material, inventory) {
+  if (!material.recipe?.ingredients.length) return '<p class="operator-meta">暂无合成配方</p>';
+  const materials = materialMap();
+  const ingredientCount = material.recipe.ingredients.length;
+  const ingredients = material.recipe.ingredients.map(ingredient => {
+    const owned = inventory[ingredient.itemId] ?? 0;
+    const insufficient = owned < ingredient.quantity;
+    const source = materials.get(ingredient.itemId);
+    return `<div class="recipe-ingredient${insufficient ? ' insufficient' : ''}">
+      <div class="recipe-ingredient-icon">
+        <img src="${itemIcon(ingredient.itemId)}" alt="" data-img-fallback>
+      </div>
+      <span class="recipe-ingredient-count">${owned} / ${ingredient.quantity}</span>
+      <span class="recipe-ingredient-name">${esc(source?.name || ingredient.itemId)}</span>
+    </div>`;
+  }).join('');
+  return `<div class="recipe-visual"><div class="recipe-ingredients" data-count="${ingredientCount}">${ingredients}</div></div>`;
+}
+
+function renderInventoryDetailContent(itemId, detail) {
+  const unlimitedEligible = new Set(state.unlimitedEligibleItemIds);
+  const unlimited = new Set(state.settings.unlimitedItemIds);
+  const quantity = state.account.inventory[itemId] ?? 0;
+  const unlimitedHtml = unlimitedEligible.has(itemId)
+    ? `<div class="inventory-detail-block">
+      <div class="inventory-detail-row inventory-detail-unlimited-row">
+        <span>无限供应</span>
+        <label class="switch"><input type="checkbox" data-inventory-unlimited="${esc(itemId)}" ${unlimited.has(itemId) ? 'checked' : ''}><span></span></label>
+      </div>
+      <p class="inventory-detail-hint">开启后，规划计算中将该材料视为无限可用。</p>
+    </div>`
+    : '';
+  return `<div class="inventory-detail-body">
+    <div class="inventory-detail-header">
+      <span class="inventory-detail-icon"><img src="${itemIcon(itemId)}" alt="" data-img-fallback></span>
+      <h2 class="inventory-detail-name">${esc(detail.material.name)}</h2>
+    </div>
+    <dl class="inventory-detail-meta">
+      <div class="inventory-detail-row"><dt>当前数量</dt><dd>${quantity}</dd></div>
+    </dl>
+    ${unlimitedHtml}
+    <section class="inventory-detail-block">
+      <h3 class="inventory-detail-subtitle">合成配方</h3>
+      ${renderRecipeVisual(detail.material, state.account.inventory)}
+    </section>
+  </div>`;
 }
 
 function renderInventory() {
   if (!state.account) return renderDashboard();
   const query = inventorySearch;
-  const unlimited = new Set(state.settings.unlimitedItemIds);
-  const unlimitedEligible = new Set(state.unlimitedEligibleItemIds);
-  const blueUnlimitedCount = state.settings.unlimitedItemIds.filter(id => unlimitedEligible.has(id)).length;
-  const rows = state.gameData.materials
-    .filter(item => inventoryMaterialIds.has(item.itemId))
-    .filter(item => !query || item.name.includes(query))
-    .sort((a, b) => {
-      return (unlimitedPriority.get(a.itemId) ?? Infinity)
-        - (unlimitedPriority.get(b.itemId) ?? Infinity)
-        || a.name.localeCompare(b.name, 'zh-CN');
-    });
-  content.innerHTML = `${banners()}<div class="filters" style="grid-template-columns:minmax(240px,1fr) auto">
-    <input data-inventory-search value="${esc(query)}" placeholder="搜索材料">
-    <span class="badge blue">已设无限 ${blueUnlimitedCount} 项蓝色材料</span>
-  </div><div class="table-wrap"><table><thead><tr><th>材料</th><th>等级</th><th>实际数量</th><th>规划状态</th><th>无限供应</th><th></th></tr></thead><tbody>
-    ${inventoryRowsHtml(rows, unlimited, unlimitedEligible)}
-    </tbody></table></div>`;
+  const sections = inventorySections(query);
+  syncInventorySelection(sections);
+  content.innerHTML = `${banners()}<div class="inventory-layout">
+    <div class="inventory-main">
+      <div class="inventory-toolbar">
+        <input data-inventory-search value="${esc(query)}" placeholder="搜索材料">
+      </div>
+      <div class="inventory-page" data-inventory-list>
+        ${renderInventoryListHtml(sections, inventorySelectedId)}
+      </div>
+    </div>
+    <aside class="inventory-detail" data-inventory-detail aria-label="材料详情">
+      ${inventorySelectedId ? renderInventoryDetailLoading(inventorySelectedId) : renderInventoryDetailEmpty()}
+    </aside>
+  </div>`;
   bindActions();
+  if (inventorySelectedId) loadInventoryDetail(inventorySelectedId);
 }
 
-function inventoryRowsHtml(rows, unlimited, unlimitedEligible) {
-  return rows.map(item => `<tr><td><div class="material-cell"><img class="item-icon" src="${itemIcon(item.itemId)}" alt="" data-img-fallback><strong>${esc(item.name)}</strong></div></td><td>${item.rarity}</td><td>${state.account.inventory[item.itemId] ?? 0}</td><td class="${unlimited.has(item.itemId) ? 'infinity' : ''}">${unlimited.has(item.itemId) ? '∞' : state.account.inventory[item.itemId] ?? 0}</td><td>${unlimitedEligible.has(item.itemId) ? `<label class="switch"><input type="checkbox" data-unlimited="${esc(item.itemId)}" ${unlimited.has(item.itemId) ? 'checked' : ''}><span></span></label>` : '<span class="operator-meta">—</span>'}</td><td><button class="link-button" data-material="${esc(item.itemId)}">查看配方</button></td></tr>`).join('');
+async function loadInventoryDetail(itemId) {
+  const panel = document.querySelector('[data-inventory-detail]');
+  if (!panel || inventorySelectedId !== itemId) return;
+  panel.innerHTML = renderInventoryDetailLoading(itemId);
+  bindImageFallbacks(panel);
+  const requestId = ++inventoryDetailRequest;
+  try {
+    const detail = await api.materialDetail(itemId);
+    if (requestId !== inventoryDetailRequest || inventorySelectedId !== itemId) return;
+    panel.innerHTML = renderInventoryDetailContent(itemId, detail);
+    bindInventoryDetailActions(panel);
+    bindImageFallbacks(panel);
+  } catch (error) {
+    if (requestId !== inventoryDetailRequest || inventorySelectedId !== itemId) return;
+    panel.innerHTML = `${renderInventoryDetailLoading(itemId)}<p class="error-banner" style="margin-top:12px">${esc(error.message || String(error))}</p>`;
+    bindImageFallbacks(panel);
+  }
+}
+
+function selectInventoryItem(itemId) {
+  if (inventorySelectedId === itemId) return;
+  inventorySelectedId = itemId;
+  document.querySelectorAll('[data-inventory-item]').forEach(button => {
+    const selected = button.dataset.inventoryItem === itemId;
+    button.classList.toggle('selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+  loadInventoryDetail(itemId);
 }
 
 function renderSettings() {
@@ -349,19 +568,16 @@ function bindActions() {
   }));
   document.querySelector('[data-inventory-search]')?.addEventListener('input', event => {
     inventorySearch = event.target.value;
-    const rows = content.querySelector('tbody');
-    if (!rows) return;
-    const unlimited = new Set(state.settings.unlimitedItemIds);
-    const unlimitedEligible = new Set(state.unlimitedEligibleItemIds);
-    const materials = state.gameData.materials
-      .filter(item => inventoryMaterialIds.has(item.itemId))
-      .filter(item => !inventorySearch || item.name.includes(inventorySearch))
-      .sort((a, b) => (unlimitedPriority.get(a.itemId) ?? Infinity)
-        - (unlimitedPriority.get(b.itemId) ?? Infinity)
-        || a.name.localeCompare(b.name, 'zh-CN'));
-    rows.innerHTML = inventoryRowsHtml(materials, unlimited, unlimitedEligible);
-    bindInventoryRowActions(rows);
-    bindImageFallbacks(rows);
+    const sections = inventorySections();
+    syncInventorySelection(sections);
+    const list = content.querySelector('[data-inventory-list]');
+    const panel = content.querySelector('[data-inventory-detail]');
+    if (!list || !panel) return;
+    list.innerHTML = renderInventoryListHtml(sections, inventorySelectedId);
+    bindInventoryGridActions(list);
+    bindImageFallbacks(list);
+    if (inventorySelectedId) loadInventoryDetail(inventorySelectedId);
+    else panel.innerHTML = renderInventoryDetailEmpty();
   });
   const openCandidate = card => {
     const [candidateMode] = card.dataset.candidate.split(':');
@@ -377,7 +593,8 @@ function bindActions() {
       openCandidate(card);
     });
   });
-  bindInventoryRowActions();
+  bindInventoryGridActions();
+  bindInventoryDetailActions();
   document.querySelector('[data-unlimited-summaries]')?.addEventListener('change', async event => {
     const ids = new Set(state.settings.unlimitedItemIds);
     for (const id of state.skillSummaryItemIds) event.target.checked ? ids.add(id) : ids.delete(id);
@@ -390,18 +607,22 @@ function bindActions() {
   bindImageFallbacks();
 }
 
-function bindInventoryRowActions(root = document) {
-  root.querySelectorAll('[data-material]:not([data-material-bound])').forEach(button => {
-    button.dataset.materialBound = 'true';
-    button.addEventListener('click', () => showMaterial(button.dataset.material));
+function bindInventoryGridActions(root = document) {
+  root.querySelectorAll('[data-inventory-item]:not([data-inventory-bound])').forEach(button => {
+    button.dataset.inventoryBound = 'true';
+    button.addEventListener('click', () => selectInventoryItem(button.dataset.inventoryItem));
   });
-  root.querySelectorAll('[data-unlimited]:not([data-unlimited-bound])').forEach(input => {
-    input.dataset.unlimitedBound = 'true';
+}
+
+function bindInventoryDetailActions(root = document) {
+  root.querySelectorAll('[data-inventory-unlimited]:not([data-inventory-unlimited-bound])').forEach(input => {
+    input.dataset.inventoryUnlimitedBound = 'true';
     input.addEventListener('change', async () => {
       const ids = new Set(state.settings.unlimitedItemIds);
-      input.checked ? ids.add(input.dataset.unlimited) : ids.delete(input.dataset.unlimited);
+      input.checked ? ids.add(input.dataset.inventoryUnlimited) : ids.delete(input.dataset.inventoryUnlimited);
       state = await api.updateSettings({ unlimitedItemIds: [...ids] });
-      render();
+      if (page === 'inventory' && inventorySelectedId) loadInventoryDetail(inventorySelectedId);
+      else render();
     });
   });
 }
@@ -470,16 +691,6 @@ function craftTree(step, materials) {
   if (!step.batches && !step.unlimitedRoots.length) return '';
   if (step.unlimitedRoots.length && !step.batches) return `<div class="craft-tree">${esc(materials.get(step.itemId)?.name || step.itemId)} 由无限供应链满足</div>`;
   return `<div class="craft-tree">加工 ${esc(materials.get(step.itemId)?.name || step.itemId)}：${step.batches} 次，产出 ${step.crafted}${step.children.map(child => `<div>${esc(materials.get(child.itemId)?.name || child.itemId)} ×${child.requested}${craftTree(child, materials)}</div>`).join('')}</div>`;
-}
-
-async function showMaterial(itemId) {
-  try {
-    const detail = await api.materialDetail(itemId);
-    const materials = materialMap();
-    showModal(`<h2>${esc(detail.material.name)}</h2><p>实际拥有：<strong>${detail.realQuantity}</strong> · 规划状态：<strong class="${detail.planningAvailable === '∞' ? 'infinity' : ''}">${detail.planningAvailable}</strong></p>
-      <section class="stage-block"><h3>加工配方</h3>${detail.material.recipe ? detail.material.recipe.ingredients.map(x => `<div class="material-line"><span>${esc(materials.get(x.itemId)?.name || x.itemId)}</span><strong>×${x.quantity}</strong><span></span></div>`).join('') + `<p>每次确定产出：${detail.material.recipe.outputQuantity} · 当前还可加工：${detail.craftable}</p>` : '<p class="operator-meta">该材料没有确定性加工配方。</p>'}</section>
-      <section class="stage-block"><h3>参与的上级材料</h3>${detail.parents.length ? detail.parents.map(x => `<span class="badge muted" style="margin:4px">${esc(x.name)}</span>`).join('') : '<p class="operator-meta">当前数据中没有上级配方。</p>'}</section>`);
-  } catch (error) { showToast(error.message || String(error)); }
 }
 
 function showModal(html) { modalContent.innerHTML = html; modal.classList.remove('hidden'); }

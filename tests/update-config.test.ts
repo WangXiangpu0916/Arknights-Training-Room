@@ -63,20 +63,29 @@ test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保�
   assert.match(renderer, /const available = new Map\(currentMasteryCandidates\(\)/);
   assert.match(renderer, /function currentMasteryCandidates\(\)/);
   assert.match(renderer, /class="operator-skill \$\{candidate \? 'can-upgrade' : ''\}"/);
-  assert.match(renderer, /operator-skill-mastery">M\$\{masteryLevel\}/);
+  assert.match(renderer, /class="operator-skill-icon"/);
+  assert.match(renderer, /class="mastery-badge" aria-hidden="true"><img class="operator-skill-mastery"/);
+  assert.doesNotMatch(renderer, /operator-skill-mastery">M\$\{masteryLevel\}/);
+  assert.match(styles, /\.mastery-badge \{[^}]*width: 26px;[^}]*height: 24px/);
+  assert.match(styles, /\.mastery-badge \{[^}]*background: #1f1a1c/);
+  assert.match(styles, /\.mastery-badge \{[^}]*overflow: hidden/);
+  assert.match(styles, /\.mastery-badge img \{[^}]*width: 22px;[^}]*height: 20px/);
+  assert.match(styles, /\.mastery-badge img \{[^}]*left: 2px;[^}]*top: 2px/);
+  assert.match(styles, /\.mastery-badge img \{[^}]*object-fit: contain/);
+  assert.match(styles, /\.operator-skill-icon \{[^}]*width: 100%; height: 100%/);
   assert.doesNotMatch(renderer, /class="skill-pills"|class="skill-pill/);
   assert.match(styles, /\.dashboard-layout \{[^}]*max-width: 1680px/);
-  assert.match(styles, /\.cards \{[^}]*grid-template-columns: repeat\(3, minmax\(0, 410px\)\);[^}]*justify-content: start/);
-  assert.doesNotMatch(styles, /@container|repeat\(2, minmax\(0, 410px\)\)|repeat\(4, minmax\(0, 410px\)\)/);
+  assert.match(styles, /\.cards \{[^}]*grid-template-columns: repeat\(3, minmax\(0, 338px\)\);[^}]*justify-content: start/);
+  assert.doesNotMatch(styles, /@container|repeat\(2, minmax\(0, 338px\)\)|repeat\(4, minmax\(0, 338px\)\)/);
   assert.doesNotMatch(styles, /\.cards \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(styles, /main \{[^}]*height: 100vh;[^}]*overflow-y: auto/);
   assert.match(styles, /\.sidebar \{[^}]*height: 100vh;[^}]*overflow: hidden/);
 });
 
-test('固定窗口锁定 1530×800 且不再运行 resize-only FLIP', () => {
+test('固定窗口锁定 1360×800 且不再运行 resize-only FLIP', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const main = readFileSync('src/main.ts', 'utf8');
-  assert.match(main, /FIXED_WINDOW_WIDTH = 1530/);
+  assert.match(main, /FIXED_WINDOW_WIDTH = 1360/);
   assert.match(main, /FIXED_WINDOW_HEIGHT = 800/);
   assert.match(main, /resizable: false/);
   assert.match(main, /maximizable: false/);
@@ -93,7 +102,9 @@ test('专精顶部控制区固定为筛选行与三个统一模式开关', () =>
   assert.match(renderer, /class="dashboard-mode-row"[\s\S]*连续专精模式[\s\S]*技巧概要视为无限[\s\S]*使用无限池材料/);
   assert.match(styles, /\.dashboard-mode-row \{[^}]*display: flex;[^}]*flex-wrap: nowrap/);
   assert.match(styles, /\.dashboard-mode-toggle \{[^}]*min-height: 38px;[^}]*padding: 6px 10px/);
-  assert.match(styles, /\.operator-filter-row \{[^}]*repeat\(6, minmax\(112px, 1fr\)\)/);
+  assert.match(renderer, /operatorFilterRegion\('common', '筛选'[\s\S]*operatorFilterRegion\('more', '更多筛选'/);
+  assert.match(styles, /\.operator-filter-group \{[^}]*grid-template-columns: 116px minmax\(0, 1fr\)/);
+  assert.doesNotMatch(renderer, /<details|operatorFilterMenu|operator-filter-popover/);
   assert.match(renderer, /dashboardFilters\.unlimited = event\.target\.checked \? 'with' : 'real'/);
   assert.doesNotMatch(renderer, /data-mode=|data-supply-mode=|技巧概要无限供应|仅真实仓库<\/button>/);
   const main = readFileSync('src/main.ts', 'utf8');
@@ -110,13 +121,35 @@ test('专精候选整卡打开材料详情且不再显示查看材料按钮', ()
   assert.match(styles, /\.candidate:hover \{/);
 });
 
-test('仓库仅展示 21 种蓝色材料且设置页不再重复管理无限供应', () => {
+test('仓库展示分类图标网格与右侧详情抽屉', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
-  const inventoryIds = renderer.match(/const inventoryMaterialIds = new Set\(\[([\s\S]*?)\]\);/)?.[1].match(/'\d+'/g) ?? [];
-  assert.equal(inventoryIds.length, 21);
-  assert.match(renderer, /filter\(item => inventoryMaterialIds\.has\(item\.itemId\)\)/);
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(renderer, /InventoryCatalog\.buildSections/);
+  assert.match(renderer, /inventory-section-title/);
+  assert.match(renderer, /inventory-icon-grid-pinned/);
+  assert.match(renderer, /inventory-icon-frame/);
+  assert.match(renderer, /data-inventory-detail/);
+  assert.match(renderer, /data-inventory-unlimited/);
+  assert.match(renderer, /renderRecipeVisual/);
+  assert.doesNotMatch(renderer, /inventory-icon-ring/);
+  assert.doesNotMatch(renderer, /recipe-target/);
+  assert.doesNotMatch(renderer, /recipe-ingredient-plus/);
+  assert.doesNotMatch(renderer, /recipe-flow-arrow/);
+  assert.doesNotMatch(renderer, /inventoryMaterialIds/);
+  assert.doesNotMatch(renderer, /已设无限/);
+  assert.doesNotMatch(renderer, /<th>规划状态<\/th>/);
+  assert.doesNotMatch(renderer, /operator-meta">—<\/span>/);
   assert.doesNotMatch(renderer, /data-action="manage-unlimited"|action === 'manage-unlimited'/);
   assert.doesNotMatch(renderer, /<h3>无限供应材料<\/h3>/);
+  assert.doesNotMatch(renderer, />查看配方</);
+  assert.doesNotMatch(renderer, /inventory-switch-slot/);
+  assert.doesNotMatch(styles, /inventory-icon-ring/);
+  assert.doesNotMatch(styles, /inventory-detail-icon\.rarity-/);
+  assert.doesNotMatch(styles, /recipe-ingredient-icon\.rarity-/);
+  assert.match(styles, /\.inventory-icon-grid \{[^}]*grid-template-columns: repeat\(auto-fill, minmax\(72px, 1fr\)\)/);
+  assert.match(styles, /\.inventory-icon-grid-pinned \{[^}]*grid-template-columns: repeat\(4, 72px\)/);
+  assert.match(styles, /\.inventory-detail \{/);
+  assert.match(styles, /\.recipe-visual/);
 });
 
 test('专精卡片按头像边界对齐图标并保持技能名称单行滚动', () => {

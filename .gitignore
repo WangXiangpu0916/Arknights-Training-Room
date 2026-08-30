@@ -4,4 +4,7 @@ release/
 *.log
 .cache/
 qa-runtime/
+.qa-artifacts/
+output/
+qa-fixture-runtime/
 qa-*.png

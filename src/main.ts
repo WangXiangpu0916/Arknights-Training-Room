@@ -7,7 +7,7 @@ import { LocalStore } from './data/local-store';
 
 let mainWindow: BrowserWindow | null = null;
 let service: AppService;
-const FIXED_WINDOW_WIDTH = 1530;
+const FIXED_WINDOW_WIDTH = 1360;
 const FIXED_WINDOW_HEIGHT = 800;
 
 type UpdatePhase = 'idle' | 'unsupported' | 'checking' | 'current' | 'available' | 'downloading' | 'ready' | 'installing' | 'error';
@@ -171,9 +171,15 @@ async function createWindow(): Promise<void> {
     await new Promise(resolve => setTimeout(resolve, 700));
     if (process.env.ATR_SCREENSHOT_PAGE) {
       await mainWindow.webContents.executeJavaScript(
-        `document.querySelector('[data-page="${process.env.ATR_SCREENSHOT_PAGE}"]')?.click()`,
+        `page = ${JSON.stringify(process.env.ATR_SCREENSHOT_PAGE)}; render()`,
       );
       await new Promise(resolve => setTimeout(resolve, 300));
+    }
+    if (process.env.ATR_SCREENSHOT_INVENTORY_ITEM) {
+      await mainWindow.webContents.executeJavaScript(
+        `document.querySelector('[data-inventory-item="${process.env.ATR_SCREENSHOT_INVENTORY_ITEM}"]')?.click()`,
+      );
+      await new Promise(resolve => setTimeout(resolve, Number(process.env.ATR_SCREENSHOT_DELAY) || 1200));
     }
     if (process.env.ATR_SCREENSHOT_MODE) {
       const continuous = process.env.ATR_SCREENSHOT_MODE === 'continuous';
@@ -197,6 +203,18 @@ async function createWindow(): Promise<void> {
     }
     if (process.env.ATR_SCREENSHOT_CANDIDATE === 'open') {
       await mainWindow.webContents.executeJavaScript(`document.querySelector('.candidate')?.click()`);
+      await new Promise(resolve => setTimeout(resolve, 200));
+    }
+    if (process.env.ATR_SCREENSHOT_OPERATOR_FILTER) {
+      await mainWindow.webContents.executeJavaScript(
+        `(() => {
+          const region = document.querySelector('[data-operator-filter-region="${process.env.ATR_SCREENSHOT_OPERATOR_FILTER}"]');
+          if (!region) return;
+          region.classList.add('open');
+          region.querySelector('[data-operator-filter-panel]').hidden = false;
+          region.querySelector('[data-operator-panel-trigger]').setAttribute('aria-expanded', 'true');
+        })()`,
+      );
       await new Promise(resolve => setTimeout(resolve, 200));
     }
     if (process.env.ATR_SCREENSHOT_DELAY) {

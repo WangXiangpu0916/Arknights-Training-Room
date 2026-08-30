@@ -3,6 +3,7 @@
     "name": "阿米娅",
     "pinyin": "amiya",
     "pinyinInitials": "amy",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -25,6 +26,7 @@
     "name": "凯尔希",
     "pinyin": "kaierxi",
     "pinyinInitials": "kex",
+    "implementationDate": "2021-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -46,6 +48,7 @@
     "name": "12F",
     "pinyin": "12f",
     "pinyinInitials": "12f",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -68,6 +71,7 @@
     "name": "陈",
     "pinyin": "chen",
     "pinyinInitials": "c",
+    "implementationDate": "2019-07-09T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -91,6 +95,7 @@
     "name": "煌",
     "pinyin": "huang",
     "pinyinInitials": "h",
+    "implementationDate": "2019-12-24T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -113,6 +118,7 @@
     "name": "阿米娅(近卫)",
     "pinyin": "amiyajinwei",
     "pinyinInitials": "amyjw",
+    "implementationDate": "2020-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -135,6 +141,7 @@
     "name": "炎狱炎熔",
     "pinyin": "yanyuyanrong",
     "pinyinInitials": "yyyr",
+    "implementationDate": "2021-02-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -157,6 +164,7 @@
     "name": "浊心斯卡蒂",
     "pinyin": "zhuoxinsikadi",
     "pinyinInitials": "zxskd",
+    "implementationDate": "2021-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -178,6 +186,7 @@
     "name": "假日威龙陈",
     "pinyin": "jiariweilongchen",
     "pinyinInitials": "jrwlc",
+    "implementationDate": "2021-08-03T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -199,6 +208,7 @@
     "name": "耀骑士临光",
     "pinyin": "yaoqishilinguang",
     "pinyinInitials": "yqslg",
+    "implementationDate": "2021-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -220,6 +230,7 @@
     "name": "予愿安洁莉娜",
     "pinyin": "yuyuananjielina",
     "pinyinInitials": "yyajln",
+    "implementationDate": "2026-08-01T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -241,6 +252,7 @@
     "name": "纯烬艾雅法拉",
     "pinyin": "chunjinaiyafala",
     "pinyinInitials": "cjayfl",
+    "implementationDate": "2023-08-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -262,6 +274,7 @@
     "name": "维娜·维多利亚",
     "pinyin": "weinaweiduoliya",
     "pinyinInitials": "wnwdly",
+    "implementationDate": "2024-10-09T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -283,6 +296,7 @@
     "name": "空",
     "pinyin": "kong",
     "pinyinInitials": "k",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -305,6 +319,7 @@
     "name": "焰影苇草",
     "pinyin": "yanyingweicao",
     "pinyinInitials": "yywc",
+    "implementationDate": "2022-12-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -327,6 +342,7 @@
     "name": "寒芒克洛丝",
     "pinyin": "hanmangkeluosi",
     "pinyinInitials": "hmkls",
+    "implementationDate": "2022-01-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -349,6 +365,7 @@
     "name": "撷英调香师",
     "pinyin": "xieyingtiaoxiangshi",
     "pinyinInitials": "xytxs",
+    "implementationDate": "2026-01-09T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -370,6 +387,7 @@
     "name": "归溟幽灵鲨",
     "pinyin": "guimingyoulingsha",
     "pinyinInitials": "gmyls",
+    "implementationDate": "2022-05-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -392,6 +410,7 @@
     "name": "濯尘芙蓉",
     "pinyin": "zhuochenfurong",
     "pinyinInitials": "zcfr",
+    "implementationDate": "2022-06-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -413,6 +432,7 @@
     "name": "百炼嘉维尔",
     "pinyin": "bailianjiaweier",
     "pinyinInitials": "bljwe",
+    "implementationDate": "2022-08-11T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -434,6 +454,7 @@
     "name": "承曦格雷伊",
     "pinyin": "chengxigeleiyi",
     "pinyinInitials": "cxgly",
+    "implementationDate": "2022-07-05T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -455,6 +476,7 @@
     "name": "缄默德克萨斯",
     "pinyin": "jianmodekesasi",
     "pinyinInitials": "jmdkss",
+    "implementationDate": "2022-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -477,6 +499,7 @@
     "name": "麒麟R夜刀",
     "pinyin": "qilinryedao",
     "pinyinInitials": "qlryd",
+    "implementationDate": "2023-03-07T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -500,6 +523,7 @@
     "name": "德克萨斯",
     "pinyin": "dekesasi",
     "pinyinInitials": "dkss",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -524,6 +548,7 @@
     "name": "火龙S黑角",
     "pinyin": "huolongsheijiao",
     "pinyinInitials": "hlshj",
+    "implementationDate": "2023-03-07T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -547,6 +572,7 @@
     "name": "淬羽赫默",
     "pinyin": "cuiyuhemo",
     "pinyinInitials": "cyhm",
+    "implementationDate": "2023-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -570,6 +596,7 @@
     "name": "圣约送葬人",
     "pinyin": "shengyuesongzangren",
     "pinyinInitials": "syszr",
+    "implementationDate": "2023-06-08T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -591,6 +618,7 @@
     "name": "琳琅诗怀雅",
     "pinyin": "linlangshihuaiya",
     "pinyinInitials": "llshy",
+    "implementationDate": "2023-08-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -612,6 +640,7 @@
     "name": "涤火杰西卡",
     "pinyin": "dihuojiexika",
     "pinyinInitials": "dhjxk",
+    "implementationDate": "2023-09-05T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -634,6 +663,7 @@
     "name": "维什戴尔",
     "pinyin": "weishendaier",
     "pinyinInitials": "wsde",
+    "implementationDate": "2024-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -654,6 +684,7 @@
     "name": "历阵锐枪芬",
     "pinyin": "lizhenruiqiangfen",
     "pinyinInitials": "lzrqf",
+    "implementationDate": "2024-05-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -675,6 +706,7 @@
     "name": "阿米娅(医疗)",
     "pinyin": "amiyayiliao",
     "pinyinInitials": "amyyl",
+    "implementationDate": "2024-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -697,6 +729,7 @@
     "name": "荒芜拉普兰德",
     "pinyin": "huangwulapulande",
     "pinyinInitials": "hwlpld",
+    "implementationDate": "2024-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -718,6 +751,7 @@
     "name": "引星棘刺",
     "pinyin": "yinxingjici",
     "pinyinInitials": "yxjc",
+    "implementationDate": "2024-12-05T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -739,6 +773,7 @@
     "name": "能天使",
     "pinyin": "nengtianshi",
     "pinyinInitials": "nts",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -762,6 +797,7 @@
     "name": "烛煌",
     "pinyin": "zhuhuang",
     "pinyinInitials": "zh",
+    "implementationDate": "2025-01-22T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -784,6 +820,7 @@
     "name": "新约能天使",
     "pinyin": "xinyuenengtianshi",
     "pinyinInitials": "xynts",
+    "implementationDate": "2025-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -806,6 +843,7 @@
     "name": "酒神",
     "pinyin": "jiushen",
     "pinyinInitials": "js",
+    "implementationDate": "2025-06-05T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -827,6 +865,7 @@
     "name": "司霆惊蛰",
     "pinyin": "sitingjingzhe",
     "pinyinInitials": "stjz",
+    "implementationDate": "2025-07-08T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -848,6 +887,7 @@
     "name": "斩业星熊",
     "pinyin": "zhanyexingxiong",
     "pinyinInitials": "zyxx",
+    "implementationDate": "2025-08-02T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -870,6 +910,7 @@
     "name": "凛御银灰",
     "pinyin": "linyuyinhui",
     "pinyinInitials": "lyyh",
+    "implementationDate": "2025-11-01T12:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -891,6 +932,7 @@
     "name": "圣聆初雪",
     "pinyin": "shenglingchuxue",
     "pinyinInitials": "slcx",
+    "implementationDate": "2025-11-01T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -912,6 +954,7 @@
     "name": "溯光星源",
     "pinyin": "suguangxingyuan",
     "pinyinInitials": "sgxy",
+    "implementationDate": "2025-11-01T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -934,6 +977,7 @@
     "name": "焰狐龙梓兰",
     "pinyin": "yanhulongzilan",
     "pinyinInitials": "yhlzl",
+    "implementationDate": "2026-06-01T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -957,6 +1001,7 @@
     "name": "雷狼龙S空爆",
     "pinyin": "leilanglongskongbao",
     "pinyinInitials": "lllskb",
+    "implementationDate": "2026-06-01T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -980,6 +1025,7 @@
     "name": "赤刃明霄陈",
     "pinyin": "chirenmingxiaochen",
     "pinyinInitials": "crmxc",
+    "implementationDate": "2026-02-10T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1001,6 +1047,7 @@
     "name": "怒潮凛冬",
     "pinyin": "nuchaolindong",
     "pinyinInitials": "ncld",
+    "implementationDate": "2026-04-07T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1024,6 +1071,7 @@
     "name": "凯尔希·思衡托",
     "pinyin": "kaierxisihengtuo",
     "pinyinInitials": "kexsht",
+    "implementationDate": "2026-05-01T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1045,6 +1093,7 @@
     "name": "芙兰卡",
     "pinyin": "fulanka",
     "pinyinInitials": "flk",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1067,6 +1116,7 @@
     "name": "雷蛇",
     "pinyin": "leishe",
     "pinyinInitials": "ls",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1090,6 +1140,7 @@
     "name": "赫默",
     "pinyin": "hemo",
     "pinyinInitials": "hm",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1113,6 +1164,7 @@
     "name": "远山",
     "pinyin": "yuanshan",
     "pinyinInitials": "ys",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1136,6 +1188,7 @@
     "name": "深海色",
     "pinyin": "shenhaise",
     "pinyinInitials": "shs",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1158,6 +1211,7 @@
     "name": "推进之王",
     "pinyin": "tuijinzhiwang",
     "pinyinInitials": "tjzw",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1181,6 +1235,7 @@
     "name": "W",
     "pinyin": "w",
     "pinyinInitials": "w",
+    "implementationDate": "2020-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1201,6 +1256,7 @@
     "name": "凛冬",
     "pinyin": "lindong",
     "pinyinInitials": "ld",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1225,6 +1281,7 @@
     "name": "末药",
     "pinyin": "moyao",
     "pinyinInitials": "my",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1248,6 +1305,7 @@
     "name": "白雪",
     "pinyin": "baixue",
     "pinyinInitials": "bx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1271,6 +1329,7 @@
     "name": "芙蓉",
     "pinyin": "furong",
     "pinyinInitials": "fr",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1297,6 +1356,7 @@
     "name": "炎熔",
     "pinyin": "yanrong",
     "pinyinInitials": "yr",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1323,6 +1383,7 @@
     "name": "米格鲁",
     "pinyin": "migelu",
     "pinyinInitials": "mgl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1349,6 +1410,7 @@
     "name": "芬",
     "pinyin": "fen",
     "pinyinInitials": "f",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1375,6 +1437,7 @@
     "name": "克洛丝",
     "pinyin": "keluosi",
     "pinyinInitials": "kls",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1401,6 +1464,7 @@
     "name": "流星",
     "pinyin": "liuxing",
     "pinyinInitials": "lx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1424,6 +1488,7 @@
     "name": "艾丝黛尔",
     "pinyin": "aisidaier",
     "pinyinInitials": "asde",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1445,6 +1510,7 @@
     "name": "白面鸮",
     "pinyin": "baimianxiao",
     "pinyinInitials": "bmx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1468,6 +1534,7 @@
     "name": "蓝毒",
     "pinyin": "landu",
     "pinyinInitials": "ld",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1490,6 +1557,7 @@
     "name": "杜宾",
     "pinyin": "dubin",
     "pinyinInitials": "db",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1513,6 +1581,7 @@
     "name": "炎客",
     "pinyin": "yanke",
     "pinyinInitials": "yk",
+    "implementationDate": "2019-10-15T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -1535,6 +1604,7 @@
     "name": "梅",
     "pinyin": "mei",
     "pinyinInitials": "m",
+    "implementationDate": "2019-11-19T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1558,6 +1628,7 @@
     "name": "伊芙利特",
     "pinyin": "yifulite",
     "pinyinInitials": "yflt",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1581,6 +1652,7 @@
     "name": "星源",
     "pinyin": "xingyuan",
     "pinyinInitials": "xy",
+    "implementationDate": "2022-07-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1604,6 +1676,7 @@
     "name": "星熊",
     "pinyin": "xingxiong",
     "pinyinInitials": "xx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1627,6 +1700,7 @@
     "name": "猎蜂",
     "pinyin": "liefeng",
     "pinyinInitials": "lf",
+    "implementationDate": "2019-05-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1650,6 +1724,7 @@
     "name": "拉普兰德",
     "pinyin": "lapulande",
     "pinyinInitials": "lpld",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1671,6 +1746,7 @@
     "name": "夜烟",
     "pinyin": "yeyan",
     "pinyinInitials": "yy",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1694,6 +1770,7 @@
     "name": "幽灵鲨",
     "pinyin": "youlingsha",
     "pinyinInitials": "yls",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1717,6 +1794,7 @@
     "name": "红",
     "pinyin": "hong",
     "pinyinInitials": "h",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1740,6 +1818,7 @@
     "name": "普罗旺斯",
     "pinyin": "puluowangsi",
     "pinyinInitials": "plws",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1762,6 +1841,7 @@
     "name": "闪灵",
     "pinyin": "shanling",
     "pinyinInitials": "sl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1784,6 +1864,7 @@
     "name": "临光",
     "pinyin": "linguang",
     "pinyinInitials": "lg",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1806,6 +1887,7 @@
     "name": "清道夫",
     "pinyin": "qingdaofu",
     "pinyinInitials": "qdf",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1830,6 +1912,7 @@
     "name": "弑君者",
     "pinyin": "shijunzhe",
     "pinyinInitials": "sjz",
+    "implementationDate": "2024-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1851,6 +1934,7 @@
     "name": "蛇屠箱",
     "pinyin": "shetuxiang",
     "pinyinInitials": "stx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1873,6 +1957,7 @@
     "name": "桃金娘",
     "pinyin": "taojinniang",
     "pinyinInitials": "tjn",
+    "implementationDate": "2019-09-10T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1896,6 +1981,7 @@
     "name": "摩根",
     "pinyin": "mogen",
     "pinyinInitials": "mg",
+    "implementationDate": "2023-04-06T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1918,6 +2004,7 @@
     "name": "因陀罗",
     "pinyin": "yintuoluo",
     "pinyinInitials": "ytl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1940,6 +2027,7 @@
     "name": "达格达",
     "pinyin": "dageda",
     "pinyinInitials": "dgd",
+    "implementationDate": "2022-10-11T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -1962,6 +2050,7 @@
     "name": "守林人",
     "pinyin": "shoulinren",
     "pinyinInitials": "slr",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -1983,6 +2072,7 @@
     "name": "断罪者",
     "pinyin": "duanzuizhe",
     "pinyinInitials": "dzz",
+    "implementationDate": "2020-04-01T16:00:00",
     "gender": "断罪",
     "position": "近战位",
     "obtainMethods": [
@@ -2003,6 +2093,7 @@
     "name": "火神",
     "pinyin": "huoshen",
     "pinyinInitials": "hs",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2024,6 +2115,7 @@
     "name": "夜魔",
     "pinyin": "yemo",
     "pinyinInitials": "ym",
+    "implementationDate": "2019-05-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2046,6 +2138,7 @@
     "name": "天火",
     "pinyin": "tianhuo",
     "pinyinInitials": "th",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2067,6 +2160,7 @@
     "name": "华法琳",
     "pinyin": "huafalin",
     "pinyinInitials": "hfl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2089,6 +2183,7 @@
     "name": "银灰",
     "pinyin": "yinhui",
     "pinyinInitials": "yh",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -2112,6 +2207,7 @@
     "name": "崖心",
     "pinyin": "yaxin",
     "pinyinInitials": "yx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2134,6 +2230,7 @@
     "name": "初雪",
     "pinyin": "chuxue",
     "pinyinInitials": "cx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2156,6 +2253,7 @@
     "name": "夜莺",
     "pinyin": "yeying",
     "pinyinInitials": "yy",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2178,6 +2276,7 @@
     "name": "艾雅法拉",
     "pinyin": "aiyafala",
     "pinyinInitials": "ayfl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2199,6 +2298,7 @@
     "name": "调香师",
     "pinyin": "tiaoxiangshi",
     "pinyinInitials": "txs",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2222,6 +2322,7 @@
     "name": "地灵",
     "pinyin": "diling",
     "pinyinInitials": "dl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2245,6 +2346,7 @@
     "name": "慕斯",
     "pinyin": "musi",
     "pinyinInitials": "ms",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2268,6 +2370,7 @@
     "name": "嘉维尔",
     "pinyin": "jiaweier",
     "pinyinInitials": "jwe",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2289,6 +2392,7 @@
     "name": "赫拉格",
     "pinyin": "helage",
     "pinyinInitials": "hlg",
+    "implementationDate": "2019-09-10T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -2311,6 +2415,7 @@
     "name": "红云",
     "pinyin": "hongyun",
     "pinyinInitials": "hy",
+    "implementationDate": "2019-10-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2334,6 +2439,7 @@
     "name": "翎羽",
     "pinyin": "lingyu",
     "pinyinInitials": "ly",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2358,6 +2464,7 @@
     "name": "霜叶",
     "pinyin": "shuangye",
     "pinyinInitials": "sy",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2381,6 +2488,7 @@
     "name": "烈夏",
     "pinyin": "liexia",
     "pinyinInitials": "lx",
+    "implementationDate": "2023-12-05T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2404,6 +2512,7 @@
     "name": "真理",
     "pinyin": "zhenli",
     "pinyinInitials": "zl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2428,6 +2537,7 @@
     "name": "古米",
     "pinyin": "gumi",
     "pinyinInitials": "gm",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2453,6 +2563,7 @@
     "name": "早露",
     "pinyin": "zaolu",
     "pinyinInitials": "zl",
+    "implementationDate": "2020-06-18T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2477,6 +2588,7 @@
     "name": "讯使",
     "pinyin": "xunshi",
     "pinyinInitials": "xs",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -2499,6 +2611,7 @@
     "name": "角峰",
     "pinyin": "jiaofeng",
     "pinyinInitials": "jf",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -2523,6 +2636,7 @@
     "name": "提丰",
     "pinyin": "tifeng",
     "pinyinInitials": "tf",
+    "implementationDate": "2023-07-06T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2544,6 +2658,7 @@
     "name": "刻俄柏",
     "pinyin": "keebai",
     "pinyinInitials": "keb",
+    "implementationDate": "2020-02-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2566,6 +2681,7 @@
     "name": "年",
     "pinyin": "nian",
     "pinyinInitials": "n",
+    "implementationDate": "2020-01-16T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2588,6 +2704,7 @@
     "name": "夕",
     "pinyin": "xi",
     "pinyinInitials": "x",
+    "implementationDate": "2021-02-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2610,6 +2727,7 @@
     "name": "可颂",
     "pinyin": "kesong",
     "pinyinInitials": "ks",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2633,6 +2751,7 @@
     "name": "令",
     "pinyin": "ling",
     "pinyinInitials": "l",
+    "implementationDate": "2022-01-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2655,6 +2774,7 @@
     "name": "重岳",
     "pinyin": "zhongyue",
     "pinyinInitials": "zy",
+    "implementationDate": "2023-01-17T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -2677,6 +2797,7 @@
     "name": "黍",
     "pinyin": "shu",
     "pinyinInitials": "s",
+    "implementationDate": "2024-02-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2699,6 +2820,7 @@
     "name": "余",
     "pinyin": "yu",
     "pinyinInitials": "y",
+    "implementationDate": "2025-01-22T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -2721,6 +2843,7 @@
     "name": "望",
     "pinyin": "wang",
     "pinyinInitials": "w",
+    "implementationDate": "2026-02-10T12:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -2743,6 +2866,7 @@
     "name": "塞雷娅",
     "pinyin": "saileiya",
     "pinyinInitials": "sly",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2766,6 +2890,7 @@
     "name": "白金",
     "pinyin": "baijin",
     "pinyinInitials": "bj",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2788,6 +2913,7 @@
     "name": "灵知",
     "pinyin": "lingzhi",
     "pinyinInitials": "lz",
+    "implementationDate": "2021-12-21T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -2810,6 +2936,7 @@
     "name": "玫兰莎",
     "pinyin": "meilansha",
     "pinyinInitials": "mls",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2836,6 +2963,7 @@
     "name": "卡缇",
     "pinyin": "kati",
     "pinyinInitials": "kt",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2860,6 +2988,7 @@
     "name": "史都华德",
     "pinyin": "shidouhuade",
     "pinyinInitials": "sdhd",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -2885,6 +3014,7 @@
     "name": "安德切尔",
     "pinyin": "andeqieer",
     "pinyinInitials": "adqe",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -2909,6 +3039,7 @@
     "name": "安赛尔",
     "pinyin": "ansaier",
     "pinyinInitials": "ase",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -2935,6 +3066,7 @@
     "name": "莫斯提马",
     "pinyin": "mositima",
     "pinyinInitials": "mstm",
+    "implementationDate": "2019-11-19T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -2957,6 +3089,7 @@
     "name": "卡夫卡",
     "pinyin": "kafuka",
     "pinyinInitials": "kfk",
+    "implementationDate": "2020-12-17T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -2979,6 +3112,7 @@
     "name": "狮蝎",
     "pinyin": "shixie",
     "pinyinInitials": "sx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3000,6 +3134,7 @@
     "name": "安哲拉",
     "pinyin": "anzhela",
     "pinyinInitials": "azl",
+    "implementationDate": "2020-08-11T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3023,6 +3158,7 @@
     "name": "陨星",
     "pinyin": "yunxing",
     "pinyinInitials": "yx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3045,6 +3181,7 @@
     "name": "格拉尼",
     "pinyin": "gelani",
     "pinyinInitials": "gln",
+    "implementationDate": "2019-05-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3067,6 +3204,7 @@
     "name": "风笛",
     "pinyin": "fengdi",
     "pinyinInitials": "fd",
+    "implementationDate": "2020-03-17T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3089,6 +3227,7 @@
     "name": "阿",
     "pinyin": "a",
     "pinyinInitials": "a",
+    "implementationDate": "2020-01-16T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -3113,6 +3252,7 @@
     "name": "吽",
     "pinyin": "hong",
     "pinyinInitials": "h",
+    "implementationDate": "2020-01-16T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3137,6 +3277,7 @@
     "name": "暴行",
     "pinyin": "baoxing",
     "pinyinInitials": "bx",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3159,6 +3300,7 @@
     "name": "杰西卡",
     "pinyin": "jiexika",
     "pinyinInitials": "jxk",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3184,6 +3326,7 @@
     "name": "暗索",
     "pinyin": "ansuo",
     "pinyinInitials": "as",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3207,6 +3350,7 @@
     "name": "砾",
     "pinyin": "li",
     "pinyinInitials": "l",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3230,6 +3374,7 @@
     "name": "香草",
     "pinyin": "xiangcao",
     "pinyinInitials": "xc",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3254,6 +3399,7 @@
     "name": "食铁兽",
     "pinyin": "shitieshou",
     "pinyinInitials": "sts",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3276,6 +3422,7 @@
     "name": "梅尔",
     "pinyin": "meier",
     "pinyinInitials": "me",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3299,6 +3446,7 @@
     "name": "槐琥",
     "pinyin": "huaihu",
     "pinyinInitials": "hh",
+    "implementationDate": "2019-11-19T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3323,6 +3471,7 @@
     "name": "塑心",
     "pinyin": "suxin",
     "pinyinInitials": "sx",
+    "implementationDate": "2023-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3344,6 +3493,7 @@
     "name": "麦哲伦",
     "pinyin": "maizhelun",
     "pinyinInitials": "mzl",
+    "implementationDate": "2019-10-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3367,6 +3517,7 @@
     "name": "缪尔赛思",
     "pinyin": "miuersaisi",
     "pinyinInitials": "mess",
+    "implementationDate": "2023-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3389,6 +3540,7 @@
     "name": "傀影",
     "pinyin": "kuiying",
     "pinyinInitials": "ky",
+    "implementationDate": "2020-04-21T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3411,6 +3563,7 @@
     "name": "柏喙",
     "pinyin": "baihui",
     "pinyinInitials": "bh",
+    "implementationDate": "2020-03-17T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3433,6 +3586,7 @@
     "name": "格雷伊",
     "pinyin": "geleiyi",
     "pinyinInitials": "gly",
+    "implementationDate": "2019-07-09T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -3456,6 +3610,7 @@
     "name": "巫恋",
     "pinyin": "wulian",
     "pinyinInitials": "wl",
+    "implementationDate": "2020-04-21T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3478,6 +3633,7 @@
     "name": "波登可",
     "pinyin": "bodengke",
     "pinyinInitials": "bdk",
+    "implementationDate": "2020-06-18T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3501,6 +3657,7 @@
     "name": "坚雷",
     "pinyin": "jianlei",
     "pinyinInitials": "jl",
+    "implementationDate": "2019-10-01T04:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3522,6 +3679,7 @@
     "name": "苇草",
     "pinyin": "weicao",
     "pinyinInitials": "wc",
+    "implementationDate": "2019-12-10T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3544,6 +3702,7 @@
     "name": "斯卡蒂",
     "pinyin": "sikadi",
     "pinyinInitials": "skd",
+    "implementationDate": "2019-05-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3567,6 +3726,7 @@
     "name": "山",
     "pinyin": "shan",
     "pinyinInitials": "s",
+    "implementationDate": "2020-12-17T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3589,6 +3749,7 @@
     "name": "鞭刃",
     "pinyin": "bianren",
     "pinyinInitials": "br",
+    "implementationDate": "2020-10-15T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3611,6 +3772,7 @@
     "name": "芳汀",
     "pinyin": "fangting",
     "pinyinInitials": "ft",
+    "implementationDate": "2020-09-24T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3634,6 +3796,7 @@
     "name": "孑",
     "pinyin": "jie",
     "pinyinInitials": "j",
+    "implementationDate": "2020-08-11T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3657,6 +3820,7 @@
     "name": "星极",
     "pinyin": "xingji",
     "pinyinInitials": "xj",
+    "implementationDate": "2019-09-10T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3679,6 +3843,7 @@
     "name": "微风",
     "pinyin": "weifeng",
     "pinyinInitials": "wf",
+    "implementationDate": "2019-11-01T04:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3700,6 +3865,7 @@
     "name": "阿消",
     "pinyin": "axiao",
     "pinyinInitials": "ax",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3724,6 +3890,7 @@
     "name": "梓兰",
     "pinyin": "zilan",
     "pinyinInitials": "zl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3750,6 +3917,7 @@
     "name": "送葬人",
     "pinyin": "songzangren",
     "pinyinInitials": "szr",
+    "implementationDate": "2019-10-15T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -3772,6 +3940,7 @@
     "name": "泡普卡",
     "pinyin": "paopuka",
     "pinyinInitials": "ppk",
+    "implementationDate": "2019-07-09T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3797,6 +3966,7 @@
     "name": "空爆",
     "pinyin": "kongbao",
     "pinyinInitials": "kb",
+    "implementationDate": "2019-05-23T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3822,6 +3992,7 @@
     "name": "月见夜",
     "pinyin": "yuejianye",
     "pinyinInitials": "yjy",
+    "implementationDate": "2019-05-30T10:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3847,6 +4018,7 @@
     "name": "斑点",
     "pinyin": "bandian",
     "pinyinInitials": "bd",
+    "implementationDate": "2019-07-09T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3872,6 +4044,7 @@
     "name": "Lancet-2",
     "pinyin": "lancet2",
     "pinyinInitials": "lancet2",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3889,6 +4062,7 @@
     "name": "Castle-3",
     "pinyin": "castle3",
     "pinyinInitials": "castle3",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3905,6 +4079,7 @@
     "name": "缠丸",
     "pinyin": "chanwan",
     "pinyinInitials": "cw",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3928,6 +4103,7 @@
     "name": "红豆",
     "pinyin": "hongdou",
     "pinyinInitials": "hd",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -3951,6 +4127,7 @@
     "name": "安洁莉娜",
     "pinyin": "anjielina",
     "pinyinInitials": "ajln",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -3972,6 +4149,7 @@
     "name": "棘刺",
     "pinyin": "jici",
     "pinyinInitials": "jc",
+    "implementationDate": "2020-08-11T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -3994,6 +4172,7 @@
     "name": "断崖",
     "pinyin": "duanya",
     "pinyinInitials": "dy",
+    "implementationDate": "2020-07-09T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -4016,6 +4195,7 @@
     "name": "和弦",
     "pinyin": "hexian",
     "pinyinInitials": "hx",
+    "implementationDate": "2022-12-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4038,6 +4218,7 @@
     "name": "苏苏洛",
     "pinyin": "susuluo",
     "pinyinInitials": "ssl",
+    "implementationDate": "2019-08-27T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4061,6 +4242,7 @@
     "name": "菲亚梅塔",
     "pinyin": "feiyameita",
     "pinyinInitials": "fymt",
+    "implementationDate": "2022-03-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4082,6 +4264,7 @@
     "name": "刻刀",
     "pinyin": "kedao",
     "pinyinInitials": "kd",
+    "implementationDate": "2020-04-21T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4105,6 +4288,7 @@
     "name": "安比尔",
     "pinyin": "anbier",
     "pinyinInitials": "abe",
+    "implementationDate": "2019-12-24T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4128,6 +4312,7 @@
     "name": "暴雨",
     "pinyin": "baoyu",
     "pinyinInitials": "by",
+    "implementationDate": "2021-04-15T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4150,6 +4335,7 @@
     "name": "惊蛰",
     "pinyin": "jingzhe",
     "pinyinInitials": "jz",
+    "implementationDate": "2020-02-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4172,6 +4358,7 @@
     "name": "诗怀雅",
     "pinyin": "shihuaiya",
     "pinyinInitials": "shy",
+    "implementationDate": "2019-07-09T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4195,6 +4382,7 @@
     "name": "泥岩",
     "pinyin": "niyan",
     "pinyinInitials": "ny",
+    "implementationDate": "2020-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4217,6 +4405,7 @@
     "name": "老鲤",
     "pinyin": "laoli",
     "pinyinInitials": "ll",
+    "implementationDate": "2022-01-25T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -4240,6 +4429,7 @@
     "name": "拜松",
     "pinyin": "baisong",
     "pinyinInitials": "bs",
+    "implementationDate": "2019-11-19T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -4262,6 +4452,7 @@
     "name": "格劳克斯",
     "pinyin": "gelaokesi",
     "pinyinInitials": "glks",
+    "implementationDate": "2019-08-27T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4284,6 +4475,7 @@
     "name": "卡达",
     "pinyin": "kada",
     "pinyinInitials": "kd",
+    "implementationDate": "2020-07-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4307,6 +4499,7 @@
     "name": "空弦",
     "pinyin": "kongxian",
     "pinyinInitials": "kx",
+    "implementationDate": "2021-01-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4329,6 +4522,7 @@
     "name": "铸铁",
     "pinyin": "zhutie",
     "pinyinInitials": "zt",
+    "implementationDate": "2020-04-21T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4351,6 +4545,7 @@
     "name": "稀音",
     "pinyin": "xiyin",
     "pinyinInitials": "xy",
+    "implementationDate": "2020-07-28T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4373,6 +4568,7 @@
     "name": "宴",
     "pinyin": "yan",
     "pinyinInitials": "y",
+    "implementationDate": "2020-03-17T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4396,6 +4592,7 @@
     "name": "爱丽丝",
     "pinyin": "ailisi",
     "pinyinInitials": "als",
+    "implementationDate": "2021-01-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4418,6 +4615,7 @@
     "name": "黑",
     "pinyin": "hei",
     "pinyinInitials": "h",
+    "implementationDate": "2019-08-27T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4440,6 +4638,7 @@
     "name": "寒檀",
     "pinyin": "hantan",
     "pinyinInitials": "ht",
+    "implementationDate": "2023-07-06T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4461,6 +4660,7 @@
     "name": "月禾",
     "pinyin": "yuehe",
     "pinyinInitials": "yh",
+    "implementationDate": "2020-06-02T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4483,6 +4683,7 @@
     "name": "蜜蜡",
     "pinyin": "mila",
     "pinyinInitials": "ml",
+    "implementationDate": "2020-07-28T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4505,6 +4706,7 @@
     "name": "亚叶",
     "pinyin": "yaye",
     "pinyinInitials": "yy",
+    "implementationDate": "2020-07-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4527,6 +4729,7 @@
     "name": "奥斯塔",
     "pinyin": "aosita",
     "pinyinInitials": "ast",
+    "implementationDate": "2020-10-15T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -4551,6 +4754,7 @@
     "name": "杰克",
     "pinyin": "jieke",
     "pinyinInitials": "jk",
+    "implementationDate": "2020-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4574,6 +4778,7 @@
     "name": "锡兰",
     "pinyin": "xilan",
     "pinyinInitials": "xl",
+    "implementationDate": "2019-08-27T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4597,6 +4802,7 @@
     "name": "贾维",
     "pinyin": "jiawei",
     "pinyinInitials": "jw",
+    "implementationDate": "2020-07-28T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -4621,6 +4827,7 @@
     "name": "史尔特尔",
     "pinyin": "shierteer",
     "pinyinInitials": "sete",
+    "implementationDate": "2020-09-24T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4643,6 +4850,7 @@
     "name": "伊桑",
     "pinyin": "yisang",
     "pinyinInitials": "ys",
+    "implementationDate": "2019-11-01T04:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -4664,6 +4872,7 @@
     "name": "布洛卡",
     "pinyin": "buluoka",
     "pinyinInitials": "blk",
+    "implementationDate": "2019-12-10T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -4688,6 +4897,7 @@
     "name": "铃兰",
     "pinyin": "linglan",
     "pinyinInitials": "ll",
+    "implementationDate": "2020-07-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4710,6 +4920,7 @@
     "name": "嵯峨",
     "pinyin": "cuoe",
     "pinyinInitials": "ce",
+    "implementationDate": "2021-02-05T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4732,6 +4943,7 @@
     "name": "熔泉",
     "pinyin": "rongquan",
     "pinyinInitials": "rq",
+    "implementationDate": "2021-04-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4754,6 +4966,7 @@
     "name": "四月",
     "pinyin": "siyue",
     "pinyinInitials": "sy",
+    "implementationDate": "2020-09-24T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4776,6 +4989,7 @@
     "name": "酸糖",
     "pinyin": "suantang",
     "pinyinInitials": "st",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4799,6 +5013,7 @@
     "name": "灰喉",
     "pinyin": "huihou",
     "pinyinInitials": "hh",
+    "implementationDate": "2019-12-24T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4821,6 +5036,7 @@
     "name": "贝娜",
     "pinyin": "beina",
     "pinyinInitials": "bn",
+    "implementationDate": "2021-06-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4843,6 +5059,7 @@
     "name": "莱恩哈特",
     "pinyin": "laienhate",
     "pinyinInitials": "leht",
+    "implementationDate": "2020-06-18T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -4865,6 +5082,7 @@
     "name": "THRM-EX",
     "pinyin": "thrmex",
     "pinyinInitials": "thrmex",
+    "implementationDate": "2020-05-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -4883,6 +5101,7 @@
     "name": "澄闪",
     "pinyin": "chengshan",
     "pinyinInitials": "cs",
+    "implementationDate": "2022-02-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -4904,6 +5123,7 @@
     "name": "石棉",
     "pinyin": "shimian",
     "pinyinInitials": "sm",
+    "implementationDate": "2020-06-02T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4926,6 +5146,7 @@
     "name": "慑砂",
     "pinyin": "shesha",
     "pinyinInitials": "ss",
+    "implementationDate": "2020-03-17T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -4948,6 +5169,7 @@
     "name": "泡泡",
     "pinyin": "paopao",
     "pinyinInitials": "pp",
+    "implementationDate": "2020-10-15T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4971,6 +5193,7 @@
     "name": "雪雉",
     "pinyin": "xuezhi",
     "pinyinInitials": "xz",
+    "implementationDate": "2020-01-09T04:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -4993,6 +5216,7 @@
     "name": "清流",
     "pinyin": "qingliu",
     "pinyinInitials": "ql",
+    "implementationDate": "2020-03-03T04:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5015,6 +5239,7 @@
     "name": "薄绿",
     "pinyin": "baol",
     "pinyinInitials": "bl",
+    "implementationDate": "2020-09-24T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5037,6 +5262,7 @@
     "name": "迷迭香",
     "pinyin": "midiexiang",
     "pinyinInitials": "mdx",
+    "implementationDate": "2020-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5059,6 +5285,7 @@
     "name": "哈蒂娅",
     "pinyin": "hadiya",
     "pinyinInitials": "hdy",
+    "implementationDate": "2025-11-01T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5080,6 +5307,7 @@
     "name": "正义骑士号",
     "pinyin": "zhengyiqishihao",
     "pinyinInitials": "zyqsh",
+    "implementationDate": "2021-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5098,6 +5326,7 @@
     "name": "布丁",
     "pinyin": "buding",
     "pinyinInitials": "bd",
+    "implementationDate": "2021-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5119,6 +5348,7 @@
     "name": "玫拉",
     "pinyin": "meila",
     "pinyinInitials": "ml",
+    "implementationDate": "2023-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5140,6 +5370,7 @@
     "name": "艾丽妮",
     "pinyin": "ailini",
     "pinyinInitials": "aln",
+    "implementationDate": "2022-05-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5161,6 +5392,7 @@
     "name": "温蒂",
     "pinyin": "wendi",
     "pinyinInitials": "wd",
+    "implementationDate": "2020-05-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5183,6 +5415,7 @@
     "name": "隐德来希",
     "pinyin": "yindelaixi",
     "pinyinInitials": "ydlx",
+    "implementationDate": "2025-02-14T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5204,6 +5437,7 @@
     "name": "止颂",
     "pinyin": "zhisong",
     "pinyinInitials": "zs",
+    "implementationDate": "2023-11-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -5226,6 +5460,7 @@
     "name": "耶拉",
     "pinyin": "yela",
     "pinyinInitials": "yl",
+    "implementationDate": "2021-12-21T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5248,6 +5483,7 @@
     "name": "子月",
     "pinyin": "ziyue",
     "pinyinInitials": "zy",
+    "implementationDate": "2022-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5269,6 +5505,7 @@
     "name": "空构",
     "pinyin": "konggou",
     "pinyinInitials": "kg",
+    "implementationDate": "2023-06-08T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5290,6 +5527,7 @@
     "name": "风丸",
     "pinyin": "fengwan",
     "pinyinInitials": "fw",
+    "implementationDate": "2022-03-15T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5311,6 +5549,7 @@
     "name": "谜图",
     "pinyin": "mitu",
     "pinyinInitials": "mt",
+    "implementationDate": "2022-12-15T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -5333,6 +5572,7 @@
     "name": "九色鹿",
     "pinyin": "jiuselu",
     "pinyinInitials": "jsl",
+    "implementationDate": "2022-01-10T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5354,6 +5594,7 @@
     "name": "极境",
     "pinyin": "jijing",
     "pinyinInitials": "jj",
+    "implementationDate": "2020-05-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -5376,6 +5617,7 @@
     "name": "红隼",
     "pinyin": "hongsun",
     "pinyinInitials": "hs",
+    "implementationDate": "2024-02-03T11:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5396,6 +5638,7 @@
     "name": "暮落",
     "pinyin": "muluo",
     "pinyinInitials": "ml",
+    "implementationDate": "2022-01-05T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -5417,6 +5660,7 @@
     "name": "忍冬",
     "pinyin": "rendong",
     "pinyinInitials": "rd",
+    "implementationDate": "2024-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5438,6 +5682,7 @@
     "name": "霍尔海雅",
     "pinyin": "huoerhaiya",
     "pinyinInitials": "hehy",
+    "implementationDate": "2023-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5459,6 +5704,7 @@
     "name": "图耶",
     "pinyin": "tuye",
     "pinyinInitials": "ty",
+    "implementationDate": "2021-01-19T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5481,6 +5727,7 @@
     "name": "复奏",
     "pinyin": "fuzou",
     "pinyinInitials": "fz",
+    "implementationDate": "2026-03-10T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5502,6 +5749,7 @@
     "name": "但书",
     "pinyin": "danshu",
     "pinyinInitials": "ds",
+    "implementationDate": "2022-09-08T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5523,6 +5771,7 @@
     "name": "见行者",
     "pinyin": "jianxingzhe",
     "pinyinInitials": "jxz",
+    "implementationDate": "2022-03-15T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -5545,6 +5794,7 @@
     "name": "贝洛内",
     "pinyin": "beiluonei",
     "pinyinInitials": "bln",
+    "implementationDate": "2026-03-10T12:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -5566,6 +5816,7 @@
     "name": "号角",
     "pinyin": "haojiao",
     "pinyinInitials": "hj",
+    "implementationDate": "2022-04-14T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5587,6 +5838,7 @@
     "name": "洛洛",
     "pinyin": "luoluo",
     "pinyinInitials": "ll",
+    "implementationDate": "2022-04-14T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5608,6 +5860,7 @@
     "name": "褐果",
     "pinyin": "heguo",
     "pinyinInitials": "hg",
+    "implementationDate": "2022-04-14T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -5630,6 +5883,7 @@
     "name": "流明",
     "pinyin": "liuming",
     "pinyinInitials": "lm",
+    "implementationDate": "2022-05-01T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -5652,6 +5906,7 @@
     "name": "埃拉托",
     "pinyin": "ailatuo",
     "pinyinInitials": "alt",
+    "implementationDate": "2022-05-19T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5674,6 +5929,7 @@
     "name": "海蒂",
     "pinyin": "haidi",
     "pinyinInitials": "hd",
+    "implementationDate": "2022-04-14T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5695,6 +5951,7 @@
     "name": "黑键",
     "pinyin": "heijian",
     "pinyinInitials": "hj",
+    "implementationDate": "2022-06-09T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -5716,6 +5973,7 @@
     "name": "车尔尼",
     "pinyin": "cheerni",
     "pinyinInitials": "cen",
+    "implementationDate": "2022-06-09T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -5738,6 +5996,7 @@
     "name": "多萝西",
     "pinyin": "duoluoxi",
     "pinyinInitials": "dlx",
+    "implementationDate": "2022-07-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5760,6 +6019,7 @@
     "name": "协律",
     "pinyin": "xiel",
     "pinyinInitials": "xl",
+    "implementationDate": "2025-11-01T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5781,6 +6041,7 @@
     "name": "寻澜",
     "pinyin": "xunlan",
     "pinyinInitials": "xl",
+    "implementationDate": "2025-01-22T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5803,6 +6064,7 @@
     "name": "至简",
     "pinyin": "zhijian",
     "pinyinInitials": "zj",
+    "implementationDate": "2022-08-11T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -5825,6 +6087,7 @@
     "name": "鸿雪",
     "pinyin": "hongxue",
     "pinyinInitials": "hx",
+    "implementationDate": "2022-08-11T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5846,6 +6109,7 @@
     "name": "缇缇",
     "pinyin": "titi",
     "pinyinInitials": "tt",
+    "implementationDate": "2026-01-09T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5867,6 +6131,7 @@
     "name": "佩佩",
     "pinyin": "peipei",
     "pinyinInitials": "pp",
+    "implementationDate": "2024-08-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5888,6 +6153,7 @@
     "name": "苦艾",
     "pinyin": "kuai",
     "pinyinInitials": "ka",
+    "implementationDate": "2020-06-18T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -5912,6 +6178,7 @@
     "name": "铅踝",
     "pinyin": "qianhuai",
     "pinyinInitials": "qh",
+    "implementationDate": "2022-10-11T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -5934,6 +6201,7 @@
     "name": "石英",
     "pinyin": "shiying",
     "pinyinInitials": "sy",
+    "implementationDate": "2022-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5955,6 +6223,7 @@
     "name": "玛恩纳",
     "pinyin": "maenna",
     "pinyinInitials": "men",
+    "implementationDate": "2022-09-08T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -5976,6 +6245,7 @@
     "name": "斥罪",
     "pinyin": "chizui",
     "pinyinInitials": "cz",
+    "implementationDate": "2022-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -5997,6 +6267,7 @@
     "name": "海沫",
     "pinyin": "haimo",
     "pinyinInitials": "hm",
+    "implementationDate": "2022-09-27T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6018,6 +6289,7 @@
     "name": "罗小黑",
     "pinyin": "luoxiaohei",
     "pinyinInitials": "lxh",
+    "implementationDate": "2022-09-15T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6039,6 +6311,7 @@
     "name": "明椒",
     "pinyin": "mingjiao",
     "pinyinInitials": "mj",
+    "implementationDate": "2022-10-11T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6060,6 +6333,7 @@
     "name": "白铁",
     "pinyin": "baitie",
     "pinyinInitials": "bt",
+    "implementationDate": "2022-10-11T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6081,6 +6355,7 @@
     "name": "泰拉大陆调查团",
     "pinyin": "tailadaludiaochatuan",
     "pinyinInitials": "tldldct",
+    "implementationDate": "2023-03-07T16:00:00",
     "gender": "未知",
     "position": "远程位",
     "obtainMethods": [
@@ -6101,6 +6376,7 @@
     "name": "截云",
     "pinyin": "jieyun",
     "pinyinInitials": "jy",
+    "implementationDate": "2023-01-17T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6123,6 +6399,7 @@
     "name": "海霓",
     "pinyin": "haini",
     "pinyinInitials": "hn",
+    "implementationDate": "2024-06-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6144,6 +6421,7 @@
     "name": "林",
     "pinyin": "lin",
     "pinyinInitials": "l",
+    "implementationDate": "2023-01-17T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6165,6 +6443,7 @@
     "name": "温米",
     "pinyin": "wenmi",
     "pinyinInitials": "wm",
+    "implementationDate": "2024-01-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6186,6 +6465,7 @@
     "name": "仇白",
     "pinyin": "choubai",
     "pinyinInitials": "cb",
+    "implementationDate": "2023-02-14T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6207,6 +6487,7 @@
     "name": "铎铃",
     "pinyin": "duoling",
     "pinyinInitials": "dl",
+    "implementationDate": "2023-02-14T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6228,6 +6509,7 @@
     "name": "伊内丝",
     "pinyin": "yineisi",
     "pinyinInitials": "yns",
+    "implementationDate": "2023-04-06T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6249,6 +6531,7 @@
     "name": "赫德雷",
     "pinyin": "hedelei",
     "pinyinInitials": "hdl",
+    "implementationDate": "2023-10-08T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6270,6 +6553,7 @@
     "name": "U-Official",
     "pinyin": "uofficial",
     "pinyinInitials": "uofficial",
+    "implementationDate": "2023-04-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6291,6 +6575,7 @@
     "name": "Friston-3",
     "pinyin": "friston3",
     "pinyinInitials": "friston3",
+    "implementationDate": "2023-05-22T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6308,6 +6593,7 @@
     "name": "薇薇安娜",
     "pinyin": "weiweianna",
     "pinyinInitials": "wwan",
+    "implementationDate": "2023-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6329,6 +6615,7 @@
     "name": "跃跃",
     "pinyin": "yueyue",
     "pinyinInitials": "yy",
+    "implementationDate": "2023-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6350,6 +6637,7 @@
     "name": "凛视",
     "pinyin": "linshi",
     "pinyinInitials": "ls",
+    "implementationDate": "2023-07-13T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6370,6 +6658,7 @@
     "name": "冰酿",
     "pinyin": "bingniang",
     "pinyinInitials": "bn",
+    "implementationDate": "2023-09-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6392,6 +6681,7 @@
     "name": "杏仁",
     "pinyin": "xingren",
     "pinyinInitials": "xr",
+    "implementationDate": "2023-09-05T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6414,6 +6704,7 @@
     "name": "苍苔",
     "pinyin": "cangtai",
     "pinyinInitials": "ct",
+    "implementationDate": "2023-08-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6437,6 +6728,7 @@
     "name": "维荻",
     "pinyin": "weidi",
     "pinyinInitials": "wd",
+    "implementationDate": "2023-10-08T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6459,6 +6751,7 @@
     "name": "深律",
     "pinyin": "shenl",
     "pinyinInitials": "sl",
+    "implementationDate": "2023-11-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6480,6 +6773,7 @@
     "name": "戴菲恩",
     "pinyin": "daifeien",
     "pinyinInitials": "dfe",
+    "implementationDate": "2023-10-08T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6501,6 +6795,7 @@
     "name": "哈洛德",
     "pinyin": "haluode",
     "pinyinInitials": "hld",
+    "implementationDate": "2023-12-05T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -6523,6 +6818,7 @@
     "name": "锏",
     "pinyin": "jian",
     "pinyinInitials": "j",
+    "implementationDate": "2023-12-05T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6545,6 +6841,7 @@
     "name": "莱伊",
     "pinyin": "laiyi",
     "pinyinInitials": "ly",
+    "implementationDate": "2024-01-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6566,6 +6863,7 @@
     "name": "万顷",
     "pinyin": "wanqing",
     "pinyinInitials": "wq",
+    "implementationDate": "2024-02-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6588,6 +6886,7 @@
     "name": "特米米",
     "pinyin": "temimi",
     "pinyinInitials": "tmm",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6610,6 +6909,7 @@
     "name": "左乐",
     "pinyin": "zuole",
     "pinyinInitials": "zl",
+    "implementationDate": "2024-02-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6631,6 +6931,7 @@
     "name": "小满",
     "pinyin": "xiaoman",
     "pinyinInitials": "xm",
+    "implementationDate": "2024-02-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6652,6 +6953,7 @@
     "name": "艾拉",
     "pinyin": "aila",
     "pinyinInitials": "al",
+    "implementationDate": "2024-03-07T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6673,6 +6975,7 @@
     "name": "双月",
     "pinyin": "shuangyue",
     "pinyinInitials": "sy",
+    "implementationDate": "2024-03-07T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6694,6 +6997,7 @@
     "name": "医生",
     "pinyin": "yisheng",
     "pinyinInitials": "ys",
+    "implementationDate": "2024-03-07T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6715,6 +7019,7 @@
     "name": "导火索",
     "pinyin": "daohuosuo",
     "pinyinInitials": "dhs",
+    "implementationDate": "2024-03-07T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6736,6 +7041,7 @@
     "name": "露托",
     "pinyin": "lutuo",
     "pinyinInitials": "lt",
+    "implementationDate": "2024-04-11T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6757,6 +7063,7 @@
     "name": "奥达",
     "pinyin": "aoda",
     "pinyinInitials": "ad",
+    "implementationDate": "2024-04-11T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6779,6 +7086,7 @@
     "name": "阿斯卡纶",
     "pinyin": "asikalun",
     "pinyinInitials": "askl",
+    "implementationDate": "2024-04-11T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6800,6 +7108,7 @@
     "name": "逻各斯",
     "pinyin": "luogesi",
     "pinyinInitials": "lgs",
+    "implementationDate": "2024-05-01T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -6822,6 +7131,7 @@
     "name": "魔王",
     "pinyin": "mowang",
     "pinyinInitials": "mw",
+    "implementationDate": "2024-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6843,6 +7153,7 @@
     "name": "PhonoR-0",
     "pinyin": "phonor0",
     "pinyinInitials": "phonor0",
+    "implementationDate": "2024-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6860,6 +7171,7 @@
     "name": "深巡",
     "pinyin": "shenxun",
     "pinyinInitials": "sx",
+    "implementationDate": "2024-06-05T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -6881,6 +7193,7 @@
     "name": "娜仁图亚",
     "pinyin": "narentuya",
     "pinyinInitials": "nrty",
+    "implementationDate": "2024-08-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6902,6 +7215,7 @@
     "name": "莎草",
     "pinyin": "suocao",
     "pinyinInitials": "sc",
+    "implementationDate": "2024-08-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6923,6 +7237,7 @@
     "name": "衡沙",
     "pinyin": "hengsha",
     "pinyinInitials": "hs",
+    "implementationDate": "2024-08-01T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -6944,6 +7259,7 @@
     "name": "玛露西尔",
     "pinyin": "maluxier",
     "pinyinInitials": "mlxe",
+    "implementationDate": "2024-09-02T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -6965,6 +7281,7 @@
     "name": "莱欧斯",
     "pinyin": "laiousi",
     "pinyinInitials": "los",
+    "implementationDate": "2024-09-02T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -6986,6 +7303,7 @@
     "name": "森西",
     "pinyin": "senxi",
     "pinyinInitials": "sx",
+    "implementationDate": "2024-09-02T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -7007,6 +7325,7 @@
     "name": "齐尔查克",
     "pinyin": "qierchake",
     "pinyinInitials": "qeck",
+    "implementationDate": "2024-09-02T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -7028,6 +7347,7 @@
     "name": "乌尔比安",
     "pinyin": "wuerbian",
     "pinyinInitials": "weba",
+    "implementationDate": "2024-06-05T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -7050,6 +7370,7 @@
     "name": "妮芙",
     "pinyin": "nifu",
     "pinyinInitials": "nf",
+    "implementationDate": "2024-07-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7071,6 +7392,7 @@
     "name": "渡桥",
     "pinyin": "duqiao",
     "pinyinInitials": "dq",
+    "implementationDate": "2024-07-09T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -7092,6 +7414,7 @@
     "name": "菲莱",
     "pinyin": "feilai",
     "pinyinInitials": "fl",
+    "implementationDate": "2024-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7113,6 +7436,7 @@
     "name": "锡人",
     "pinyin": "xiren",
     "pinyinInitials": "xr",
+    "implementationDate": "2024-07-16T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -7133,6 +7457,7 @@
     "name": "裁度",
     "pinyin": "caidu",
     "pinyinInitials": "cd",
+    "implementationDate": "2024-11-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -7154,6 +7479,7 @@
     "name": "燧石",
     "pinyin": "suishi",
     "pinyinInitials": "ss",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7176,6 +7502,7 @@
     "name": "凯瑟琳",
     "pinyin": "kaiselin",
     "pinyinInitials": "ksl",
+    "implementationDate": "2024-10-09T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7197,6 +7524,7 @@
     "name": "瑰盐",
     "pinyin": "guiyan",
     "pinyinInitials": "gy",
+    "implementationDate": "2024-12-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7218,6 +7546,7 @@
     "name": "特克诺",
     "pinyin": "tekenuo",
     "pinyinInitials": "tkn",
+    "implementationDate": "2024-12-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7239,6 +7568,7 @@
     "name": "云迹",
     "pinyin": "yunji",
     "pinyinInitials": "yj",
+    "implementationDate": "2024-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7260,6 +7590,7 @@
     "name": "摆渡人",
     "pinyin": "baiduren",
     "pinyinInitials": "bdr",
+    "implementationDate": "2026-01-09T12:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -7281,6 +7612,7 @@
     "name": "森蚺",
     "pinyin": "senran",
     "pinyinInitials": "sr",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7303,6 +7635,7 @@
     "name": "钼铅",
     "pinyin": "muqian",
     "pinyinInitials": "mq",
+    "implementationDate": "2025-03-07T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7324,6 +7657,7 @@
     "name": "行箸",
     "pinyin": "xingzhu",
     "pinyinInitials": "xz",
+    "implementationDate": "2025-01-22T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7345,6 +7679,7 @@
     "name": "诺威尔",
     "pinyin": "nuoweier",
     "pinyinInitials": "nwe",
+    "implementationDate": "2025-02-14T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -7366,6 +7701,7 @@
     "name": "水灯心",
     "pinyin": "shuidengxin",
     "pinyinInitials": "sdx",
+    "implementationDate": "2025-03-07T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7388,6 +7724,7 @@
     "name": "阿兰娜",
     "pinyin": "alanna",
     "pinyinInitials": "aln",
+    "implementationDate": "2025-04-07T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7409,6 +7746,7 @@
     "name": "Mon3tr",
     "pinyin": "mon3tr",
     "pinyinInitials": "mon3tr",
+    "implementationDate": "2025-04-07T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7430,6 +7768,7 @@
     "name": "丰川祥子",
     "pinyin": "fengchuanxiangzi",
     "pinyinInitials": "fcxz",
+    "implementationDate": "2025-09-04T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7451,6 +7790,7 @@
     "name": "若叶睦",
     "pinyin": "ruoyemu",
     "pinyinInitials": "rym",
+    "implementationDate": "2025-09-04T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7472,6 +7812,7 @@
     "name": "三角初华",
     "pinyin": "sanjiaochuhua",
     "pinyinInitials": "sjch",
+    "implementationDate": "2025-09-04T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7493,6 +7834,7 @@
     "name": "祐天寺若麦",
     "pinyin": "youtiansiruomai",
     "pinyinInitials": "ytsrm",
+    "implementationDate": "2025-09-04T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7514,6 +7856,7 @@
     "name": "八幡海铃",
     "pinyin": "bafanhailing",
     "pinyinInitials": "bfhl",
+    "implementationDate": "2025-09-04T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7535,6 +7878,7 @@
     "name": "聆音",
     "pinyin": "lingyin",
     "pinyinInitials": "ly",
+    "implementationDate": "2025-05-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7556,6 +7900,7 @@
     "name": "CONFESS-47",
     "pinyin": "confess47",
     "pinyinInitials": "confess47",
+    "implementationDate": "2025-05-01T16:00:00",
     "gender": "未知",
     "position": "近战位",
     "obtainMethods": [
@@ -7573,6 +7918,7 @@
     "name": "蒂比",
     "pinyin": "dibi",
     "pinyinInitials": "db",
+    "implementationDate": "2025-06-05T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7594,6 +7940,7 @@
     "name": "蕾缪安",
     "pinyin": "leimiuan",
     "pinyinInitials": "lma",
+    "implementationDate": "2025-05-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7615,6 +7962,7 @@
     "name": "信仰搅拌机",
     "pinyin": "xinyangjiaobanji",
     "pinyinInitials": "xyjbj",
+    "implementationDate": "2025-05-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -7636,6 +7984,7 @@
     "name": "电弧",
     "pinyin": "dianhu",
     "pinyinInitials": "dh",
+    "implementationDate": "2025-07-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7658,6 +8007,7 @@
     "name": "录武官",
     "pinyin": "luwuguan",
     "pinyinInitials": "lwg",
+    "implementationDate": "2025-07-08T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -7679,6 +8029,7 @@
     "name": "Miss.Christine",
     "pinyin": "misschristine",
     "pinyinInitials": "misschristine",
+    "implementationDate": "2025-06-05T16:00:00",
     "gender": "女士",
     "position": "远程位",
     "obtainMethods": [
@@ -7699,6 +8050,7 @@
     "name": "松桐",
     "pinyin": "songtong",
     "pinyinInitials": "st",
+    "implementationDate": "2025-08-02T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -7720,6 +8072,7 @@
     "name": "遥",
     "pinyin": "yao",
     "pinyinInitials": "y",
+    "implementationDate": "2025-08-02T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7741,6 +8094,7 @@
     "name": "吉星",
     "pinyin": "jixing",
     "pinyinInitials": "jx",
+    "implementationDate": "2025-08-02T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7762,6 +8116,7 @@
     "name": "真言",
     "pinyin": "zhenyan",
     "pinyinInitials": "zy",
+    "implementationDate": "2025-10-09T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7784,6 +8139,7 @@
     "name": "折桠",
     "pinyin": "zheya",
     "pinyinInitials": "zy",
+    "implementationDate": "2025-10-09T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7805,6 +8161,7 @@
     "name": "冬时",
     "pinyin": "dongshi",
     "pinyinInitials": "ds",
+    "implementationDate": "2025-10-09T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7826,6 +8183,7 @@
     "name": "焰尾",
     "pinyin": "yanwei",
     "pinyinInitials": "yw",
+    "implementationDate": "2021-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7848,6 +8206,7 @@
     "name": "雪猎",
     "pinyin": "xuelie",
     "pinyinInitials": "xl",
+    "implementationDate": "2025-11-01T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -7869,6 +8228,7 @@
     "name": "娜斯提",
     "pinyin": "nasiti",
     "pinyinInitials": "nst",
+    "implementationDate": "2025-12-05T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7891,6 +8251,7 @@
     "name": "天空盒",
     "pinyin": "tiankonghe",
     "pinyinInitials": "tkh",
+    "implementationDate": "2025-12-05T12:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -7912,6 +8273,7 @@
     "name": "响石",
     "pinyin": "xiangshi",
     "pinyinInitials": "xs",
+    "implementationDate": "2025-12-05T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7933,6 +8295,7 @@
     "name": "罗德岛隐秘队",
     "pinyin": "luodedaoyinmidui",
     "pinyinInitials": "lddymd",
+    "implementationDate": "2026-06-01T12:00:00",
     "gender": "未知",
     "position": "远程位",
     "obtainMethods": [
@@ -7953,6 +8316,7 @@
     "name": "羽毛笔",
     "pinyin": "yumaobi",
     "pinyinInitials": "ymb",
+    "implementationDate": "2021-08-03T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -7975,6 +8339,7 @@
     "name": "矩",
     "pinyin": "ju",
     "pinyinInitials": "j",
+    "implementationDate": "2026-02-10T12:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -7995,6 +8360,7 @@
     "name": "风絮",
     "pinyin": "fengxu",
     "pinyinInitials": "fx",
+    "implementationDate": "2026-02-10T12:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -8016,6 +8382,7 @@
     "name": "伯塔尼",
     "pinyin": "botani",
     "pinyinInitials": "btn",
+    "implementationDate": "2026-04-07T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8037,6 +8404,7 @@
     "name": "乌啾",
     "pinyin": "wujiu",
     "pinyinInitials": "wj",
+    "implementationDate": "2026-04-07T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8058,6 +8426,7 @@
     "name": "裂响",
     "pinyin": "liexiang",
     "pinyinInitials": "lx",
+    "implementationDate": "2026-05-01T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8079,6 +8448,7 @@
     "name": "维伊",
     "pinyin": "weiyi",
     "pinyinInitials": "wy",
+    "implementationDate": "2026-05-01T12:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -8100,6 +8470,7 @@
     "name": "GALLUS²",
     "pinyin": "gallus",
     "pinyinInitials": "gallus",
+    "implementationDate": "2026-05-01T12:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -8117,6 +8488,7 @@
     "name": "可露希尔",
     "pinyin": "keluxier",
     "pinyinInitials": "klxe",
+    "implementationDate": "2026-05-01T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8138,6 +8510,7 @@
     "name": "谬因",
     "pinyin": "miuyin",
     "pinyinInitials": "my",
+    "implementationDate": "2026-07-10T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8159,6 +8532,7 @@
     "name": "极光",
     "pinyin": "jiguang",
     "pinyinInitials": "jg",
+    "implementationDate": "2021-12-21T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8180,6 +8554,7 @@
     "name": "机械师",
     "pinyin": "jixieshi",
     "pinyinInitials": "jxs",
+    "implementationDate": "2026-07-17T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -8202,6 +8577,7 @@
     "name": "佩德洛",
     "pinyin": "peideluo",
     "pinyinInitials": "pdl",
+    "implementationDate": "2026-07-10T12:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -8223,6 +8599,7 @@
     "name": "珊比",
     "pinyin": "shanbi",
     "pinyinInitials": "sb",
+    "implementationDate": "2026-08-01T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8244,6 +8621,7 @@
     "name": "时隙",
     "pinyin": "shixi",
     "pinyinInitials": "sx",
+    "implementationDate": "2026-08-01T12:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8265,6 +8643,7 @@
     "name": "嘉辛塔",
     "pinyin": "jiaxinta",
     "pinyinInitials": "jxt",
+    "implementationDate": "2026-08-01T12:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8286,6 +8665,7 @@
     "name": "瑕光",
     "pinyin": "xiaguang",
     "pinyinInitials": "xg",
+    "implementationDate": "2020-10-15T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8308,6 +8688,7 @@
     "name": "卡涅利安",
     "pinyin": "kanielian",
     "pinyinInitials": "knla",
+    "implementationDate": "2021-06-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8330,6 +8711,7 @@
     "name": "伺夜",
     "pinyin": "siye",
     "pinyinInitials": "sy",
+    "implementationDate": "2022-11-01T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -8352,6 +8734,7 @@
     "name": "远牙",
     "pinyin": "yuanya",
     "pinyinInitials": "yy",
+    "implementationDate": "2021-10-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8374,6 +8757,7 @@
     "name": "灰毫",
     "pinyin": "huihao",
     "pinyinInitials": "hh",
+    "implementationDate": "2021-10-15T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8396,6 +8780,7 @@
     "name": "掠风",
     "pinyin": "lefeng",
     "pinyinInitials": "lf",
+    "implementationDate": "2022-05-01T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -8417,6 +8802,7 @@
     "name": "絮雨",
     "pinyin": "xuyu",
     "pinyinInitials": "xy",
+    "implementationDate": "2020-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8439,6 +8825,7 @@
     "name": "水月",
     "pinyin": "shuiyue",
     "pinyinInitials": "sy",
+    "implementationDate": "2021-08-03T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -8461,6 +8848,7 @@
     "name": "松果",
     "pinyin": "songguo",
     "pinyinInitials": "sg",
+    "implementationDate": "2020-12-17T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8484,6 +8872,7 @@
     "name": "骋风",
     "pinyin": "chengfeng",
     "pinyinInitials": "cf",
+    "implementationDate": "2025-04-07T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -8505,6 +8894,7 @@
     "name": "阿罗玛",
     "pinyin": "aluoma",
     "pinyinInitials": "alm",
+    "implementationDate": "2024-04-11T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8526,6 +8916,7 @@
     "name": "蜜莓",
     "pinyin": "mimei",
     "pinyinInitials": "mm",
+    "implementationDate": "2021-11-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8547,6 +8938,7 @@
     "name": "死芒",
     "pinyin": "simang",
     "pinyinInitials": "sm",
+    "implementationDate": "2025-03-07T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8569,6 +8961,7 @@
     "name": "罗宾",
     "pinyin": "luobin",
     "pinyinInitials": "lb",
+    "implementationDate": "2020-12-17T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8591,6 +8984,7 @@
     "name": "豆苗",
     "pinyin": "doumiao",
     "pinyinInitials": "dm",
+    "implementationDate": "2021-01-05T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8614,6 +9008,7 @@
     "name": "乌有",
     "pinyin": "wuyou",
     "pinyinInitials": "wy",
+    "implementationDate": "2021-02-05T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -8636,6 +9031,7 @@
     "name": "灰烬",
     "pinyin": "huijin",
     "pinyinInitials": "hj",
+    "implementationDate": "2021-03-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8657,6 +9053,7 @@
     "name": "闪击",
     "pinyin": "shanji",
     "pinyinInitials": "sj",
+    "implementationDate": "2021-03-09T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -8678,6 +9075,7 @@
     "name": "霜华",
     "pinyin": "shuanghua",
     "pinyinInitials": "sh",
+    "implementationDate": "2021-03-09T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8699,6 +9097,7 @@
     "name": "战车",
     "pinyin": "zhanche",
     "pinyinInitials": "zc",
+    "implementationDate": "2021-03-09T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -8720,6 +9119,7 @@
     "name": "洋灰",
     "pinyin": "yanghui",
     "pinyinInitials": "yh",
+    "implementationDate": "2023-04-06T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8741,6 +9141,7 @@
     "name": "雪绒",
     "pinyin": "xuerong",
     "pinyinInitials": "xr",
+    "implementationDate": "2022-11-01T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -8762,6 +9163,7 @@
     "name": "深靛",
     "pinyin": "shendian",
     "pinyinInitials": "sd",
+    "implementationDate": "2021-06-01T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8785,6 +9187,7 @@
     "name": "异客",
     "pinyin": "yike",
     "pinyinInitials": "yk",
+    "implementationDate": "2021-04-15T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -8807,6 +9210,7 @@
     "name": "桑葚",
     "pinyin": "sangshen",
     "pinyinInitials": "ss",
+    "implementationDate": "2021-09-17T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8828,6 +9232,7 @@
     "name": "歌蕾蒂娅",
     "pinyin": "geleidiya",
     "pinyinInitials": "gldy",
+    "implementationDate": "2021-05-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8851,6 +9256,7 @@
     "name": "赤冬",
     "pinyin": "chidong",
     "pinyinInitials": "cd",
+    "implementationDate": "2021-05-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8873,6 +9279,7 @@
     "name": "夜半",
     "pinyin": "yeban",
     "pinyinInitials": "yb",
+    "implementationDate": "2022-01-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -8894,6 +9301,7 @@
     "name": "绮良",
     "pinyin": "qiliang",
     "pinyinInitials": "ql",
+    "implementationDate": "2021-06-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8916,6 +9324,7 @@
     "name": "琴柳",
     "pinyin": "qinliu",
     "pinyinInitials": "ql",
+    "implementationDate": "2021-09-17T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8937,6 +9346,7 @@
     "name": "罗比菈塔",
     "pinyin": "luobilata",
     "pinyinInitials": "lblt",
+    "implementationDate": "2021-09-17T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8959,6 +9369,7 @@
     "name": "帕拉斯",
     "pinyin": "palasi",
     "pinyinInitials": "pls",
+    "implementationDate": "2021-07-02T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -8981,6 +9392,7 @@
     "name": "龙舌兰",
     "pinyin": "longshelan",
     "pinyinInitials": "lsl",
+    "implementationDate": "2021-08-03T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -9003,6 +9415,7 @@
     "name": "波卜",
     "pinyin": "bobu",
     "pinyinInitials": "bb",
+    "implementationDate": "2024-10-09T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -9024,6 +9437,7 @@
     "name": "青枳",
     "pinyin": "qingzhi",
     "pinyinInitials": "qz",
+    "implementationDate": "2023-08-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -9046,6 +9460,7 @@
     "name": "蚀清",
     "pinyin": "shiqing",
     "pinyinInitials": "sq",
+    "implementationDate": "2021-11-01T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -9067,6 +9482,7 @@
     "name": "休谟斯",
     "pinyin": "xiumosi",
     "pinyinInitials": "xms",
+    "implementationDate": "2023-04-06T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -9089,6 +9505,7 @@
     "name": "夏栎",
     "pinyin": "xiali",
     "pinyinInitials": "xl",
+    "implementationDate": "2022-02-15T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -9110,6 +9527,7 @@
     "name": "火哨",
     "pinyin": "huoshao",
     "pinyinInitials": "hs",
+    "implementationDate": "2023-01-17T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -9131,6 +9549,7 @@
     "name": "刺玫",
     "pinyin": "cimei",
     "pinyinInitials": "cm",
+    "implementationDate": "2023-10-08T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -9152,6 +9571,7 @@
     "name": "野鬃",
     "pinyin": "yezong",
     "pinyinInitials": "yz",
+    "implementationDate": "2021-11-01T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -9175,6 +9595,7 @@
     "name": "晓歌",
     "pinyin": "xiaoge",
     "pinyinInitials": "xg",
+    "implementationDate": "2022-08-11T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -9196,6 +9617,7 @@
     "name": "隐现",
     "pinyin": "yinxian",
     "pinyinInitials": "yx",
+    "implementationDate": "2023-06-08T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -9218,6 +9640,7 @@
     "name": "折光",
     "pinyin": "zheguang",
     "pinyinInitials": "zg",
+    "implementationDate": "2023-11-01T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -9239,6 +9662,7 @@
     "name": "黑角",
     "pinyin": "heijiao",
     "pinyinInitials": "hj",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -9262,6 +9686,7 @@
     "name": "杜林",
     "pinyin": "dulin",
     "pinyinInitials": "dl",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -9286,6 +9711,7 @@
     "name": "夜刀",
     "pinyin": "yedao",
     "pinyinInitials": "yd",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -9309,6 +9735,7 @@
     "name": "巡林者",
     "pinyin": "xunlinzhe",
     "pinyinInitials": "xlz",
+    "implementationDate": "2019-04-30T10:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -9332,6 +9759,7 @@
     "name": "预备干员-近战",
     "pinyin": "yubeiganyuanjinzhan",
     "pinyinInitials": "ybgyjz",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9346,6 +9774,7 @@
     "name": "预备干员-术师",
     "pinyin": "yubeiganyuanshushi",
     "pinyinInitials": "ybgyss",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9360,6 +9789,7 @@
     "name": "预备干员-后勤",
     "pinyin": "yubeiganyuanhouqin",
     "pinyinInitials": "ybgyhq",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9374,6 +9804,7 @@
     "name": "预备干员-狙击",
     "pinyin": "yubeiganyuanjuji",
     "pinyinInitials": "ybgyjj",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9388,6 +9819,7 @@
     "name": "Sharp",
     "pinyin": "sharp",
     "pinyinInitials": "sharp",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "男",
     "position": "近战位",
     "obtainMethods": [
@@ -9410,6 +9842,7 @@
     "name": "Pith",
     "pinyin": "pith",
     "pinyinInitials": "pith",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -9432,6 +9865,7 @@
     "name": "Touch",
     "pinyin": "touch",
     "pinyinInitials": "touch",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "女",
     "position": "远程位",
     "obtainMethods": [
@@ -9454,6 +9888,7 @@
     "name": "Stormeye",
     "pinyin": "stormeye",
     "pinyinInitials": "stormeye",
+    "implementationDate": "2020-08-25T16:00:00",
     "gender": "男",
     "position": "远程位",
     "obtainMethods": [
@@ -9476,6 +9911,7 @@
     "name": "暮落",
     "pinyin": "muluo",
     "pinyinInitials": "ml",
+    "implementationDate": "2022-01-05T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9490,6 +9926,7 @@
     "name": "郁金香",
     "pinyin": "yujinxiang",
     "pinyinInitials": "yjx",
+    "implementationDate": "2022-09-27T16:00:00",
     "gender": "女",
     "position": "近战位",
     "obtainMethods": [
@@ -9511,6 +9948,7 @@
     "name": "预备干员-重装",
     "pinyin": "yubeiganyuanzhongzhuang",
     "pinyinInitials": "ybgyzz",
+    "implementationDate": "2022-09-27T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9525,6 +9963,7 @@
     "name": "预备干员-先锋(卫戍协议)",
     "pinyin": "yubeiganyuanxianfengweishuxieyi",
     "pinyinInitials": "ybgyxfwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9539,6 +9978,7 @@
     "name": "预备干员-近卫(卫戍协议)",
     "pinyin": "yubeiganyuanjinweiweishuxieyi",
     "pinyinInitials": "ybgyjwwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9553,6 +9993,7 @@
     "name": "预备干员-重装(卫戍协议)",
     "pinyin": "yubeiganyuanzhongzhuangweishuxieyi",
     "pinyinInitials": "ybgyzzwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9567,6 +10008,7 @@
     "name": "预备干员-狙击(卫戍协议)",
     "pinyin": "yubeiganyuanjujiweishuxieyi",
     "pinyinInitials": "ybgyjjwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9581,6 +10023,7 @@
     "name": "预备干员-术师(卫戍协议)",
     "pinyin": "yubeiganyuanshushiweishuxieyi",
     "pinyinInitials": "ybgysswsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9595,6 +10038,7 @@
     "name": "预备干员-医疗(卫戍协议)",
     "pinyin": "yubeiganyuanyiliaoweishuxieyi",
     "pinyinInitials": "ybgyylwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9609,6 +10053,7 @@
     "name": "预备干员-辅助(卫戍协议)",
     "pinyin": "yubeiganyuanfuzhuweishuxieyi",
     "pinyinInitials": "ybgyfzwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9623,6 +10068,7 @@
     "name": "预备干员-特种(卫戍协议)",
     "pinyin": "yubeiganyuantezhongweishuxieyi",
     "pinyinInitials": "ybgytzwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9637,6 +10083,7 @@
     "name": "郁金香(卫戍协议)",
     "pinyin": "yujinxiangweishuxieyi",
     "pinyinInitials": "yjxwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9651,6 +10098,7 @@
     "name": "Sharp(卫戍协议)",
     "pinyin": "sharpweishuxieyi",
     "pinyinInitials": "sharpwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9665,6 +10113,7 @@
     "name": "Mechanist(卫戍协议)",
     "pinyin": "mechanistweishuxieyi",
     "pinyinInitials": "mechanistwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9679,6 +10128,7 @@
     "name": "Stormeye(卫戍协议)",
     "pinyin": "stormeyeweishuxieyi",
     "pinyinInitials": "stormeyewsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9693,6 +10143,7 @@
     "name": "Pith(卫戍协议)",
     "pinyin": "pithweishuxieyi",
     "pinyinInitials": "pithwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9707,6 +10158,7 @@
     "name": "Touch(卫戍协议)",
     "pinyin": "touchweishuxieyi",
     "pinyinInitials": "touchwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9721,6 +10173,7 @@
     "name": "Raidian(卫戍协议)",
     "pinyin": "raidianweishuxieyi",
     "pinyinInitials": "raidianwsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9735,6 +10188,7 @@
     "name": "Misery(卫戍协议)",
     "pinyin": "miseryweishuxieyi",
     "pinyinInitials": "miserywsxy",
+    "implementationDate": "2024-11-15T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [
@@ -9749,6 +10203,7 @@
     "name": "盟约·辅助干员",
     "pinyin": "mengyuefuzhuganyuan",
     "pinyinInitials": "myfzgy",
+    "implementationDate": "2025-11-14T16:00:00",
     "gender": "",
     "position": "远程位",
     "obtainMethods": [
@@ -9763,6 +10218,7 @@
     "name": "领主·Sharp",
     "pinyin": "lingzhusharp",
     "pinyinInitials": "lzsharp",
+    "implementationDate": "2025-11-14T16:00:00",
     "gender": "",
     "position": "近战位",
     "obtainMethods": [

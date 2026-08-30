@@ -10,7 +10,7 @@ const metadataParams = {
   tables: 'chara=c,char_obtain=o,chara_extra_info=e',
   fields: [
     'c.charId', 'c.cn', 'c.position', 'c.nation', 'c.org', 'c.team',
-    'o.obtainMethod', 'e.sex', 'e.birthPlace', 'e.dateOfBirth', 'e.race',
+    'o.obtainMethod', 'o.cnOnlineTime', 'e.sex', 'e.birthPlace', 'e.dateOfBirth', 'e.race',
   ].join(','),
   join_on: 'c._pageName=o._pageName,c._pageName=e._pageName',
   limit: '500',
@@ -42,6 +42,7 @@ for (const { title } of metadataRows) {
     name: title.cn ?? name,
     pinyin: syllables.join(''),
     pinyinInitials: syllables.map(value => value[0]).join(''),
+    implementationDate: normalizeDateTime(title.cnOnlineTime),
     gender: title.sex ?? '',
     position: title.position ?? '',
     obtainMethods: splitWords(title.obtainMethod),
@@ -93,4 +94,12 @@ function uniqueValues(...values) {
 function parseBirthdayMonth(value) {
   const match = String(value ?? '').match(/^(1[0-2]|[1-9])月/);
   return match ? Number(match[1]) : undefined;
+}
+
+function normalizeDateTime(value) {
+  const normalized = String(value ?? '').trim().replace(' ', 'T');
+  if (!normalized) return undefined;
+  return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?$/.test(normalized)
+    ? normalized
+    : undefined;
 }

@@ -31,6 +31,7 @@ interface OperatorMetadata {
   name?: string;
   pinyin?: string;
   pinyinInitials?: string;
+  implementationDate?: string;
   gender?: string;
   position?: string;
   obtainMethods?: string[];
@@ -145,6 +146,7 @@ export class ToolboxGameDataProvider {
         subProfession: subProfessionNames[operatorId] ?? '未知分支',
         searchPinyin: profile.pinyin ?? '',
         searchPinyinInitials: profile.pinyinInitials ?? '',
+        implementationDate: profile.implementationDate,
         gender: profile.gender ?? '',
         position: profile.position ?? '',
         obtainMethods: profile.obtainMethods ?? [],

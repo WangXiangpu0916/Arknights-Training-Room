@@ -35,6 +35,7 @@ export interface OperatorDefinition {
   subProfession: string;
   searchPinyin?: string;
   searchPinyinInitials?: string;
+  implementationDate?: string;
   gender?: string;
   position?: string;
   obtainMethods?: string[];
