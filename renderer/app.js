@@ -55,7 +55,7 @@ const skillIcon = id => `../../resources/images/skill/${encodeURIComponent(id)}.
 const masteryIcon = level => `../../resources/images/mastery/m${level}.png`;
 const masteryBadge = level => `../../resources/images/mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`;
 const eliteIcon = level => `../../resources/images/elite/e${Number(level)}.png`;
-const professionIcon = name => `../../resources/images/profession/${encodeURIComponent(name)}.png`;
+const professionIcon = name => `../../resources/images/profession-hd/${encodeURIComponent(name)}.png`;
 const moduleIcon = id => `https://torappu.prts.wiki/assets/uniequip_img/${encodeURIComponent(id)}.png`;
 const skillPlaceholder = '../../resources/images/skill/placeholder.svg';
 const materialMap = () => new Map(state.gameData.materials.map(x => [x.itemId, x]));

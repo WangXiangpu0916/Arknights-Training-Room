@@ -1,0 +1,15 @@
+{
+  "source": "https://github.com/MooncellWiki/prts-design/tree/master/preview/assets/profession",
+  "resolution": "108x109",
+  "processing": "The source drop shadow was discarded; the white field was converted to transparency and the dark artwork to alpha so CSS can apply the active theme color without a background seam.",
+  "files": {
+    "先锋.png": "pioneer.png",
+    "近卫.png": "warrior.png",
+    "重装.png": "tank.png",
+    "狙击.png": "sniper.png",
+    "术师.png": "caster.png",
+    "医疗.png": "medic.png",
+    "辅助.png": "support.png",
+    "特种.png": "special.png"
+  }
+}

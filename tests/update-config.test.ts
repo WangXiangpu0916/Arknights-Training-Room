@@ -237,10 +237,21 @@ test('干员列表区分 Rank 与专精并提供默认培养排序、紧凑技�
   assert.match(renderer, /definition\.position, \.\.\.\(definition\.tags \|\| \[\]\)/);
   assert.match(renderer, /operator-watermark/);
   assert.match(renderer, /professionIcon\(definition\.profession\)/);
+  assert.match(renderer, /resources\/images\/profession-hd/);
+  assert.match(styles, /\.operator-watermark \{[^}]*filter: invert\(1\)/);
+  assert.match(styles, /data-theme="light"[^}]*operator-watermark \{[^}]*filter: none/);
+  assert.doesNotMatch(styles, /operator-watermark[^}]*mix-blend-mode/);
+  for (const profession of ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种']) {
+    const icon = readFileSync(`resources/images/profession-hd/${profession}.png`);
+    assert.equal(icon.readUInt32BE(16), 108, `${profession}职业图标应使用高清宽度`);
+    assert.equal(icon.readUInt32BE(20), 109, `${profession}职业图标应使用高清高度`);
+  }
   assert.match(renderer, /definition\.skills\.length > 3 \? 'many-skills'/);
   assert.match(styles, /\.operator-list \{[^}]*gap: 0;[^}]*border-top/);
   assert.match(styles, /\.operator-row \{[^}]*border-bottom: 1px solid var\(--line\);[^}]*border-radius: 0/);
-  assert.match(styles, /\.operator-skills\.many-skills \{[^}]*grid-template-columns: repeat\(4, 54px\)/);
+  assert.match(styles, /\.operator-skills \{[^}]*justify-self: end/);
+  assert.match(styles, /\.operator-skills\.many-skills \{[^}]*width: max-content/);
+  assert.doesNotMatch(styles, /\.operator-skills\.many-skills[^}]*grid-template-columns/);
   const filters = readFileSync('renderer/operator-filter.js', 'utf8');
   assert.match(filters, /sort: 'training-desc'/);
   assert.match(filters, /PROFESSION_ORDER/);

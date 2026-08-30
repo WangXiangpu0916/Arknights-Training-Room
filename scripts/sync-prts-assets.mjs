@@ -8,12 +8,9 @@ const imageRoot = path.join('resources', 'images');
 const skillDir = path.join(imageRoot, 'skill');
 const masteryDir = path.join(imageRoot, 'mastery');
 const eliteDir = path.join(imageRoot, 'elite');
-const professionDir = path.join(imageRoot, 'profession');
 const masteryTitles = [0, 1, 2, 3].map(level => `文件:专精 ${level} 大图.png`);
 const masteryBadgeTitles = [0, 1, 2, 3].map(level => `文件:专精_${level}_角标.png`);
 const eliteTitles = [0, 1, 2].map(level => `文件:精英 ${level} 大图.png`);
-const professions = ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种'];
-const professionTitles = professions.map(name => `文件:图标 职业 ${name}.png`);
 
 const branchUrl = new URL(api);
 branchUrl.search = new URLSearchParams({
@@ -39,7 +36,6 @@ await writeFile(
 await mkdir(skillDir, { recursive: true });
 await mkdir(masteryDir, { recursive: true });
 await mkdir(eliteDir, { recursive: true });
-await mkdir(professionDir, { recursive: true });
 
 const skillNames = JSON.parse(await readFile(path.join('resources', 'game-data', 'skill-cn.json'), 'utf8'));
 const cultivate = JSON.parse(await readFile(path.join('resources', 'game-data', 'cultivate.json'), 'utf8'));
@@ -50,7 +46,6 @@ const titles = [
   ...masteryTitles,
   ...masteryBadgeTitles,
   ...eliteTitles,
-  ...professionTitles,
   ...new Set(skillIds.map(id => `文件:技能 ${skillNames[id]}.png`)),
 ];
 
@@ -77,7 +72,6 @@ for (let index = 0; index < titles.length; index += 50) {
 const mastery = {};
 const masteryBadges = {};
 const elite = {};
-const profession = {};
 for (const [level, title] of masteryTitles.entries()) {
   const image = images.get(title);
   if (!image) throw new Error(`PRTS 缺少必需素材：${title}`);
@@ -104,15 +98,6 @@ for (const [level, title] of eliteTitles.entries()) {
   await download(image.url, localPath);
   elite[level] = manifestEntry(title, image, localPath);
 }
-for (const [index, title] of professionTitles.entries()) {
-  const image = images.get(title);
-  if (!image) throw new Error(`PRTS 缺少必需素材：${title}`);
-  const name = professions[index];
-  const localPath = path.join(professionDir, `${name}.png`);
-  await download(image.url, localPath);
-  profession[name] = manifestEntry(title, image, localPath);
-}
-
 const skills = {};
 const missing = [];
 let nextSkill = 0;
@@ -133,10 +118,10 @@ await Promise.all(Array.from({ length: 6 }, async () => {
 
 await writeFile(
   path.join(imageRoot, 'prts-assets.json'),
-  `${JSON.stringify({ source: 'https://prts.wiki', syncedAt: new Date().toISOString(), mastery, masteryBadges, elite, profession, skills, missing }, null, 2)}\n`,
+  `${JSON.stringify({ source: 'https://prts.wiki', syncedAt: new Date().toISOString(), mastery, masteryBadges, elite, skills, missing }, null, 2)}\n`,
   'utf8',
 );
-console.log(`PRTS 素材同步完成：干员资料 ${Object.keys(operatorMetadata).length}，职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，角标 ${Object.keys(masteryBadges).length}，精英 ${Object.keys(elite).length}，职业 ${Object.keys(profession).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
+console.log(`PRTS 素材同步完成：干员资料 ${Object.keys(operatorMetadata).length}，职业分支 ${Object.keys(subProfessions).length}，专精 ${Object.keys(mastery).length}，角标 ${Object.keys(masteryBadges).length}，精英 ${Object.keys(elite).length}，技能 ${Object.keys(skills).length}，缺失 ${missing.length}`);
 if (missing.length) console.log(missing.map(item => `${item.skillId} ${item.name}`).join('\n'));
 
 async function download(url, target) {
