@@ -19,12 +19,17 @@ interface RawItem {
 }
 
 interface RawCultivate {
+  evolve?: Array<Record<string, number>>;
   skills?: {
     elite?: Array<{
       name: string;
       cost: Array<Record<string, number>>;
     }>;
   };
+  uniequip?: Array<{
+    id: string;
+    cost: Array<Record<string, number>>;
+  }>;
 }
 
 interface OperatorMetadata {
@@ -40,6 +45,12 @@ interface OperatorMetadata {
   organizations?: string[];
   teams?: string[];
   birthdayMonth?: number;
+  tags?: string[];
+}
+
+interface MaterialMetadata {
+  purpose?: string;
+  description?: string;
 }
 
 const FILES = [
@@ -49,6 +60,7 @@ const FILES = [
   ['locales/cn/character.json', 'character-cn.json'],
   ['locales/cn/material.json', 'material-cn.json'],
   ['locales/cn/skill.json', 'skill-cn.json'],
+  ['locales/cn/uniequip.json', 'uniequip-cn.json'],
 ] as const;
 
 const RAW_ROOT = 'https://raw.githubusercontent.com/arkntools/arknights-toolbox-data/master/assets';
@@ -106,15 +118,17 @@ export class ToolboxGameDataProvider {
   }
 
   private async loadFrom(directory: string): Promise<GameData> {
-    const [characters, cultivate, items, characterNames, materialNames, skillNames, subProfessionNames, operatorMetadata, metadata] = await Promise.all([
+    const [characters, cultivate, items, characterNames, materialNames, skillNames, moduleNames, subProfessionNames, operatorMetadata, materialMetadata, metadata] = await Promise.all([
       this.json<Dict<RawCharacter>>(directory, 'character.json'),
       this.json<Dict<RawCultivate>>(directory, 'cultivate.json'),
       this.json<Dict<RawItem>>(directory, 'item.json'),
       this.json<Dict<string>>(directory, 'character-cn.json'),
       this.json<Dict<string>>(directory, 'material-cn.json'),
       this.json<Dict<string>>(directory, 'skill-cn.json'),
+      this.json<Dict<string>>(directory, 'uniequip-cn.json'),
       this.json<Dict<string>>(this.bundledGameDataDir(), 'subprofession-cn.json'),
       this.json<Dict<OperatorMetadata>>(this.bundledGameDataDir(), 'operator-metadata.json'),
+      this.json<Dict<MaterialMetadata>>(this.bundledGameDataDir(), 'material-metadata.json'),
       this.json<{ version: string; updatedAt: string; sourceCommit?: string }>(directory, 'data-version.json'),
     ]);
 
@@ -123,6 +137,8 @@ export class ToolboxGameDataProvider {
       name: materialNames[itemId] ?? `未知材料 ${itemId}`,
       rarity: item.rare,
       type: item.type,
+      purpose: materialMetadata[itemId]?.purpose ?? '',
+      description: materialMetadata[itemId]?.description ?? '',
       recipe: item.formula && Object.keys(item.formula).length
         ? {
             productItemId: itemId,
@@ -136,7 +152,7 @@ export class ToolboxGameDataProvider {
     for (const [operatorId, raw] of Object.entries(cultivate)) {
       const character = characters[operatorId];
       const elite = raw.skills?.elite ?? [];
-      if (!character || !elite.length || !characterNames[operatorId]) continue;
+      if (!character || !characterNames[operatorId]) continue;
       const profile = operatorMetadata[operatorId] ?? {};
       operators.push({
         operatorId,
@@ -155,6 +171,20 @@ export class ToolboxGameDataProvider {
         organizations: profile.organizations ?? [],
         teams: profile.teams ?? [],
         birthdayMonth: profile.birthdayMonth,
+        tags: profile.tags ?? [],
+        promotionRequirements: {
+          1: this.amounts(raw.evolve?.[0] ?? {}),
+          2: this.amounts(raw.evolve?.[1] ?? {}),
+        },
+        modules: (raw.uniequip ?? []).map(module => ({
+          moduleId: module.id,
+          name: moduleNames[module.id] ?? module.id,
+          requirements: {
+            1: this.amounts(module.cost[0] ?? {}),
+            2: this.amounts(module.cost[1] ?? {}),
+            3: this.amounts(module.cost[2] ?? {}),
+          },
+        })),
         skills: elite.map((skill, index) => ({
           skillId: skill.name,
           operatorId,

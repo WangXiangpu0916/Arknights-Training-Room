@@ -29,6 +29,7 @@ interface RawCharacter {
   evolvePhase?: number;
   mainSkillLevel?: number;
   skills?: Array<{ id: string; level: number }>;
+  equips?: Array<{ id: string; level: number }>;
 }
 
 interface RawCultivate {
@@ -138,6 +139,7 @@ export class SklandClient {
         elitePhase: Number(raw.evolvePhase ?? 0),
         skillLevel: Number(raw.mainSkillLevel ?? 0),
         skills: [],
+        modules: [],
       };
       current.level = Math.max(current.level, Number(raw.level ?? 0));
       current.elitePhase = Math.max(current.elitePhase, Number(raw.evolvePhase ?? 0));
@@ -148,6 +150,13 @@ export class SklandClient {
         const existing = current.skills.find(x => x.skillId === skillId);
         if (existing) existing.masteryLevel = Math.max(existing.masteryLevel, masteryLevel) as MasteryLevel;
         else current.skills.push({ skillId, masteryLevel });
+      }
+      for (const module of raw.equips ?? []) {
+        const moduleId = module.id.replace(/\[([0-9]+?)\]/g, '_$1');
+        const level = Math.max(0, Math.min(3, Number(module.level ?? 0)));
+        const existing = current.modules?.find(item => item.moduleId === moduleId);
+        if (existing) existing.level = Math.max(existing.level, level);
+        else (current.modules ??= []).push({ moduleId, level });
       }
       merged.set(operatorId, current);
     }

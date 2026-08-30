@@ -49,6 +49,8 @@ const itemIcon = id => `../../resources/images/item/${encodeURIComponent(id)}.pn
 const skillIcon = id => `../../resources/images/skill/${encodeURIComponent(id)}.png`;
 const masteryIcon = level => `../../resources/images/mastery/m${level}.png`;
 const masteryBadge = level => `../../resources/images/mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`;
+const eliteIcon = level => `../../resources/images/elite/e${Number(level)}.png`;
+const moduleIcon = id => `https://torappu.prts.wiki/assets/uniequip_img/${encodeURIComponent(id)}.png`;
 const skillPlaceholder = '../../resources/images/skill/placeholder.svg';
 const materialMap = () => new Map(state.gameData.materials.map(x => [x.itemId, x]));
 const showToast = message => {
@@ -71,8 +73,11 @@ function setBusy(button, busy, text = '处理中…') {
 }
 
 function render() {
+  document.documentElement.dataset.theme = state?.settings?.theme || 'system';
   updateChrome();
   if (page === 'dashboard') renderDashboard();
+  if (page === 'promotion') renderPromotionPlanner();
+  if (page === 'modules') renderModulePlanner();
   if (page === 'operators') renderOperators();
   if (page === 'inventory') renderInventory();
   if (page === 'settings') renderSettings();
@@ -81,6 +86,8 @@ function render() {
 function updateChrome() {
   const titles = {
     dashboard: ['当前可以专精', '基于真实仓库与加工站配方的确定性计算'],
+    promotion: ['精英化规划', '当前干员状态与真实仓库可满足的晋升'],
+    modules: ['模组规划', '已持有干员的模组开启与升级材料就绪情况'],
     operators: ['干员', '已持有干员的培养与专精状态'],
     inventory: ['仓库', '真实库存、无限供应状态与加工关系'],
     settings: ['设置', '账号、游戏数据与本地缓存'],
@@ -95,6 +102,41 @@ function updateChrome() {
     ? `<strong>${esc(state.account.nickname || `UID ${state.account.uid}`)}</strong>${state.usingCache ? '当前使用缓存数据<br>' : ''}游戏数据 ${esc(fmtTime(state.gameData.updatedAt))}`
     : `<strong>尚未连接账号</strong>游戏数据 ${esc(fmtTime(state.gameData.updatedAt))}`;
   document.querySelector('#refresh-button').disabled = !state.loggedIn;
+}
+
+function renderPromotionPlanner() {
+  if (!state.account) return renderDashboard();
+  const list = state.promotions || [];
+  content.innerHTML = `${banners()}<div class="result-summary">找到 ${list.length} 个当前可精英化干员</div>
+    ${list.length ? `<div class="planner-cards">${list.map(promotionCard).join('')}</div>` : '<div class="empty"><div><h2>当前没有可执行的精英化</h2><p>材料不足、未达到下一阶段或干员已精英 2。</p></div></div>'}`;
+  bindActions();
+}
+
+function promotionCard(candidate) {
+  return `<article class="planner-card rarity-${candidate.operator.rarity}" data-plan-kind="promotion" data-plan-key="${esc(candidate.operator.operatorId)}" role="button" tabindex="0">
+    <img class="planner-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
+    <div class="planner-copy"><div class="planner-name"><strong>${esc(candidate.operator.name)}</strong><span>${esc(candidate.operator.profession)} · ${esc(candidate.operator.subProfession)}</span></div>
+      <div class="elite-transition" aria-label="精英 ${candidate.from} 到精英 ${candidate.to}"><img src="${eliteIcon(candidate.from)}" alt="精英 ${candidate.from}"><span>→</span><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"></div></div>
+    <span class="ready-badge">材料已就绪</span>
+  </article>`;
+}
+
+function renderModulePlanner() {
+  if (!state.account) return renderDashboard();
+  const list = state.modules || [];
+  content.innerHTML = `${banners()}<div class="result-summary">找到 ${list.length} 个当前可开启或升级模组</div>
+    <p class="planner-note">模组开启仍需在游戏内完成对应任务；此处核对精英/等级门槛、现有模组等级与材料。</p>
+    ${list.length ? `<div class="planner-cards module-planner-cards">${list.map(moduleCard).join('')}</div>` : '<div class="empty"><div><h2>当前没有材料就绪的模组</h2><p>无模组、等级门槛不足、材料不足或所有模组均已 3 级。</p></div></div>'}`;
+  bindActions();
+}
+
+function moduleCard(candidate) {
+  return `<article class="planner-card module-plan-card rarity-${candidate.operator.rarity}" data-plan-kind="module" data-plan-key="${esc(candidate.operator.operatorId)}:${esc(candidate.module.moduleId)}" role="button" tabindex="0">
+    <img class="planner-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
+    <img class="module-art" src="${moduleIcon(candidate.module.moduleId)}" alt="${esc(candidate.module.name)}模组图标" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-img-fallback>
+    <div class="planner-copy"><div class="planner-name"><strong>${esc(candidate.operator.name)}</strong><span>${esc(candidate.module.name)}</span></div><div class="module-level">Lv.${candidate.from} <span>→</span> Lv.${candidate.to}</div></div>
+    <span class="ready-badge">材料已就绪</span>
+  </article>`;
 }
 
 function banners() {
@@ -231,9 +273,13 @@ function operatorRowsHtml(rows) {
     `${candidate.operator.operatorId}\u0000${candidate.skill.skillId}`,
     candidate,
   ]));
-  return rows.map(({ owned, definition }) => `<article class="operator-row">
+  return rows.map(({ owned, definition }) => `<article class="operator-row rarity-${definition.rarity}">
     <img class="operator-avatar" src="${avatar(definition.operatorId)}" alt="${esc(definition.name)}头像" data-img-fallback>
-    <div><h3>${esc(definition.name)}</h3><div class="operator-meta">${definition.rarity}★ · ${esc(definition.profession)}<br>精英 ${owned.elitePhase} · Lv.${owned.level} · 技能 Rank ${owned.skillLevel}</div></div>
+    <div class="operator-info">
+      <div class="operator-identity"><h3>${esc(definition.name)}</h3><span>${esc(definition.profession)} <i>|</i> ${esc(definition.subProfession)}</span></div>
+      <div class="operator-status"><span class="rarity-badge rarity-${definition.rarity}">${definition.rarity}★</span><span><img src="${eliteIcon(owned.elitePhase)}" alt="">精英 ${owned.elitePhase} · Lv.${owned.level}</span><span class="rank-badge">Rank ${owned.skillLevel}</span></div>
+      <div class="operator-tags">${[definition.position, ...(definition.tags || [])].filter(Boolean).map(tag => `<span>${esc(tag)}</span>`).join('')}</div>
+    </div>
     <div class="operator-skills" aria-label="${esc(definition.name)}技能专精状态">${[...definition.skills].sort((a, b) => a.index - b.index).map(skill => {
       const ownedSkill = owned.skills.find(item => item.skillId === skill.skillId);
       const candidate = available.get(`${definition.operatorId}\u0000${skill.skillId}`);
@@ -244,6 +290,7 @@ function operatorRowsHtml(rows) {
         <span class="mastery-badge" aria-hidden="true"><img class="operator-skill-mastery" src="${masteryBadge(masteryLevel)}" alt=""></span>
       </div>`;
     }).join('')}</div>
+    <div class="operator-watermark" aria-hidden="true"><strong>${esc(definition.profession)}</strong><span>${esc(definition.subProfession)}</span></div>
   </article>`).join('');
 }
 
@@ -465,6 +512,7 @@ function renderInventoryDetailContent(itemId, detail) {
     <div class="inventory-detail-header">
       <span class="inventory-detail-icon"><img src="${itemIcon(itemId)}" alt="" data-img-fallback></span>
       <h2 class="inventory-detail-name">${esc(detail.material.name)}</h2>
+      ${Number(detail.craftable) > 0 ? `<span class="craftable-badge">可合成 × ${detail.craftable}</span>` : ''}
     </div>
     <dl class="inventory-detail-meta">
       <div class="inventory-detail-row"><dt>当前数量</dt><dd>${quantity}</dd></div>
@@ -473,6 +521,14 @@ function renderInventoryDetailContent(itemId, detail) {
     <section class="inventory-detail-block">
       <h3 class="inventory-detail-subtitle">合成配方</h3>
       ${renderRecipeVisual(detail.material, state.account.inventory)}
+    </section>
+    <section class="inventory-detail-block inventory-copy-block">
+      <h3 class="inventory-detail-subtitle">用途</h3>
+      <p>${esc(detail.material.purpose || '暂无资料')}</p>
+    </section>
+    <section class="inventory-detail-block inventory-copy-block">
+      <h3 class="inventory-detail-subtitle">描述</h3>
+      <p>${esc(detail.material.description || '暂无资料')}</p>
     </section>
   </div>`;
 }
@@ -544,8 +600,9 @@ function renderSettings() {
   content.innerHTML = `${banners()}<div class="settings-grid">
     <section class="setting-card"><div><h3>森空岛账号</h3><p>${state.loggedIn ? `已连接${state.account ? ` · UID ${esc(state.account.uid)}` : ''}` : '未连接。凭据使用 Windows DPAPI 加密保存。'}</p></div><div>${state.loggedIn ? '<button class="secondary" data-action="login">重新认证</button> <button class="danger" data-action="logout">退出 / 删除认证</button>' : '<button class="primary" data-action="login">扫码连接</button>'}</div></section>
     <section class="setting-card"><div><h3>游戏数据</h3><p>最后更新：${esc(fmtTime(state.gameData.updatedAt))}<br>版本：${esc(state.gameData.version)}</p></div><button class="secondary" data-action="update-game">检查并更新</button></section>
+    <section class="setting-card"><div><h3>主题</h3><p>跟随系统会使用 Electron 原生系统主题状态并实时响应切换。</p></div><div class="radio-stack theme-options"><label><input type="radio" name="theme" value="system" ${state.settings.theme === 'system' ? 'checked' : ''}> 跟随系统</label><label><input type="radio" name="theme" value="dark" ${state.settings.theme === 'dark' ? 'checked' : ''}> 深色</label><label><input type="radio" name="theme" value="light" ${state.settings.theme === 'light' ? 'checked' : ''}> 浅色</label></div></section>
     <section class="setting-card"><div><h3>连续专精排序</h3><p>严格使用指定的六档顺序或完全倒序。</p></div><div class="radio-stack"><label><input type="radio" name="sort" value="forward" ${state.settings.continuousSort === 'forward' ? 'checked' : ''}> 连续跨度优先</label><label><input type="radio" name="sort" value="reverse" ${state.settings.continuousSort === 'reverse' ? 'checked' : ''}> 完全反向</label></div></section>
-    <section class="setting-card"><div><h3>应用更新</h3><p>当前版本 v${esc(updateState.currentVersion)}<br><span class="update-message ${updateState.phase === 'error' ? 'error' : ''}">${esc(updateState.message)}</span></p>${updateState.phase === 'downloading' ? `<div class="update-progress"><span style="width:${Math.max(0, Math.min(100, updateState.progress || 0))}%"></span></div>` : ''}</div><div>${updateActions[updateState.phase] || updateActions.idle}</div></section>
+    <section class="setting-card update-card"><div><h3>应用更新</h3><p>当前版本 v${esc(updateState.currentVersion)}<br><span class="update-message ${updateState.phase === 'error' ? 'error' : ''}">${esc(updateState.message)}</span></p>${updateState.phase === 'downloading' ? `<div class="update-progress"><span style="width:${Math.max(0, Math.min(100, updateState.progress || 0))}%"></span></div>` : ''}</div><div>${updateActions[updateState.phase] || updateActions.idle}</div></section>
     <section class="setting-card"><div><h3>启动时自动刷新</h3><p>先显示缓存结果，再在后台同步森空岛。</p></div><label class="switch"><input type="checkbox" data-auto-refresh ${state.settings.autoRefresh ? 'checked' : ''}><span></span></label></section>
     <section class="setting-card"><div><h3>缓存</h3><p>清除最近一次账号快照；不会删除登录凭据或内置游戏数据。</p></div><button class="danger" data-action="clear-cache">清理账号缓存</button></section>
   </div>`;
@@ -593,6 +650,21 @@ function bindActions() {
       openCandidate(card);
     });
   });
+  const openPlan = card => {
+    const key = card.dataset.planKey;
+    const candidate = card.dataset.planKind === 'promotion'
+      ? (state.promotions || []).find(item => item.operator.operatorId === key)
+      : (state.modules || []).find(item => `${item.operator.operatorId}:${item.module.moduleId}` === key);
+    if (candidate) showPlanCandidate(candidate, card.dataset.planKind);
+  };
+  document.querySelectorAll('[data-plan-kind]').forEach(card => {
+    card.addEventListener('click', () => openPlan(card));
+    card.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      openPlan(card);
+    });
+  });
   bindInventoryGridActions();
   bindInventoryDetailActions();
   document.querySelector('[data-unlimited-summaries]')?.addEventListener('change', async event => {
@@ -603,6 +675,7 @@ function bindActions() {
   });
   document.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click', () => handleAction(button.dataset.action, button)));
   document.querySelectorAll('input[name="sort"]').forEach(input => input.addEventListener('change', async () => { state = await api.updateSettings({ continuousSort: input.value }); render(); }));
+  document.querySelectorAll('input[name="theme"]').forEach(input => input.addEventListener('change', async () => { state = await api.updateSettings({ theme: input.value }); render(); }));
   document.querySelector('[data-auto-refresh]')?.addEventListener('change', async event => { state = await api.updateSettings({ autoRefresh: event.target.checked }); render(); });
   bindImageFallbacks();
 }
@@ -685,6 +758,20 @@ function showCandidate(candidate) {
       return `<div class="material-line"><span>${esc(materials.get(requirement.itemId)?.name || requirement.itemId)} ×${requirement.quantity}</span><span>实际 ${state.account.inventory[requirement.itemId] ?? 0}</span><span class="${step?.batches ? 'infinity' : 'success'}">${step?.unlimitedRoots.length ? '∞ 供应' : step?.batches ? `加工 ${step.batches} 次` : '满足'}</span></div>${step ? craftTree(step, materials) : ''}`;
     }).join('')}</section>`).join('')}
     ${candidate.stages.length > 1 ? `<section class="stage-block"><h3>连续专精总材料</h3>${[...totals].map(([id, quantity]) => `<div class="material-line"><span>${esc(materials.get(id)?.name || id)}</span><strong>×${quantity}</strong><span></span></div>`).join('')}</section>` : ''}`);
+}
+
+function showPlanCandidate(candidate, kind) {
+  const materials = materialMap();
+  const title = kind === 'promotion'
+    ? `${candidate.operator.name} · 精英 ${candidate.from} → 精英 ${candidate.to}`
+    : `${candidate.operator.name} · ${candidate.module.name}`;
+  const transition = kind === 'promotion'
+    ? `<div class="elite-transition modal-transition"><img src="${eliteIcon(candidate.from)}" alt="精英 ${candidate.from}"><span>→</span><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"></div>`
+    : `<div class="module-modal-heading"><img src="${moduleIcon(candidate.module.moduleId)}" alt="${esc(candidate.module.name)}"><strong>Lv.${candidate.from} → Lv.${candidate.to}</strong></div>`;
+  showModal(`<h2>${esc(title)}</h2>${transition}<section class="stage-block"><h3>所需材料</h3>${candidate.requirements.map(requirement => {
+    const step = candidate.craft.steps.find(item => item.itemId === requirement.itemId);
+    return `<div class="material-line"><span>${esc(materials.get(requirement.itemId)?.name || requirement.itemId)} ×${requirement.quantity}</span><span>实际 ${state.account.inventory[requirement.itemId] ?? 0}</span><span class="${step?.batches ? 'infinity' : 'success'}">${step?.batches ? `加工 ${step.batches} 次` : '满足'}</span></div>${step ? craftTree(step, materials) : ''}`;
+  }).join('')}</section>${kind === 'module' && candidate.from === 0 ? '<p class="planner-note">材料与等级门槛已满足；首次开启前仍需在游戏内完成该模组任务。</p>' : ''}`);
 }
 
 function craftTree(step, materials) {

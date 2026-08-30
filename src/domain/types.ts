@@ -16,7 +16,15 @@ export interface Material {
   name: string;
   rarity: number;
   type: number;
+  purpose?: string;
+  description?: string;
   recipe?: Recipe;
+}
+
+export interface ModuleDefinition {
+  moduleId: string;
+  name: string;
+  requirements: Record<1 | 2 | 3, MaterialAmount[]>;
 }
 
 export interface SkillDefinition {
@@ -44,6 +52,9 @@ export interface OperatorDefinition {
   organizations?: string[];
   teams?: string[];
   birthdayMonth?: number;
+  tags?: string[];
+  promotionRequirements?: Partial<Record<1 | 2, MaterialAmount[]>>;
+  modules?: ModuleDefinition[];
   skills: SkillDefinition[];
 }
 
@@ -58,6 +69,7 @@ export interface OwnedOperator {
   elitePhase: number;
   skillLevel: number;
   skills: OwnedSkill[];
+  modules?: Array<{ moduleId: string; level: number }>;
 }
 
 export interface AccountSnapshot {
@@ -73,6 +85,7 @@ export interface Settings {
   continuousSort: 'forward' | 'reverse';
   selectedUid?: string;
   autoRefresh: boolean;
+  theme: 'system' | 'dark' | 'light';
 }
 
 export interface CraftStep {
@@ -111,6 +124,23 @@ export interface MasteryCandidate {
   usesUnlimited: boolean;
   unlimitedRoots: string[];
   remainingInventory: Record<string, number>;
+}
+
+export interface PromotionCandidate {
+  operator: OperatorDefinition;
+  from: number;
+  to: number;
+  requirements: MaterialAmount[];
+  craft: CraftResult;
+}
+
+export interface ModuleCandidate {
+  operator: OperatorDefinition;
+  module: ModuleDefinition;
+  from: number;
+  to: number;
+  requirements: MaterialAmount[];
+  craft: CraftResult;
 }
 
 export interface GameData {

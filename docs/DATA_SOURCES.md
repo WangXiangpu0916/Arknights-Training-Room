@@ -26,6 +26,7 @@ GET  zonai.skland.com/api/v1/game/cultivate/player?uid=...
 
 - `characters[].id / level / evolvePhase / mainSkillLevel`
 - `characters[].skills[].id / level`（level 为当前 M0-M3）
+- `characters[].equips[].id / level`（当前已开启模组与等级）
 - `items[].id / count`（仓库）
 
 这条培养接口在 2026-08-18 仍更新的 `arkntools/arknights-toolbox` 中用于导入仓库和完整干员养成状态。扫码、凭据交换、刷新和签名还与 2026-07-13 更新的 `TNXG/skland-api` 交叉核验。
@@ -53,13 +54,14 @@ GET  zonai.skland.com/api/v1/game/cultivate/player?uid=...
 | 文件 | 用途 |
 |---|---|
 | `data/character.json` | 星级、职业 |
-| `data/cultivate.json` | 每干员各技能 M1/M2/M3 材料 |
+| `data/cultivate.json` | 专精、精英化与模组开启/升级材料、阶段和等级门槛 |
 | `data/item.json` | 材料等级、类型、加工配方 |
 | `locales/cn/character.json` | 官方中文干员名 |
 | `locales/cn/skill.json` | 官方中文技能名 |
 | `locales/cn/material.json` | 官方中文材料名 |
+| `locales/cn/uniequip.json` | 模组中文名 |
 
-`cultivate.skills.elite[].cost[0..2]` 分别映射 M1/M2/M3。`item.formula` 是确定输入；普通加工产出 1，芯片转换按游戏规则产出 2。随机副产物字段不进入模型。
+`cultivate.skills.elite[].cost[0..2]` 分别映射 M1/M2/M3；`cultivate.evolve` 与 `cultivate.uniequip` 分别提供精英化和模组需求。`item.formula` 是确定输入；普通加工产出 1，芯片转换按游戏规则产出 2。随机副产物字段不进入模型。
 
 “检查并更新”先把六个文件下载到旁路目录，全部完成 JSON 与领域解析后再目录交换；任一下载或解析失败时继续使用旧目录。缓存损坏则回退到安装包内置快照。
 
@@ -67,7 +69,7 @@ GET  zonai.skland.com/api/v1/game/cultivate/player?uid=...
 
 - `SklandClient` 是账号 adapter；未来可由其他账号 provider 替代，只需输出 `AccountSnapshot`。
 - `ToolboxGameDataProvider` 是静态数据 provider；业务引擎只消费统一 `GameData`，不依赖 GitHub 或网页 HTML。
-- PRTS 仅用于通过 `npm run assets:sync` 同步专精等级与技能原始 PNG 到 `resources/images`；应用运行时不联网访问 PRTS。结构化数据缺字段时仍应在 provider 层增加校验/补充，不把 HTML 结构渗入规划器。
+- PRTS 用于通过 `npm run assets:sync` 同步专精等级、技能、精英阶段图标，以及通过 Cargo 写入干员标签和材料用途/描述。模组图片由 PRTS 静态资源按真实模组 ID 懒加载；其余规划数据不依赖网页 HTML。结构化数据缺字段时仍应在 provider 层增加校验/补充，不把 HTML 结构渗入规划器。
 
 ## 参考实现
 

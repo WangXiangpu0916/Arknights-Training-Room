@@ -7,6 +7,15 @@ import {
 
 type Inventory = Record<string, number>;
 
+export function directCraftableQuantity(inventory: Inventory, recipe?: Recipe): number {
+  if (!recipe?.ingredients.length || !Number.isSafeInteger(recipe.outputQuantity) || recipe.outputQuantity <= 0) return 0;
+  const batches = Math.min(...recipe.ingredients.map(ingredient => {
+    if (!Number.isSafeInteger(ingredient.quantity) || ingredient.quantity <= 0) return 0;
+    return Math.floor(Math.max(0, inventory[ingredient.itemId] ?? 0) / ingredient.quantity);
+  }));
+  return Math.max(0, batches) * recipe.outputQuantity;
+}
+
 interface MutableRun {
   inventory: Inventory;
   roots: Set<string>;

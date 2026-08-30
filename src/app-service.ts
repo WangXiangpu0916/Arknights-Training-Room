@@ -3,7 +3,9 @@ import { LocalStore } from './data/local-store';
 import { ToolboxGameDataProvider } from './data/game-data-provider';
 import { SklandClient } from './data/skland-client';
 import { MasteryPlanner } from './engine/mastery';
-import { CraftingEngine } from './engine/crafting';
+import { PromotionPlanner } from './engine/promotion';
+import { ModulePlanner } from './engine/module';
+import { directCraftableQuantity } from './engine/crafting';
 import { unlimitedMaterialGroups } from './domain/mastery-materials';
 
 export class AppService {
@@ -34,6 +36,8 @@ export class AppService {
   async state() {
     const loggedIn = Boolean(await this.store.readCredentials());
     const planner = new MasteryPlanner(this.gameData);
+    const promotionPlanner = new PromotionPlanner(this.gameData);
+    const modulePlanner = new ModulePlanner(this.gameData);
     const unlimitedMaterials = unlimitedMaterialGroups(this.gameData);
     const single = this.account
       ? planner.singleStage(this.account.operators, this.account.inventory, this.settings.unlimitedItemIds)
@@ -63,6 +67,12 @@ export class AppService {
       continuous,
       singleReal,
       continuousReal,
+      promotions: this.account
+        ? promotionPlanner.candidates(this.account.operators, this.account.inventory)
+        : [],
+      modules: this.account
+        ? modulePlanner.candidates(this.account.operators, this.account.inventory)
+        : [],
       usingCache: Boolean(this.account && this.usingCache),
       lastError: this.lastError,
     };
@@ -112,6 +122,9 @@ export class AppService {
         .filter(id => materialIds.has(id)),
       continuousSort: patch.continuousSort === 'reverse' ? 'reverse' :
         patch.continuousSort === 'forward' ? 'forward' : this.settings.continuousSort,
+      theme: patch.theme === 'light' || patch.theme === 'dark' || patch.theme === 'system'
+        ? patch.theme
+        : this.settings.theme,
     };
     await this.store.writeSettings(this.settings);
     return this.state();
@@ -145,29 +158,8 @@ export class AppService {
     const material = this.gameData.materials.find(x => x.itemId === itemId);
     if (!material) throw new Error(`未知材料：${itemId}`);
     const inventory = this.account?.inventory ?? {};
-    const recipes = this.gameData.materials.flatMap(x => x.recipe ? [x.recipe] : []);
     const unlimited = new Set(this.settings.unlimitedItemIds);
-    const emptyProductInventory = { ...inventory, [itemId]: 0 };
-    const infinite = new CraftingEngine(recipes, unlimited).fulfill({}, [{ itemId, quantity: 1 }]);
-    let craftable: number | '∞';
-    if (infinite.feasible && infinite.unlimitedRoots.length) {
-      craftable = '∞';
-    } else {
-      let low = 0;
-      let high = 1;
-      const canCraft = (quantity: number) => new CraftingEngine(recipes, unlimited)
-        .fulfill(emptyProductInventory, [{ itemId, quantity }]).feasible;
-      while (high < 1_000_000 && canCraft(high)) {
-        low = high;
-        high *= 2;
-      }
-      while (low + 1 < high) {
-        const middle = Math.floor((low + high) / 2);
-        if (canCraft(middle)) low = middle;
-        else high = middle;
-      }
-      craftable = low;
-    }
+    const craftable = directCraftableQuantity(inventory, material.recipe);
     const parents = this.gameData.materials.filter(x =>
       x.recipe?.ingredients.some(ingredient => ingredient.itemId === itemId),
     );
@@ -176,7 +168,7 @@ export class AppService {
       realQuantity: inventory[itemId] ?? 0,
       unlimited: unlimited.has(itemId),
       craftable,
-      planningAvailable: craftable === '∞' ? '∞' : (inventory[itemId] ?? 0) + craftable,
+      planningAvailable: (inventory[itemId] ?? 0) + craftable,
       parents,
     };
   }

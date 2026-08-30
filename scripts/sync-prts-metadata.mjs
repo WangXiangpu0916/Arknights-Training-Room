@@ -9,7 +9,7 @@ const metadataParams = {
   format: 'json',
   tables: 'chara=c,char_obtain=o,chara_extra_info=e',
   fields: [
-    'c.charId', 'c.cn', 'c.position', 'c.nation', 'c.org', 'c.team',
+    'c.charId', 'c.cn', 'c.position', 'c.tag', 'c.nation', 'c.org', 'c.team',
     'o.obtainMethod', 'o.cnOnlineTime', 'e.sex', 'e.birthPlace', 'e.dateOfBirth', 'e.race',
   ].join(','),
   join_on: 'c._pageName=o._pageName,c._pageName=e._pageName',
@@ -51,6 +51,7 @@ for (const { title } of metadataRows) {
     organizations: uniqueValues(title.nation, title.org),
     teams: scalarValues(title.team),
     birthdayMonth: parseBirthdayMonth(title.dateOfBirth),
+    tags: splitWords(title.tag),
   };
 }
 
@@ -60,6 +61,56 @@ await writeFile(
   'utf8',
 );
 console.log(`PRTS 干员资料同步完成：${Object.keys(operatorMetadata).length}`);
+
+const itemRows = [];
+for (let offset = 0; ; offset += 500) {
+  const url = new URL(api);
+  url.search = new URLSearchParams({
+    action: 'cargoquery',
+    format: 'json',
+    tables: 'item',
+    fields: 'itemId,purpose,description',
+    limit: '500',
+    offset: String(offset),
+  });
+  const response = await request(url);
+  if (!response.ok) throw new Error(`PRTS 材料资料请求失败：HTTP ${response.status}`);
+  const payload = await response.json();
+  if (payload.error) throw new Error(`PRTS 材料资料请求失败：${payload.error.info}`);
+  const rows = payload.cargoquery ?? [];
+  itemRows.push(...rows);
+  if (rows.length < 500) break;
+}
+
+const knownMaterialIds = new Set(Object.keys(JSON.parse(
+  await readFile(path.join('resources', 'game-data', 'material-cn.json'), 'utf8'),
+)));
+const materialMetadata = {};
+for (const { title } of itemRows) {
+  const itemId = String(title.itemId ?? '').trim();
+  if (!knownMaterialIds.has(itemId)) continue;
+  materialMetadata[itemId] = {
+    purpose: plainText(title.purpose),
+    description: plainText(title.description),
+  };
+}
+await writeFile(
+  path.join('resources', 'game-data', 'material-metadata.json'),
+  `${JSON.stringify(materialMetadata, null, 2)}\n`,
+  'utf8',
+);
+
+const moduleResponse = await request(
+  'https://raw.githubusercontent.com/arkntools/arknights-toolbox-data/master/assets/locales/cn/uniequip.json',
+);
+if (!moduleResponse.ok) throw new Error(`模组名称请求失败：HTTP ${moduleResponse.status}`);
+const moduleNames = await moduleResponse.json();
+await writeFile(
+  path.join('resources', 'game-data', 'uniequip-cn.json'),
+  `${JSON.stringify(moduleNames, null, 2)}\n`,
+  'utf8',
+);
+console.log(`PRTS 材料资料同步完成：${Object.keys(materialMetadata).length}；模组名称 ${Object.keys(moduleNames).length}`);
 
 async function request(url) {
   let error;
@@ -102,4 +153,17 @@ function normalizeDateTime(value) {
   return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?$/.test(normalized)
     ? normalized
     : undefined;
+}
+
+function plainText(value) {
+  return String(value ?? '')
+    .replace(/<br\s*\/?\s*>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\[\[(?:[^|\]]+\|)?([^\]]+)\]\]/g, '$1')
+    .replace(/'{2,}/g, '')
+    .replace(/{{[^{}]*}}/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/\s*\n\s*/g, '\n')
+    .trim();
 }

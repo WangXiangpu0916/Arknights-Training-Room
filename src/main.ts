@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, nativeTheme, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import path from 'node:path';
 import { writeFile } from 'node:fs/promises';
@@ -40,6 +40,26 @@ function setUpdateState(patch: Partial<UpdateState>): UpdateState {
   return updateState;
 }
 
+function friendlyUpdateError(error: unknown, action = '检查更新'): string {
+  const detail = error instanceof Error ? error.message : String(error);
+  if (/\b404\b|not found/i.test(detail)) return `${action}失败：GitHub 发布源当前不可用（HTTP 404），请稍后重试。`;
+  if (/ENOTFOUND|EAI_AGAIN|ECONNRESET|ETIMEDOUT|network|fetch failed/i.test(detail)) {
+    return `${action}失败：无法连接 GitHub，请检查网络后重试。`;
+  }
+  return `${action}失败：暂时无法获取版本信息，请稍后重试。`;
+}
+
+function reportUpdateError(event: string, error: unknown, action: string): UpdateState {
+  const detail = error instanceof Error ? `${error.name}: ${error.message}\n${error.stack ?? ''}` : String(error);
+  void service?.store.log(event, detail);
+  return setUpdateState({ phase: 'error', message: friendlyUpdateError(error, action) });
+}
+
+function applyTheme(theme: 'system' | 'dark' | 'light'): void {
+  nativeTheme.themeSource = theme;
+  mainWindow?.webContents.send('theme:changed', { theme, dark: nativeTheme.shouldUseDarkColors });
+}
+
 function configureUpdater(): void {
   if (!updateSupported) return;
   autoUpdater.autoDownload = false;
@@ -50,7 +70,7 @@ function configureUpdater(): void {
   autoUpdater.on('update-available', info => setUpdateState({ phase: 'available', message: `发现新测试版本 v${info.version}，可选择下载更新。`, availableVersion: info.version, progress: undefined }));
   autoUpdater.on('download-progress', progress => setUpdateState({ phase: 'downloading', message: `正在下载 v${updateState.availableVersion ?? ''}…`, progress: Math.round(progress.percent) }));
   autoUpdater.on('update-downloaded', info => setUpdateState({ phase: 'ready', message: `v${info.version} 已下载，重启应用即可安装。`, availableVersion: info.version, progress: 100 }));
-  autoUpdater.on('error', error => setUpdateState({ phase: 'error', message: `更新失败：${error.message}` }));
+  autoUpdater.on('error', error => reportUpdateError('auto-update-error', error, '更新'));
 }
 
 function registerIpc(): void {
@@ -83,6 +103,7 @@ function registerIpc(): void {
   });
   ipcMain.handle('settings:update', async (_event, settings) => {
     const result = await service.updateSettings(settings);
+    applyTheme(result.settings.theme);
     notifyStateChanged();
     return result;
   });
@@ -98,7 +119,7 @@ function registerIpc(): void {
     try {
       await autoUpdater.checkForUpdates();
     } catch (error) {
-      setUpdateState({ phase: 'error', message: `检查更新失败：${error instanceof Error ? error.message : String(error)}` });
+      reportUpdateError('update-check-failure', error, '检查更新');
     }
     return updateState;
   });
@@ -108,7 +129,7 @@ function registerIpc(): void {
       setUpdateState({ phase: 'downloading', message: `正在下载 v${updateState.availableVersion ?? ''}…`, progress: 0 });
       await autoUpdater.downloadUpdate();
     } catch (error) {
-      setUpdateState({ phase: 'error', message: `下载更新失败：${error instanceof Error ? error.message : String(error)}` });
+      reportUpdateError('update-download-failure', error, '下载更新');
     }
     return updateState;
   });
@@ -136,7 +157,7 @@ async function createWindow(): Promise<void> {
     fullscreenable: false,
     title: '训练室',
     icon: path.join(app.getAppPath(), 'build', 'icon.png'),
-    backgroundColor: '#101317',
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#101317' : '#edf2f6',
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -229,10 +250,11 @@ app.whenReady().then(async () => {
   app.setAppUserModelId('io.github.arknights.trainingroom');
   service = new AppService(new LocalStore());
   await service.initialize();
+  const state = await service.state();
+  applyTheme(state.settings.theme);
   configureUpdater();
   registerIpc();
   await createWindow();
-  const state = await service.state();
   if (state.loggedIn && state.account && state.settings.autoRefresh) {
     service.refreshAccount().then(notifyStateChanged).catch(() => notifyStateChanged());
   }

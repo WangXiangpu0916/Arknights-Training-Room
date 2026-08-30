@@ -172,3 +172,64 @@ test('专精候选竖线直接按真实星级使用游戏稀有度配色', () =>
   assert.match(styles, /\.candidate\.rarity-6 \{[^}]*linear-gradient\(180deg, #C82A36 0%, #FF9433 100%\)[^}]*background-size: 3px 100%/);
   assert.doesNotMatch(styles, /\.candidate\.rarity-6 \{[^}]*linear-gradient\(90deg/);
 });
+
+test('精英化与模组规划是同级页面并使用真实图标和独立状态', () => {
+  const html = readFileSync('renderer/index.html', 'utf8');
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  assert.match(html, /data-page="promotion"[^>]*>[^<]*<span>[^<]*<\/span>精英化规划/);
+  assert.match(html, /data-page="modules"[^>]*>[^<]*<span>[^<]*<\/span>模组规划/);
+  assert.match(renderer, /state\.promotions/);
+  assert.match(renderer, /state\.modules/);
+  assert.match(renderer, /resources\/images\/elite\/e\$\{Number\(level\)\}\.png/);
+  assert.match(renderer, /torappu\.prts\.wiki\/assets\/uniequip_img/);
+  assert.match(renderer, /candidate\.module\.moduleId/);
+});
+
+test('仓库详情栏共享页面滚动并展示动态 PRTS 文本与固定可合成标签', () => {
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(renderer, /detail\.material\.purpose/);
+  assert.match(renderer, /detail\.material\.description/);
+  assert.match(renderer, /可合成 × \$\{detail\.craftable\}/);
+  assert.match(styles, /\.inventory-detail \{[^}]*position: static;[^}]*overflow: visible/);
+  assert.doesNotMatch(styles, /\.inventory-detail \{[^}]*overflow: auto/);
+  assert.match(styles, /\.craftable-badge \{[^}]*position: absolute/);
+  assert.match(styles, /\.inventory-copy-block p \{[^}]*overflow-wrap: anywhere;[^}]*word-break: break-word/);
+  const metadata = JSON.parse(readFileSync('resources/game-data/material-metadata.json', 'utf8'));
+  assert.equal(metadata['31094'].purpose, '具备良好光学性能和物理性能的特种光学材料。用于高级强化场合。');
+  assert.ok(metadata['30023'].description.length > 30);
+});
+
+test('主题使用 Electron nativeTheme 三态并完整定义浅色层级', () => {
+  const main = readFileSync('src/main.ts', 'utf8');
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(main, /nativeTheme\.themeSource = theme/);
+  assert.match(renderer, /name="theme" value="system"/);
+  assert.match(renderer, /name="theme" value="dark"/);
+  assert.match(renderer, /name="theme" value="light"/);
+  assert.match(styles, /:root\[data-theme="light"\]/);
+  assert.match(styles, /@media \(prefers-color-scheme: light\)/);
+  assert.match(styles, /--bg: #edf2f6/);
+});
+
+test('更新异常被记录并转换成短消息，设置卡片可断开任意长字符串', () => {
+  const main = readFileSync('src/main.ts', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(main, /friendlyUpdateError/);
+  assert.match(main, /service\?\.store\.log\(event, detail\)/);
+  assert.doesNotMatch(main, /message: `检查更新失败：\$\{error instanceof Error \? error\.message/);
+  assert.match(styles, /\.update-message \{[^}]*max-width: 100%;[^}]*overflow-wrap: anywhere;[^}]*word-break: break-word/);
+  assert.match(styles, /\.setting-card \{[^}]*grid-template-columns: minmax\(0, 1fr\) auto/);
+});
+
+test('干员卡片区分 Rank 与专精并提供全星级徽标、标签和职业水印', () => {
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(renderer, /Rank \$\{owned\.skillLevel\}/);
+  assert.match(renderer, /masteryBadge\(masteryLevel\)/);
+  assert.match(renderer, /definition\.position, \.\.\.\(definition\.tags \|\| \[\]\)/);
+  assert.match(renderer, /operator-watermark/);
+  for (const rarity of [1, 2, 3, 4, 5, 6]) assert.match(styles, new RegExp(`\\.rarity-badge\\.rarity-${rarity}`));
+  assert.match(styles, /\.rarity-badge\.rarity-6 \{[^}]*linear-gradient/);
+});

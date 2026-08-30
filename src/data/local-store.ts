@@ -7,6 +7,7 @@ const DEFAULT_SETTINGS: Settings = {
   unlimitedItemIds: [],
   continuousSort: 'forward',
   autoRefresh: false,
+  theme: 'system',
 };
 
 export interface StoredCredentials {
@@ -37,6 +38,7 @@ export class LocalStore {
         ? value.unlimitedItemIds.filter(x => typeof x === 'string')
         : [],
       continuousSort: value?.continuousSort === 'reverse' ? 'reverse' : 'forward',
+      theme: value?.theme === 'dark' || value?.theme === 'light' ? value.theme : 'system',
     };
   }
 
@@ -52,7 +54,13 @@ export class LocalStore {
       || !Array.isArray(value.operators)
       || !value.inventory
       || typeof value.inventory !== 'object') return null;
-    return value as AccountSnapshot;
+    return {
+      ...value,
+      operators: value.operators.map(operator => ({
+        ...operator,
+        modules: Array.isArray(operator.modules) ? operator.modules : [],
+      })),
+    } as AccountSnapshot;
   }
 
   writeAccount(account: AccountSnapshot): Promise<void> {

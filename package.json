@@ -1,6 +1,6 @@
 {
   "name": "arknights-training-room",
-  "version": "0.0.18-beta.5",
+  "version": "0.0.19-beta.1",
   "description": "训练室（测试版）：明日方舟本地专精规划桌面应用",
   "repository": "https://github.com/WangXiangpu0916/Arknights-Training-Room.git",
   "main": "dist/src/main.js",

@@ -1,6 +1,6 @@
 {
   "source": "https://prts.wiki",
-  "syncedAt": "2026-08-27T09:37:26.526Z",
+  "syncedAt": "2026-08-30T06:08:04.903Z",
   "mastery": {
     "0": {
       "prtsTitle": "文件:专精 0 大图.png",
@@ -35,25 +35,55 @@
       "sha1": "3fd2f0a3bd325b903d7244656f5ad711c9d53341"
     }
   },
+  "masteryBadges": {
+    "0": {
+      "prtsTitle": "文件:专精_0_角标.png",
+      "localPath": "resources/images/mastery/专精_0_角标.png",
+      "cached": true
+    },
+    "1": {
+      "prtsTitle": "文件:专精_1_角标.png",
+      "localPath": "resources/images/mastery/专精_1_角标.png",
+      "cached": true
+    },
+    "2": {
+      "prtsTitle": "文件:专精_2_角标.png",
+      "localPath": "resources/images/mastery/专精_2_角标.png",
+      "cached": true
+    },
+    "3": {
+      "prtsTitle": "文件:专精_3_角标.png",
+      "localPath": "resources/images/mastery/专精_3_角标.png",
+      "cached": true
+    }
+  },
+  "elite": {
+    "0": {
+      "prtsTitle": "文件:精英 0 大图.png",
+      "sourceUrl": "https://media.prts.wiki/c/c5/%E7%B2%BE%E8%8B%B1_0_%E5%A4%A7%E5%9B%BE.png",
+      "localPath": "resources/images/elite/e0.png",
+      "width": 256,
+      "height": 166,
+      "sha1": "03195aad3fb4c5f56a8390b079e9e00336e8bbeb"
+    },
+    "1": {
+      "prtsTitle": "文件:精英 1 大图.png",
+      "sourceUrl": "https://media.prts.wiki/d/d7/%E7%B2%BE%E8%8B%B1_1_%E5%A4%A7%E5%9B%BE.png",
+      "localPath": "resources/images/elite/e1.png",
+      "width": 256,
+      "height": 167,
+      "sha1": "50be187836ca2087a12f1700bcac78c1dd4fd9f1"
+    },
+    "2": {
+      "prtsTitle": "文件:精英 2 大图.png",
+      "sourceUrl": "https://media.prts.wiki/5/5d/%E7%B2%BE%E8%8B%B1_2_%E5%A4%A7%E5%9B%BE.png",
+      "localPath": "resources/images/elite/e2.png",
+      "width": 256,
+      "height": 213,
+      "sha1": "2a1fe62b506fdec9beb909f28f5f487c73cf8a0a"
+    }
+  },
   "skills": {
-    "skchr_absin_1": {
-      "name": "执法模式",
-      "prtsTitle": "文件:技能 执法模式.png",
-      "sourceUrl": "https://media.prts.wiki/8/8e/%E6%8A%80%E8%83%BD_%E6%89%A7%E6%B3%95%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_absin_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "08dcb9da56ca96181287b7f58bfea40898877e57"
-    },
-    "skchr_absin_2": {
-      "name": "终结连射",
-      "prtsTitle": "文件:技能 终结连射.png",
-      "sourceUrl": "https://media.prts.wiki/4/43/%E6%8A%80%E8%83%BD_%E7%BB%88%E7%BB%93%E8%BF%9E%E5%B0%84.png",
-      "localPath": "resources/images/skill/skchr_absin_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "5a41015b4eef2f65e33816c631a485eb11a79661"
-    },
     "skchr_aglina_1": {
       "name": "秘杖·速充模式",
       "prtsTitle": "文件:技能 秘杖·速充模式.png",
@@ -71,6 +101,24 @@
       "width": 128,
       "height": 128,
       "sha1": "1a955573aa022ca24c8395f1daaef258a4a5feb2"
+    },
+    "skchr_absin_1": {
+      "name": "执法模式",
+      "prtsTitle": "文件:技能 执法模式.png",
+      "sourceUrl": "https://media.prts.wiki/8/8e/%E6%8A%80%E8%83%BD_%E6%89%A7%E6%B3%95%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_absin_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "08dcb9da56ca96181287b7f58bfea40898877e57"
+    },
+    "skchr_absin_2": {
+      "name": "终结连射",
+      "prtsTitle": "文件:技能 终结连射.png",
+      "sourceUrl": "https://media.prts.wiki/4/43/%E6%8A%80%E8%83%BD_%E7%BB%88%E7%BB%93%E8%BF%9E%E5%B0%84.png",
+      "localPath": "resources/images/skill/skchr_absin_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "5a41015b4eef2f65e33816c631a485eb11a79661"
     },
     "skchr_aglina_2": {
       "name": "秘杖·微粒模式",
@@ -90,15 +138,6 @@
       "height": 128,
       "sha1": "03b782426cac2299769ad40d45028fa4733a482e"
     },
-    "skchr_aglina_3": {
-      "name": "秘杖·反重力模式",
-      "prtsTitle": "文件:技能 秘杖·反重力模式.png",
-      "sourceUrl": "https://media.prts.wiki/3/39/%E6%8A%80%E8%83%BD_%E7%A7%98%E6%9D%96%C2%B7%E5%8F%8D%E9%87%8D%E5%8A%9B%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_aglina_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "d5bad042d00c75d9daf24cd096a8a8057fb9f24b"
-    },
     "skchr_aglna2_1": {
       "name": "极速送达",
       "prtsTitle": "文件:技能 极速送达.png",
@@ -107,6 +146,15 @@
       "width": 128,
       "height": 128,
       "sha1": "e047248f369dee32b7dd6636af1985355e4b0d9f"
+    },
+    "skchr_aglina_3": {
+      "name": "秘杖·反重力模式",
+      "prtsTitle": "文件:技能 秘杖·反重力模式.png",
+      "sourceUrl": "https://media.prts.wiki/3/39/%E6%8A%80%E8%83%BD_%E7%A7%98%E6%9D%96%C2%B7%E5%8F%8D%E9%87%8D%E5%8A%9B%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_aglina_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "d5bad042d00c75d9daf24cd096a8a8057fb9f24b"
     },
     "skchr_aglna2_2": {
       "name": "重力自定义",
@@ -144,14 +192,14 @@
       "height": 128,
       "sha1": "447bd23ff8bd3e4fd73087a755493dec436d5991"
     },
-    "skchr_akafyu_1": {
-      "name": "信影流·雷刀之势",
-      "prtsTitle": "文件:技能 信影流·雷刀之势.png",
-      "sourceUrl": "https://media.prts.wiki/c/ce/%E6%8A%80%E8%83%BD_%E4%BF%A1%E5%BD%B1%E6%B5%81%C2%B7%E9%9B%B7%E5%88%80%E4%B9%8B%E5%8A%BF.png",
-      "localPath": "resources/images/skill/skchr_akafyu_1.png",
+    "skchr_akafyu_2": {
+      "name": "信影流·十文字胜",
+      "prtsTitle": "文件:技能 信影流·十文字胜.png",
+      "sourceUrl": "https://media.prts.wiki/2/28/%E6%8A%80%E8%83%BD_%E4%BF%A1%E5%BD%B1%E6%B5%81%C2%B7%E5%8D%81%E6%96%87%E5%AD%97%E8%83%9C.png",
+      "localPath": "resources/images/skill/skchr_akafyu_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "f2bd178162f1b5959e3b5d59e77d0427ee37695d"
+      "sha1": "acd665f57ef4106e67c19e6d5887bbfa4a16dac3"
     },
     "skchr_agoat2_3": {
       "name": "火山回响",
@@ -162,14 +210,23 @@
       "height": 128,
       "sha1": "d609e243e1eab211ccf2dc5d39659941164797df"
     },
-    "skchr_akafyu_2": {
-      "name": "信影流·十文字胜",
-      "prtsTitle": "文件:技能 信影流·十文字胜.png",
-      "sourceUrl": "https://media.prts.wiki/2/28/%E6%8A%80%E8%83%BD_%E4%BF%A1%E5%BD%B1%E6%B5%81%C2%B7%E5%8D%81%E6%96%87%E5%AD%97%E8%83%9C.png",
-      "localPath": "resources/images/skill/skchr_akafyu_2.png",
+    "skchr_akafyu_1": {
+      "name": "信影流·雷刀之势",
+      "prtsTitle": "文件:技能 信影流·雷刀之势.png",
+      "sourceUrl": "https://media.prts.wiki/c/ce/%E6%8A%80%E8%83%BD_%E4%BF%A1%E5%BD%B1%E6%B5%81%C2%B7%E9%9B%B7%E5%88%80%E4%B9%8B%E5%8A%BF.png",
+      "localPath": "resources/images/skill/skchr_akafyu_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "acd665f57ef4106e67c19e6d5887bbfa4a16dac3"
+      "sha1": "f2bd178162f1b5959e3b5d59e77d0427ee37695d"
+    },
+    "skchr_alanna_1": {
+      "name": "气动增压",
+      "prtsTitle": "文件:技能 气动增压.png",
+      "sourceUrl": "https://media.prts.wiki/e/ee/%E6%8A%80%E8%83%BD_%E6%B0%94%E5%8A%A8%E5%A2%9E%E5%8E%8B.png",
+      "localPath": "resources/images/skill/skchr_alanna_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "a9f8dc80459c16085146b228d9bd15cc5af25e0e"
     },
     "skchr_akkord_1": {
       "name": "反拍重音",
@@ -189,15 +246,6 @@
       "height": 128,
       "sha1": "48702a320b3ba5eebb8bae8fff3801cd24292c02"
     },
-    "skchr_alanna_1": {
-      "name": "气动增压",
-      "prtsTitle": "文件:技能 气动增压.png",
-      "sourceUrl": "https://media.prts.wiki/e/ee/%E6%8A%80%E8%83%BD_%E6%B0%94%E5%8A%A8%E5%A2%9E%E5%8E%8B.png",
-      "localPath": "resources/images/skill/skchr_alanna_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "a9f8dc80459c16085146b228d9bd15cc5af25e0e"
-    },
     "skchr_alanna_2": {
       "name": "“万斤顶”",
       "prtsTitle": "文件:技能 “万斤顶”.png",
@@ -207,15 +255,6 @@
       "height": 128,
       "sha1": "7bb5866c0d3a04ea7f73e14ecc972bc58f45aa05"
     },
-    "skchr_almond_1": {
-      "name": "磁力抓取",
-      "prtsTitle": "文件:技能 磁力抓取.png",
-      "sourceUrl": "https://media.prts.wiki/2/2c/%E6%8A%80%E8%83%BD_%E7%A3%81%E5%8A%9B%E6%8A%93%E5%8F%96.png",
-      "localPath": "resources/images/skill/skchr_almond_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "2d422fb2cd37a5d933939c9ee74c7b09189d4c63"
-    },
     "skchr_almond_2": {
       "name": "强力牵引",
       "prtsTitle": "文件:技能 强力牵引.png",
@@ -224,6 +263,15 @@
       "width": 128,
       "height": 128,
       "sha1": "f4d363cf3e40e9a4c3cc54c1adec664f8bccc1a5"
+    },
+    "skchr_almond_1": {
+      "name": "磁力抓取",
+      "prtsTitle": "文件:技能 磁力抓取.png",
+      "sourceUrl": "https://media.prts.wiki/2/2c/%E6%8A%80%E8%83%BD_%E7%A3%81%E5%8A%9B%E6%8A%93%E5%8F%96.png",
+      "localPath": "resources/images/skill/skchr_almond_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "2d422fb2cd37a5d933939c9ee74c7b09189d4c63"
     },
     "skchr_amgoat_1": {
       "name": "二重咏唱",
@@ -243,15 +291,6 @@
       "height": 128,
       "sha1": "11ccd6a9edcc5e1725a86e15212daf306c0a9462"
     },
-    "skchr_amgoat_3": {
-      "name": "火山",
-      "prtsTitle": "文件:技能 火山.png",
-      "sourceUrl": "https://media.prts.wiki/f/fb/%E6%8A%80%E8%83%BD_%E7%81%AB%E5%B1%B1.png",
-      "localPath": "resources/images/skill/skchr_amgoat_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "b9d69974563d4a76a9090cac492c005ba402aa45"
-    },
     "skchr_amiya2_1": {
       "name": "影霄·奔夜",
       "prtsTitle": "文件:技能 影霄·奔夜.png",
@@ -260,6 +299,15 @@
       "width": 128,
       "height": 128,
       "sha1": "3a579c9e835908b47a144bfe1f633473e98c104b"
+    },
+    "skchr_amgoat_3": {
+      "name": "火山",
+      "prtsTitle": "文件:技能 火山.png",
+      "sourceUrl": "https://media.prts.wiki/f/fb/%E6%8A%80%E8%83%BD_%E7%81%AB%E5%B1%B1.png",
+      "localPath": "resources/images/skill/skchr_amgoat_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "b9d69974563d4a76a9090cac492c005ba402aa45"
     },
     "skchr_amiya2_2": {
       "name": "影霄·绝影",
@@ -297,6 +345,15 @@
       "height": 128,
       "sha1": "96654ec98e24d459366f934e03be206f73655003"
     },
+    "skchr_amoris_2": {
+      "name": "如麦般生长",
+      "prtsTitle": "文件:技能 如麦般生长.png",
+      "sourceUrl": "https://media.prts.wiki/d/df/%E6%8A%80%E8%83%BD_%E5%A6%82%E9%BA%A6%E8%88%AC%E7%94%9F%E9%95%BF.png",
+      "localPath": "resources/images/skill/skchr_amoris_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "1859c37330138273319e76ab08bb759a6ed18cd1"
+    },
     "skchr_amiya_3": {
       "name": "奇美拉",
       "prtsTitle": "文件:技能 奇美拉.png",
@@ -315,15 +372,6 @@
       "height": 128,
       "sha1": "498cf149f65fca2ee6899b9f1bf2a4fe8727b66d"
     },
-    "skchr_amoris_2": {
-      "name": "如麦般生长",
-      "prtsTitle": "文件:技能 如麦般生长.png",
-      "sourceUrl": "https://media.prts.wiki/d/df/%E6%8A%80%E8%83%BD_%E5%A6%82%E9%BA%A6%E8%88%AC%E7%94%9F%E9%95%BF.png",
-      "localPath": "resources/images/skill/skchr_amoris_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "1859c37330138273319e76ab08bb759a6ed18cd1"
-    },
     "skchr_angel2_1": {
       "name": "天空大扫除",
       "prtsTitle": "文件:技能 天空大扫除.png",
@@ -332,33 +380,6 @@
       "width": 128,
       "height": 128,
       "sha1": "25d875465975871490487d4492a7e736eb2fcce2"
-    },
-    "skchr_angel_1": {
-      "name": "冲锋模式",
-      "prtsTitle": "文件:技能 冲锋模式.png",
-      "sourceUrl": "https://media.prts.wiki/3/3d/%E6%8A%80%E8%83%BD_%E5%86%B2%E9%94%8B%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_angel_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "7e5779f53d23c0762606f73465fe30d7a017c84b"
-    },
-    "skchr_angel2_2": {
-      "name": "开火成瘾症",
-      "prtsTitle": "文件:技能 开火成瘾症.png",
-      "sourceUrl": "https://media.prts.wiki/0/01/%E6%8A%80%E8%83%BD_%E5%BC%80%E7%81%AB%E6%88%90%E7%98%BE%E7%97%87.png",
-      "localPath": "resources/images/skill/skchr_angel2_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "ea9039dd629315ffacef40f7209f8176179802b9"
-    },
-    "skchr_angel_2": {
-      "name": "扫射模式",
-      "prtsTitle": "文件:技能 扫射模式.png",
-      "sourceUrl": "https://media.prts.wiki/e/e6/%E6%8A%80%E8%83%BD_%E6%89%AB%E5%B0%84%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_angel_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "c57458baf796ff5ceecb48cc19c5cb2855b300a9"
     },
     "skchr_angel2_3": {
       "name": "使命必达！",
@@ -369,14 +390,32 @@
       "height": 128,
       "sha1": "fdca34ebfaccebaf8dd9f5edd98d0fd654800608"
     },
-    "skchr_angel_3": {
-      "name": "过载模式",
-      "prtsTitle": "文件:技能 过载模式.png",
-      "sourceUrl": "https://media.prts.wiki/6/64/%E6%8A%80%E8%83%BD_%E8%BF%87%E8%BD%BD%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_angel_3.png",
+    "skchr_angel2_2": {
+      "name": "开火成瘾症",
+      "prtsTitle": "文件:技能 开火成瘾症.png",
+      "sourceUrl": "https://media.prts.wiki/0/01/%E6%8A%80%E8%83%BD_%E5%BC%80%E7%81%AB%E6%88%90%E7%98%BE%E7%97%87.png",
+      "localPath": "resources/images/skill/skchr_angel2_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "1832a2f74c952a00000e0ab98a28f129f85244fb"
+      "sha1": "ea9039dd629315ffacef40f7209f8176179802b9"
+    },
+    "skchr_angel_1": {
+      "name": "冲锋模式",
+      "prtsTitle": "文件:技能 冲锋模式.png",
+      "sourceUrl": "https://media.prts.wiki/3/3d/%E6%8A%80%E8%83%BD_%E5%86%B2%E9%94%8B%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_angel_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "7e5779f53d23c0762606f73465fe30d7a017c84b"
+    },
+    "skchr_angel_2": {
+      "name": "扫射模式",
+      "prtsTitle": "文件:技能 扫射模式.png",
+      "sourceUrl": "https://media.prts.wiki/e/e6/%E6%8A%80%E8%83%BD_%E6%89%AB%E5%B0%84%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_angel_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "c57458baf796ff5ceecb48cc19c5cb2855b300a9"
     },
     "skchr_aosta_2": {
       "name": "影钉",
@@ -396,6 +435,15 @@
       "height": 128,
       "sha1": "88398e591e14e84ea72f532220dac72519ec2b02"
     },
+    "skchr_angel_3": {
+      "name": "过载模式",
+      "prtsTitle": "文件:技能 过载模式.png",
+      "sourceUrl": "https://media.prts.wiki/6/64/%E6%8A%80%E8%83%BD_%E8%BF%87%E8%BD%BD%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_angel_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "1832a2f74c952a00000e0ab98a28f129f85244fb"
+    },
     "skchr_aphris_2": {
       "name": "临界瞬爆",
       "prtsTitle": "文件:技能 临界瞬爆.png",
@@ -405,15 +453,6 @@
       "height": 128,
       "sha1": "d5fea7304a73f9477f56ad5ce56e239d72b2006e"
     },
-    "skchr_aprl_1": {
-      "name": "精准射击",
-      "prtsTitle": "文件:技能 精准射击.png",
-      "sourceUrl": "https://media.prts.wiki/3/33/%E6%8A%80%E8%83%BD_%E7%B2%BE%E5%87%86%E5%B0%84%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_aprl_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "693b74bc027d91caa950e76fa02eed5d0a9f1a1d"
-    },
     "skchr_aphris_3": {
       "name": "混沌的本质",
       "prtsTitle": "文件:技能 混沌的本质.png",
@@ -422,6 +461,15 @@
       "width": 128,
       "height": 128,
       "sha1": "fca1961101d6f66cc839b20912a75a024f8ece2a"
+    },
+    "skchr_aprl_1": {
+      "name": "精准射击",
+      "prtsTitle": "文件:技能 精准射击.png",
+      "sourceUrl": "https://media.prts.wiki/3/33/%E6%8A%80%E8%83%BD_%E7%B2%BE%E5%87%86%E5%B0%84%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_aprl_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "693b74bc027d91caa950e76fa02eed5d0a9f1a1d"
     },
     "skchr_aprl_2": {
       "name": "灵活伪装",
@@ -441,15 +489,6 @@
       "height": 128,
       "sha1": "2b490d6a0f1bc96352b50cec3b977bf4136166f1"
     },
-    "skchr_aprot2_2": {
-      "name": "燃命狂欢",
-      "prtsTitle": "文件:技能 燃命狂欢.png",
-      "sourceUrl": "https://media.prts.wiki/a/aa/%E6%8A%80%E8%83%BD_%E7%87%83%E5%91%BD%E7%8B%82%E6%AC%A2.png",
-      "localPath": "resources/images/skill/skchr_aprot2_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "a0d076b9cdbf6d4b0ff666332a8155613bbb0693"
-    },
     "skchr_archet_1": {
       "name": "箭矢·散逸",
       "prtsTitle": "文件:技能 箭矢·散逸.png",
@@ -458,6 +497,15 @@
       "width": 128,
       "height": 128,
       "sha1": "99a00fc10d700cfd0d841e01c89f66bdb24b9992"
+    },
+    "skchr_aprot2_2": {
+      "name": "燃命狂欢",
+      "prtsTitle": "文件:技能 燃命狂欢.png",
+      "sourceUrl": "https://media.prts.wiki/a/aa/%E6%8A%80%E8%83%BD_%E7%87%83%E5%91%BD%E7%8B%82%E6%AC%A2.png",
+      "localPath": "resources/images/skill/skchr_aprot2_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "a0d076b9cdbf6d4b0ff666332a8155613bbb0693"
     },
     "skchr_archet_2": {
       "name": "箭矢·追猎",
@@ -567,15 +615,6 @@
       "height": 128,
       "sha1": "ca613fe0b41ba898fb5c03f41d0d096a06f9b6c3"
     },
-    "skchr_astesi_1": {
-      "name": "星座守护",
-      "prtsTitle": "文件:技能 星座守护.png",
-      "sourceUrl": "https://media.prts.wiki/2/23/%E6%8A%80%E8%83%BD_%E6%98%9F%E5%BA%A7%E5%AE%88%E6%8A%A4.png",
-      "localPath": "resources/images/skill/skchr_astesi_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "5c7c669cebabcbbadd7c5f1ed61b9ae6a6f897aa"
-    },
     "skchr_ashlok_2": {
       "name": "专注轰击",
       "prtsTitle": "文件:技能 专注轰击.png",
@@ -585,14 +624,14 @@
       "height": 128,
       "sha1": "b6e3bdd9857dedb149042a168ddc2d14e69182df"
     },
-    "skchr_aurora_1": {
-      "name": "固守家园",
-      "prtsTitle": "文件:技能 固守家园.png",
-      "sourceUrl": "https://media.prts.wiki/f/f6/%E6%8A%80%E8%83%BD_%E5%9B%BA%E5%AE%88%E5%AE%B6%E5%9B%AD.png",
-      "localPath": "resources/images/skill/skchr_aurora_1.png",
+    "skchr_astesi_1": {
+      "name": "星座守护",
+      "prtsTitle": "文件:技能 星座守护.png",
+      "sourceUrl": "https://media.prts.wiki/2/23/%E6%8A%80%E8%83%BD_%E6%98%9F%E5%BA%A7%E5%AE%88%E6%8A%A4.png",
+      "localPath": "resources/images/skill/skchr_astesi_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "f267840ae81c2d461fd813257eece4cb818373e5"
+      "sha1": "5c7c669cebabcbbadd7c5f1ed61b9ae6a6f897aa"
     },
     "skchr_astesi_2": {
       "name": "星辉剑",
@@ -603,6 +642,15 @@
       "height": 128,
       "sha1": "aaa044763aad1aae06cddfbe3396eae4f84e9c2c"
     },
+    "skchr_aurora_1": {
+      "name": "固守家园",
+      "prtsTitle": "文件:技能 固守家园.png",
+      "sourceUrl": "https://media.prts.wiki/f/f6/%E6%8A%80%E8%83%BD_%E5%9B%BA%E5%AE%88%E5%AE%B6%E5%9B%AD.png",
+      "localPath": "resources/images/skill/skchr_aurora_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "f267840ae81c2d461fd813257eece4cb818373e5"
+    },
     "skchr_aurora_2": {
       "name": "人工降雪",
       "prtsTitle": "文件:技能 人工降雪.png",
@@ -611,6 +659,15 @@
       "width": 128,
       "height": 128,
       "sha1": "a0e16c0b01d33b5d68e701a5c251d227d56bd2a4"
+    },
+    "skchr_baslin_1": {
+      "name": "急救",
+      "prtsTitle": "文件:技能 急救.png",
+      "sourceUrl": "https://media.prts.wiki/4/4c/%E6%8A%80%E8%83%BD_%E6%80%A5%E6%95%91.png",
+      "localPath": "resources/images/skill/skchr_baslin_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "8384d363c5993ad0d8d77006e25d53b3114f3f32"
     },
     "skchr_ayer_1": {
       "name": "多导向散射弹丸",
@@ -629,15 +686,6 @@
       "width": 128,
       "height": 128,
       "sha1": "73e7e23932dfb6a03dc872e5e4bafc9afcb6ee20"
-    },
-    "skchr_baslin_1": {
-      "name": "急救",
-      "prtsTitle": "文件:技能 急救.png",
-      "sourceUrl": "https://media.prts.wiki/4/4c/%E6%8A%80%E8%83%BD_%E6%80%A5%E6%95%91.png",
-      "localPath": "resources/images/skill/skchr_baslin_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "8384d363c5993ad0d8d77006e25d53b3114f3f32"
     },
     "skchr_baslin_2": {
       "name": "沉音宁神",
@@ -729,15 +777,6 @@
       "height": 128,
       "sha1": "e7641460c5b17f4749501e6f408c1bb7735945aa"
     },
-    "skchr_bibeak_1": {
-      "name": "飞针剑羽",
-      "prtsTitle": "文件:技能 飞针剑羽.png",
-      "sourceUrl": "https://media.prts.wiki/8/84/%E6%8A%80%E8%83%BD_%E9%A3%9E%E9%92%88%E5%89%91%E7%BE%BD.png",
-      "localPath": "resources/images/skill/skchr_bibeak_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "341aeff7aaffefbddd21cec2fed6fe3057b30c68"
-    },
     "skchr_bibeak_2": {
       "name": "异刃斩",
       "prtsTitle": "文件:技能 异刃斩.png",
@@ -747,6 +786,15 @@
       "height": 128,
       "sha1": "9c0c6355b9ba565a6b4fc2db4fd0172f3b2e7edb"
     },
+    "skchr_bibeak_1": {
+      "name": "飞针剑羽",
+      "prtsTitle": "文件:技能 飞针剑羽.png",
+      "sourceUrl": "https://media.prts.wiki/8/84/%E6%8A%80%E8%83%BD_%E9%A3%9E%E9%92%88%E5%89%91%E7%BE%BD.png",
+      "localPath": "resources/images/skill/skchr_bibeak_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "341aeff7aaffefbddd21cec2fed6fe3057b30c68"
+    },
     "skchr_billro_1": {
       "name": "沙暴守卫",
       "prtsTitle": "文件:技能 沙暴守卫.png",
@@ -755,15 +803,6 @@
       "width": 128,
       "height": 128,
       "sha1": "c9fc1afe27fc9b1de58198024b6051c6f00ba690"
-    },
-    "skchr_billro_3": {
-      "name": "食噬之印",
-      "prtsTitle": "文件:技能 食噬之印.png",
-      "sourceUrl": "https://media.prts.wiki/5/50/%E6%8A%80%E8%83%BD_%E9%A3%9F%E5%99%AC%E4%B9%8B%E5%8D%B0.png",
-      "localPath": "resources/images/skill/skchr_billro_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "c7940fa468c01a984f0a7664aa1bc1fef4d4c5fb"
     },
     "skchr_billro_2": {
       "name": "沙缚镣锁",
@@ -782,6 +821,15 @@
       "width": 128,
       "height": 128,
       "sha1": "b5e488c71a48fe06a3df2edb27f1a727e376d6ec"
+    },
+    "skchr_billro_3": {
+      "name": "食噬之印",
+      "prtsTitle": "文件:技能 食噬之印.png",
+      "sourceUrl": "https://media.prts.wiki/5/50/%E6%8A%80%E8%83%BD_%E9%A3%9F%E5%99%AC%E4%B9%8B%E5%8D%B0.png",
+      "localPath": "resources/images/skill/skchr_billro_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "c7940fa468c01a984f0a7664aa1bc1fef4d4c5fb"
     },
     "skchr_blackd_2": {
       "name": "冲锋号令·防御",
@@ -837,15 +885,6 @@
       "height": 128,
       "sha1": "23c38715a72b8e26f77f059c3762cf5c6eb8fdeb"
     },
-    "skchr_blemsh_1": {
-      "name": "光芒涌动",
-      "prtsTitle": "文件:技能 光芒涌动.png",
-      "sourceUrl": "https://media.prts.wiki/5/5b/%E6%8A%80%E8%83%BD_%E5%85%89%E8%8A%92%E6%B6%8C%E5%8A%A8.png",
-      "localPath": "resources/images/skill/skchr_blemsh_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "bc29d95eb3f660fc0938d4af7dc6ab92385deb44"
-    },
     "skchr_blemsh_2": {
       "name": "慑敌辉光",
       "prtsTitle": "文件:技能 慑敌辉光.png",
@@ -854,6 +893,15 @@
       "width": 128,
       "height": 128,
       "sha1": "d9a40b5f1ab758dc0780405718785aede712ccee"
+    },
+    "skchr_blemsh_1": {
+      "name": "光芒涌动",
+      "prtsTitle": "文件:技能 光芒涌动.png",
+      "sourceUrl": "https://media.prts.wiki/5/5b/%E6%8A%80%E8%83%BD_%E5%85%89%E8%8A%92%E6%B6%8C%E5%8A%A8.png",
+      "localPath": "resources/images/skill/skchr_blemsh_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "bc29d95eb3f660fc0938d4af7dc6ab92385deb44"
     },
     "skchr_blemsh_3": {
       "name": "先贤化身",
@@ -891,6 +939,15 @@
       "height": 128,
       "sha1": "cd3b864e66675ba4ce068b44eac345976220cf3f"
     },
+    "skchr_blkkgt_2": {
+      "name": "无声的嘲笑",
+      "prtsTitle": "文件:技能 无声的嘲笑.png",
+      "sourceUrl": "https://media.prts.wiki/7/72/%E6%8A%80%E8%83%BD_%E6%97%A0%E5%A3%B0%E7%9A%84%E5%98%B2%E7%AC%91.png",
+      "localPath": "resources/images/skill/skchr_blkkgt_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "2adbbe0949dfbfa4bf87b44bfcc38e93f4e5cddf"
+    },
     "skchr_blkkgt_3": {
       "name": "归于宁静",
       "prtsTitle": "文件:技能 归于宁静.png",
@@ -900,14 +957,14 @@
       "height": 128,
       "sha1": "57072f32fbfcc0133bdbc7373767bf8551ab7fc6"
     },
-    "skchr_blkkgt_2": {
-      "name": "无声的嘲笑",
-      "prtsTitle": "文件:技能 无声的嘲笑.png",
-      "sourceUrl": "https://media.prts.wiki/7/72/%E6%8A%80%E8%83%BD_%E6%97%A0%E5%A3%B0%E7%9A%84%E5%98%B2%E7%AC%91.png",
-      "localPath": "resources/images/skill/skchr_blkkgt_2.png",
+    "skchr_bluep_1": {
+      "name": "二重射击·自动",
+      "prtsTitle": "文件:技能 二重射击·自动.png",
+      "sourceUrl": "https://media.prts.wiki/8/81/%E6%8A%80%E8%83%BD_%E4%BA%8C%E9%87%8D%E5%B0%84%E5%87%BB%C2%B7%E8%87%AA%E5%8A%A8.png",
+      "localPath": "resources/images/skill/skchr_bluep_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "2adbbe0949dfbfa4bf87b44bfcc38e93f4e5cddf"
+      "sha1": "dad4c950543823621db01501cdda167b7607b428"
     },
     "skchr_blkngt_1": {
       "name": "半醒",
@@ -926,15 +983,6 @@
       "width": 128,
       "height": 128,
       "sha1": "64f611cbde44247ac76732feffca652560cc135b"
-    },
-    "skchr_bluep_1": {
-      "name": "二重射击·自动",
-      "prtsTitle": "文件:技能 二重射击·自动.png",
-      "sourceUrl": "https://media.prts.wiki/8/81/%E6%8A%80%E8%83%BD_%E4%BA%8C%E9%87%8D%E5%B0%84%E5%87%BB%C2%B7%E8%87%AA%E5%8A%A8.png",
-      "localPath": "resources/images/skill/skchr_bluep_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "dad4c950543823621db01501cdda167b7607b428"
     },
     "skchr_bluep_2": {
       "name": "毒液散射",
@@ -990,6 +1038,15 @@
       "height": 128,
       "sha1": "6dcb9327336898508e5ea49483f0d5b396f603ef"
     },
+    "skchr_branch_1": {
+      "name": "绝境抵抗",
+      "prtsTitle": "文件:技能 绝境抵抗.png",
+      "sourceUrl": "https://media.prts.wiki/f/f5/%E6%8A%80%E8%83%BD_%E7%BB%9D%E5%A2%83%E6%8A%B5%E6%8A%97.png",
+      "localPath": "resources/images/skill/skchr_branch_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "906a87836736b424e30cba1003653f10098cc31b"
+    },
     "skchr_bpipe_3": {
       "name": "闭膛连发",
       "prtsTitle": "文件:技能 闭膛连发.png",
@@ -1007,15 +1064,6 @@
       "width": 128,
       "height": 128,
       "sha1": "c32f5411a2b070be772963cff96c5af018e6a9b0"
-    },
-    "skchr_branch_1": {
-      "name": "绝境抵抗",
-      "prtsTitle": "文件:技能 绝境抵抗.png",
-      "sourceUrl": "https://media.prts.wiki/f/f5/%E6%8A%80%E8%83%BD_%E7%BB%9D%E5%A2%83%E6%8A%B5%E6%8A%97.png",
-      "localPath": "resources/images/skill/skchr_branch_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "906a87836736b424e30cba1003653f10098cc31b"
     },
     "skchr_breeze_1": {
       "name": "集束疗法",
@@ -1044,6 +1092,15 @@
       "height": 128,
       "sha1": "8a9d5076fb7bb1790a916a466ccc74efbdb06d60"
     },
+    "skchr_broca_1": {
+      "name": "通电",
+      "prtsTitle": "文件:技能 通电.png",
+      "sourceUrl": "https://media.prts.wiki/c/c9/%E6%8A%80%E8%83%BD_%E9%80%9A%E7%94%B5.png",
+      "localPath": "resources/images/skill/skchr_broca_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "b6eb6b23649a85427d75ec120374acd4a1eaee57"
+    },
     "skchr_brigid_2": {
       "name": "可驯服的",
       "prtsTitle": "文件:技能 可驯服的.png",
@@ -1053,14 +1110,14 @@
       "height": 128,
       "sha1": "4af8c7ea9043cce6df81bb1fa3bacbbfffef33f2"
     },
-    "skchr_broca_1": {
-      "name": "通电",
-      "prtsTitle": "文件:技能 通电.png",
-      "sourceUrl": "https://media.prts.wiki/c/c9/%E6%8A%80%E8%83%BD_%E9%80%9A%E7%94%B5.png",
-      "localPath": "resources/images/skill/skchr_broca_1.png",
+    "skchr_broca_2": {
+      "name": "高压电流",
+      "prtsTitle": "文件:技能 高压电流.png",
+      "sourceUrl": "https://media.prts.wiki/a/ae/%E6%8A%80%E8%83%BD_%E9%AB%98%E5%8E%8B%E7%94%B5%E6%B5%81.png",
+      "localPath": "resources/images/skill/skchr_broca_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "b6eb6b23649a85427d75ec120374acd4a1eaee57"
+      "sha1": "1d20e427959acbeb98a85e360fbb571bb93b4bd0"
     },
     "skchr_brownb_1": {
       "name": "高机动",
@@ -1071,14 +1128,14 @@
       "height": 128,
       "sha1": "24c11a0ca8a662d4f4bab5bfa0e2df8e6bf0fbe8"
     },
-    "skchr_broca_2": {
-      "name": "高压电流",
-      "prtsTitle": "文件:技能 高压电流.png",
-      "sourceUrl": "https://media.prts.wiki/a/ae/%E6%8A%80%E8%83%BD_%E9%AB%98%E5%8E%8B%E7%94%B5%E6%B5%81.png",
-      "localPath": "resources/images/skill/skchr_broca_2.png",
+    "skchr_bryota_2": {
+      "name": "土石的恒心",
+      "prtsTitle": "文件:技能 土石的恒心.png",
+      "sourceUrl": "https://media.prts.wiki/6/67/%E6%8A%80%E8%83%BD_%E5%9C%9F%E7%9F%B3%E7%9A%84%E6%81%92%E5%BF%83.png",
+      "localPath": "resources/images/skill/skchr_bryota_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "1d20e427959acbeb98a85e360fbb571bb93b4bd0"
+      "sha1": "6e9dfb1d376204cfa64713002c4303b0bd74097d"
     },
     "skchr_brownb_2": {
       "name": "急速拳",
@@ -1106,15 +1163,6 @@
       "width": 128,
       "height": 128,
       "sha1": "01d0afab6550566e11e9b570357b065ff7f54c9b"
-    },
-    "skchr_bryota_2": {
-      "name": "土石的恒心",
-      "prtsTitle": "文件:技能 土石的恒心.png",
-      "sourceUrl": "https://media.prts.wiki/6/67/%E6%8A%80%E8%83%BD_%E5%9C%9F%E7%9F%B3%E7%9A%84%E6%81%92%E5%BF%83.png",
-      "localPath": "resources/images/skill/skchr_bryota_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "6e9dfb1d376204cfa64713002c4303b0bd74097d"
     },
     "skchr_bstalk_2": {
       "name": "“大家一起上”",
@@ -1152,15 +1200,6 @@
       "height": 128,
       "sha1": "03b32c4668c76c01f1732462ac0ed18bcb83e835"
     },
-    "skchr_cammou_2": {
-      "name": "同步索敌攻击",
-      "prtsTitle": "文件:技能 同步索敌攻击.png",
-      "sourceUrl": "https://media.prts.wiki/8/85/%E6%8A%80%E8%83%BD_%E5%90%8C%E6%AD%A5%E7%B4%A2%E6%95%8C%E6%94%BB%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_cammou_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "022b06cc9d7f99cab025256dc0f510600e73cc2a"
-    },
     "skchr_cairn_2": {
       "name": "震撼型指路",
       "prtsTitle": "文件:技能 震撼型指路.png",
@@ -1170,14 +1209,14 @@
       "height": 128,
       "sha1": "011b1feb1a8206ce127a6556de60fe87d553c929"
     },
-    "skchr_caper_2": {
-      "name": "乐趣加倍",
-      "prtsTitle": "文件:技能 乐趣加倍.png",
-      "sourceUrl": "https://media.prts.wiki/3/37/%E6%8A%80%E8%83%BD_%E4%B9%90%E8%B6%A3%E5%8A%A0%E5%80%8D.png",
-      "localPath": "resources/images/skill/skchr_caper_2.png",
+    "skchr_cammou_2": {
+      "name": "同步索敌攻击",
+      "prtsTitle": "文件:技能 同步索敌攻击.png",
+      "sourceUrl": "https://media.prts.wiki/8/85/%E6%8A%80%E8%83%BD_%E5%90%8C%E6%AD%A5%E7%B4%A2%E6%95%8C%E6%94%BB%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_cammou_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "1ef5c343ce52b5dfd1771cf0dac1fd95067aac68"
+      "sha1": "022b06cc9d7f99cab025256dc0f510600e73cc2a"
     },
     "skchr_caper_1": {
       "name": "强力击·β型",
@@ -1187,6 +1226,15 @@
       "width": 128,
       "height": 128,
       "sha1": "9410fc0a946379d697ada148a7eb432392b283d4"
+    },
+    "skchr_caper_2": {
+      "name": "乐趣加倍",
+      "prtsTitle": "文件:技能 乐趣加倍.png",
+      "sourceUrl": "https://media.prts.wiki/3/37/%E6%8A%80%E8%83%BD_%E4%B9%90%E8%B6%A3%E5%8A%A0%E5%80%8D.png",
+      "localPath": "resources/images/skill/skchr_caper_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "1ef5c343ce52b5dfd1771cf0dac1fd95067aac68"
     },
     "skchr_catap2_1": {
       "name": "高压回填斩",
@@ -1287,15 +1335,6 @@
       "height": 128,
       "sha1": "74c0d16227db2500cd55500ccbf4d324104fb7d3"
     },
-    "skchr_cerber_1": {
-      "name": "“很冰的斧”",
-      "prtsTitle": "文件:技能 “很冰的斧”.png",
-      "sourceUrl": "https://media.prts.wiki/d/d7/%E6%8A%80%E8%83%BD_%E2%80%9C%E5%BE%88%E5%86%B0%E7%9A%84%E6%96%A7%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_cerber_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "efd54c412217e29ac0dbc797009956fac9bf3b12"
-    },
     "skchr_cerber_2": {
       "name": "“很热的刀”",
       "prtsTitle": "文件:技能 “很热的刀”.png",
@@ -1304,6 +1343,15 @@
       "width": 128,
       "height": 128,
       "sha1": "c7c5b5cf777f304933fb2b8e4198f0bdf3d87b03"
+    },
+    "skchr_cerber_1": {
+      "name": "“很冰的斧”",
+      "prtsTitle": "文件:技能 “很冰的斧”.png",
+      "sourceUrl": "https://media.prts.wiki/d/d7/%E6%8A%80%E8%83%BD_%E2%80%9C%E5%BE%88%E5%86%B0%E7%9A%84%E6%96%A7%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_cerber_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "efd54c412217e29ac0dbc797009956fac9bf3b12"
     },
     "skchr_cerber_3": {
       "name": "“很重的枪”",
@@ -1323,14 +1371,14 @@
       "height": 128,
       "sha1": "ddacd06c936a17f320c2571ca752d5d5486faa3f"
     },
-    "skchr_ceylon_1": {
-      "name": "集中式水疗",
-      "prtsTitle": "文件:技能 集中式水疗.png",
-      "sourceUrl": "https://media.prts.wiki/2/2e/%E6%8A%80%E8%83%BD_%E9%9B%86%E4%B8%AD%E5%BC%8F%E6%B0%B4%E7%96%97.png",
-      "localPath": "resources/images/skill/skchr_ceylon_1.png",
+    "skchr_cetsyr_2": {
+      "name": "明日渺远不及",
+      "prtsTitle": "文件:技能 明日渺远不及.png",
+      "sourceUrl": "https://media.prts.wiki/6/69/%E6%8A%80%E8%83%BD_%E6%98%8E%E6%97%A5%E6%B8%BA%E8%BF%9C%E4%B8%8D%E5%8F%8A.png",
+      "localPath": "resources/images/skill/skchr_cetsyr_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "d9b93e329e7af36908e57fa3aabe01c565a22899"
+      "sha1": "4acef529b752500f669b0359dd7626fa41e07dbf"
     },
     "skchr_cetsyr_3": {
       "name": "编织重构现世",
@@ -1341,14 +1389,23 @@
       "height": 128,
       "sha1": "437d41ff9925a93295dec2a575c51817005f9c9d"
     },
-    "skchr_cetsyr_2": {
-      "name": "明日渺远不及",
-      "prtsTitle": "文件:技能 明日渺远不及.png",
-      "sourceUrl": "https://media.prts.wiki/6/69/%E6%8A%80%E8%83%BD_%E6%98%8E%E6%97%A5%E6%B8%BA%E8%BF%9C%E4%B8%8D%E5%8F%8A.png",
-      "localPath": "resources/images/skill/skchr_cetsyr_2.png",
+    "skchr_cgbird_2": {
+      "name": "法术护盾",
+      "prtsTitle": "文件:技能 法术护盾.png",
+      "sourceUrl": "https://media.prts.wiki/3/33/%E6%8A%80%E8%83%BD_%E6%B3%95%E6%9C%AF%E6%8A%A4%E7%9B%BE.png",
+      "localPath": "resources/images/skill/skchr_cgbird_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "4acef529b752500f669b0359dd7626fa41e07dbf"
+      "sha1": "6017fc8df345bd419d8d7baba5cc3a062abfa088"
+    },
+    "skchr_ceylon_1": {
+      "name": "集中式水疗",
+      "prtsTitle": "文件:技能 集中式水疗.png",
+      "sourceUrl": "https://media.prts.wiki/2/2e/%E6%8A%80%E8%83%BD_%E9%9B%86%E4%B8%AD%E5%BC%8F%E6%B0%B4%E7%96%97.png",
+      "localPath": "resources/images/skill/skchr_ceylon_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "d9b93e329e7af36908e57fa3aabe01c565a22899"
     },
     "skchr_ceylon_2": {
       "name": "水灵庇护",
@@ -1358,15 +1415,6 @@
       "width": 128,
       "height": 128,
       "sha1": "dc3a6544681553d1601e6161be4638349c9443f4"
-    },
-    "skchr_cgbird_2": {
-      "name": "法术护盾",
-      "prtsTitle": "文件:技能 法术护盾.png",
-      "sourceUrl": "https://media.prts.wiki/3/33/%E6%8A%80%E8%83%BD_%E6%B3%95%E6%9C%AF%E6%8A%A4%E7%9B%BE.png",
-      "localPath": "resources/images/skill/skchr_cgbird_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "6017fc8df345bd419d8d7baba5cc3a062abfa088"
     },
     "skchr_cgbird_3": {
       "name": "圣域",
@@ -1404,15 +1452,6 @@
       "height": 128,
       "sha1": "3d90c51c64d68bb39af02fd81201d74a77d26e44"
     },
-    "skchr_chen3_2": {
-      "name": "赤霄·绝影-驰",
-      "prtsTitle": "文件:技能 赤霄·绝影-驰.png",
-      "sourceUrl": "https://media.prts.wiki/5/5b/%E6%8A%80%E8%83%BD_%E8%B5%A4%E9%9C%84%C2%B7%E7%BB%9D%E5%BD%B1-%E9%A9%B0.png",
-      "localPath": "resources/images/skill/skchr_chen3_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "93dcba61297d31a80a396ee20561ff8cda60c6e8"
-    },
     "skchr_chen3_1": {
       "name": "赤霄·奔夜",
       "prtsTitle": "文件:技能 赤霄·奔夜.png",
@@ -1421,6 +1460,15 @@
       "width": 128,
       "height": 128,
       "sha1": "d1b30483326a6086895673b851e5c01ae8eafbb6"
+    },
+    "skchr_chen3_2": {
+      "name": "赤霄·绝影-驰",
+      "prtsTitle": "文件:技能 赤霄·绝影-驰.png",
+      "sourceUrl": "https://media.prts.wiki/5/5b/%E6%8A%80%E8%83%BD_%E8%B5%A4%E9%9C%84%C2%B7%E7%BB%9D%E5%BD%B1-%E9%A9%B0.png",
+      "localPath": "resources/images/skill/skchr_chen3_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "93dcba61297d31a80a396ee20561ff8cda60c6e8"
     },
     "skchr_chen_1": {
       "name": "鞘击",
@@ -1476,15 +1524,6 @@
       "height": 128,
       "sha1": "a4e179da1bc41c99ab9932a15198bcfc637678f5"
     },
-    "skchr_chimes_2": {
-      "name": "乡心无改",
-      "prtsTitle": "文件:技能 乡心无改.png",
-      "sourceUrl": "https://media.prts.wiki/0/04/%E6%8A%80%E8%83%BD_%E4%B9%A1%E5%BF%83%E6%97%A0%E6%94%B9.png",
-      "localPath": "resources/images/skill/skchr_chimes_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "d547359095cf94ed3e1553454f9550aaa4959f64"
-    },
     "skchr_chilc_2": {
       "name": "随机应变",
       "prtsTitle": "文件:技能 随机应变.png",
@@ -1493,6 +1532,15 @@
       "width": 128,
       "height": 128,
       "sha1": "1431a4212612d58ddfcb46ed383b4d9d7a19409a"
+    },
+    "skchr_chimes_2": {
+      "name": "乡心无改",
+      "prtsTitle": "文件:技能 乡心无改.png",
+      "sourceUrl": "https://media.prts.wiki/0/04/%E6%8A%80%E8%83%BD_%E4%B9%A1%E5%BF%83%E6%97%A0%E6%94%B9.png",
+      "localPath": "resources/images/skill/skchr_chimes_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "d547359095cf94ed3e1553454f9550aaa4959f64"
     },
     "skchr_chnut_1": {
       "name": "积微成著",
@@ -1512,15 +1560,6 @@
       "height": 128,
       "sha1": "42ee651107df95751e12e4c5ece0c8d884514a5c"
     },
-    "skchr_christ_2": {
-      "name": "狂饮之宴",
-      "prtsTitle": "文件:技能 狂饮之宴.png",
-      "sourceUrl": "https://media.prts.wiki/e/e8/%E6%8A%80%E8%83%BD_%E7%8B%82%E9%A5%AE%E4%B9%8B%E5%AE%B4.png",
-      "localPath": "resources/images/skill/skchr_christ_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "e694c2793ecd1d0e5a24122c154ab14e2fbdb86d"
-    },
     "skchr_christ_1": {
       "name": "自由用餐礼仪",
       "prtsTitle": "文件:技能 自由用餐礼仪.png",
@@ -1530,14 +1569,14 @@
       "height": 128,
       "sha1": "578d5fb894b664622dc4173f6dc849362388e4de"
     },
-    "skchr_chyue_1": {
-      "name": "冲盈",
-      "prtsTitle": "文件:技能 冲盈.png",
-      "sourceUrl": "https://media.prts.wiki/8/8e/%E6%8A%80%E8%83%BD_%E5%86%B2%E7%9B%88.png",
-      "localPath": "resources/images/skill/skchr_chyue_1.png",
+    "skchr_christ_2": {
+      "name": "狂饮之宴",
+      "prtsTitle": "文件:技能 狂饮之宴.png",
+      "sourceUrl": "https://media.prts.wiki/e/e8/%E6%8A%80%E8%83%BD_%E7%8B%82%E9%A5%AE%E4%B9%8B%E5%AE%B4.png",
+      "localPath": "resources/images/skill/skchr_christ_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "b827be58287144321ab75c9a3d42c939568335c0"
+      "sha1": "e694c2793ecd1d0e5a24122c154ab14e2fbdb86d"
     },
     "skchr_chyue_2": {
       "name": "拂尘",
@@ -1547,6 +1586,15 @@
       "width": 128,
       "height": 128,
       "sha1": "38af809ca39d0b6c73c047f11241a43b83dc1953"
+    },
+    "skchr_chyue_1": {
+      "name": "冲盈",
+      "prtsTitle": "文件:技能 冲盈.png",
+      "sourceUrl": "https://media.prts.wiki/8/8e/%E6%8A%80%E8%83%BD_%E5%86%B2%E7%9B%88.png",
+      "localPath": "resources/images/skill/skchr_chyue_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "b827be58287144321ab75c9a3d42c939568335c0"
     },
     "skchr_chyue_3": {
       "name": "我无",
@@ -1584,15 +1632,6 @@
       "height": 128,
       "sha1": "babd08c29a7282d04fabe5a634b59541d9d505f3"
     },
-    "skchr_clour_2": {
-      "name": "双弦开弓",
-      "prtsTitle": "文件:技能 双弦开弓.png",
-      "sourceUrl": "https://media.prts.wiki/7/75/%E6%8A%80%E8%83%BD_%E5%8F%8C%E5%BC%A6%E5%BC%80%E5%BC%93.png",
-      "localPath": "resources/images/skill/skchr_clour_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "c20b6d7f0d976bc35a1c2d900c78ab1c4566b4c8"
-    },
     "skchr_coldst_2": {
       "name": "酣醉之夜",
       "prtsTitle": "文件:技能 酣醉之夜.png",
@@ -1601,6 +1640,15 @@
       "width": 128,
       "height": 128,
       "sha1": "8989796a912f82808123f6daef828c17a8df928d"
+    },
+    "skchr_clour_2": {
+      "name": "双弦开弓",
+      "prtsTitle": "文件:技能 双弦开弓.png",
+      "sourceUrl": "https://media.prts.wiki/7/75/%E6%8A%80%E8%83%BD_%E5%8F%8C%E5%BC%A6%E5%BC%80%E5%BC%93.png",
+      "localPath": "resources/images/skill/skchr_clour_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "c20b6d7f0d976bc35a1c2d900c78ab1c4566b4c8"
     },
     "skchr_cqbw_1": {
       "name": "红桃K",
@@ -1647,15 +1695,6 @@
       "height": 128,
       "sha1": "926debe6db664cd650505ddeaf02788fbefe5e1d"
     },
-    "skchr_crow_1": {
-      "name": "高速切割",
-      "prtsTitle": "文件:技能 高速切割.png",
-      "sourceUrl": "https://media.prts.wiki/a/aa/%E6%8A%80%E8%83%BD_%E9%AB%98%E9%80%9F%E5%88%87%E5%89%B2.png",
-      "localPath": "resources/images/skill/skchr_crow_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "225e5926255f154cbcaba0c7e2c8358d09a36cd6"
-    },
     "skchr_crosly_3": {
       "name": "烽烟行刑场",
       "prtsTitle": "文件:技能 烽烟行刑场.png",
@@ -1664,6 +1703,15 @@
       "width": 128,
       "height": 128,
       "sha1": "a29b4e37e7dcbba27c6ecff852fc5af7bb33068a"
+    },
+    "skchr_crow_1": {
+      "name": "高速切割",
+      "prtsTitle": "文件:技能 高速切割.png",
+      "sourceUrl": "https://media.prts.wiki/a/aa/%E6%8A%80%E8%83%BD_%E9%AB%98%E9%80%9F%E5%88%87%E5%89%B2.png",
+      "localPath": "resources/images/skill/skchr_crow_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "225e5926255f154cbcaba0c7e2c8358d09a36cd6"
     },
     "skchr_crow_2": {
       "name": "收割",
@@ -1701,15 +1749,6 @@
       "height": 128,
       "sha1": "aa0ac079f82a59d178511d6f52a75cf6fd7426fc"
     },
-    "skchr_ctrail_2": {
-      "name": "掠空飞翎",
-      "prtsTitle": "文件:技能 掠空飞翎.png",
-      "sourceUrl": "https://media.prts.wiki/b/bd/%E6%8A%80%E8%83%BD_%E6%8E%A0%E7%A9%BA%E9%A3%9E%E7%BF%8E.png",
-      "localPath": "resources/images/skill/skchr_ctrail_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "b15b33c9d006aaaf59ca5efc4cc9bb4613ae66c5"
-    },
     "skchr_cutter_1": {
       "name": "红移",
       "prtsTitle": "文件:技能 红移.png",
@@ -1718,15 +1757,6 @@
       "width": 128,
       "height": 128,
       "sha1": "129fdf51430ef8fb6fd5011a54764bab70b99609"
-    },
-    "skchr_cuttle_2": {
-      "name": "阻滞射击战术",
-      "prtsTitle": "文件:技能 阻滞射击战术.png",
-      "sourceUrl": "https://media.prts.wiki/a/a0/%E6%8A%80%E8%83%BD_%E9%98%BB%E6%BB%9E%E5%B0%84%E5%87%BB%E6%88%98%E6%9C%AF.png",
-      "localPath": "resources/images/skill/skchr_cuttle_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "679cadd87c268ba88796dad0af3ab8aed6eacd7b"
     },
     "skchr_cutter_2": {
       "name": "绯红刺刀",
@@ -1737,14 +1767,23 @@
       "height": 128,
       "sha1": "b47f981b8474e8c5bdc7d14a473993da82bdc608"
     },
-    "skchr_dagda_2": {
-      "name": "精准捕杀",
-      "prtsTitle": "文件:技能 精准捕杀.png",
-      "sourceUrl": "https://media.prts.wiki/3/39/%E6%8A%80%E8%83%BD_%E7%B2%BE%E5%87%86%E6%8D%95%E6%9D%80.png",
-      "localPath": "resources/images/skill/skchr_dagda_2.png",
+    "skchr_ctrail_2": {
+      "name": "掠空飞翎",
+      "prtsTitle": "文件:技能 掠空飞翎.png",
+      "sourceUrl": "https://media.prts.wiki/b/bd/%E6%8A%80%E8%83%BD_%E6%8E%A0%E7%A9%BA%E9%A3%9E%E7%BF%8E.png",
+      "localPath": "resources/images/skill/skchr_ctrail_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "550fab4ee966af02de5b9082a44c7c460146875c"
+      "sha1": "b15b33c9d006aaaf59ca5efc4cc9bb4613ae66c5"
+    },
+    "skchr_cuttle_2": {
+      "name": "阻滞射击战术",
+      "prtsTitle": "文件:技能 阻滞射击战术.png",
+      "sourceUrl": "https://media.prts.wiki/a/a0/%E6%8A%80%E8%83%BD_%E9%98%BB%E6%BB%9E%E5%B0%84%E5%87%BB%E6%88%98%E6%9C%AF.png",
+      "localPath": "resources/images/skill/skchr_cuttle_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "679cadd87c268ba88796dad0af3ab8aed6eacd7b"
     },
     "skchr_dagda_1": {
       "name": "反制技巧",
@@ -1755,14 +1794,14 @@
       "height": 128,
       "sha1": "8b18b308af74e9d606ff6d999aa94b72d50065cb"
     },
-    "skchr_deepcl_1": {
-      "name": "光影之触",
-      "prtsTitle": "文件:技能 光影之触.png",
-      "sourceUrl": "https://media.prts.wiki/2/2e/%E6%8A%80%E8%83%BD_%E5%85%89%E5%BD%B1%E4%B9%8B%E8%A7%A6.png",
-      "localPath": "resources/images/skill/skchr_deepcl_1.png",
+    "skchr_dagda_2": {
+      "name": "精准捕杀",
+      "prtsTitle": "文件:技能 精准捕杀.png",
+      "sourceUrl": "https://media.prts.wiki/3/39/%E6%8A%80%E8%83%BD_%E7%B2%BE%E5%87%86%E6%8D%95%E6%9D%80.png",
+      "localPath": "resources/images/skill/skchr_dagda_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "f90994d50b1fbc342129fd4eb43732a54fdacb14"
+      "sha1": "550fab4ee966af02de5b9082a44c7c460146875c"
     },
     "skchr_deepcl_2": {
       "name": "视觉陷阱",
@@ -1773,6 +1812,15 @@
       "height": 128,
       "sha1": "9c4d1b82eee19872a18e6963ebc957c7bdf0b215"
     },
+    "skchr_deepcl_1": {
+      "name": "光影之触",
+      "prtsTitle": "文件:技能 光影之触.png",
+      "sourceUrl": "https://media.prts.wiki/2/2e/%E6%8A%80%E8%83%BD_%E5%85%89%E5%BD%B1%E4%B9%8B%E8%A7%A6.png",
+      "localPath": "resources/images/skill/skchr_deepcl_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "f90994d50b1fbc342129fd4eb43732a54fdacb14"
+    },
     "skchr_delphn_1": {
       "name": "“贯注”",
       "prtsTitle": "文件:技能 “贯注”.png",
@@ -1781,15 +1829,6 @@
       "width": 128,
       "height": 128,
       "sha1": "6089f392ee3a601498657cb5b70a06a3d8d66e7a"
-    },
-    "skchr_demetr_2": {
-      "name": "军师的手段",
-      "prtsTitle": "文件:技能 军师的手段.png",
-      "sourceUrl": "https://media.prts.wiki/7/71/%E6%8A%80%E8%83%BD_%E5%86%9B%E5%B8%88%E7%9A%84%E6%89%8B%E6%AE%B5.png",
-      "localPath": "resources/images/skill/skchr_demetr_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "e942aae60b42f4b1f2aaa20fb3a9cc4e8dfca756"
     },
     "skchr_delphn_2": {
       "name": "“抢攻”",
@@ -1809,15 +1848,6 @@
       "height": 128,
       "sha1": "081be272af577eefb082bf7c2b62d9a363700285"
     },
-    "skchr_demkni_1": {
-      "name": "急救",
-      "prtsTitle": "文件:技能 急救.png",
-      "sourceUrl": "https://media.prts.wiki/4/4c/%E6%8A%80%E8%83%BD_%E6%80%A5%E6%95%91.png",
-      "localPath": "resources/images/skill/skchr_demkni_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "8384d363c5993ad0d8d77006e25d53b3114f3f32"
-    },
     "skchr_demetr_3": {
       "name": "清算",
       "prtsTitle": "文件:技能 清算.png",
@@ -1826,6 +1856,24 @@
       "width": 128,
       "height": 128,
       "sha1": "59b17fced6ee38eb0b1216a5fd97f5ea8bdb960e"
+    },
+    "skchr_demetr_2": {
+      "name": "军师的手段",
+      "prtsTitle": "文件:技能 军师的手段.png",
+      "sourceUrl": "https://media.prts.wiki/7/71/%E6%8A%80%E8%83%BD_%E5%86%9B%E5%B8%88%E7%9A%84%E6%89%8B%E6%AE%B5.png",
+      "localPath": "resources/images/skill/skchr_demetr_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "e942aae60b42f4b1f2aaa20fb3a9cc4e8dfca756"
+    },
+    "skchr_demkni_1": {
+      "name": "急救",
+      "prtsTitle": "文件:技能 急救.png",
+      "sourceUrl": "https://media.prts.wiki/4/4c/%E6%8A%80%E8%83%BD_%E6%80%A5%E6%95%91.png",
+      "localPath": "resources/images/skill/skchr_demkni_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "8384d363c5993ad0d8d77006e25d53b3114f3f32"
     },
     "skchr_demkni_2": {
       "name": "药物配置",
@@ -1872,15 +1920,6 @@
       "height": 128,
       "sha1": "19d8f674584d0ba848095e352c4af21b8735edd3"
     },
-    "skchr_doroth_1": {
-      "name": "危险目标清除",
-      "prtsTitle": "文件:技能 危险目标清除.png",
-      "sourceUrl": "https://media.prts.wiki/f/ff/%E6%8A%80%E8%83%BD_%E5%8D%B1%E9%99%A9%E7%9B%AE%E6%A0%87%E6%B8%85%E9%99%A4.png",
-      "localPath": "resources/images/skill/skchr_doroth_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "47b9a2d451a08fbd1d2fa1b4903051d563d49167"
-    },
     "skchr_dolris_2": {
       "name": "我悲悯的",
       "prtsTitle": "文件:技能 我悲悯的.png",
@@ -1889,6 +1928,15 @@
       "width": 128,
       "height": 128,
       "sha1": "6a3db3ee41669b98c0574ae9eb55fceb63f85094"
+    },
+    "skchr_doroth_1": {
+      "name": "危险目标清除",
+      "prtsTitle": "文件:技能 危险目标清除.png",
+      "sourceUrl": "https://media.prts.wiki/f/ff/%E6%8A%80%E8%83%BD_%E5%8D%B1%E9%99%A9%E7%9B%AE%E6%A0%87%E6%B8%85%E9%99%A4.png",
+      "localPath": "resources/images/skill/skchr_doroth_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "47b9a2d451a08fbd1d2fa1b4903051d563d49167"
     },
     "skchr_doroth_2": {
       "name": "流沙区域生成",
@@ -1899,15 +1947,6 @@
       "height": 128,
       "sha1": "1860c2f0944f12125a116863bc9078c5820f7f0b"
     },
-    "skchr_durnar_2": {
-      "name": "起盾回击",
-      "prtsTitle": "文件:技能 起盾回击.png",
-      "sourceUrl": "https://media.prts.wiki/1/13/%E6%8A%80%E8%83%BD_%E8%B5%B7%E7%9B%BE%E5%9B%9E%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_durnar_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "a4dcaf5f19d77665ba370a877de3ec99cf4533a8"
-    },
     "skchr_doroth_3": {
       "name": "高速共振排障",
       "prtsTitle": "文件:技能 高速共振排障.png",
@@ -1916,15 +1955,6 @@
       "width": 128,
       "height": 128,
       "sha1": "946df28a919e91a87eb1a26f81a865bfae4b5b16"
-    },
-    "skchr_dusk_1": {
-      "name": "工笔入化",
-      "prtsTitle": "文件:技能 工笔入化.png",
-      "sourceUrl": "https://media.prts.wiki/5/55/%E6%8A%80%E8%83%BD_%E5%B7%A5%E7%AC%94%E5%85%A5%E5%8C%96.png",
-      "localPath": "resources/images/skill/skchr_dusk_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "b28f20fced25c54112b91b326beacf3fc271b75b"
     },
     "skchr_dusk_2": {
       "name": "泼墨淋漓",
@@ -1935,14 +1965,23 @@
       "height": 128,
       "sha1": "e27d7ee8bbf4a49b5003fc89a38ab614c73c8571"
     },
-    "skchr_ebnhlz_2": {
-      "name": "荒芜回响",
-      "prtsTitle": "文件:技能 荒芜回响.png",
-      "sourceUrl": "https://media.prts.wiki/f/f1/%E6%8A%80%E8%83%BD_%E8%8D%92%E8%8A%9C%E5%9B%9E%E5%93%8D.png",
-      "localPath": "resources/images/skill/skchr_ebnhlz_2.png",
+    "skchr_dusk_1": {
+      "name": "工笔入化",
+      "prtsTitle": "文件:技能 工笔入化.png",
+      "sourceUrl": "https://media.prts.wiki/5/55/%E6%8A%80%E8%83%BD_%E5%B7%A5%E7%AC%94%E5%85%A5%E5%8C%96.png",
+      "localPath": "resources/images/skill/skchr_dusk_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "ce68768631cd7507fcd2efbcb443e4eb313ec9b7"
+      "sha1": "b28f20fced25c54112b91b326beacf3fc271b75b"
+    },
+    "skchr_durnar_2": {
+      "name": "起盾回击",
+      "prtsTitle": "文件:技能 起盾回击.png",
+      "sourceUrl": "https://media.prts.wiki/1/13/%E6%8A%80%E8%83%BD_%E8%B5%B7%E7%9B%BE%E5%9B%9E%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_durnar_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "a4dcaf5f19d77665ba370a877de3ec99cf4533a8"
     },
     "skchr_dusk_3": {
       "name": "写意胜形",
@@ -1962,6 +2001,15 @@
       "height": 128,
       "sha1": "e47d844bcfe4c9755ae46717fdfc0672cf36dfbd"
     },
+    "skchr_ebnhlz_2": {
+      "name": "荒芜回响",
+      "prtsTitle": "文件:技能 荒芜回响.png",
+      "sourceUrl": "https://media.prts.wiki/f/f1/%E6%8A%80%E8%83%BD_%E8%8D%92%E8%8A%9C%E5%9B%9E%E5%93%8D.png",
+      "localPath": "resources/images/skill/skchr_ebnhlz_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "ce68768631cd7507fcd2efbcb443e4eb313ec9b7"
+    },
     "skchr_ebnhlz_3": {
       "name": "寂静之声",
       "prtsTitle": "文件:技能 寂静之声.png",
@@ -1970,15 +2018,6 @@
       "width": 128,
       "height": 128,
       "sha1": "47200830778787bc406ba4fdd93452a0dcb77ba9"
-    },
-    "skchr_ela_3": {
-      "name": "“博萨克风暴”",
-      "prtsTitle": "文件:技能 “博萨克风暴”.png",
-      "sourceUrl": "https://media.prts.wiki/b/b5/%E6%8A%80%E8%83%BD_%E2%80%9C%E5%8D%9A%E8%90%A8%E5%85%8B%E9%A3%8E%E6%9A%B4%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_ela_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "0b6324441e9f08090dfc9cafe87c6448b6dd7624"
     },
     "skchr_ela_1": {
       "name": "眩目阻滞",
@@ -1998,6 +2037,15 @@
       "height": 128,
       "sha1": "e23fcae123274bb5eedd2cb6c8a5aa953d827306"
     },
+    "skchr_ela_3": {
+      "name": "“博萨克风暴”",
+      "prtsTitle": "文件:技能 “博萨克风暴”.png",
+      "sourceUrl": "https://media.prts.wiki/b/b5/%E6%8A%80%E8%83%BD_%E2%80%9C%E5%8D%9A%E8%90%A8%E5%85%8B%E9%A3%8E%E6%9A%B4%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_ela_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "0b6324441e9f08090dfc9cafe87c6448b6dd7624"
+    },
     "skchr_erato_1": {
       "name": "安眠旋律",
       "prtsTitle": "文件:技能 安眠旋律.png",
@@ -2006,33 +2054,6 @@
       "width": 128,
       "height": 128,
       "sha1": "2bc31532582c33842ed85eda3a57c3c59fa80f89"
-    },
-    "skchr_elysm_2": {
-      "name": "聆听",
-      "prtsTitle": "文件:技能 聆听.png",
-      "sourceUrl": "https://media.prts.wiki/7/72/%E6%8A%80%E8%83%BD_%E8%81%86%E5%90%AC.png",
-      "localPath": "resources/images/skill/skchr_elysm_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "fd9c477efa639a12d67e0c13f89a965467ae923c"
-    },
-    "skchr_ethan_1": {
-      "name": "花式回旋",
-      "prtsTitle": "文件:技能 花式回旋.png",
-      "sourceUrl": "https://media.prts.wiki/4/48/%E6%8A%80%E8%83%BD_%E8%8A%B1%E5%BC%8F%E5%9B%9E%E6%97%8B.png",
-      "localPath": "resources/images/skill/skchr_ethan_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "1546c9cb4b1604721f371ff6f54f0d1e483a1860"
-    },
-    "skchr_estell_2": {
-      "name": "舍身突击",
-      "prtsTitle": "文件:技能 舍身突击.png",
-      "sourceUrl": "https://media.prts.wiki/e/ef/%E6%8A%80%E8%83%BD_%E8%88%8D%E8%BA%AB%E7%AA%81%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_estell_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "34774b396df16f6a3aef170c3753dda9215aa6a8"
     },
     "skchr_erato_2": {
       "name": "英雄赞歌",
@@ -2043,6 +2064,33 @@
       "height": 128,
       "sha1": "96ded4b24cb621082577a81dc89b9cf1892ab7d8"
     },
+    "skchr_elysm_2": {
+      "name": "聆听",
+      "prtsTitle": "文件:技能 聆听.png",
+      "sourceUrl": "https://media.prts.wiki/7/72/%E6%8A%80%E8%83%BD_%E8%81%86%E5%90%AC.png",
+      "localPath": "resources/images/skill/skchr_elysm_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "fd9c477efa639a12d67e0c13f89a965467ae923c"
+    },
+    "skchr_estell_2": {
+      "name": "舍身突击",
+      "prtsTitle": "文件:技能 舍身突击.png",
+      "sourceUrl": "https://media.prts.wiki/e/ef/%E6%8A%80%E8%83%BD_%E8%88%8D%E8%BA%AB%E7%AA%81%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_estell_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "34774b396df16f6a3aef170c3753dda9215aa6a8"
+    },
+    "skchr_ethan_1": {
+      "name": "花式回旋",
+      "prtsTitle": "文件:技能 花式回旋.png",
+      "sourceUrl": "https://media.prts.wiki/4/48/%E6%8A%80%E8%83%BD_%E8%8A%B1%E5%BC%8F%E5%9B%9E%E6%97%8B.png",
+      "localPath": "resources/images/skill/skchr_ethan_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "1546c9cb4b1604721f371ff6f54f0d1e483a1860"
+    },
     "skchr_ethan_2": {
       "name": "十字悬挂",
       "prtsTitle": "文件:技能 十字悬挂.png",
@@ -2051,15 +2099,6 @@
       "width": 128,
       "height": 128,
       "sha1": "9e8b7f331d60816f4bcdf6ffb49dcb593abc7693"
-    },
-    "skchr_etlchi_2": {
-      "name": "绯红壁合",
-      "prtsTitle": "文件:技能 绯红壁合.png",
-      "sourceUrl": "https://media.prts.wiki/e/e3/%E6%8A%80%E8%83%BD_%E7%BB%AF%E7%BA%A2%E5%A3%81%E5%90%88.png",
-      "localPath": "resources/images/skill/skchr_etlchi_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "5a13f0124630545b4593ff0122d20298d942e6d6"
     },
     "skchr_etlchi_1": {
       "name": "玫影觅迹",
@@ -2070,23 +2109,14 @@
       "height": 128,
       "sha1": "82b74c87401794485b76fd25ab9bc32909b9462c"
     },
-    "skchr_etlchi_3": {
-      "name": "灵与欲的惜别",
-      "prtsTitle": "文件:技能 灵与欲的惜别.png",
-      "sourceUrl": "https://media.prts.wiki/2/23/%E6%8A%80%E8%83%BD_%E7%81%B5%E4%B8%8E%E6%AC%B2%E7%9A%84%E6%83%9C%E5%88%AB.png",
-      "localPath": "resources/images/skill/skchr_etlchi_3.png",
+    "skchr_etlchi_2": {
+      "name": "绯红壁合",
+      "prtsTitle": "文件:技能 绯红壁合.png",
+      "sourceUrl": "https://media.prts.wiki/e/e3/%E6%8A%80%E8%83%BD_%E7%BB%AF%E7%BA%A2%E5%A3%81%E5%90%88.png",
+      "localPath": "resources/images/skill/skchr_etlchi_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "ca842135281685d1485184900828f0d8e3cacb6f"
-    },
-    "skchr_excu2_2": {
-      "name": "近身铳斗",
-      "prtsTitle": "文件:技能 近身铳斗.png",
-      "sourceUrl": "https://media.prts.wiki/d/d1/%E6%8A%80%E8%83%BD_%E8%BF%91%E8%BA%AB%E9%93%B3%E6%96%97.png",
-      "localPath": "resources/images/skill/skchr_excu2_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "b59cebc8ee4b39d175a59228e4eaf669ae72a3ea"
+      "sha1": "5a13f0124630545b4593ff0122d20298d942e6d6"
     },
     "skchr_excu2_1": {
       "name": "遗嘱执行",
@@ -2097,6 +2127,15 @@
       "height": 128,
       "sha1": "8e17e6d80ba4dd8a25c33789dd304b388aad457c"
     },
+    "skchr_etlchi_3": {
+      "name": "灵与欲的惜别",
+      "prtsTitle": "文件:技能 灵与欲的惜别.png",
+      "sourceUrl": "https://media.prts.wiki/2/23/%E6%8A%80%E8%83%BD_%E7%81%B5%E4%B8%8E%E6%AC%B2%E7%9A%84%E6%83%9C%E5%88%AB.png",
+      "localPath": "resources/images/skill/skchr_etlchi_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "ca842135281685d1485184900828f0d8e3cacb6f"
+    },
     "skchr_excu2_3": {
       "name": "圣约决裁",
       "prtsTitle": "文件:技能 圣约决裁.png",
@@ -2106,14 +2145,14 @@
       "height": 128,
       "sha1": "215e981f08873cf2da45c97f4db1b50f1ad453bd"
     },
-    "skchr_excu_2": {
-      "name": "最终旅程",
-      "prtsTitle": "文件:技能 最终旅程.png",
-      "sourceUrl": "https://media.prts.wiki/c/c1/%E6%8A%80%E8%83%BD_%E6%9C%80%E7%BB%88%E6%97%85%E7%A8%8B.png",
-      "localPath": "resources/images/skill/skchr_excu_2.png",
+    "skchr_excu2_2": {
+      "name": "近身铳斗",
+      "prtsTitle": "文件:技能 近身铳斗.png",
+      "sourceUrl": "https://media.prts.wiki/d/d1/%E6%8A%80%E8%83%BD_%E8%BF%91%E8%BA%AB%E9%93%B3%E6%96%97.png",
+      "localPath": "resources/images/skill/skchr_excu2_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "91a4ca238120db760c30209d6bc939007557e4dd"
+      "sha1": "b59cebc8ee4b39d175a59228e4eaf669ae72a3ea"
     },
     "skchr_excu_1": {
       "name": "铳口收束",
@@ -2123,6 +2162,15 @@
       "width": 128,
       "height": 128,
       "sha1": "850720df652baa8d784c394e3c3be160363ce5ef"
+    },
+    "skchr_excu_2": {
+      "name": "最终旅程",
+      "prtsTitle": "文件:技能 最终旅程.png",
+      "sourceUrl": "https://media.prts.wiki/c/c1/%E6%8A%80%E8%83%BD_%E6%9C%80%E7%BB%88%E6%97%85%E7%A8%8B.png",
+      "localPath": "resources/images/skill/skchr_excu_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "91a4ca238120db760c30209d6bc939007557e4dd"
     },
     "skchr_f12yin_1": {
       "name": "左勾扫拳",
@@ -2169,15 +2217,6 @@
       "height": 128,
       "sha1": "779e650eb0f33d37acc2fa8f25056d461d7e71df"
     },
-    "skchr_fartth_2": {
-      "name": "同盟支援",
-      "prtsTitle": "文件:技能 同盟支援.png",
-      "sourceUrl": "https://media.prts.wiki/1/1d/%E6%8A%80%E8%83%BD_%E5%90%8C%E7%9B%9F%E6%94%AF%E6%8F%B4.png",
-      "localPath": "resources/images/skill/skchr_fartth_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "bfd19696465b3068a4f61543556347fe59272c5e"
-    },
     "skchr_fartth_3": {
       "name": "光羽箭",
       "prtsTitle": "文件:技能 光羽箭.png",
@@ -2186,6 +2225,15 @@
       "width": 128,
       "height": 128,
       "sha1": "e874e476b7333df9169c5f4c591066834b1b3693"
+    },
+    "skchr_fartth_2": {
+      "name": "同盟支援",
+      "prtsTitle": "文件:技能 同盟支援.png",
+      "sourceUrl": "https://media.prts.wiki/1/1d/%E6%8A%80%E8%83%BD_%E5%90%8C%E7%9B%9F%E6%94%AF%E6%8F%B4.png",
+      "localPath": "resources/images/skill/skchr_fartth_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "bfd19696465b3068a4f61543556347fe59272c5e"
     },
     "skchr_finlpp_1": {
       "name": "治愈水波",
@@ -2205,15 +2253,6 @@
       "height": 128,
       "sha1": "28c083921f6d08c6a1930e76287f3c1f74c6abb8"
     },
-    "skchr_firwhl_2": {
-      "name": "焦土",
-      "prtsTitle": "文件:技能 焦土.png",
-      "sourceUrl": "https://media.prts.wiki/b/b5/%E6%8A%80%E8%83%BD_%E7%84%A6%E5%9C%9F.png",
-      "localPath": "resources/images/skill/skchr_firwhl_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "b607dba313a232cda54681ce240275eeae044323"
-    },
     "skchr_firwhl_1": {
       "name": "野火",
       "prtsTitle": "文件:技能 野火.png",
@@ -2222,6 +2261,15 @@
       "width": 128,
       "height": 128,
       "sha1": "41784b7bf164dac14595ea7578538ed43c281367"
+    },
+    "skchr_firwhl_2": {
+      "name": "焦土",
+      "prtsTitle": "文件:技能 焦土.png",
+      "sourceUrl": "https://media.prts.wiki/b/b5/%E6%8A%80%E8%83%BD_%E7%84%A6%E5%9C%9F.png",
+      "localPath": "resources/images/skill/skchr_firwhl_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "b607dba313a232cda54681ce240275eeae044323"
     },
     "skchr_flameb_1": {
       "name": "歃血",
@@ -2313,15 +2361,6 @@
       "height": 128,
       "sha1": "487dc6a73856143065439067f4471ae2520c1e27"
     },
-    "skchr_folivo_1": {
-      "name": "保护色隐蔽",
-      "prtsTitle": "文件:技能 保护色隐蔽.png",
-      "sourceUrl": "https://media.prts.wiki/c/cc/%E6%8A%80%E8%83%BD_%E4%BF%9D%E6%8A%A4%E8%89%B2%E9%9A%90%E8%94%BD.png",
-      "localPath": "resources/images/skill/skchr_folivo_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "5aff2de3c88a6e89037e267c07a973d220355774"
-    },
     "skchr_fmout_2": {
       "name": "命运",
       "prtsTitle": "文件:技能 命运.png",
@@ -2330,6 +2369,15 @@
       "width": 128,
       "height": 128,
       "sha1": "67bf2af94380cb1060e0fb6cf6d30ecf762ab77b"
+    },
+    "skchr_folivo_1": {
+      "name": "保护色隐蔽",
+      "prtsTitle": "文件:技能 保护色隐蔽.png",
+      "sourceUrl": "https://media.prts.wiki/c/cc/%E6%8A%80%E8%83%BD_%E4%BF%9D%E6%8A%A4%E8%89%B2%E9%9A%90%E8%94%BD.png",
+      "localPath": "resources/images/skill/skchr_folivo_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "5aff2de3c88a6e89037e267c07a973d220355774"
     },
     "skchr_folivo_2": {
       "name": "全景过载摄像",
@@ -2421,15 +2469,6 @@
       "height": 128,
       "sha1": "f40cafe86836fa13d7778e5741cf0075b615d3de"
     },
-    "skchr_fuze_1": {
-      "name": "火力侦察",
-      "prtsTitle": "文件:技能 火力侦察.png",
-      "sourceUrl": "https://media.prts.wiki/d/dc/%E6%8A%80%E8%83%BD_%E7%81%AB%E5%8A%9B%E4%BE%A6%E5%AF%9F.png",
-      "localPath": "resources/images/skill/skchr_fuze_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "60b172441ebd6c6a3401978ab85c5bda60d44ecc"
-    },
     "skchr_fuze_2": {
       "name": "霰射炸药",
       "prtsTitle": "文件:技能 霰射炸药.png",
@@ -2438,6 +2477,15 @@
       "width": 128,
       "height": 128,
       "sha1": "d4ffd6b13e0b4429ab34ac8e1e22c155408610b9"
+    },
+    "skchr_fuze_1": {
+      "name": "火力侦察",
+      "prtsTitle": "文件:技能 火力侦察.png",
+      "sourceUrl": "https://media.prts.wiki/d/dc/%E6%8A%80%E8%83%BD_%E7%81%AB%E5%8A%9B%E4%BE%A6%E5%AF%9F.png",
+      "localPath": "resources/images/skill/skchr_fuze_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "60b172441ebd6c6a3401978ab85c5bda60d44ecc"
     },
     "skchr_gdglow_1": {
       "name": "火花四溅",
@@ -2448,15 +2496,6 @@
       "height": 128,
       "sha1": "b6227f5f84e4193ae9b9f4a878b8b41e14845f04"
     },
-    "skchr_gdglow_3": {
-      "name": "澄净闪耀",
-      "prtsTitle": "文件:技能 澄净闪耀.png",
-      "sourceUrl": "https://media.prts.wiki/8/83/%E6%8A%80%E8%83%BD_%E6%BE%84%E5%87%80%E9%97%AA%E8%80%80.png",
-      "localPath": "resources/images/skill/skchr_gdglow_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "face7718181c8f7d3397c1da0d20fe9bd587eff3"
-    },
     "skchr_gdglow_2": {
       "name": "电流翻涌",
       "prtsTitle": "文件:技能 电流翻涌.png",
@@ -2465,6 +2504,15 @@
       "width": 128,
       "height": 128,
       "sha1": "1a71c29e334af1dee06318acd2a0217c9998a10c"
+    },
+    "skchr_gdglow_3": {
+      "name": "澄净闪耀",
+      "prtsTitle": "文件:技能 澄净闪耀.png",
+      "sourceUrl": "https://media.prts.wiki/8/83/%E6%8A%80%E8%83%BD_%E6%BE%84%E5%87%80%E9%97%AA%E8%80%80.png",
+      "localPath": "resources/images/skill/skchr_gdglow_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "face7718181c8f7d3397c1da0d20fe9bd587eff3"
     },
     "skchr_ghost2_1": {
       "name": "生存的技巧",
@@ -2475,15 +2523,6 @@
       "height": 128,
       "sha1": "cb0d90e051912934b7e388b718211f0ff216e163"
     },
-    "skchr_ghost2_3": {
-      "name": "生存的重压",
-      "prtsTitle": "文件:技能 生存的重压.png",
-      "sourceUrl": "https://media.prts.wiki/4/42/%E6%8A%80%E8%83%BD_%E7%94%9F%E5%AD%98%E7%9A%84%E9%87%8D%E5%8E%8B.png",
-      "localPath": "resources/images/skill/skchr_ghost2_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "83eec15332a8c1efbe218d93141eadc5fd445fa9"
-    },
     "skchr_ghost2_2": {
       "name": "生存的渴望",
       "prtsTitle": "文件:技能 生存的渴望.png",
@@ -2492,6 +2531,15 @@
       "width": 128,
       "height": 128,
       "sha1": "ce76199a583da3ef464100a05363765e88b84e6a"
+    },
+    "skchr_ghost2_3": {
+      "name": "生存的重压",
+      "prtsTitle": "文件:技能 生存的重压.png",
+      "sourceUrl": "https://media.prts.wiki/4/42/%E6%8A%80%E8%83%BD_%E7%94%9F%E5%AD%98%E7%9A%84%E9%87%8D%E5%8E%8B.png",
+      "localPath": "resources/images/skill/skchr_ghost2_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "83eec15332a8c1efbe218d93141eadc5fd445fa9"
     },
     "skchr_ghost_2": {
       "name": "肉斩骨断",
@@ -2565,15 +2613,6 @@
       "height": 128,
       "sha1": "9d443da8f84f8c698fbe15cc06b49983cca930db"
     },
-    "skchr_glaze_2": {
-      "name": "雷达定位",
-      "prtsTitle": "文件:技能 雷达定位.png",
-      "sourceUrl": "https://media.prts.wiki/0/07/%E6%8A%80%E8%83%BD_%E9%9B%B7%E8%BE%BE%E5%AE%9A%E4%BD%8D.png",
-      "localPath": "resources/images/skill/skchr_glaze_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "974de5a1f0ebec2ac8ee702ba22c47abb2bd6662"
-    },
     "skchr_glaze_1": {
       "name": "阻挡弹",
       "prtsTitle": "文件:技能 阻挡弹.png",
@@ -2583,23 +2622,14 @@
       "height": 128,
       "sha1": "69fc121f72dc1a64f9b2c89116caea16b588ad8b"
     },
-    "skchr_gnosis_1": {
-      "name": "高速思考",
-      "prtsTitle": "文件:技能 高速思考.png",
-      "sourceUrl": "https://media.prts.wiki/e/e9/%E6%8A%80%E8%83%BD_%E9%AB%98%E9%80%9F%E6%80%9D%E8%80%83.png",
-      "localPath": "resources/images/skill/skchr_gnosis_1.png",
+    "skchr_glaze_2": {
+      "name": "雷达定位",
+      "prtsTitle": "文件:技能 雷达定位.png",
+      "sourceUrl": "https://media.prts.wiki/0/07/%E6%8A%80%E8%83%BD_%E9%9B%B7%E8%BE%BE%E5%AE%9A%E4%BD%8D.png",
+      "localPath": "resources/images/skill/skchr_glaze_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "e7cea684785ebe5b287397150b454e574251a50e"
-    },
-    "skchr_glider_2": {
-      "name": "振奋",
-      "prtsTitle": "文件:技能 振奋.png",
-      "sourceUrl": "https://media.prts.wiki/a/a7/%E6%8A%80%E8%83%BD_%E6%8C%AF%E5%A5%8B.png",
-      "localPath": "resources/images/skill/skchr_glider_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "f46a6ad77a652c9a9d1abc2e0735286d51b3bffd"
+      "sha1": "974de5a1f0ebec2ac8ee702ba22c47abb2bd6662"
     },
     "skchr_glider_1": {
       "name": "精神护理",
@@ -2610,14 +2640,32 @@
       "height": 128,
       "sha1": "15400f37389ddc165384183fa7407aa063a3d288"
     },
-    "skchr_grabds_1": {
-      "name": "竹笛飞声",
-      "prtsTitle": "文件:技能 竹笛飞声.png",
-      "sourceUrl": "https://media.prts.wiki/0/0a/%E6%8A%80%E8%83%BD_%E7%AB%B9%E7%AC%9B%E9%A3%9E%E5%A3%B0.png",
-      "localPath": "resources/images/skill/skchr_grabds_1.png",
+    "skchr_glider_2": {
+      "name": "振奋",
+      "prtsTitle": "文件:技能 振奋.png",
+      "sourceUrl": "https://media.prts.wiki/a/a7/%E6%8A%80%E8%83%BD_%E6%8C%AF%E5%A5%8B.png",
+      "localPath": "resources/images/skill/skchr_glider_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "5d022ee24d59570f5c4f887a7be59c97092fa360"
+      "sha1": "f46a6ad77a652c9a9d1abc2e0735286d51b3bffd"
+    },
+    "skchr_gnosis_1": {
+      "name": "高速思考",
+      "prtsTitle": "文件:技能 高速思考.png",
+      "sourceUrl": "https://media.prts.wiki/e/e9/%E6%8A%80%E8%83%BD_%E9%AB%98%E9%80%9F%E6%80%9D%E8%80%83.png",
+      "localPath": "resources/images/skill/skchr_gnosis_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "e7cea684785ebe5b287397150b454e574251a50e"
+    },
+    "skchr_gnosis_2": {
+      "name": "零度爆发",
+      "prtsTitle": "文件:技能 零度爆发.png",
+      "sourceUrl": "https://media.prts.wiki/e/e7/%E6%8A%80%E8%83%BD_%E9%9B%B6%E5%BA%A6%E7%88%86%E5%8F%91.png",
+      "localPath": "resources/images/skill/skchr_gnosis_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "0abd8ad5571b82226fd6b0bc106b57224a32154e"
     },
     "skchr_gnosis_3": {
       "name": "失温症",
@@ -2628,14 +2676,14 @@
       "height": 128,
       "sha1": "9520ee214aa8ba09102cacd96e25a3261a1a1ed7"
     },
-    "skchr_gnosis_2": {
-      "name": "零度爆发",
-      "prtsTitle": "文件:技能 零度爆发.png",
-      "sourceUrl": "https://media.prts.wiki/e/e7/%E6%8A%80%E8%83%BD_%E9%9B%B6%E5%BA%A6%E7%88%86%E5%8F%91.png",
-      "localPath": "resources/images/skill/skchr_gnosis_2.png",
+    "skchr_grabds_1": {
+      "name": "竹笛飞声",
+      "prtsTitle": "文件:技能 竹笛飞声.png",
+      "sourceUrl": "https://media.prts.wiki/0/0a/%E6%8A%80%E8%83%BD_%E7%AB%B9%E7%AC%9B%E9%A3%9E%E5%A3%B0.png",
+      "localPath": "resources/images/skill/skchr_grabds_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "0abd8ad5571b82226fd6b0bc106b57224a32154e"
+      "sha1": "5d022ee24d59570f5c4f887a7be59c97092fa360"
     },
     "skchr_grabds_2": {
       "name": "乡音沉沉",
@@ -2673,15 +2721,6 @@
       "height": 128,
       "sha1": "a30b39a1025f8920395225abacea8b204b1a723a"
     },
-    "skchr_gravel_2": {
-      "name": "鼠群",
-      "prtsTitle": "文件:技能 鼠群.png",
-      "sourceUrl": "https://media.prts.wiki/f/f3/%E6%8A%80%E8%83%BD_%E9%BC%A0%E7%BE%A4.png",
-      "localPath": "resources/images/skill/skchr_gravel_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "0189230c66cf63cd4f3b79e852b41479a3cfe0cd"
-    },
     "skchr_gravel_1": {
       "name": "影袭",
       "prtsTitle": "文件:技能 影袭.png",
@@ -2691,14 +2730,14 @@
       "height": 128,
       "sha1": "0acfd7b6ea5891b8a9d457ae11c954f85223ba3a"
     },
-    "skchr_greyy2_2": {
-      "name": "晨曦信标",
-      "prtsTitle": "文件:技能 晨曦信标.png",
-      "sourceUrl": "https://media.prts.wiki/7/70/%E6%8A%80%E8%83%BD_%E6%99%A8%E6%9B%A6%E4%BF%A1%E6%A0%87.png",
-      "localPath": "resources/images/skill/skchr_greyy2_2.png",
+    "skchr_gravel_2": {
+      "name": "鼠群",
+      "prtsTitle": "文件:技能 鼠群.png",
+      "sourceUrl": "https://media.prts.wiki/f/f3/%E6%8A%80%E8%83%BD_%E9%BC%A0%E7%BE%A4.png",
+      "localPath": "resources/images/skill/skchr_gravel_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "560e8ed7e4d8ad234af8611783c91737b7bf2e10"
+      "sha1": "0189230c66cf63cd4f3b79e852b41479a3cfe0cd"
     },
     "skchr_greyy_2": {
       "name": "静电释放",
@@ -2709,6 +2748,15 @@
       "height": 128,
       "sha1": "698c050ef85b19b87cb057e1f0d167bebf692d2a"
     },
+    "skchr_greyy2_2": {
+      "name": "晨曦信标",
+      "prtsTitle": "文件:技能 晨曦信标.png",
+      "sourceUrl": "https://media.prts.wiki/7/70/%E6%8A%80%E8%83%BD_%E6%99%A8%E6%9B%A6%E4%BF%A1%E6%A0%87.png",
+      "localPath": "resources/images/skill/skchr_greyy2_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "560e8ed7e4d8ad234af8611783c91737b7bf2e10"
+    },
     "skchr_gvial2_1": {
       "name": "精准痛击",
       "prtsTitle": "文件:技能 精准痛击.png",
@@ -2717,6 +2765,15 @@
       "width": 128,
       "height": 128,
       "sha1": "a948c0b3da9757427bbfb816e6a2fdd59c7677c8"
+    },
+    "skchr_haak_1": {
+      "name": "快速射击",
+      "prtsTitle": "文件:技能 快速射击.png",
+      "sourceUrl": "https://media.prts.wiki/2/20/%E6%8A%80%E8%83%BD_%E5%BF%AB%E9%80%9F%E5%B0%84%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_haak_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "c32bc0633ea555d39f662b1f8c0683c1f2fd407a"
     },
     "skchr_gvial2_2": {
       "name": "链锯强袭",
@@ -2744,15 +2801,6 @@
       "width": 128,
       "height": 128,
       "sha1": "236e7334281305944a746226274fef723fe934cd"
-    },
-    "skchr_haak_1": {
-      "name": "快速射击",
-      "prtsTitle": "文件:技能 快速射击.png",
-      "sourceUrl": "https://media.prts.wiki/2/20/%E6%8A%80%E8%83%BD_%E5%BF%AB%E9%80%9F%E5%B0%84%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_haak_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "c32bc0633ea555d39f662b1f8c0683c1f2fd407a"
     },
     "skchr_haak_2": {
       "name": "爆发剂·γ型",
@@ -2889,15 +2937,6 @@
       "height": 128,
       "sha1": "eafd2fdf44d5dea43c646db3a77699f56b5528f5"
     },
-    "skchr_haruka_2": {
-      "name": "幽隙栖萤",
-      "prtsTitle": "文件:技能 幽隙栖萤.png",
-      "sourceUrl": "https://media.prts.wiki/e/e6/%E6%8A%80%E8%83%BD_%E5%B9%BD%E9%9A%99%E6%A0%96%E8%90%A4.png",
-      "localPath": "resources/images/skill/skchr_haruka_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "536a366f66860bc299a775575b3fb602f171fb4f"
-    },
     "skchr_haruka_3": {
       "name": "夏末游鳞",
       "prtsTitle": "文件:技能 夏末游鳞.png",
@@ -2906,6 +2945,15 @@
       "width": 128,
       "height": 128,
       "sha1": "b5ce788d3ab78e85f1cadc0df2dee88dfad0c637"
+    },
+    "skchr_haruka_2": {
+      "name": "幽隙栖萤",
+      "prtsTitle": "文件:技能 幽隙栖萤.png",
+      "sourceUrl": "https://media.prts.wiki/e/e6/%E6%8A%80%E8%83%BD_%E5%B9%BD%E9%9A%99%E6%A0%96%E8%90%A4.png",
+      "localPath": "resources/images/skill/skchr_haruka_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "536a366f66860bc299a775575b3fb602f171fb4f"
     },
     "skchr_hbisc2_2": {
       "name": "抚业之触",
@@ -2934,15 +2982,6 @@
       "height": 128,
       "sha1": "4775d81510e3a44c6d8c3354a105d4dd311b7e3c"
     },
-    "skchr_headb2_3": {
-      "name": "无可抵挡",
-      "prtsTitle": "文件:技能 无可抵挡.png",
-      "sourceUrl": "https://media.prts.wiki/f/fe/%E6%8A%80%E8%83%BD_%E6%97%A0%E5%8F%AF%E6%8A%B5%E6%8C%A1.png",
-      "localPath": "resources/images/skill/skchr_headb2_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "99897984570a5dba4c42af00c37cf7526039ba35"
-    },
     "skchr_headbr_2": {
       "name": "乌萨斯战吼",
       "prtsTitle": "文件:技能 乌萨斯战吼.png",
@@ -2952,14 +2991,14 @@
       "height": 128,
       "sha1": "b55885ba8b069bd84ffb17b76fd9374f959fc505"
     },
-    "skchr_heidi_2": {
-      "name": "虚构故事·锈城",
-      "prtsTitle": "文件:技能 虚构故事·锈城.png",
-      "sourceUrl": "https://media.prts.wiki/3/39/%E6%8A%80%E8%83%BD_%E8%99%9A%E6%9E%84%E6%95%85%E4%BA%8B%C2%B7%E9%94%88%E5%9F%8E.png",
-      "localPath": "resources/images/skill/skchr_heidi_2.png",
+    "skchr_headb2_3": {
+      "name": "无可抵挡",
+      "prtsTitle": "文件:技能 无可抵挡.png",
+      "sourceUrl": "https://media.prts.wiki/f/fe/%E6%8A%80%E8%83%BD_%E6%97%A0%E5%8F%AF%E6%8A%B5%E6%8C%A1.png",
+      "localPath": "resources/images/skill/skchr_headb2_3.png",
       "width": 128,
       "height": 128,
-      "sha1": "91510fee182082ea560cffa039a59bda6f3f8b2c"
+      "sha1": "99897984570a5dba4c42af00c37cf7526039ba35"
     },
     "skchr_heidi_1": {
       "name": "虚构故事·怒士",
@@ -2969,6 +3008,15 @@
       "width": 128,
       "height": 128,
       "sha1": "b8abdcfbbdadddf17992022f9fe3d71c629db7cc"
+    },
+    "skchr_heidi_2": {
+      "name": "虚构故事·锈城",
+      "prtsTitle": "文件:技能 虚构故事·锈城.png",
+      "sourceUrl": "https://media.prts.wiki/3/39/%E6%8A%80%E8%83%BD_%E8%99%9A%E6%9E%84%E6%95%85%E4%BA%8B%C2%B7%E9%94%88%E5%9F%8E.png",
+      "localPath": "resources/images/skill/skchr_heidi_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "91510fee182082ea560cffa039a59bda6f3f8b2c"
     },
     "skchr_helage_1": {
       "name": "新月",
@@ -2997,14 +3045,14 @@
       "height": 128,
       "sha1": "357444e1442bafc9c586d6865db3a51e15d8dcc7"
     },
-    "skchr_heyak_3": {
-      "name": "博览者的狂语",
-      "prtsTitle": "文件:技能 博览者的狂语.png",
-      "sourceUrl": "https://media.prts.wiki/3/39/%E6%8A%80%E8%83%BD_%E5%8D%9A%E8%A7%88%E8%80%85%E7%9A%84%E7%8B%82%E8%AF%AD.png",
-      "localPath": "resources/images/skill/skchr_heyak_3.png",
+    "skchr_heyak_1": {
+      "name": "但为求索",
+      "prtsTitle": "文件:技能 但为求索.png",
+      "sourceUrl": "https://media.prts.wiki/c/ce/%E6%8A%80%E8%83%BD_%E4%BD%86%E4%B8%BA%E6%B1%82%E7%B4%A2.png",
+      "localPath": "resources/images/skill/skchr_heyak_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "4b60231a91ffa1e08c97780bd5058456a73dc5f2"
+      "sha1": "cda39fe4c1a666c1b619f1011c6f0b2ca47504ea"
     },
     "skchr_heyak_2": {
       "name": "群星逶迤",
@@ -3015,14 +3063,14 @@
       "height": 128,
       "sha1": "b6411dfac89229ce2091eb0774d091c5f48b3e3f"
     },
-    "skchr_heyak_1": {
-      "name": "但为求索",
-      "prtsTitle": "文件:技能 但为求索.png",
-      "sourceUrl": "https://media.prts.wiki/c/ce/%E6%8A%80%E8%83%BD_%E4%BD%86%E4%B8%BA%E6%B1%82%E7%B4%A2.png",
-      "localPath": "resources/images/skill/skchr_heyak_1.png",
+    "skchr_heyak_3": {
+      "name": "博览者的狂语",
+      "prtsTitle": "文件:技能 博览者的狂语.png",
+      "sourceUrl": "https://media.prts.wiki/3/39/%E6%8A%80%E8%83%BD_%E5%8D%9A%E8%A7%88%E8%80%85%E7%9A%84%E7%8B%82%E8%AF%AD.png",
+      "localPath": "resources/images/skill/skchr_heyak_3.png",
       "width": 128,
       "height": 128,
-      "sha1": "cda39fe4c1a666c1b619f1011c6f0b2ca47504ea"
+      "sha1": "4b60231a91ffa1e08c97780bd5058456a73dc5f2"
     },
     "skchr_highmo_1": {
       "name": "回首，断舍",
@@ -3051,14 +3099,14 @@
       "height": 128,
       "sha1": "b86ede3fb7bdfd070e353ec791c53a796e3f6412"
     },
-    "skchr_hodrer_1": {
-      "name": "重锋不熄",
-      "prtsTitle": "文件:技能 重锋不熄.png",
-      "sourceUrl": "https://media.prts.wiki/1/1b/%E6%8A%80%E8%83%BD_%E9%87%8D%E9%94%8B%E4%B8%8D%E7%86%84.png",
-      "localPath": "resources/images/skill/skchr_hodrer_1.png",
+    "skchr_hmau_2": {
+      "name": "反制医疗模式",
+      "prtsTitle": "文件:技能 反制医疗模式.png",
+      "sourceUrl": "https://media.prts.wiki/3/34/%E6%8A%80%E8%83%BD_%E5%8F%8D%E5%88%B6%E5%8C%BB%E7%96%97%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_hmau_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "c05aec04efb6f4cb6f6213010620d563411dddea"
+      "sha1": "98c809dbdc660613de8646bab84016bd130f2b0a"
     },
     "skchr_hodrer_2": {
       "name": "余烬重荷",
@@ -3069,15 +3117,6 @@
       "height": 128,
       "sha1": "4bacb5ea9db28995ed14848b579307bffbe15d1f"
     },
-    "skchr_hmau_2": {
-      "name": "反制医疗模式",
-      "prtsTitle": "文件:技能 反制医疗模式.png",
-      "sourceUrl": "https://media.prts.wiki/3/34/%E6%8A%80%E8%83%BD_%E5%8F%8D%E5%88%B6%E5%8C%BB%E7%96%97%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_hmau_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "98c809dbdc660613de8646bab84016bd130f2b0a"
-    },
     "skchr_hodrer_3": {
       "name": "死境硝烟",
       "prtsTitle": "文件:技能 死境硝烟.png",
@@ -3086,6 +3125,15 @@
       "width": 128,
       "height": 128,
       "sha1": "75f363a90faad0399dbde378c577e2353fb5b225"
+    },
+    "skchr_hodrer_1": {
+      "name": "重锋不熄",
+      "prtsTitle": "文件:技能 重锋不熄.png",
+      "sourceUrl": "https://media.prts.wiki/1/1b/%E6%8A%80%E8%83%BD_%E9%87%8D%E9%94%8B%E4%B8%8D%E7%86%84.png",
+      "localPath": "resources/images/skill/skchr_hodrer_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "c05aec04efb6f4cb6f6213010620d563411dddea"
     },
     "skchr_horn_1": {
       "name": "照明榴弹",
@@ -3123,15 +3171,6 @@
       "height": 128,
       "sha1": "1ba7e56005ca1fc412fb9f1a7de1dee23edb5139"
     },
-    "skchr_hpsts_2": {
-      "name": "武力模式",
-      "prtsTitle": "文件:技能 武力模式.png",
-      "sourceUrl": "https://media.prts.wiki/f/f3/%E6%8A%80%E8%83%BD_%E6%AD%A6%E5%8A%9B%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_hpsts_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "0d453a32e5372dc2119532e3652d228d348e6efb"
-    },
     "skchr_hsgma2_1": {
       "name": "恶业苦果",
       "prtsTitle": "文件:技能 恶业苦果.png",
@@ -3140,6 +3179,15 @@
       "width": 128,
       "height": 128,
       "sha1": "ea8d97c726617da43c20fb614a8afd7535868493"
+    },
+    "skchr_hpsts_2": {
+      "name": "武力模式",
+      "prtsTitle": "文件:技能 武力模式.png",
+      "sourceUrl": "https://media.prts.wiki/f/f3/%E6%8A%80%E8%83%BD_%E6%AD%A6%E5%8A%9B%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_hpsts_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "0d453a32e5372dc2119532e3652d228d348e6efb"
     },
     "skchr_hsgma2_2": {
       "name": "无始无明",
@@ -3177,15 +3225,6 @@
       "height": 128,
       "sha1": "b0c7d17ab48a37a3547fb094fc6f005905af26d9"
     },
-    "skchr_hsguma_3": {
-      "name": "力之锯",
-      "prtsTitle": "文件:技能 力之锯.png",
-      "sourceUrl": "https://media.prts.wiki/8/89/%E6%8A%80%E8%83%BD_%E5%8A%9B%E4%B9%8B%E9%94%AF.png",
-      "localPath": "resources/images/skill/skchr_hsguma_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "ac2269e687fca6e3c217ca9bc48c778a2f559405"
-    },
     "skchr_huang_1": {
       "name": "强力击·γ型",
       "prtsTitle": "文件:技能 强力击·γ型.png",
@@ -3195,14 +3234,14 @@
       "height": 128,
       "sha1": "0f05de6d7ae13d51fc79bce517b4bc2f328d184b"
     },
-    "skchr_huang_3": {
-      "name": "沸腾爆裂",
-      "prtsTitle": "文件:技能 沸腾爆裂.png",
-      "sourceUrl": "https://media.prts.wiki/5/56/%E6%8A%80%E8%83%BD_%E6%B2%B8%E8%85%BE%E7%88%86%E8%A3%82.png",
-      "localPath": "resources/images/skill/skchr_huang_3.png",
+    "skchr_hsguma_3": {
+      "name": "力之锯",
+      "prtsTitle": "文件:技能 力之锯.png",
+      "sourceUrl": "https://media.prts.wiki/8/89/%E6%8A%80%E8%83%BD_%E5%8A%9B%E4%B9%8B%E9%94%AF.png",
+      "localPath": "resources/images/skill/skchr_hsguma_3.png",
       "width": 128,
       "height": 128,
-      "sha1": "eed053d2f61a98056b315c90b6c37eb48806f999"
+      "sha1": "ac2269e687fca6e3c217ca9bc48c778a2f559405"
     },
     "skchr_huang_2": {
       "name": "链锯延伸模块",
@@ -3212,6 +3251,15 @@
       "width": 128,
       "height": 128,
       "sha1": "310d83b04ee8b2a0779f3e4a292f3f74d7892ef2"
+    },
+    "skchr_huang_3": {
+      "name": "沸腾爆裂",
+      "prtsTitle": "文件:技能 沸腾爆裂.png",
+      "sourceUrl": "https://media.prts.wiki/5/56/%E6%8A%80%E8%83%BD_%E6%B2%B8%E8%85%BE%E7%88%86%E8%A3%82.png",
+      "localPath": "resources/images/skill/skchr_huang_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "eed053d2f61a98056b315c90b6c37eb48806f999"
     },
     "skchr_humus_1": {
       "name": "固废切割",
@@ -3276,15 +3324,6 @@
       "height": 128,
       "sha1": "6f6b297384e6aecfe0bc7687e71ba818e6767697"
     },
-    "skchr_indigo_2": {
-      "name": "光影迷宫",
-      "prtsTitle": "文件:技能 光影迷宫.png",
-      "sourceUrl": "https://media.prts.wiki/5/56/%E6%8A%80%E8%83%BD_%E5%85%89%E5%BD%B1%E8%BF%B7%E5%AE%AB.png",
-      "localPath": "resources/images/skill/skchr_indigo_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "aeb2acd32efce122ac83a219990a1938eeda2297"
-    },
     "skchr_indigo_1": {
       "name": "灯塔守卫者",
       "prtsTitle": "文件:技能 灯塔守卫者.png",
@@ -3294,14 +3333,14 @@
       "height": 128,
       "sha1": "6f61f95439b4440486eb79f31ba4ed9b44ceb5e7"
     },
-    "skchr_ines_2": {
-      "name": "暗夜无明",
-      "prtsTitle": "文件:技能 暗夜无明.png",
-      "sourceUrl": "https://media.prts.wiki/2/2a/%E6%8A%80%E8%83%BD_%E6%9A%97%E5%A4%9C%E6%97%A0%E6%98%8E.png",
-      "localPath": "resources/images/skill/skchr_ines_2.png",
+    "skchr_indigo_2": {
+      "name": "光影迷宫",
+      "prtsTitle": "文件:技能 光影迷宫.png",
+      "sourceUrl": "https://media.prts.wiki/5/56/%E6%8A%80%E8%83%BD_%E5%85%89%E5%BD%B1%E8%BF%B7%E5%AE%AB.png",
+      "localPath": "resources/images/skill/skchr_indigo_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "5a6da8b5778289e8b6273f2ec10ccc0516907cb7"
+      "sha1": "aeb2acd32efce122ac83a219990a1938eeda2297"
     },
     "skchr_ines_1": {
       "name": "淬影突袭",
@@ -3311,6 +3350,15 @@
       "width": 128,
       "height": 128,
       "sha1": "52a4ebd14db5306e7c0670e34571c80b2a4100d7"
+    },
+    "skchr_ines_2": {
+      "name": "暗夜无明",
+      "prtsTitle": "文件:技能 暗夜无明.png",
+      "sourceUrl": "https://media.prts.wiki/2/2a/%E6%8A%80%E8%83%BD_%E6%9A%97%E5%A4%9C%E6%97%A0%E6%98%8E.png",
+      "localPath": "resources/images/skill/skchr_ines_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "5a6da8b5778289e8b6273f2ec10ccc0516907cb7"
     },
     "skchr_ines_3": {
       "name": "独影归途",
@@ -3330,15 +3378,6 @@
       "height": 128,
       "sha1": "3f9a1f3c644ef9d97f6a25ccb52d74a8e1e671c9"
     },
-    "skchr_inside_2": {
-      "name": "“解决麻烦”",
-      "prtsTitle": "文件:技能 “解决麻烦”.png",
-      "sourceUrl": "https://media.prts.wiki/1/17/%E6%8A%80%E8%83%BD_%E2%80%9C%E8%A7%A3%E5%86%B3%E9%BA%BB%E7%83%A6%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_inside_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "ac71fa065a8b6aff0fb0608c84172add80aca2e2"
-    },
     "skchr_irene_1": {
       "name": "起风",
       "prtsTitle": "文件:技能 起风.png",
@@ -3348,14 +3387,14 @@
       "height": 128,
       "sha1": "83740299c7ea1d526367cfee5c9e18a74610015d"
     },
-    "skchr_irene_3": {
-      "name": "判决",
-      "prtsTitle": "文件:技能 判决.png",
-      "sourceUrl": "https://media.prts.wiki/4/4e/%E6%8A%80%E8%83%BD_%E5%88%A4%E5%86%B3.png",
-      "localPath": "resources/images/skill/skchr_irene_3.png",
+    "skchr_inside_2": {
+      "name": "“解决麻烦”",
+      "prtsTitle": "文件:技能 “解决麻烦”.png",
+      "sourceUrl": "https://media.prts.wiki/1/17/%E6%8A%80%E8%83%BD_%E2%80%9C%E8%A7%A3%E5%86%B3%E9%BA%BB%E7%83%A6%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_inside_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "08208fd7be07f03079cd94219ad57ec444c9e0b2"
+      "sha1": "ac71fa065a8b6aff0fb0608c84172add80aca2e2"
     },
     "skchr_irene_2": {
       "name": "裂潮",
@@ -3365,6 +3404,15 @@
       "width": 128,
       "height": 128,
       "sha1": "695f38eedff7c0000dc9e9b1016f7ce89466bd4a"
+    },
+    "skchr_irene_3": {
+      "name": "判决",
+      "prtsTitle": "文件:技能 判决.png",
+      "sourceUrl": "https://media.prts.wiki/4/4e/%E6%8A%80%E8%83%BD_%E5%88%A4%E5%86%B3.png",
+      "localPath": "resources/images/skill/skchr_irene_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "08208fd7be07f03079cd94219ad57ec444c9e0b2"
     },
     "skchr_iris_1": {
       "name": "童话守卫者",
@@ -3384,15 +3432,6 @@
       "height": 128,
       "sha1": "89fdfe76ce82ecba467c155037b6f7a95acee64e"
     },
-    "skchr_ironmn_1": {
-      "name": "极致火力",
-      "prtsTitle": "文件:技能 极致火力.png",
-      "sourceUrl": "https://media.prts.wiki/9/97/%E6%8A%80%E8%83%BD_%E6%9E%81%E8%87%B4%E7%81%AB%E5%8A%9B.png",
-      "localPath": "resources/images/skill/skchr_ironmn_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "7841b83c8d65f272b5e4b5f395afa7d5edbc511f"
-    },
     "skchr_ironmn_2": {
       "name": "高效补给",
       "prtsTitle": "文件:技能 高效补给.png",
@@ -3401,6 +3440,15 @@
       "width": 128,
       "height": 128,
       "sha1": "04a66dbc32220f7e34e9dc34fb38ec07ed5a5b8b"
+    },
+    "skchr_ironmn_1": {
+      "name": "极致火力",
+      "prtsTitle": "文件:技能 极致火力.png",
+      "sourceUrl": "https://media.prts.wiki/9/97/%E6%8A%80%E8%83%BD_%E6%9E%81%E8%87%B4%E7%81%AB%E5%8A%9B.png",
+      "localPath": "resources/images/skill/skchr_ironmn_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "7841b83c8d65f272b5e4b5f395afa7d5edbc511f"
     },
     "skchr_ironmn_3": {
       "name": "铁钳号·原型机",
@@ -3447,15 +3495,6 @@
       "height": 128,
       "sha1": "e76393c07469d0eecdb5afe8c0bfcfd57fb88d84"
     },
-    "skchr_jesca2_3": {
-      "name": "饱和迸射",
-      "prtsTitle": "文件:技能 饱和迸射.png",
-      "sourceUrl": "https://media.prts.wiki/a/ac/%E6%8A%80%E8%83%BD_%E9%A5%B1%E5%92%8C%E8%BF%B8%E5%B0%84.png",
-      "localPath": "resources/images/skill/skchr_jesca2_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "22998865161a931fe398cd48b1121e630dd503fb"
-    },
     "skchr_jesca2_2": {
       "name": "掩蔽护卫",
       "prtsTitle": "文件:技能 掩蔽护卫.png",
@@ -3464,6 +3503,15 @@
       "width": 128,
       "height": 128,
       "sha1": "7d585f21a38bcfce970186adda796f95ec00adad"
+    },
+    "skchr_jesca2_3": {
+      "name": "饱和迸射",
+      "prtsTitle": "文件:技能 饱和迸射.png",
+      "sourceUrl": "https://media.prts.wiki/a/ac/%E6%8A%80%E8%83%BD_%E9%A5%B1%E5%92%8C%E8%BF%B8%E5%B0%84.png",
+      "localPath": "resources/images/skill/skchr_jesca2_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "22998865161a931fe398cd48b1121e630dd503fb"
     },
     "skchr_jesica_1": {
       "name": "强力击·β型",
@@ -3564,15 +3612,6 @@
       "height": 128,
       "sha1": "cf9f4c9cce397ccab0908a9f9dabe81362576b6b"
     },
-    "skchr_kalts2_2": {
-      "name": "保护性拒止",
-      "prtsTitle": "文件:技能 保护性拒止.png",
-      "sourceUrl": "https://media.prts.wiki/1/18/%E6%8A%80%E8%83%BD_%E4%BF%9D%E6%8A%A4%E6%80%A7%E6%8B%92%E6%AD%A2.png",
-      "localPath": "resources/images/skill/skchr_kalts2_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "e2769d7e9c3f62f9ab69a1bd30ddb4a8b7f62cc7"
-    },
     "skchr_kalts2_1": {
       "name": "应急肃正防线",
       "prtsTitle": "文件:技能 应急肃正防线.png",
@@ -3581,6 +3620,15 @@
       "width": 128,
       "height": 128,
       "sha1": "aa4f2a2e6b39e34e391542c6c6f30d14d1cc3cd6"
+    },
+    "skchr_kalts2_2": {
+      "name": "保护性拒止",
+      "prtsTitle": "文件:技能 保护性拒止.png",
+      "sourceUrl": "https://media.prts.wiki/1/18/%E6%8A%80%E8%83%BD_%E4%BF%9D%E6%8A%A4%E6%80%A7%E6%8B%92%E6%AD%A2.png",
+      "localPath": "resources/images/skill/skchr_kalts2_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "e2769d7e9c3f62f9ab69a1bd30ddb4a8b7f62cc7"
     },
     "skchr_kalts2_3": {
       "name": "破梏重生",
@@ -3636,15 +3684,6 @@
       "height": 128,
       "sha1": "c30df0d5b1f537c58ce8c1aae7b11cb06b0b5953"
     },
-    "skchr_kichi_2": {
-      "name": "吉星高照！",
-      "prtsTitle": "文件:技能 吉星高照！.png",
-      "sourceUrl": "https://media.prts.wiki/2/2b/%E6%8A%80%E8%83%BD_%E5%90%89%E6%98%9F%E9%AB%98%E7%85%A7%EF%BC%81.png",
-      "localPath": "resources/images/skill/skchr_kichi_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "388aa83cc2bdf213599453866320fc4493548c38"
-    },
     "skchr_kichi_1": {
       "name": "欢迎您来！",
       "prtsTitle": "文件:技能 欢迎您来！.png",
@@ -3653,6 +3692,15 @@
       "width": 128,
       "height": 128,
       "sha1": "7030b51bfdab1102547b8bbc7a53fdd087b1d9f8"
+    },
+    "skchr_kichi_2": {
+      "name": "吉星高照！",
+      "prtsTitle": "文件:技能 吉星高照！.png",
+      "sourceUrl": "https://media.prts.wiki/2/2b/%E6%8A%80%E8%83%BD_%E5%90%89%E6%98%9F%E9%AB%98%E7%85%A7%EF%BC%81.png",
+      "localPath": "resources/images/skill/skchr_kichi_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "388aa83cc2bdf213599453866320fc4493548c38"
     },
     "skchr_kirara_1": {
       "name": "锚击",
@@ -3726,15 +3774,6 @@
       "height": 128,
       "sha1": "38453fefc927f452c598745c308a31931f2ad4de"
     },
-    "skchr_lasher_2": {
-      "name": "权知轻重",
-      "prtsTitle": "文件:技能 权知轻重.png",
-      "sourceUrl": "https://media.prts.wiki/3/38/%E6%8A%80%E8%83%BD_%E6%9D%83%E7%9F%A5%E8%BD%BB%E9%87%8D.png",
-      "localPath": "resources/images/skill/skchr_lasher_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "da0932432667d1b68d87c8ddff0378c1c580b1a4"
-    },
     "skchr_lava2_1": {
       "name": "焰淬匕首",
       "prtsTitle": "文件:技能 焰淬匕首.png",
@@ -3743,6 +3782,15 @@
       "width": 128,
       "height": 128,
       "sha1": "bdb337263d04f0d4df2da835da226de2a0ef0db6"
+    },
+    "skchr_lasher_2": {
+      "name": "权知轻重",
+      "prtsTitle": "文件:技能 权知轻重.png",
+      "sourceUrl": "https://media.prts.wiki/3/38/%E6%8A%80%E8%83%BD_%E6%9D%83%E7%9F%A5%E8%BD%BB%E9%87%8D.png",
+      "localPath": "resources/images/skill/skchr_lasher_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "da0932432667d1b68d87c8ddff0378c1c580b1a4"
     },
     "skchr_lava2_2": {
       "name": "狱火之环",
@@ -3861,15 +3909,6 @@
       "height": 128,
       "sha1": "2c15d72ff025eeee383a3430f7a021e14766d0d3"
     },
-    "skchr_liesel_2": {
-      "name": "直到终曲",
-      "prtsTitle": "文件:技能 直到终曲.png",
-      "sourceUrl": "https://media.prts.wiki/d/db/%E6%8A%80%E8%83%BD_%E7%9B%B4%E5%88%B0%E7%BB%88%E6%9B%B2.png",
-      "localPath": "resources/images/skill/skchr_liesel_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "a4e9d2cdfdbae1f2d7d63053d0adc91670fd0260"
-    },
     "skchr_lin_1": {
       "name": "玲珑",
       "prtsTitle": "文件:技能 玲珑.png",
@@ -3878,6 +3917,15 @@
       "width": 128,
       "height": 128,
       "sha1": "91fffe1052dc761f195f6467963e22e990fe611d"
+    },
+    "skchr_liesel_2": {
+      "name": "直到终曲",
+      "prtsTitle": "文件:技能 直到终曲.png",
+      "sourceUrl": "https://media.prts.wiki/d/db/%E6%8A%80%E8%83%BD_%E7%9B%B4%E5%88%B0%E7%BB%88%E6%9B%B2.png",
+      "localPath": "resources/images/skill/skchr_liesel_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "a4e9d2cdfdbae1f2d7d63053d0adc91670fd0260"
     },
     "skchr_lin_2": {
       "name": "荫庇",
@@ -3888,15 +3936,6 @@
       "height": 128,
       "sha1": "ac40a15f5f299a08a24b86cd74578712705a1720"
     },
-    "skchr_ling_1": {
-      "name": "重进酒",
-      "prtsTitle": "文件:技能 重进酒.png",
-      "sourceUrl": "https://media.prts.wiki/d/d3/%E6%8A%80%E8%83%BD_%E9%87%8D%E8%BF%9B%E9%85%92.png",
-      "localPath": "resources/images/skill/skchr_ling_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "269f0875bb6b03f340a5651884de640066af83ba"
-    },
     "skchr_lin_3": {
       "name": "流光乍裂",
       "prtsTitle": "文件:技能 流光乍裂.png",
@@ -3905,6 +3944,15 @@
       "width": 128,
       "height": 128,
       "sha1": "8fca4efdca0b61f322adb838a658dccb56c7f344"
+    },
+    "skchr_ling_1": {
+      "name": "重进酒",
+      "prtsTitle": "文件:技能 重进酒.png",
+      "sourceUrl": "https://media.prts.wiki/d/d3/%E6%8A%80%E8%83%BD_%E9%87%8D%E8%BF%9B%E9%85%92.png",
+      "localPath": "resources/images/skill/skchr_ling_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "269f0875bb6b03f340a5651884de640066af83ba"
     },
     "skchr_ling_2": {
       "name": "笑鸣瑟",
@@ -3933,6 +3981,15 @@
       "height": 128,
       "sha1": "dc9e633d1ba8ef37a4e3f6b5bb44728bb5113763"
     },
+    "skchr_lisa_2": {
+      "name": "儿时的舞乐",
+      "prtsTitle": "文件:技能 儿时的舞乐.png",
+      "sourceUrl": "https://media.prts.wiki/c/cf/%E6%8A%80%E8%83%BD_%E5%84%BF%E6%97%B6%E7%9A%84%E8%88%9E%E4%B9%90.png",
+      "localPath": "resources/images/skill/skchr_lisa_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "dbecd72946ace5af1289661d743f5715325985be"
+    },
     "skchr_lisa_1": {
       "name": "全力以赴",
       "prtsTitle": "文件:技能 全力以赴.png",
@@ -3951,15 +4008,6 @@
       "height": 128,
       "sha1": "4e85497e7898e4594727c76a15907dcf344f5216"
     },
-    "skchr_lisa_2": {
-      "name": "儿时的舞乐",
-      "prtsTitle": "文件:技能 儿时的舞乐.png",
-      "sourceUrl": "https://media.prts.wiki/c/cf/%E6%8A%80%E8%83%BD_%E5%84%BF%E6%97%B6%E7%9A%84%E8%88%9E%E4%B9%90.png",
-      "localPath": "resources/images/skill/skchr_lisa_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "dbecd72946ace5af1289661d743f5715325985be"
-    },
     "skchr_liskam_1": {
       "name": "充能防御",
       "prtsTitle": "文件:技能 充能防御.png",
@@ -3968,6 +4016,15 @@
       "width": 128,
       "height": 128,
       "sha1": "62d313eca32accd44f1a1617bc76767944c0d07d"
+    },
+    "skchr_lmlee_2": {
+      "name": "驱凶辟邪",
+      "prtsTitle": "文件:技能 驱凶辟邪.png",
+      "sourceUrl": "https://media.prts.wiki/4/46/%E6%8A%80%E8%83%BD_%E9%A9%B1%E5%87%B6%E8%BE%9F%E9%82%AA.png",
+      "localPath": "resources/images/skill/skchr_lmlee_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "e4cb7aa736efcb06c4b6a2841f315ee350e4c71d"
     },
     "skchr_liskam_2": {
       "name": "反击电弧",
@@ -3986,15 +4043,6 @@
       "width": 128,
       "height": 128,
       "sha1": "7cb39b90654caeef29f8b555c79063592c911650"
-    },
-    "skchr_lmlee_2": {
-      "name": "驱凶辟邪",
-      "prtsTitle": "文件:技能 驱凶辟邪.png",
-      "sourceUrl": "https://media.prts.wiki/4/46/%E6%8A%80%E8%83%BD_%E9%A9%B1%E5%87%B6%E8%BE%9F%E9%82%AA.png",
-      "localPath": "resources/images/skill/skchr_lmlee_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "e4cb7aa736efcb06c4b6a2841f315ee350e4c71d"
     },
     "skchr_lmlee_3": {
       "name": "贵客盈门",
@@ -4032,6 +4080,15 @@
       "height": 128,
       "sha1": "73eba643af508d84b3eb28a81362c14a831fa840"
     },
+    "skchr_lumen_1": {
+      "name": "沐雨",
+      "prtsTitle": "文件:技能 沐雨.png",
+      "sourceUrl": "https://media.prts.wiki/2/23/%E6%8A%80%E8%83%BD_%E6%B2%90%E9%9B%A8.png",
+      "localPath": "resources/images/skill/skchr_lumen_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "fb7c0729e677543550ce62e7cd91ec01183ffdc9"
+    },
     "skchr_lolxh_1": {
       "name": "掠光尾影",
       "prtsTitle": "文件:技能 掠光尾影.png",
@@ -4049,15 +4106,6 @@
       "width": 128,
       "height": 128,
       "sha1": "3f588fe6044f9588f2d3b4fa2f2743c596144bcf"
-    },
-    "skchr_lumen_1": {
-      "name": "沐雨",
-      "prtsTitle": "文件:技能 沐雨.png",
-      "sourceUrl": "https://media.prts.wiki/2/23/%E6%8A%80%E8%83%BD_%E6%B2%90%E9%9B%A8.png",
-      "localPath": "resources/images/skill/skchr_lumen_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "fb7c0729e677543550ce62e7cd91ec01183ffdc9"
     },
     "skchr_lumen_2": {
       "name": "沛霖",
@@ -4077,15 +4125,6 @@
       "height": 128,
       "sha1": "bfca80b4ea0d3d6f5edb12147405de42ee47f59d"
     },
-    "skchr_lunacu_2": {
-      "name": "伏击之影",
-      "prtsTitle": "文件:技能 伏击之影.png",
-      "sourceUrl": "https://media.prts.wiki/1/1c/%E6%8A%80%E8%83%BD_%E4%BC%8F%E5%87%BB%E4%B9%8B%E5%BD%B1.png",
-      "localPath": "resources/images/skill/skchr_lunacu_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "1a8e44ee51c794206e60df73dfd7f7de4f063e2d"
-    },
     "skchr_lunacu_1": {
       "name": "狩猎时刻",
       "prtsTitle": "文件:技能 狩猎时刻.png",
@@ -4094,6 +4133,15 @@
       "width": 128,
       "height": 128,
       "sha1": "c74ea034e87d72dc2955d5dfca48c9413ff0cd75"
+    },
+    "skchr_lunacu_2": {
+      "name": "伏击之影",
+      "prtsTitle": "文件:技能 伏击之影.png",
+      "sourceUrl": "https://media.prts.wiki/1/1c/%E6%8A%80%E8%83%BD_%E4%BC%8F%E5%87%BB%E4%B9%8B%E5%BD%B1.png",
+      "localPath": "resources/images/skill/skchr_lunacu_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "1a8e44ee51c794206e60df73dfd7f7de4f063e2d"
     },
     "skchr_luton_1": {
       "name": "强力击·β型",
@@ -4113,15 +4161,6 @@
       "height": 128,
       "sha1": "c308cd64a95886f2bf9e7da50cacaea536211663"
     },
-    "skchr_makiri_2": {
-      "name": "万手成局",
-      "prtsTitle": "文件:技能 万手成局.png",
-      "sourceUrl": "https://media.prts.wiki/3/30/%E6%8A%80%E8%83%BD_%E4%B8%87%E6%89%8B%E6%88%90%E5%B1%80.png",
-      "localPath": "resources/images/skill/skchr_makiri_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "54daee7c3f94f1069fb571ad5514f99ffeb20abc"
-    },
     "skchr_makiri_1": {
       "name": "入场安排",
       "prtsTitle": "文件:技能 入场安排.png",
@@ -4131,23 +4170,14 @@
       "height": 128,
       "sha1": "96f24848b46e91affed551ad9c16b27f98e4c345"
     },
-    "skchr_mantic_1": {
-      "name": "蝎毒",
-      "prtsTitle": "文件:技能 蝎毒.png",
-      "sourceUrl": "https://media.prts.wiki/5/55/%E6%8A%80%E8%83%BD_%E8%9D%8E%E6%AF%92.png",
-      "localPath": "resources/images/skill/skchr_mantic_1.png",
+    "skchr_makiri_2": {
+      "name": "万手成局",
+      "prtsTitle": "文件:技能 万手成局.png",
+      "sourceUrl": "https://media.prts.wiki/3/30/%E6%8A%80%E8%83%BD_%E4%B8%87%E6%89%8B%E6%88%90%E5%B1%80.png",
+      "localPath": "resources/images/skill/skchr_makiri_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "b421758206f057fcb3b98439a894c231c58ed879"
-    },
-    "skchr_mantic_2": {
-      "name": "蓄力毒尾击",
-      "prtsTitle": "文件:技能 蓄力毒尾击.png",
-      "sourceUrl": "https://media.prts.wiki/e/e3/%E6%8A%80%E8%83%BD_%E8%93%84%E5%8A%9B%E6%AF%92%E5%B0%BE%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_mantic_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "2272200bcb3925d356feaa46531e53f7894a4e04"
+      "sha1": "54daee7c3f94f1069fb571ad5514f99ffeb20abc"
     },
     "skchr_malist_2": {
       "name": "神工意匠",
@@ -4158,6 +4188,15 @@
       "height": 128,
       "sha1": "48783902ead68b193eed609b4eb4eeaf2a1c972d"
     },
+    "skchr_mantic_1": {
+      "name": "蝎毒",
+      "prtsTitle": "文件:技能 蝎毒.png",
+      "sourceUrl": "https://media.prts.wiki/5/55/%E6%8A%80%E8%83%BD_%E8%9D%8E%E6%AF%92.png",
+      "localPath": "resources/images/skill/skchr_mantic_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "b421758206f057fcb3b98439a894c231c58ed879"
+    },
     "skchr_mantra_1": {
       "name": "共鸣溃缩",
       "prtsTitle": "文件:技能 共鸣溃缩.png",
@@ -4166,6 +4205,15 @@
       "width": 128,
       "height": 128,
       "sha1": "bec7b64a9e189e9e7f08612d8b564e18e0f03bc4"
+    },
+    "skchr_mantic_2": {
+      "name": "蓄力毒尾击",
+      "prtsTitle": "文件:技能 蓄力毒尾击.png",
+      "sourceUrl": "https://media.prts.wiki/e/e3/%E6%8A%80%E8%83%BD_%E8%93%84%E5%8A%9B%E6%AF%92%E5%B0%BE%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_mantic_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "2272200bcb3925d356feaa46531e53f7894a4e04"
     },
     "skchr_mantra_2": {
       "name": "意识联协",
@@ -4203,6 +4251,15 @@
       "height": 128,
       "sha1": "689b187562cbcd6e8f6863bd89ded770510d6b27"
     },
+    "skchr_mberry_2": {
+      "name": "安全区域",
+      "prtsTitle": "文件:技能 安全区域.png",
+      "sourceUrl": "https://media.prts.wiki/b/bc/%E6%8A%80%E8%83%BD_%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F.png",
+      "localPath": "resources/images/skill/skchr_mberry_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "81300329fcd49bf9e1485a3c1f1fc4e5b75d5d9a"
+    },
     "skchr_marcil_3": {
       "name": "爆破魔法",
       "prtsTitle": "文件:技能 爆破魔法.png",
@@ -4220,24 +4277,6 @@
       "width": 128,
       "height": 128,
       "sha1": "78ffdb1940b48e215c1dfab4f7c817025af16f17"
-    },
-    "skchr_mberry_2": {
-      "name": "安全区域",
-      "prtsTitle": "文件:技能 安全区域.png",
-      "sourceUrl": "https://media.prts.wiki/b/bc/%E6%8A%80%E8%83%BD_%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F.png",
-      "localPath": "resources/images/skill/skchr_mberry_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "81300329fcd49bf9e1485a3c1f1fc4e5b75d5d9a"
-    },
-    "skchr_mcnist_3": {
-      "name": "工程学十字星",
-      "prtsTitle": "文件:技能 工程学十字星.png",
-      "sourceUrl": "https://media.prts.wiki/1/1d/%E6%8A%80%E8%83%BD_%E5%B7%A5%E7%A8%8B%E5%AD%A6%E5%8D%81%E5%AD%97%E6%98%9F.png",
-      "localPath": "resources/images/skill/skchr_mcnist_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "2816384d4ae99b9e995451c44d438192070da398"
     },
     "skchr_mcnist_1": {
       "name": "聚类分析",
@@ -4257,6 +4296,15 @@
       "height": 128,
       "sha1": "9ca0fa8d2622b9e349547aaaabaaf918fa7d03e2"
     },
+    "skchr_mcnist_3": {
+      "name": "工程学十字星",
+      "prtsTitle": "文件:技能 工程学十字星.png",
+      "sourceUrl": "https://media.prts.wiki/1/1d/%E6%8A%80%E8%83%BD_%E5%B7%A5%E7%A8%8B%E5%AD%A6%E5%8D%81%E5%AD%97%E6%98%9F.png",
+      "localPath": "resources/images/skill/skchr_mcnist_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "2816384d4ae99b9e995451c44d438192070da398"
+    },
     "skchr_melnte_1": {
       "name": "饱和脉冲",
       "prtsTitle": "文件:技能 饱和脉冲.png",
@@ -4274,15 +4322,6 @@
       "width": 128,
       "height": 128,
       "sha1": "034b440dd83ae41e5e8fcd0f7d4dfd5e51e7cf49"
-    },
-    "skchr_meteo_2": {
-      "name": "高爆弹头",
-      "prtsTitle": "文件:技能 高爆弹头.png",
-      "sourceUrl": "https://media.prts.wiki/3/34/%E6%8A%80%E8%83%BD_%E9%AB%98%E7%88%86%E5%BC%B9%E5%A4%B4.png",
-      "localPath": "resources/images/skill/skchr_meteo_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "b1e27f536b0a18419d542f524fa8b671b3cb5888"
     },
     "skchr_meteo_1": {
       "name": "霰射弹头",
@@ -4302,6 +4341,15 @@
       "height": 128,
       "sha1": "d635035cf6acbb88c789a5dcbf848247df1e507f"
     },
+    "skchr_meteo_2": {
+      "name": "高爆弹头",
+      "prtsTitle": "文件:技能 高爆弹头.png",
+      "sourceUrl": "https://media.prts.wiki/3/34/%E6%8A%80%E8%83%BD_%E9%AB%98%E7%88%86%E5%BC%B9%E5%A4%B4.png",
+      "localPath": "resources/images/skill/skchr_meteo_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "b1e27f536b0a18419d542f524fa8b671b3cb5888"
+    },
     "skchr_mgllan_2": {
       "name": "激光开采模块",
       "prtsTitle": "文件:技能 激光开采模块.png",
@@ -4320,15 +4368,6 @@
       "height": 128,
       "sha1": "c2e0b3ed9eaedb237740001577d064935b3a60ae"
     },
-    "skchr_milu_2": {
-      "name": "战术电台",
-      "prtsTitle": "文件:技能 战术电台.png",
-      "sourceUrl": "https://media.prts.wiki/d/d6/%E6%8A%80%E8%83%BD_%E6%88%98%E6%9C%AF%E7%94%B5%E5%8F%B0.png",
-      "localPath": "resources/images/skill/skchr_milu_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "80f6d7dc45a146fc847149ad06d4bf7fde2d0e37"
-    },
     "skchr_milu_1": {
       "name": "环境伪装",
       "prtsTitle": "文件:技能 环境伪装.png",
@@ -4338,14 +4377,14 @@
       "height": 128,
       "sha1": "cb287be7e75b4ac14dbffde1bc3de56af5242fd0"
     },
-    "skchr_mint_2": {
-      "name": "聚能涡旋",
-      "prtsTitle": "文件:技能 聚能涡旋.png",
-      "sourceUrl": "https://media.prts.wiki/c/c2/%E6%8A%80%E8%83%BD_%E8%81%9A%E8%83%BD%E6%B6%A1%E6%97%8B.png",
-      "localPath": "resources/images/skill/skchr_mint_2.png",
+    "skchr_milu_2": {
+      "name": "战术电台",
+      "prtsTitle": "文件:技能 战术电台.png",
+      "sourceUrl": "https://media.prts.wiki/d/d6/%E6%8A%80%E8%83%BD_%E6%88%98%E6%9C%AF%E7%94%B5%E5%8F%B0.png",
+      "localPath": "resources/images/skill/skchr_milu_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "1d7dabdecd237276c254cf567b45438a1a8b5fe1"
+      "sha1": "80f6d7dc45a146fc847149ad06d4bf7fde2d0e37"
     },
     "skchr_mint_1": {
       "name": "风语",
@@ -4355,6 +4394,15 @@
       "width": 128,
       "height": 128,
       "sha1": "2b21f5f2f9cbf735bb986350614aa8da72664fde"
+    },
+    "skchr_mint_2": {
+      "name": "聚能涡旋",
+      "prtsTitle": "文件:技能 聚能涡旋.png",
+      "sourceUrl": "https://media.prts.wiki/c/c2/%E6%8A%80%E8%83%BD_%E8%81%9A%E8%83%BD%E6%B6%A1%E6%97%8B.png",
+      "localPath": "resources/images/skill/skchr_mint_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "1d7dabdecd237276c254cf567b45438a1a8b5fe1"
     },
     "skchr_mitm_1": {
       "name": "遥控解体",
@@ -4437,15 +4485,6 @@
       "height": 128,
       "sha1": "d855eb4006abe2ee5f5e5635a427dc3dae9443ae"
     },
-    "skchr_mlyss_3": {
-      "name": "浅层非熵适应",
-      "prtsTitle": "文件:技能 浅层非熵适应.png",
-      "sourceUrl": "https://media.prts.wiki/f/fc/%E6%8A%80%E8%83%BD_%E6%B5%85%E5%B1%82%E9%9D%9E%E7%86%B5%E9%80%82%E5%BA%94.png",
-      "localPath": "resources/images/skill/skchr_mlyss_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "6cd6de70bae363d7e2657d91bcf6265b761b349c"
-    },
     "skchr_mlyss_2": {
       "name": "生态耦合",
       "prtsTitle": "文件:技能 生态耦合.png",
@@ -4454,6 +4493,15 @@
       "width": 128,
       "height": 128,
       "sha1": "491debb20a10f3414ec9926f379da6d55615080b"
+    },
+    "skchr_mlyss_3": {
+      "name": "浅层非熵适应",
+      "prtsTitle": "文件:技能 浅层非熵适应.png",
+      "sourceUrl": "https://media.prts.wiki/f/fc/%E6%8A%80%E8%83%BD_%E6%B5%85%E5%B1%82%E9%9D%9E%E7%86%B5%E9%80%82%E5%BA%94.png",
+      "localPath": "resources/images/skill/skchr_mlyss_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "6cd6de70bae363d7e2657d91bcf6265b761b349c"
     },
     "skchr_mm_1": {
       "name": "麻痹弹",
@@ -4590,15 +4638,6 @@
       "height": 128,
       "sha1": "baf33410f549e25ac68e76144b946c2e5693c794"
     },
-    "skchr_myrrh_2": {
-      "name": "医疗力场",
-      "prtsTitle": "文件:技能 医疗力场.png",
-      "sourceUrl": "https://media.prts.wiki/2/2b/%E6%8A%80%E8%83%BD_%E5%8C%BB%E7%96%97%E5%8A%9B%E5%9C%BA.png",
-      "localPath": "resources/images/skill/skchr_myrrh_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "1ebec6c630a3764455f305b267048e9b134fc161"
-    },
     "skchr_myrrh_1": {
       "name": "二重治疗",
       "prtsTitle": "文件:技能 二重治疗.png",
@@ -4608,14 +4647,14 @@
       "height": 128,
       "sha1": "e4d1f289626b58ca035d909729abe74f1776c3b8"
     },
-    "skchr_narant_2": {
-      "name": "恶魇",
-      "prtsTitle": "文件:技能 恶魇.png",
-      "sourceUrl": "https://media.prts.wiki/3/33/%E6%8A%80%E8%83%BD_%E6%81%B6%E9%AD%87.png",
-      "localPath": "resources/images/skill/skchr_narant_2.png",
+    "skchr_myrtle_2": {
+      "name": "治愈之翼",
+      "prtsTitle": "文件:技能 治愈之翼.png",
+      "sourceUrl": "https://media.prts.wiki/2/20/%E6%8A%80%E8%83%BD_%E6%B2%BB%E6%84%88%E4%B9%8B%E7%BF%BC.png",
+      "localPath": "resources/images/skill/skchr_myrtle_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "ca628fb57da2872d2841d7c6b997615305210438"
+      "sha1": "b94af9b4af558d56e0f2312d0aff3b9e1b2422cb"
     },
     "skchr_narant_1": {
       "name": "旋刃",
@@ -4626,14 +4665,23 @@
       "height": 128,
       "sha1": "73315d707b5084cd740a3cfd4ce8ba5a6f3a529e"
     },
-    "skchr_myrtle_2": {
-      "name": "治愈之翼",
-      "prtsTitle": "文件:技能 治愈之翼.png",
-      "sourceUrl": "https://media.prts.wiki/2/20/%E6%8A%80%E8%83%BD_%E6%B2%BB%E6%84%88%E4%B9%8B%E7%BF%BC.png",
-      "localPath": "resources/images/skill/skchr_myrtle_2.png",
+    "skchr_myrrh_2": {
+      "name": "医疗力场",
+      "prtsTitle": "文件:技能 医疗力场.png",
+      "sourceUrl": "https://media.prts.wiki/2/2b/%E6%8A%80%E8%83%BD_%E5%8C%BB%E7%96%97%E5%8A%9B%E5%9C%BA.png",
+      "localPath": "resources/images/skill/skchr_myrrh_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "b94af9b4af558d56e0f2312d0aff3b9e1b2422cb"
+      "sha1": "1ebec6c630a3764455f305b267048e9b134fc161"
+    },
+    "skchr_narant_2": {
+      "name": "恶魇",
+      "prtsTitle": "文件:技能 恶魇.png",
+      "sourceUrl": "https://media.prts.wiki/3/33/%E6%8A%80%E8%83%BD_%E6%81%B6%E9%AD%87.png",
+      "localPath": "resources/images/skill/skchr_narant_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "ca628fb57da2872d2841d7c6b997615305210438"
     },
     "skchr_narant_3": {
       "name": "吞日",
@@ -4662,14 +4710,14 @@
       "height": 128,
       "sha1": "6e3bd049dea10be4367ceaba1d4a9032085de9ab"
     },
-    "skchr_nasti_3": {
-      "name": "栖脚地",
-      "prtsTitle": "文件:技能 栖脚地.png",
-      "sourceUrl": "https://media.prts.wiki/6/63/%E6%8A%80%E8%83%BD_%E6%A0%96%E8%84%9A%E5%9C%B0.png",
-      "localPath": "resources/images/skill/skchr_nasti_3.png",
+    "skchr_ncdeer_1": {
+      "name": "人间降吉",
+      "prtsTitle": "文件:技能 人间降吉.png",
+      "sourceUrl": "https://media.prts.wiki/0/0f/%E6%8A%80%E8%83%BD_%E4%BA%BA%E9%97%B4%E9%99%8D%E5%90%89.png",
+      "localPath": "resources/images/skill/skchr_ncdeer_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "d4d2a12225bc034f5397f99012fd9e733604abbc"
+      "sha1": "ed8bb09b5d284b61f1eb94380edc09cbd8267954"
     },
     "skchr_ncdeer_2": {
       "name": "仙山去远",
@@ -4680,14 +4728,14 @@
       "height": 128,
       "sha1": "4ad6284323ac2df4f74dd41780b702d76dfda0c6"
     },
-    "skchr_ncdeer_1": {
-      "name": "人间降吉",
-      "prtsTitle": "文件:技能 人间降吉.png",
-      "sourceUrl": "https://media.prts.wiki/0/0f/%E6%8A%80%E8%83%BD_%E4%BA%BA%E9%97%B4%E9%99%8D%E5%90%89.png",
-      "localPath": "resources/images/skill/skchr_ncdeer_1.png",
+    "skchr_nasti_3": {
+      "name": "栖脚地",
+      "prtsTitle": "文件:技能 栖脚地.png",
+      "sourceUrl": "https://media.prts.wiki/6/63/%E6%8A%80%E8%83%BD_%E6%A0%96%E8%84%9A%E5%9C%B0.png",
+      "localPath": "resources/images/skill/skchr_nasti_3.png",
       "width": 128,
       "height": 128,
-      "sha1": "ed8bb09b5d284b61f1eb94380edc09cbd8267954"
+      "sha1": "d4d2a12225bc034f5397f99012fd9e733604abbc"
     },
     "skchr_nearl2_1": {
       "name": "灿焰长刃",
@@ -4716,15 +4764,6 @@
       "height": 128,
       "sha1": "fa1d7431958eba315d6b56f9f1d800963bc937af"
     },
-    "skchr_nearl_2": {
-      "name": "急救模式",
-      "prtsTitle": "文件:技能 急救模式.png",
-      "sourceUrl": "https://media.prts.wiki/b/be/%E6%8A%80%E8%83%BD_%E6%80%A5%E6%95%91%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_nearl_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "2cb8699e86d748dde7ab1ad3cba6e39d0d34d5fe"
-    },
     "skchr_nearl_1": {
       "name": "急救",
       "prtsTitle": "文件:技能 急救.png",
@@ -4733,6 +4772,15 @@
       "width": 128,
       "height": 128,
       "sha1": "8384d363c5993ad0d8d77006e25d53b3114f3f32"
+    },
+    "skchr_nearl_2": {
+      "name": "急救模式",
+      "prtsTitle": "文件:技能 急救模式.png",
+      "sourceUrl": "https://media.prts.wiki/b/be/%E6%8A%80%E8%83%BD_%E6%80%A5%E6%95%91%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_nearl_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "2cb8699e86d748dde7ab1ad3cba6e39d0d34d5fe"
     },
     "skchr_necras_1": {
       "name": "噩愿",
@@ -4815,15 +4863,6 @@
       "height": 128,
       "sha1": "713cf9912bfb67298ff5d103a94e816d6fb5f570"
     },
-    "skchr_noirc2_1": {
-      "name": "居合拔刀气刃斩",
-      "prtsTitle": "文件:技能 居合拔刀气刃斩.png",
-      "sourceUrl": "https://media.prts.wiki/5/5e/%E6%8A%80%E8%83%BD_%E5%B1%85%E5%90%88%E6%8B%94%E5%88%80%E6%B0%94%E5%88%83%E6%96%A9.png",
-      "localPath": "resources/images/skill/skchr_noirc2_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "3b85a63eeafa417140e1ee37fb78590e822d43b9"
-    },
     "skchr_noirc2_2": {
       "name": "气刃兜割",
       "prtsTitle": "文件:技能 气刃兜割.png",
@@ -4832,6 +4871,15 @@
       "width": 128,
       "height": 128,
       "sha1": "1504d7a03dbc6fbfdbaf46a11b9b9e21b5225713"
+    },
+    "skchr_noirc2_1": {
+      "name": "居合拔刀气刃斩",
+      "prtsTitle": "文件:技能 居合拔刀气刃斩.png",
+      "sourceUrl": "https://media.prts.wiki/5/5e/%E6%8A%80%E8%83%BD_%E5%B1%85%E5%90%88%E6%8B%94%E5%88%80%E6%B0%94%E5%88%83%E6%96%A9.png",
+      "localPath": "resources/images/skill/skchr_noirc2_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "3b85a63eeafa417140e1ee37fb78590e822d43b9"
     },
     "skchr_nothin_1": {
       "name": "知难而退",
@@ -4977,15 +5025,6 @@
       "height": 128,
       "sha1": "93b52db60c53b2e5dab43a2a6b0e8fa54e77103c"
     },
-    "skchr_otter_2": {
-      "name": "爆破回收",
-      "prtsTitle": "文件:技能 爆破回收.png",
-      "sourceUrl": "https://media.prts.wiki/8/89/%E6%8A%80%E8%83%BD_%E7%88%86%E7%A0%B4%E5%9B%9E%E6%94%B6.png",
-      "localPath": "resources/images/skill/skchr_otter_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "f7508c2d9feadbafc64648ef8b3b1dd7af42f3bc"
-    },
     "skchr_pallas_1": {
       "name": "胜利的连击",
       "prtsTitle": "文件:技能 胜利的连击.png",
@@ -4994,6 +5033,15 @@
       "width": 128,
       "height": 128,
       "sha1": "d38a8ef56b1d7447978e5265a54d79114e656ba4"
+    },
+    "skchr_otter_2": {
+      "name": "爆破回收",
+      "prtsTitle": "文件:技能 爆破回收.png",
+      "sourceUrl": "https://media.prts.wiki/8/89/%E6%8A%80%E8%83%BD_%E7%88%86%E7%A0%B4%E5%9B%9E%E6%94%B6.png",
+      "localPath": "resources/images/skill/skchr_otter_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "f7508c2d9feadbafc64648ef8b3b1dd7af42f3bc"
     },
     "skchr_pallas_2": {
       "name": "信念的长鞭",
@@ -5022,6 +5070,15 @@
       "height": 128,
       "sha1": "f2fd62a0ccce826aca2e8cbb94bfbb02b3724eb9"
     },
+    "skchr_papyrs_1": {
+      "name": "巧思乍现",
+      "prtsTitle": "文件:技能 巧思乍现.png",
+      "sourceUrl": "https://media.prts.wiki/7/78/%E6%8A%80%E8%83%BD_%E5%B7%A7%E6%80%9D%E4%B9%8D%E7%8E%B0.png",
+      "localPath": "resources/images/skill/skchr_papyrs_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "9b697b80d5d4c23aea128a560f08ad0d3e95b0f4"
+    },
     "skchr_panda_2": {
       "name": "崩拳式",
       "prtsTitle": "文件:技能 崩拳式.png",
@@ -5031,14 +5088,14 @@
       "height": 128,
       "sha1": "0d2957a0689bf9185236cb721b8173a8147e983d"
     },
-    "skchr_papyrs_1": {
-      "name": "巧思乍现",
-      "prtsTitle": "文件:技能 巧思乍现.png",
-      "sourceUrl": "https://media.prts.wiki/7/78/%E6%8A%80%E8%83%BD_%E5%B7%A7%E6%80%9D%E4%B9%8D%E7%8E%B0.png",
-      "localPath": "resources/images/skill/skchr_papyrs_1.png",
+    "skchr_pasngr_1": {
+      "name": "电能之触",
+      "prtsTitle": "文件:技能 电能之触.png",
+      "sourceUrl": "https://media.prts.wiki/a/af/%E6%8A%80%E8%83%BD_%E7%94%B5%E8%83%BD%E4%B9%8B%E8%A7%A6.png",
+      "localPath": "resources/images/skill/skchr_pasngr_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "9b697b80d5d4c23aea128a560f08ad0d3e95b0f4"
+      "sha1": "2aefb4d957db1fb934c0094bcb3fda0c70168a07"
     },
     "skchr_papyrs_2": {
       "name": "临考发挥",
@@ -5057,15 +5114,6 @@
       "width": 128,
       "height": 128,
       "sha1": "f28bbe7e22c4ddb816ca55d32b61d04d16a1c059"
-    },
-    "skchr_pasngr_1": {
-      "name": "电能之触",
-      "prtsTitle": "文件:技能 电能之触.png",
-      "sourceUrl": "https://media.prts.wiki/a/af/%E6%8A%80%E8%83%BD_%E7%94%B5%E8%83%BD%E4%B9%8B%E8%A7%A6.png",
-      "localPath": "resources/images/skill/skchr_pasngr_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "2aefb4d957db1fb934c0094bcb3fda0c70168a07"
     },
     "skchr_pasngr_3": {
       "name": "辉煌裂片",
@@ -5094,15 +5142,6 @@
       "height": 128,
       "sha1": "b793245707cd9ae0091633a506c04bfbc7e59695"
     },
-    "skchr_pedro_1": {
-      "name": "标记射击",
-      "prtsTitle": "文件:技能 标记射击.png",
-      "sourceUrl": "https://media.prts.wiki/6/69/%E6%8A%80%E8%83%BD_%E6%A0%87%E8%AE%B0%E5%B0%84%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_pedro_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "f8f2c3c2186202c1bb7ffdcd871bb141a16e0fd6"
-    },
     "skchr_pedro_2": {
       "name": "交替撤离",
       "prtsTitle": "文件:技能 交替撤离.png",
@@ -5112,14 +5151,14 @@
       "height": 128,
       "sha1": "475067878fd694e78f9cde77a270e9922f06b221"
     },
-    "skchr_pepe_2": {
-      "name": "阻遏混乱锤",
-      "prtsTitle": "文件:技能 阻遏混乱锤.png",
-      "sourceUrl": "https://media.prts.wiki/3/34/%E6%8A%80%E8%83%BD_%E9%98%BB%E9%81%8F%E6%B7%B7%E4%B9%B1%E9%94%A4.png",
-      "localPath": "resources/images/skill/skchr_pepe_2.png",
+    "skchr_pedro_1": {
+      "name": "标记射击",
+      "prtsTitle": "文件:技能 标记射击.png",
+      "sourceUrl": "https://media.prts.wiki/6/69/%E6%8A%80%E8%83%BD_%E6%A0%87%E8%AE%B0%E5%B0%84%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_pedro_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "f7d37236d6b749f565627beddac391f7b62e4972"
+      "sha1": "f8f2c3c2186202c1bb7ffdcd871bb141a16e0fd6"
     },
     "skchr_pepe_1": {
       "name": "盖戳！",
@@ -5129,6 +5168,15 @@
       "width": 128,
       "height": 128,
       "sha1": "3441c2ceea9f3acfcaaca4721efd53e302004019"
+    },
+    "skchr_pepe_2": {
+      "name": "阻遏混乱锤",
+      "prtsTitle": "文件:技能 阻遏混乱锤.png",
+      "sourceUrl": "https://media.prts.wiki/3/34/%E6%8A%80%E8%83%BD_%E9%98%BB%E9%81%8F%E6%B7%B7%E4%B9%B1%E9%94%A4.png",
+      "localPath": "resources/images/skill/skchr_pepe_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "f7d37236d6b749f565627beddac391f7b62e4972"
     },
     "skchr_pepe_3": {
       "name": "时光震荡",
@@ -5157,15 +5205,6 @@
       "height": 128,
       "sha1": "ef75e55a303c44aaf6227e90306435e7a4586a0c"
     },
-    "skchr_phatom_1": {
-      "name": "暗夜魅影",
-      "prtsTitle": "文件:技能 暗夜魅影.png",
-      "sourceUrl": "https://media.prts.wiki/6/6d/%E6%8A%80%E8%83%BD_%E6%9A%97%E5%A4%9C%E9%AD%85%E5%BD%B1.png",
-      "localPath": "resources/images/skill/skchr_phatom_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "c3ed7aed3f6fc1941a2e065fd837650234275f97"
-    },
     "skchr_phatm2_2": {
       "name": "群体性谵妄",
       "prtsTitle": "文件:技能 群体性谵妄.png",
@@ -5184,14 +5223,14 @@
       "height": 128,
       "sha1": "e696b68c6dfac958882e09b21254eb8e00528c3f"
     },
-    "skchr_phatom_3": {
-      "name": "夜幕突袭",
-      "prtsTitle": "文件:技能 夜幕突袭.png",
-      "sourceUrl": "https://media.prts.wiki/d/d4/%E6%8A%80%E8%83%BD_%E5%A4%9C%E5%B9%95%E7%AA%81%E8%A2%AD.png",
-      "localPath": "resources/images/skill/skchr_phatom_3.png",
+    "skchr_phatom_1": {
+      "name": "暗夜魅影",
+      "prtsTitle": "文件:技能 暗夜魅影.png",
+      "sourceUrl": "https://media.prts.wiki/6/6d/%E6%8A%80%E8%83%BD_%E6%9A%97%E5%A4%9C%E9%AD%85%E5%BD%B1.png",
+      "localPath": "resources/images/skill/skchr_phatom_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "5360c9551be80a6bcedba0f33fe97e22f70970d1"
+      "sha1": "c3ed7aed3f6fc1941a2e065fd837650234275f97"
     },
     "skchr_phatom_2": {
       "name": "血色乐章",
@@ -5201,6 +5240,15 @@
       "width": 128,
       "height": 128,
       "sha1": "7be33623dffa971b9d3cac2bcabe8f52427acc94"
+    },
+    "skchr_phatom_3": {
+      "name": "夜幕突袭",
+      "prtsTitle": "文件:技能 夜幕突袭.png",
+      "sourceUrl": "https://media.prts.wiki/d/d4/%E6%8A%80%E8%83%BD_%E5%A4%9C%E5%B9%95%E7%AA%81%E8%A2%AD.png",
+      "localPath": "resources/images/skill/skchr_phatom_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "5360c9551be80a6bcedba0f33fe97e22f70970d1"
     },
     "skchr_phenxi_1": {
       "name": "“你须直面”",
@@ -5238,15 +5286,6 @@
       "height": 128,
       "sha1": "dba733ae88cd6afdf5a1bb643f4e76786920b06a"
     },
-    "skchr_philae_2": {
-      "name": "冥河诅咒",
-      "prtsTitle": "文件:技能 冥河诅咒.png",
-      "sourceUrl": "https://media.prts.wiki/c/c2/%E6%8A%80%E8%83%BD_%E5%86%A5%E6%B2%B3%E8%AF%85%E5%92%92.png",
-      "localPath": "resources/images/skill/skchr_philae_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "6b1d35ca3b4422fc07d0cb07d96cbad0ad812503"
-    },
     "skchr_pianst_1": {
       "name": "纷飞十指",
       "prtsTitle": "文件:技能 纷飞十指.png",
@@ -5255,6 +5294,15 @@
       "width": 128,
       "height": 128,
       "sha1": "4f0e82866774116f982c35214b65eef54b8e5163"
+    },
+    "skchr_philae_2": {
+      "name": "冥河诅咒",
+      "prtsTitle": "文件:技能 冥河诅咒.png",
+      "sourceUrl": "https://media.prts.wiki/c/c2/%E6%8A%80%E8%83%BD_%E5%86%A5%E6%B2%B3%E8%AF%85%E5%92%92.png",
+      "localPath": "resources/images/skill/skchr_philae_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "6b1d35ca3b4422fc07d0cb07d96cbad0ad812503"
     },
     "skchr_pianst_2": {
       "name": "曲惊四座",
@@ -5328,6 +5376,15 @@
       "height": 128,
       "sha1": "2634e20574e0b210b871f59c5d0884e1eccdcf4d"
     },
+    "skchr_podego_2": {
+      "name": "孢子扩散",
+      "prtsTitle": "文件:技能 孢子扩散.png",
+      "sourceUrl": "https://media.prts.wiki/c/cd/%E6%8A%80%E8%83%BD_%E5%AD%A2%E5%AD%90%E6%89%A9%E6%95%A3.png",
+      "localPath": "resources/images/skill/skchr_podego_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "e7559f1bbc8009b401c1baf5897888e43da873db"
+    },
     "skchr_prove_1": {
       "name": "狼眼",
       "prtsTitle": "文件:技能 狼眼.png",
@@ -5345,15 +5402,6 @@
       "width": 128,
       "height": 128,
       "sha1": "ae8e6d02b01038d4e940e2aad5f335e030609acd"
-    },
-    "skchr_podego_2": {
-      "name": "孢子扩散",
-      "prtsTitle": "文件:技能 孢子扩散.png",
-      "sourceUrl": "https://media.prts.wiki/c/cd/%E6%8A%80%E8%83%BD_%E5%AD%A2%E5%AD%90%E6%89%A9%E6%95%A3.png",
-      "localPath": "resources/images/skill/skchr_podego_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "e7559f1bbc8009b401c1baf5897888e43da873db"
     },
     "skchr_provs_1": {
       "name": "纠纷起诉",
@@ -5490,15 +5538,6 @@
       "height": 128,
       "sha1": "cedd450b87f924dc131f8f336096134766bb7c7e"
     },
-    "skchr_rdoc_1": {
-      "name": "以暴制暴",
-      "prtsTitle": "文件:技能 以暴制暴.png",
-      "sourceUrl": "https://media.prts.wiki/6/6b/%E6%8A%80%E8%83%BD_%E4%BB%A5%E6%9A%B4%E5%88%B6%E6%9A%B4.png",
-      "localPath": "resources/images/skill/skchr_rdoc_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "efbb5f40150572d17127acfaefab4731c2402f45"
-    },
     "skchr_ray_3": {
       "name": "“得见光芒”",
       "prtsTitle": "文件:技能 “得见光芒”.png",
@@ -5508,14 +5547,14 @@
       "height": 128,
       "sha1": "59b0d99dd5765d03df8961dff4e05012c44ddac8"
     },
-    "skchr_rdoc_2": {
-      "name": "激素手枪",
-      "prtsTitle": "文件:技能 激素手枪.png",
-      "sourceUrl": "https://media.prts.wiki/5/5f/%E6%8A%80%E8%83%BD_%E6%BF%80%E7%B4%A0%E6%89%8B%E6%9E%AA.png",
-      "localPath": "resources/images/skill/skchr_rdoc_2.png",
+    "skchr_rdoc_1": {
+      "name": "以暴制暴",
+      "prtsTitle": "文件:技能 以暴制暴.png",
+      "sourceUrl": "https://media.prts.wiki/6/6b/%E6%8A%80%E8%83%BD_%E4%BB%A5%E6%9A%B4%E5%88%B6%E6%9A%B4.png",
+      "localPath": "resources/images/skill/skchr_rdoc_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "372d299894dab7a54eb22497243f10d45a8de800"
+      "sha1": "efbb5f40150572d17127acfaefab4731c2402f45"
     },
     "skchr_reckpr_1": {
       "name": "触类旁通",
@@ -5526,14 +5565,14 @@
       "height": 128,
       "sha1": "1d655619e90b067c3b2f01db23e047daf2ff4fc7"
     },
-    "skchr_red_1": {
-      "name": "处决模式",
-      "prtsTitle": "文件:技能 处决模式.png",
-      "sourceUrl": "https://media.prts.wiki/1/1e/%E6%8A%80%E8%83%BD_%E5%A4%84%E5%86%B3%E6%A8%A1%E5%BC%8F.png",
-      "localPath": "resources/images/skill/skchr_red_1.png",
+    "skchr_rdoc_2": {
+      "name": "激素手枪",
+      "prtsTitle": "文件:技能 激素手枪.png",
+      "sourceUrl": "https://media.prts.wiki/5/5f/%E6%8A%80%E8%83%BD_%E6%BF%80%E7%B4%A0%E6%89%8B%E6%9E%AA.png",
+      "localPath": "resources/images/skill/skchr_rdoc_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "b7ce3711cc6913004b06ece65f372ea36373cbac"
+      "sha1": "372d299894dab7a54eb22497243f10d45a8de800"
     },
     "skchr_reckpr_2": {
       "name": "一点关窍",
@@ -5543,6 +5582,15 @@
       "width": 128,
       "height": 128,
       "sha1": "e449af4e4ff597526a08af55893ad06dd21c68de"
+    },
+    "skchr_red_1": {
+      "name": "处决模式",
+      "prtsTitle": "文件:技能 处决模式.png",
+      "sourceUrl": "https://media.prts.wiki/1/1e/%E6%8A%80%E8%83%BD_%E5%A4%84%E5%86%B3%E6%A8%A1%E5%BC%8F.png",
+      "localPath": "resources/images/skill/skchr_red_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "b7ce3711cc6913004b06ece65f372ea36373cbac"
     },
     "skchr_red_2": {
       "name": "狼群",
@@ -5571,15 +5619,6 @@
       "height": 128,
       "sha1": "4ad1e7d3cfb62f6f5208162ae31edff924f2242b"
     },
-    "skchr_rfrost_1": {
-      "name": "陷阱部署",
-      "prtsTitle": "文件:技能 陷阱部署.png",
-      "sourceUrl": "https://media.prts.wiki/c/cb/%E6%8A%80%E8%83%BD_%E9%99%B7%E9%98%B1%E9%83%A8%E7%BD%B2.png",
-      "localPath": "resources/images/skill/skchr_rfrost_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "33d2a823cab15825f7c000f0fc91d6dd6eabd80c"
-    },
     "skchr_rfalcn_2": {
       "name": "醉刃乱舞",
       "prtsTitle": "文件:技能 醉刃乱舞.png",
@@ -5597,6 +5636,15 @@
       "width": 128,
       "height": 128,
       "sha1": "ac7d46afbae7f45a74af937a86aa91803a32505b"
+    },
+    "skchr_rfrost_1": {
+      "name": "陷阱部署",
+      "prtsTitle": "文件:技能 陷阱部署.png",
+      "sourceUrl": "https://media.prts.wiki/c/cb/%E6%8A%80%E8%83%BD_%E9%99%B7%E9%98%B1%E9%83%A8%E7%BD%B2.png",
+      "localPath": "resources/images/skill/skchr_rfrost_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "33d2a823cab15825f7c000f0fc91d6dd6eabd80c"
     },
     "skchr_rmixer_1": {
       "name": "铳骑主考官",
@@ -5616,15 +5664,6 @@
       "height": 128,
       "sha1": "f8e6da4da439138b88598b8a9ee5dc481a967ba1"
     },
-    "skchr_robin_1": {
-      "name": "束缚“夹子”",
-      "prtsTitle": "文件:技能 束缚“夹子”.png",
-      "sourceUrl": "https://media.prts.wiki/3/3d/%E6%8A%80%E8%83%BD_%E6%9D%9F%E7%BC%9A%E2%80%9C%E5%A4%B9%E5%AD%90%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_robin_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "a9e8b6044c87273719803bc6732dc594f5bbdcf0"
-    },
     "skchr_rmixer_3": {
       "name": "退休前布道",
       "prtsTitle": "文件:技能 退休前布道.png",
@@ -5633,6 +5672,15 @@
       "width": 128,
       "height": 128,
       "sha1": "73eefea7576c92b57aabb55352626e41f31dd020"
+    },
+    "skchr_robin_1": {
+      "name": "束缚“夹子”",
+      "prtsTitle": "文件:技能 束缚“夹子”.png",
+      "sourceUrl": "https://media.prts.wiki/3/3d/%E6%8A%80%E8%83%BD_%E6%9D%9F%E7%BC%9A%E2%80%9C%E5%A4%B9%E5%AD%90%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_robin_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "a9e8b6044c87273719803bc6732dc594f5bbdcf0"
     },
     "skchr_robin_2": {
       "name": "弹射“夹子”",
@@ -5688,6 +5736,15 @@
       "height": 128,
       "sha1": "9b8fead550be0fb78bb57ffa3b13f23d3e8f53dc"
     },
+    "skchr_rosesa_1": {
+      "name": "上佳的应急药呀",
+      "prtsTitle": "文件:技能 上佳的应急药呀.png",
+      "sourceUrl": "https://media.prts.wiki/a/a1/%E6%8A%80%E8%83%BD_%E4%B8%8A%E4%BD%B3%E7%9A%84%E5%BA%94%E6%80%A5%E8%8D%AF%E5%91%80.png",
+      "localPath": "resources/images/skill/skchr_rosesa_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "2f2e12a0aa340ce909870bc3c27a58dceb4fcf98"
+    },
     "skchr_rosesa_2": {
       "name": "绝妙的长效药呀",
       "prtsTitle": "文件:技能 绝妙的长效药呀.png",
@@ -5705,15 +5762,6 @@
       "width": 128,
       "height": 128,
       "sha1": "7efa1e4a07097b06a6b0aed52b90d229cb9cf203"
-    },
-    "skchr_rosesa_1": {
-      "name": "上佳的应急药呀",
-      "prtsTitle": "文件:技能 上佳的应急药呀.png",
-      "sourceUrl": "https://media.prts.wiki/a/a1/%E6%8A%80%E8%83%BD_%E4%B8%8A%E4%BD%B3%E7%9A%84%E5%BA%94%E6%80%A5%E8%8D%AF%E5%91%80.png",
-      "localPath": "resources/images/skill/skchr_rosesa_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "2f2e12a0aa340ce909870bc3c27a58dceb4fcf98"
     },
     "skchr_rosmon_2": {
       "name": "末梢阻断",
@@ -5760,15 +5808,6 @@
       "height": 128,
       "sha1": "b4551dff90a1707dcb33d6241478aa66b589c742"
     },
-    "skchr_sbell2_1": {
-      "name": "铃音吹雪",
-      "prtsTitle": "文件:技能 铃音吹雪.png",
-      "sourceUrl": "https://media.prts.wiki/f/f7/%E6%8A%80%E8%83%BD_%E9%93%83%E9%9F%B3%E5%90%B9%E9%9B%AA.png",
-      "localPath": "resources/images/skill/skchr_sbell2_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "54f48b0fef04c8ded241fa6199a191ed3184eb04"
-    },
     "skchr_savage_1": {
       "name": "强力击·β型",
       "prtsTitle": "文件:技能 强力击·β型.png",
@@ -5777,6 +5816,15 @@
       "width": 128,
       "height": 128,
       "sha1": "9410fc0a946379d697ada148a7eb432392b283d4"
+    },
+    "skchr_sbell2_1": {
+      "name": "铃音吹雪",
+      "prtsTitle": "文件:技能 铃音吹雪.png",
+      "sourceUrl": "https://media.prts.wiki/f/f7/%E6%8A%80%E8%83%BD_%E9%93%83%E9%9F%B3%E5%90%B9%E9%9B%AA.png",
+      "localPath": "resources/images/skill/skchr_sbell2_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "54f48b0fef04c8ded241fa6199a191ed3184eb04"
     },
     "skchr_sbell2_2": {
       "name": "霜涛覆岭",
@@ -5787,15 +5835,6 @@
       "height": 128,
       "sha1": "41400f47d4352cfeb5ace17d0a73fccd4cb85f4e"
     },
-    "skchr_scave_2": {
-      "name": "冲锋号令·攻击",
-      "prtsTitle": "文件:技能 冲锋号令·攻击.png",
-      "sourceUrl": "https://media.prts.wiki/8/8d/%E6%8A%80%E8%83%BD_%E5%86%B2%E9%94%8B%E5%8F%B7%E4%BB%A4%C2%B7%E6%94%BB%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_scave_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "33064c4040d899e0430d6e7c8d75cac629d5fde9"
-    },
     "skchr_sbell2_3": {
       "name": "群山俯首",
       "prtsTitle": "文件:技能 群山俯首.png",
@@ -5804,6 +5843,15 @@
       "width": 128,
       "height": 128,
       "sha1": "c521c8483bae695220e997bf04116f67c2e9278f"
+    },
+    "skchr_scave_2": {
+      "name": "冲锋号令·攻击",
+      "prtsTitle": "文件:技能 冲锋号令·攻击.png",
+      "sourceUrl": "https://media.prts.wiki/8/8d/%E6%8A%80%E8%83%BD_%E5%86%B2%E9%94%8B%E5%8F%B7%E4%BB%A4%C2%B7%E6%94%BB%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_scave_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "33064c4040d899e0430d6e7c8d75cac629d5fde9"
     },
     "skchr_sddrag_2": {
       "name": "生灵火花",
@@ -5814,15 +5862,6 @@
       "height": 128,
       "sha1": "fea08d3a7bde07c5f17968ea068415df27c8d3fa"
     },
-    "skchr_sensi_2": {
-      "name": "团体魔物大餐",
-      "prtsTitle": "文件:技能 团体魔物大餐.png",
-      "sourceUrl": "https://media.prts.wiki/6/6e/%E6%8A%80%E8%83%BD_%E5%9B%A2%E4%BD%93%E9%AD%94%E7%89%A9%E5%A4%A7%E9%A4%90.png",
-      "localPath": "resources/images/skill/skchr_sensi_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "7e2f98eccbaf880939dafbefebf3c65c21055bd2"
-    },
     "skchr_sensi_1": {
       "name": "单人份料理",
       "prtsTitle": "文件:技能 单人份料理.png",
@@ -5831,6 +5870,15 @@
       "width": 128,
       "height": 128,
       "sha1": "26231ae76b2796c43978296768efef9444ce1d4b"
+    },
+    "skchr_sensi_2": {
+      "name": "团体魔物大餐",
+      "prtsTitle": "文件:技能 团体魔物大餐.png",
+      "sourceUrl": "https://media.prts.wiki/6/6e/%E6%8A%80%E8%83%BD_%E5%9B%A2%E4%BD%93%E9%AD%94%E7%89%A9%E5%A4%A7%E9%A4%90.png",
+      "localPath": "resources/images/skill/skchr_sensi_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "7e2f98eccbaf880939dafbefebf3c65c21055bd2"
     },
     "skchr_serum_1": {
       "name": "专注力超载",
@@ -5859,15 +5907,6 @@
       "height": 128,
       "sha1": "d013422827ab3e3b01c23a76c3152032e5554b82"
     },
-    "skchr_shining_2": {
-      "name": "自动掩护",
-      "prtsTitle": "文件:技能 自动掩护.png",
-      "sourceUrl": "https://media.prts.wiki/0/0f/%E6%8A%80%E8%83%BD_%E8%87%AA%E5%8A%A8%E6%8E%A9%E6%8A%A4.png",
-      "localPath": "resources/images/skill/skchr_shining_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "90d29702377f1bb65dbe158ae690f607446dbfd5"
-    },
     "skchr_shining_1": {
       "name": "信条",
       "prtsTitle": "文件:技能 信条.png",
@@ -5886,6 +5925,15 @@
       "height": 128,
       "sha1": "723e20dd57b0347a5a6a912a810465135cb3a600"
     },
+    "skchr_shining_2": {
+      "name": "自动掩护",
+      "prtsTitle": "文件:技能 自动掩护.png",
+      "sourceUrl": "https://media.prts.wiki/0/0f/%E6%8A%80%E8%83%BD_%E8%87%AA%E5%8A%A8%E6%8E%A9%E6%8A%A4.png",
+      "localPath": "resources/images/skill/skchr_shining_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "90d29702377f1bb65dbe158ae690f607446dbfd5"
+    },
     "skchr_shotst_1": {
       "name": "碎甲击",
       "prtsTitle": "文件:技能 碎甲击.png",
@@ -5903,6 +5951,15 @@
       "width": 128,
       "height": 128,
       "sha1": "79ace00fab500e5b84dff2eb90298ca2c26f2b95"
+    },
+    "skchr_shu_2": {
+      "name": "嘉禾盈仓",
+      "prtsTitle": "文件:技能 嘉禾盈仓.png",
+      "sourceUrl": "https://media.prts.wiki/6/69/%E6%8A%80%E8%83%BD_%E5%98%89%E7%A6%BE%E7%9B%88%E4%BB%93.png",
+      "localPath": "resources/images/skill/skchr_shu_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "566f9b01a85444b98e98601dedb662c81b94680b"
     },
     "skchr_shu_1": {
       "name": "化被草木",
@@ -5931,14 +5988,14 @@
       "height": 128,
       "sha1": "8dacfa32fb07ed5096d70a150ed03028c5be28f2"
     },
-    "skchr_shu_2": {
-      "name": "嘉禾盈仓",
-      "prtsTitle": "文件:技能 嘉禾盈仓.png",
-      "sourceUrl": "https://media.prts.wiki/6/69/%E6%8A%80%E8%83%BD_%E5%98%89%E7%A6%BE%E7%9B%88%E4%BB%93.png",
-      "localPath": "resources/images/skill/skchr_shu_2.png",
+    "skchr_shwaz_3": {
+      "name": "战术的终结",
+      "prtsTitle": "文件:技能 战术的终结.png",
+      "sourceUrl": "https://media.prts.wiki/b/b6/%E6%8A%80%E8%83%BD_%E6%88%98%E6%9C%AF%E7%9A%84%E7%BB%88%E7%BB%93.png",
+      "localPath": "resources/images/skill/skchr_shwaz_3.png",
       "width": 128,
       "height": 128,
-      "sha1": "566f9b01a85444b98e98601dedb662c81b94680b"
+      "sha1": "58095cb9f4aca164e888e14f2a16798e9c963b98"
     },
     "skchr_shwaz_2": {
       "name": "暮眼锐瞳",
@@ -5957,15 +6014,6 @@
       "width": 128,
       "height": 128,
       "sha1": "cbafd9c7e3788ef99f8ca895932209f5d8399dba"
-    },
-    "skchr_shwaz_3": {
-      "name": "战术的终结",
-      "prtsTitle": "文件:技能 战术的终结.png",
-      "sourceUrl": "https://media.prts.wiki/b/b6/%E6%8A%80%E8%83%BD_%E6%88%98%E6%9C%AF%E7%9A%84%E7%BB%88%E7%BB%93.png",
-      "localPath": "resources/images/skill/skchr_shwaz_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "58095cb9f4aca164e888e14f2a16798e9c963b98"
     },
     "skchr_siege2_1": {
       "name": "重铸晖光",
@@ -5994,15 +6042,6 @@
       "height": 128,
       "sha1": "d51b56c5b59971873f060a7affd2486f67d48987"
     },
-    "skchr_siege_2": {
-      "name": "跃空锤",
-      "prtsTitle": "文件:技能 跃空锤.png",
-      "sourceUrl": "https://media.prts.wiki/f/f0/%E6%8A%80%E8%83%BD_%E8%B7%83%E7%A9%BA%E9%94%A4.png",
-      "localPath": "resources/images/skill/skchr_siege_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "ee476e34590abc5bacea864d960ed717cbf54d4d"
-    },
     "skchr_siege_3": {
       "name": "碎颅击",
       "prtsTitle": "文件:技能 碎颅击.png",
@@ -6012,14 +6051,14 @@
       "height": 128,
       "sha1": "d2869df5e00a394a83c0e799abf792f8f6082351"
     },
-    "skchr_silent_2": {
-      "name": "医疗无人机",
-      "prtsTitle": "文件:技能 医疗无人机.png",
-      "sourceUrl": "https://media.prts.wiki/a/ad/%E6%8A%80%E8%83%BD_%E5%8C%BB%E7%96%97%E6%97%A0%E4%BA%BA%E6%9C%BA.png",
-      "localPath": "resources/images/skill/skchr_silent_2.png",
+    "skchr_siege_2": {
+      "name": "跃空锤",
+      "prtsTitle": "文件:技能 跃空锤.png",
+      "sourceUrl": "https://media.prts.wiki/f/f0/%E6%8A%80%E8%83%BD_%E8%B7%83%E7%A9%BA%E9%94%A4.png",
+      "localPath": "resources/images/skill/skchr_siege_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "7d119ee4551da1701cccf2f1a0e5e49a6bad4bbd"
+      "sha1": "ee476e34590abc5bacea864d960ed717cbf54d4d"
     },
     "skchr_skadi2_1": {
       "name": "同归殊途之吟",
@@ -6029,6 +6068,15 @@
       "width": 128,
       "height": 128,
       "sha1": "9fa609d71955bf490234fc65103b8a5145805024"
+    },
+    "skchr_silent_2": {
+      "name": "医疗无人机",
+      "prtsTitle": "文件:技能 医疗无人机.png",
+      "sourceUrl": "https://media.prts.wiki/a/ad/%E6%8A%80%E8%83%BD_%E5%8C%BB%E7%96%97%E6%97%A0%E4%BA%BA%E6%9C%BA.png",
+      "localPath": "resources/images/skill/skchr_silent_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "7d119ee4551da1701cccf2f1a0e5e49a6bad4bbd"
     },
     "skchr_skadi2_2": {
       "name": "同葬无光之愿",
@@ -6066,15 +6114,6 @@
       "height": 128,
       "sha1": "8393b4e5c3e8fe366b092c04190bd57eb1ce4baf"
     },
-    "skchr_skfire_2": {
-      "name": "天坠之火",
-      "prtsTitle": "文件:技能 天坠之火.png",
-      "sourceUrl": "https://media.prts.wiki/9/93/%E6%8A%80%E8%83%BD_%E5%A4%A9%E5%9D%A0%E4%B9%8B%E7%81%AB.png",
-      "localPath": "resources/images/skill/skchr_skfire_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "1c27eb2cdf0abef19a2c9812ec1a6cc02ef4eae8"
-    },
     "skchr_skgoat_2": {
       "name": "流沙化",
       "prtsTitle": "文件:技能 流沙化.png",
@@ -6083,6 +6122,15 @@
       "width": 128,
       "height": 128,
       "sha1": "26068256ad25acd96dabfefa76301ff4d155199a"
+    },
+    "skchr_skfire_2": {
+      "name": "天坠之火",
+      "prtsTitle": "文件:技能 天坠之火.png",
+      "sourceUrl": "https://media.prts.wiki/9/93/%E6%8A%80%E8%83%BD_%E5%A4%A9%E5%9D%A0%E4%B9%8B%E7%81%AB.png",
+      "localPath": "resources/images/skill/skchr_skfire_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "1c27eb2cdf0abef19a2c9812ec1a6cc02ef4eae8"
     },
     "skchr_skybx_1": {
       "name": "源石火药驾临",
@@ -6102,15 +6150,6 @@
       "height": 128,
       "sha1": "44cf1813a903436404e77997839a869742edbe28"
     },
-    "skchr_slbell_1": {
-      "name": "传音回响",
-      "prtsTitle": "文件:技能 传音回响.png",
-      "sourceUrl": "https://media.prts.wiki/e/e0/%E6%8A%80%E8%83%BD_%E4%BC%A0%E9%9F%B3%E5%9B%9E%E5%93%8D.png",
-      "localPath": "resources/images/skill/skchr_slbell_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "6bd70d71f65d02267f5f6eb8d82da4cd093ac453"
-    },
     "skchr_slbell_2": {
       "name": "自然震慑",
       "prtsTitle": "文件:技能 自然震慑.png",
@@ -6119,6 +6158,15 @@
       "width": 128,
       "height": 128,
       "sha1": "f90b9aa4f0d28196aa35c30285c6c92046aeb39c"
+    },
+    "skchr_slbell_1": {
+      "name": "传音回响",
+      "prtsTitle": "文件:技能 传音回响.png",
+      "sourceUrl": "https://media.prts.wiki/e/e0/%E6%8A%80%E8%83%BD_%E4%BC%A0%E9%9F%B3%E5%9B%9E%E5%93%8D.png",
+      "localPath": "resources/images/skill/skchr_slbell_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "6bd70d71f65d02267f5f6eb8d82da4cd093ac453"
     },
     "skchr_slchan_1": {
       "name": "锁链勾爪",
@@ -6147,15 +6195,6 @@
       "height": 128,
       "sha1": "3bb140f7ca1fb990f2a93ef8c562ccb555739aa2"
     },
-    "skchr_slent2_1": {
-      "name": "进取之心",
-      "prtsTitle": "文件:技能 进取之心.png",
-      "sourceUrl": "https://media.prts.wiki/c/ca/%E6%8A%80%E8%83%BD_%E8%BF%9B%E5%8F%96%E4%B9%8B%E5%BF%83.png",
-      "localPath": "resources/images/skill/skchr_slent2_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "a9a95ec49fb894bd9ca17dcd0d8f230827daddf8"
-    },
     "skchr_sleach_3": {
       "name": "光辉旗帜",
       "prtsTitle": "文件:技能 光辉旗帜.png",
@@ -6164,6 +6203,15 @@
       "width": 128,
       "height": 128,
       "sha1": "b7948e23079d8dda4954121f8ff1c5f5a53a7ba1"
+    },
+    "skchr_slent2_1": {
+      "name": "进取之心",
+      "prtsTitle": "文件:技能 进取之心.png",
+      "sourceUrl": "https://media.prts.wiki/c/ca/%E6%8A%80%E8%83%BD_%E8%BF%9B%E5%8F%96%E4%B9%8B%E5%BF%83.png",
+      "localPath": "resources/images/skill/skchr_slent2_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "a9a95ec49fb894bd9ca17dcd0d8f230827daddf8"
     },
     "skchr_slent2_2": {
       "name": "俯瞰视界",
@@ -6201,15 +6249,6 @@
       "height": 128,
       "sha1": "9410fc0a946379d697ada148a7eb432392b283d4"
     },
-    "skchr_snhunt_2": {
-      "name": "风雪连弩",
-      "prtsTitle": "文件:技能 风雪连弩.png",
-      "sourceUrl": "https://media.prts.wiki/9/97/%E6%8A%80%E8%83%BD_%E9%A3%8E%E9%9B%AA%E8%BF%9E%E5%BC%A9.png",
-      "localPath": "resources/images/skill/skchr_snhunt_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "e4566e5c59206f638082f0dcb6dde3d3665f9541"
-    },
     "skchr_snsant_1": {
       "name": "倒刺钩爪",
       "prtsTitle": "文件:技能 倒刺钩爪.png",
@@ -6218,6 +6257,15 @@
       "width": 128,
       "height": 128,
       "sha1": "5577f16117853dc77aaf56a7397e3776bb06ecd7"
+    },
+    "skchr_snhunt_2": {
+      "name": "风雪连弩",
+      "prtsTitle": "文件:技能 风雪连弩.png",
+      "sourceUrl": "https://media.prts.wiki/9/97/%E6%8A%80%E8%83%BD_%E9%A3%8E%E9%9B%AA%E8%BF%9E%E5%BC%A9.png",
+      "localPath": "resources/images/skill/skchr_snhunt_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "e4566e5c59206f638082f0dcb6dde3d3665f9541"
     },
     "skchr_snsant_2": {
       "name": "伸缩式电捕网",
@@ -6228,15 +6276,6 @@
       "height": 128,
       "sha1": "ee1132afad459e5c0066c3dfd68ea6b2a7f8bab4"
     },
-    "skchr_sntlla_2": {
-      "name": "“女巫之泪”",
-      "prtsTitle": "文件:技能 “女巫之泪”.png",
-      "sourceUrl": "https://media.prts.wiki/6/67/%E6%8A%80%E8%83%BD_%E2%80%9C%E5%A5%B3%E5%B7%AB%E4%B9%8B%E6%B3%AA%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_sntlla_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "08b756a760c43f8bb24efaab8bd543f7c2e9c12a"
-    },
     "skchr_sophia_1": {
       "name": "激励艺术",
       "prtsTitle": "文件:技能 激励艺术.png",
@@ -6245,6 +6284,15 @@
       "width": 128,
       "height": 128,
       "sha1": "cbee4177052093f09c6e4326a0977063727f5188"
+    },
+    "skchr_sntlla_2": {
+      "name": "“女巫之泪”",
+      "prtsTitle": "文件:技能 “女巫之泪”.png",
+      "sourceUrl": "https://media.prts.wiki/6/67/%E6%8A%80%E8%83%BD_%E2%80%9C%E5%A5%B3%E5%B7%AB%E4%B9%8B%E6%B3%AA%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_sntlla_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "08b756a760c43f8bb24efaab8bd543f7c2e9c12a"
     },
     "skchr_sophia_2": {
       "name": "鞭刃",
@@ -6273,15 +6321,6 @@
       "height": 128,
       "sha1": "4b3141059d98ec246ca07d0d15c05f6489ec9f3c"
     },
-    "skchr_spikes_2": {
-      "name": "致命恶作剧",
-      "prtsTitle": "文件:技能 致命恶作剧.png",
-      "sourceUrl": "https://media.prts.wiki/0/06/%E6%8A%80%E8%83%BD_%E8%87%B4%E5%91%BD%E6%81%B6%E4%BD%9C%E5%89%A7.png",
-      "localPath": "resources/images/skill/skchr_spikes_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "5f7b256b0b28761d614b412b1a3e4bcbf1ae32a3"
-    },
     "skchr_spikes_1": {
       "name": "小玩笑",
       "prtsTitle": "文件:技能 小玩笑.png",
@@ -6290,6 +6329,15 @@
       "width": 128,
       "height": 128,
       "sha1": "e9e1aee36dc944dd5fab9fc1642eced15d6f5d87"
+    },
+    "skchr_spikes_2": {
+      "name": "致命恶作剧",
+      "prtsTitle": "文件:技能 致命恶作剧.png",
+      "sourceUrl": "https://media.prts.wiki/0/06/%E6%8A%80%E8%83%BD_%E8%87%B4%E5%91%BD%E6%81%B6%E4%BD%9C%E5%89%A7.png",
+      "localPath": "resources/images/skill/skchr_spikes_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "5f7b256b0b28761d614b412b1a3e4bcbf1ae32a3"
     },
     "skchr_spuria_1": {
       "name": "见机行事",
@@ -6309,15 +6357,6 @@
       "height": 128,
       "sha1": "e952e9d21024cc2a3d84466f8a863186452d7bc1"
     },
-    "skchr_sqrrel_1": {
-      "name": "水蒸气泵",
-      "prtsTitle": "文件:技能 水蒸气泵.png",
-      "sourceUrl": "https://media.prts.wiki/5/5e/%E6%8A%80%E8%83%BD_%E6%B0%B4%E8%92%B8%E6%B0%94%E6%B3%B5.png",
-      "localPath": "resources/images/skill/skchr_sqrrel_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "682b6fda78b58ea245549dae36ff474c114067c1"
-    },
     "skchr_sqrrel_2": {
       "name": "高压水炮",
       "prtsTitle": "文件:技能 高压水炮.png",
@@ -6326,6 +6365,15 @@
       "width": 128,
       "height": 128,
       "sha1": "6f51b11a8830a336a77a9f80603a9394711c0528"
+    },
+    "skchr_sqrrel_1": {
+      "name": "水蒸气泵",
+      "prtsTitle": "文件:技能 水蒸气泵.png",
+      "sourceUrl": "https://media.prts.wiki/5/5e/%E6%8A%80%E8%83%BD_%E6%B0%B4%E8%92%B8%E6%B0%94%E6%B3%B5.png",
+      "localPath": "resources/images/skill/skchr_sqrrel_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "682b6fda78b58ea245549dae36ff474c114067c1"
     },
     "skchr_strong_1": {
       "name": "断螯",
@@ -6426,6 +6474,15 @@
       "height": 128,
       "sha1": "9c5773f7cf3fcbf675276c670655a47e8047c64c"
     },
+    "skchr_svrash_1": {
+      "name": "强力击·γ型",
+      "prtsTitle": "文件:技能 强力击·γ型.png",
+      "sourceUrl": "https://media.prts.wiki/5/54/%E6%8A%80%E8%83%BD_%E5%BC%BA%E5%8A%9B%E5%87%BB%C2%B7%CE%B3%E5%9E%8B.png",
+      "localPath": "resources/images/skill/skchr_svrash_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "0f05de6d7ae13d51fc79bce517b4bc2f328d184b"
+    },
     "skchr_svash2_2": {
       "name": "御敌的锋锐",
       "prtsTitle": "文件:技能 御敌的锋锐.png",
@@ -6443,15 +6500,6 @@
       "width": 128,
       "height": 128,
       "sha1": "181c3b77c9f09140f07a985d18f7e03f15143da1"
-    },
-    "skchr_svrash_1": {
-      "name": "强力击·γ型",
-      "prtsTitle": "文件:技能 强力击·γ型.png",
-      "sourceUrl": "https://media.prts.wiki/5/54/%E6%8A%80%E8%83%BD_%E5%BC%BA%E5%8A%9B%E5%87%BB%C2%B7%CE%B3%E5%9E%8B.png",
-      "localPath": "resources/images/skill/skchr_svrash_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "0f05de6d7ae13d51fc79bce517b4bc2f328d184b"
     },
     "skchr_svrash_2": {
       "name": "雪境生存法则",
@@ -6489,15 +6537,6 @@
       "height": 128,
       "sha1": "1bfaf1d7361a73ca37d669725da65f5a84c23ed8"
     },
-    "skchr_swire_1": {
-      "name": "指挥调度",
-      "prtsTitle": "文件:技能 指挥调度.png",
-      "sourceUrl": "https://media.prts.wiki/6/60/%E6%8A%80%E8%83%BD_%E6%8C%87%E6%8C%A5%E8%B0%83%E5%BA%A6.png",
-      "localPath": "resources/images/skill/skchr_swire_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "33bd8b7179fe8f5c4b6039089f3ac5af9c4957f7"
-    },
     "skchr_swire2_3": {
       "name": "千金一掷",
       "prtsTitle": "文件:技能 千金一掷.png",
@@ -6506,6 +6545,15 @@
       "width": 128,
       "height": 128,
       "sha1": "b79b3d3fb2e349a023d2a8356719c780d13dbb57"
+    },
+    "skchr_swire_1": {
+      "name": "指挥调度",
+      "prtsTitle": "文件:技能 指挥调度.png",
+      "sourceUrl": "https://media.prts.wiki/6/60/%E6%8A%80%E8%83%BD_%E6%8C%87%E6%8C%A5%E8%B0%83%E5%BA%A6.png",
+      "localPath": "resources/images/skill/skchr_swire_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "33bd8b7179fe8f5c4b6039089f3ac5af9c4957f7"
     },
     "skchr_swire_2": {
       "name": "协同作战",
@@ -6588,15 +6636,6 @@
       "height": 128,
       "sha1": "11563e20d6fecaf1cf4d7bc8e0983bf036dec6b2"
     },
-    "skchr_tanya_1": {
-      "name": "涤净",
-      "prtsTitle": "文件:技能 涤净.png",
-      "sourceUrl": "https://media.prts.wiki/8/84/%E6%8A%80%E8%83%BD_%E6%B6%A4%E5%87%80.png",
-      "localPath": "resources/images/skill/skchr_tanya_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "3ccec3cf5c10b23e15e40ff703c48b3f987f7c46"
-    },
     "skchr_tanya_2": {
       "name": "溃决",
       "prtsTitle": "文件:技能 溃决.png",
@@ -6605,6 +6644,15 @@
       "width": 128,
       "height": 128,
       "sha1": "99eb830f464d1cba1b9bce02187f04c551d90728"
+    },
+    "skchr_tanya_1": {
+      "name": "涤净",
+      "prtsTitle": "文件:技能 涤净.png",
+      "sourceUrl": "https://media.prts.wiki/8/84/%E6%8A%80%E8%83%BD_%E6%B6%A4%E5%87%80.png",
+      "localPath": "resources/images/skill/skchr_tanya_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "3ccec3cf5c10b23e15e40ff703c48b3f987f7c46"
     },
     "skchr_taraxa_1": {
       "name": "何处着",
@@ -6624,15 +6672,6 @@
       "height": 128,
       "sha1": "466d4f87e9c5dfec9aa2cb6a324b4f1bce9617e4"
     },
-    "skchr_tecno_2": {
-      "name": "恣意挥洒",
-      "prtsTitle": "文件:技能 恣意挥洒.png",
-      "sourceUrl": "https://media.prts.wiki/7/73/%E6%8A%80%E8%83%BD_%E6%81%A3%E6%84%8F%E6%8C%A5%E6%B4%92.png",
-      "localPath": "resources/images/skill/skchr_tecno_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "b40b25a9935726b432b9348974253ed965ff9637"
-    },
     "skchr_tecno_1": {
       "name": "关节锁定",
       "prtsTitle": "文件:技能 关节锁定.png",
@@ -6641,6 +6680,15 @@
       "width": 128,
       "height": 128,
       "sha1": "46d7c96e6c6ac90e32fee18d05229c8247bcea34"
+    },
+    "skchr_tecno_2": {
+      "name": "恣意挥洒",
+      "prtsTitle": "文件:技能 恣意挥洒.png",
+      "sourceUrl": "https://media.prts.wiki/7/73/%E6%8A%80%E8%83%BD_%E6%81%A3%E6%84%8F%E6%8C%A5%E6%B4%92.png",
+      "localPath": "resources/images/skill/skchr_tecno_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "b40b25a9935726b432b9348974253ed965ff9637"
     },
     "skchr_texas2_1": {
       "name": "细雨无声",
@@ -6651,15 +6699,6 @@
       "height": 128,
       "sha1": "c66624280ab60f7cb0c8bebe5a536b563ddc8881"
     },
-    "skchr_texas2_3": {
-      "name": "剑雨滂沱",
-      "prtsTitle": "文件:技能 剑雨滂沱.png",
-      "sourceUrl": "https://media.prts.wiki/8/88/%E6%8A%80%E8%83%BD_%E5%89%91%E9%9B%A8%E6%BB%82%E6%B2%B1.png",
-      "localPath": "resources/images/skill/skchr_texas2_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "fae0ef661ad79154d9e0a7662195023f360639f1"
-    },
     "skchr_texas2_2": {
       "name": "阵雨连绵",
       "prtsTitle": "文件:技能 阵雨连绵.png",
@@ -6668,6 +6707,15 @@
       "width": 128,
       "height": 128,
       "sha1": "ed3da79ff123e97e6e475cdb344e012f3d68f4c2"
+    },
+    "skchr_texas2_3": {
+      "name": "剑雨滂沱",
+      "prtsTitle": "文件:技能 剑雨滂沱.png",
+      "sourceUrl": "https://media.prts.wiki/8/88/%E6%8A%80%E8%83%BD_%E5%89%91%E9%9B%A8%E6%BB%82%E6%B2%B1.png",
+      "localPath": "resources/images/skill/skchr_texas2_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "fae0ef661ad79154d9e0a7662195023f360639f1"
     },
     "skchr_texas_2": {
       "name": "剑雨",
@@ -6696,15 +6744,6 @@
       "height": 128,
       "sha1": "489b7efe5bb20f95dc82b58c89a934495f020dc2"
     },
-    "skchr_thorns_2": {
-      "name": "护身尖刺",
-      "prtsTitle": "文件:技能 护身尖刺.png",
-      "sourceUrl": "https://media.prts.wiki/0/0f/%E6%8A%80%E8%83%BD_%E6%8A%A4%E8%BA%AB%E5%B0%96%E5%88%BA.png",
-      "localPath": "resources/images/skill/skchr_thorns_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "5e03b11bbe0bc13aed63f7d18a521e2a1c3a3c70"
-    },
     "skchr_thorn2_3": {
       "name": "“我的海疆”",
       "prtsTitle": "文件:技能 “我的海疆”.png",
@@ -6714,14 +6753,14 @@
       "height": 128,
       "sha1": "438d0f5077e50cef935959405001437366b8852d"
     },
-    "skchr_threye_1": {
-      "name": "我见崩毁之前",
-      "prtsTitle": "文件:技能 我见崩毁之前.png",
-      "sourceUrl": "https://media.prts.wiki/0/03/%E6%8A%80%E8%83%BD_%E6%88%91%E8%A7%81%E5%B4%A9%E6%AF%81%E4%B9%8B%E5%89%8D.png",
-      "localPath": "resources/images/skill/skchr_threye_1.png",
+    "skchr_thorns_2": {
+      "name": "护身尖刺",
+      "prtsTitle": "文件:技能 护身尖刺.png",
+      "sourceUrl": "https://media.prts.wiki/0/0f/%E6%8A%80%E8%83%BD_%E6%8A%A4%E8%BA%AB%E5%B0%96%E5%88%BA.png",
+      "localPath": "resources/images/skill/skchr_thorns_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "f4dec89256ef98952da12586ff51b1b6a30e9659"
+      "sha1": "5e03b11bbe0bc13aed63f7d18a521e2a1c3a3c70"
     },
     "skchr_thorns_3": {
       "name": "至高之术",
@@ -6732,14 +6771,14 @@
       "height": 128,
       "sha1": "371e78ccd04216dd70aa916ad94f14d2c85e0ffe"
     },
-    "skchr_thumpy_1": {
-      "name": "“还不走？”",
-      "prtsTitle": "文件:技能 “还不走？”.png",
-      "sourceUrl": "https://media.prts.wiki/7/78/%E6%8A%80%E8%83%BD_%E2%80%9C%E8%BF%98%E4%B8%8D%E8%B5%B0%EF%BC%9F%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_thumpy_1.png",
+    "skchr_threye_1": {
+      "name": "我见崩毁之前",
+      "prtsTitle": "文件:技能 我见崩毁之前.png",
+      "sourceUrl": "https://media.prts.wiki/0/03/%E6%8A%80%E8%83%BD_%E6%88%91%E8%A7%81%E5%B4%A9%E6%AF%81%E4%B9%8B%E5%89%8D.png",
+      "localPath": "resources/images/skill/skchr_threye_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "251265ff7475267f762c3f099f0dc376ac130d42"
+      "sha1": "f4dec89256ef98952da12586ff51b1b6a30e9659"
     },
     "skchr_threye_2": {
       "name": "我见枯朽之后",
@@ -6750,6 +6789,15 @@
       "height": 128,
       "sha1": "a8f79720f60299add27639e05b3eff5b266196ca"
     },
+    "skchr_thumpy_1": {
+      "name": "“还不走？”",
+      "prtsTitle": "文件:技能 “还不走？”.png",
+      "sourceUrl": "https://media.prts.wiki/7/78/%E6%8A%80%E8%83%BD_%E2%80%9C%E8%BF%98%E4%B8%8D%E8%B5%B0%EF%BC%9F%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_thumpy_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "251265ff7475267f762c3f099f0dc376ac130d42"
+    },
     "skchr_thumpy_2": {
       "name": "“慢慢走~”",
       "prtsTitle": "文件:技能 “慢慢走~”.png",
@@ -6758,6 +6806,15 @@
       "width": 128,
       "height": 128,
       "sha1": "28d97db70be0b80b321d2744607265c03d307d1f"
+    },
+    "skchr_thumpy_3": {
+      "name": "“不准走！”",
+      "prtsTitle": "文件:技能 “不准走！”.png",
+      "sourceUrl": "https://media.prts.wiki/f/f8/%E6%8A%80%E8%83%BD_%E2%80%9C%E4%B8%8D%E5%87%86%E8%B5%B0%EF%BC%81%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_thumpy_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "43afca9b9c2a3f3f72e5547122aa98928cd25416"
     },
     "skchr_tiger_1": {
       "name": "碎甲拳",
@@ -6768,14 +6825,14 @@
       "height": 128,
       "sha1": "24c3f9f49f5bfa4baef357914a0f53afccd6737b"
     },
-    "skchr_thumpy_3": {
-      "name": "“不准走！”",
-      "prtsTitle": "文件:技能 “不准走！”.png",
-      "sourceUrl": "https://media.prts.wiki/f/f8/%E6%8A%80%E8%83%BD_%E2%80%9C%E4%B8%8D%E5%87%86%E8%B5%B0%EF%BC%81%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_thumpy_3.png",
+    "skchr_tinman_1": {
+      "name": "“老科利”",
+      "prtsTitle": "文件:技能 “老科利”.png",
+      "sourceUrl": "https://media.prts.wiki/c/cf/%E6%8A%80%E8%83%BD_%E2%80%9C%E8%80%81%E7%A7%91%E5%88%A9%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_tinman_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "43afca9b9c2a3f3f72e5547122aa98928cd25416"
+      "sha1": "e6d8dea8f00ffd35c0ad2b0200fd52f8e182eda9"
     },
     "skchr_tiger_2": {
       "name": "裂魂",
@@ -6795,14 +6852,14 @@
       "height": 128,
       "sha1": "7a2392e9b1addb9260319ebfb1856ee896d02189"
     },
-    "skchr_tinman_1": {
-      "name": "“老科利”",
-      "prtsTitle": "文件:技能 “老科利”.png",
-      "sourceUrl": "https://media.prts.wiki/c/cf/%E6%8A%80%E8%83%BD_%E2%80%9C%E8%80%81%E7%A7%91%E5%88%A9%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_tinman_1.png",
+    "skchr_tippi_1": {
+      "name": "专业喷绘技巧",
+      "prtsTitle": "文件:技能 专业喷绘技巧.png",
+      "sourceUrl": "https://media.prts.wiki/1/1f/%E6%8A%80%E8%83%BD_%E4%B8%93%E4%B8%9A%E5%96%B7%E7%BB%98%E6%8A%80%E5%B7%A7.png",
+      "localPath": "resources/images/skill/skchr_tippi_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "e6d8dea8f00ffd35c0ad2b0200fd52f8e182eda9"
+      "sha1": "8fedc2f3a82c76394ee3eb72a49dc97022419856"
     },
     "skchr_tippi_2": {
       "name": "紧急赶场通知",
@@ -6813,15 +6870,6 @@
       "height": 128,
       "sha1": "3ac3fec106304661be4f71fb6edf45fae02a2540"
     },
-    "skchr_tippi_1": {
-      "name": "专业喷绘技巧",
-      "prtsTitle": "文件:技能 专业喷绘技巧.png",
-      "sourceUrl": "https://media.prts.wiki/1/1f/%E6%8A%80%E8%83%BD_%E4%B8%93%E4%B8%9A%E5%96%B7%E7%BB%98%E6%8A%80%E5%B7%A7.png",
-      "localPath": "resources/images/skill/skchr_tippi_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "8fedc2f3a82c76394ee3eb72a49dc97022419856"
-    },
     "skchr_titi_1": {
       "name": "缓蚀",
       "prtsTitle": "文件:技能 缓蚀.png",
@@ -6831,15 +6879,6 @@
       "height": 128,
       "sha1": "9fddbf7615744b51a0c404fe90f9d187a20b4722"
     },
-    "skchr_titi_3": {
-      "name": "旧日绽放",
-      "prtsTitle": "文件:技能 旧日绽放.png",
-      "sourceUrl": "https://media.prts.wiki/0/0a/%E6%8A%80%E8%83%BD_%E6%97%A7%E6%97%A5%E7%BB%BD%E6%94%BE.png",
-      "localPath": "resources/images/skill/skchr_titi_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "5e8e938bfa3393ca05c450bfc7d9d9ac281b0ff6"
-    },
     "skchr_titi_2": {
       "name": "封护",
       "prtsTitle": "文件:技能 封护.png",
@@ -6848,6 +6887,15 @@
       "width": 128,
       "height": 128,
       "sha1": "d26d4a972c918d499bdfc7513494fab416eb3c21"
+    },
+    "skchr_titi_3": {
+      "name": "旧日绽放",
+      "prtsTitle": "文件:技能 旧日绽放.png",
+      "sourceUrl": "https://media.prts.wiki/0/0a/%E6%8A%80%E8%83%BD_%E6%97%A7%E6%97%A5%E7%BB%BD%E6%94%BE.png",
+      "localPath": "resources/images/skill/skchr_titi_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "5e8e938bfa3393ca05c450bfc7d9d9ac281b0ff6"
     },
     "skchr_tknogi_1": {
       "name": "迹无",
@@ -6885,15 +6933,6 @@
       "height": 128,
       "sha1": "cd53ca9023647216ea36edf0406122e3009fd48e"
     },
-    "skchr_toddi_1": {
-      "name": "信号矢",
-      "prtsTitle": "文件:技能 信号矢.png",
-      "sourceUrl": "https://media.prts.wiki/1/1b/%E6%8A%80%E8%83%BD_%E4%BF%A1%E5%8F%B7%E7%9F%A2.png",
-      "localPath": "resources/images/skill/skchr_toddi_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "97637957089cbe34a5fea8f4bd9ded82720c81a0"
-    },
     "skchr_tmslot_2": {
       "name": "科技与传统仪式",
       "prtsTitle": "文件:技能 科技与传统仪式.png",
@@ -6903,6 +6942,15 @@
       "height": 128,
       "sha1": "84b52b54a7817cc738d5d7e7ffd280c6fc358d4f"
     },
+    "skchr_toddi_1": {
+      "name": "信号矢",
+      "prtsTitle": "文件:技能 信号矢.png",
+      "sourceUrl": "https://media.prts.wiki/1/1b/%E6%8A%80%E8%83%BD_%E4%BF%A1%E5%8F%B7%E7%9F%A2.png",
+      "localPath": "resources/images/skill/skchr_toddi_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "97637957089cbe34a5fea8f4bd9ded82720c81a0"
+    },
     "skchr_toddi_2": {
       "name": "便携破城矢",
       "prtsTitle": "文件:技能 便携破城矢.png",
@@ -6911,15 +6959,6 @@
       "width": 128,
       "height": 128,
       "sha1": "e9f01b7c9d53847fa00626f1ce5167f73db3b489"
-    },
-    "skchr_tomimi_1": {
-      "name": "部族技艺",
-      "prtsTitle": "文件:技能 部族技艺.png",
-      "sourceUrl": "https://media.prts.wiki/9/9c/%E6%8A%80%E8%83%BD_%E9%83%A8%E6%97%8F%E6%8A%80%E8%89%BA.png",
-      "localPath": "resources/images/skill/skchr_tomimi_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "36c150293fb31914c35a0cc640586b3e48ce1fd4"
     },
     "skchr_tomimi_2": {
       "name": "嘉维尔保护方案",
@@ -6939,14 +6978,14 @@
       "height": 128,
       "sha1": "689e49e2f6906dd10a139004f5dcaedf65d99a78"
     },
-    "skchr_totter_2": {
-      "name": "破虹",
-      "prtsTitle": "文件:技能 破虹.png",
-      "sourceUrl": "https://media.prts.wiki/9/90/%E6%8A%80%E8%83%BD_%E7%A0%B4%E8%99%B9.png",
-      "localPath": "resources/images/skill/skchr_totter_2.png",
+    "skchr_tomimi_1": {
+      "name": "部族技艺",
+      "prtsTitle": "文件:技能 部族技艺.png",
+      "sourceUrl": "https://media.prts.wiki/9/9c/%E6%8A%80%E8%83%BD_%E9%83%A8%E6%97%8F%E6%8A%80%E8%89%BA.png",
+      "localPath": "resources/images/skill/skchr_tomimi_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "26873a7b34d56269b5dbc324adcb95e70c40105e"
+      "sha1": "36c150293fb31914c35a0cc640586b3e48ce1fd4"
     },
     "skchr_turdus_1": {
       "name": "火钳秘咒",
@@ -6956,6 +6995,15 @@
       "width": 128,
       "height": 128,
       "sha1": "1dafa3489c61c72848f68daa5b8fd0c7d4a4c78a"
+    },
+    "skchr_totter_2": {
+      "name": "破虹",
+      "prtsTitle": "文件:技能 破虹.png",
+      "sourceUrl": "https://media.prts.wiki/9/90/%E6%8A%80%E8%83%BD_%E7%A0%B4%E8%99%B9.png",
+      "localPath": "resources/images/skill/skchr_totter_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "26873a7b34d56269b5dbc324adcb95e70c40105e"
     },
     "skchr_turdus_2": {
       "name": "“捉迷藏！”",
@@ -6975,15 +7023,6 @@
       "height": 128,
       "sha1": "76dd78d08339afedfff890142e973083e043442a"
     },
-    "skchr_tuye_2": {
-      "name": "强心剂",
-      "prtsTitle": "文件:技能 强心剂.png",
-      "sourceUrl": "https://media.prts.wiki/2/25/%E6%8A%80%E8%83%BD_%E5%BC%BA%E5%BF%83%E5%89%82.png",
-      "localPath": "resources/images/skill/skchr_tuye_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "0a1bffa324a6994311d12880506fb32d932bc8e2"
-    },
     "skchr_typhon_2": {
       "name": "冰原秩序",
       "prtsTitle": "文件:技能 冰原秩序.png",
@@ -7001,6 +7040,15 @@
       "width": 128,
       "height": 128,
       "sha1": "630e994b09a25a58d824d55de0e14f605972edfb"
+    },
+    "skchr_tuye_2": {
+      "name": "强心剂",
+      "prtsTitle": "文件:技能 强心剂.png",
+      "sourceUrl": "https://media.prts.wiki/2/25/%E6%8A%80%E8%83%BD_%E5%BC%BA%E5%BF%83%E5%89%82.png",
+      "localPath": "resources/images/skill/skchr_tuye_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "0a1bffa324a6994311d12880506fb32d932bc8e2"
     },
     "skchr_udflow_1": {
       "name": "侵袭破坏应对",
@@ -7020,6 +7068,15 @@
       "height": 128,
       "sha1": "29d7c8e22c93a04a3f675b240ebc32817839078a"
     },
+    "skchr_ulpia_2": {
+      "name": "必须维系的界限",
+      "prtsTitle": "文件:技能 必须维系的界限.png",
+      "sourceUrl": "https://media.prts.wiki/2/2e/%E6%8A%80%E8%83%BD_%E5%BF%85%E9%A1%BB%E7%BB%B4%E7%B3%BB%E7%9A%84%E7%95%8C%E9%99%90.png",
+      "localPath": "resources/images/skill/skchr_ulpia_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "1687c500966e4f447b2becbd524d680335007b4d"
+    },
     "skchr_ulpia_1": {
       "name": "必须促成的接触",
       "prtsTitle": "文件:技能 必须促成的接触.png",
@@ -7037,15 +7094,6 @@
       "width": 128,
       "height": 128,
       "sha1": "1f2729963277430c2470b01f8a592fd94b4690f5"
-    },
-    "skchr_ulpia_2": {
-      "name": "必须维系的界限",
-      "prtsTitle": "文件:技能 必须维系的界限.png",
-      "sourceUrl": "https://media.prts.wiki/2/2e/%E6%8A%80%E8%83%BD_%E5%BF%85%E9%A1%BB%E7%BB%B4%E7%B3%BB%E7%9A%84%E7%95%8C%E9%99%90.png",
-      "localPath": "resources/images/skill/skchr_ulpia_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "1687c500966e4f447b2becbd524d680335007b4d"
     },
     "skchr_ulpia_3": {
       "name": "必须开辟的通路",
@@ -7101,15 +7149,6 @@
       "height": 128,
       "sha1": "449689c2a08f33564050bc80c303f5ef1fb74e35"
     },
-    "skchr_veen_3": {
-      "name": "“用赤铁铭记”",
-      "prtsTitle": "文件:技能 “用赤铁铭记”.png",
-      "sourceUrl": "https://media.prts.wiki/0/0c/%E6%8A%80%E8%83%BD_%E2%80%9C%E7%94%A8%E8%B5%A4%E9%93%81%E9%93%AD%E8%AE%B0%E2%80%9D.png",
-      "localPath": "resources/images/skill/skchr_veen_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "4de4030609a6ba30bf73466a6e847db6bc565659"
-    },
     "skchr_vendla_2": {
       "name": "荆藤庇荫",
       "prtsTitle": "文件:技能 荆藤庇荫.png",
@@ -7119,14 +7158,14 @@
       "height": 128,
       "sha1": "b46a081b51db0201c1b0b979b2b49990cc4b6d94"
     },
-    "skchr_vigil_2": {
-      "name": "领袖的馈赠",
-      "prtsTitle": "文件:技能 领袖的馈赠.png",
-      "sourceUrl": "https://media.prts.wiki/c/c2/%E6%8A%80%E8%83%BD_%E9%A2%86%E8%A2%96%E7%9A%84%E9%A6%88%E8%B5%A0.png",
-      "localPath": "resources/images/skill/skchr_vigil_2.png",
+    "skchr_veen_3": {
+      "name": "“用赤铁铭记”",
+      "prtsTitle": "文件:技能 “用赤铁铭记”.png",
+      "sourceUrl": "https://media.prts.wiki/0/0c/%E6%8A%80%E8%83%BD_%E2%80%9C%E7%94%A8%E8%B5%A4%E9%93%81%E9%93%AD%E8%AE%B0%E2%80%9D.png",
+      "localPath": "resources/images/skill/skchr_veen_3.png",
       "width": 128,
       "height": 128,
-      "sha1": "eb9b4be7dae83fa37c154cc125917c0f5c1b553d"
+      "sha1": "4de4030609a6ba30bf73466a6e847db6bc565659"
     },
     "skchr_vigil_1": {
       "name": "领袖的呼唤",
@@ -7136,6 +7175,15 @@
       "width": 128,
       "height": 128,
       "sha1": "0da8f91679d9d1235b6d37198852e52a746295e2"
+    },
+    "skchr_vigil_2": {
+      "name": "领袖的馈赠",
+      "prtsTitle": "文件:技能 领袖的馈赠.png",
+      "sourceUrl": "https://media.prts.wiki/c/c2/%E6%8A%80%E8%83%BD_%E9%A2%86%E8%A2%96%E7%9A%84%E9%A6%88%E8%B5%A0.png",
+      "localPath": "resources/images/skill/skchr_vigil_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "eb9b4be7dae83fa37c154cc125917c0f5c1b553d"
     },
     "skchr_vigil_3": {
       "name": "领袖的尊严",
@@ -7164,24 +7212,6 @@
       "height": 128,
       "sha1": "bdac4314904260ddac87dd996e68d59f8a684a57"
     },
-    "skchr_vodfox_1": {
-      "name": "病入膏肓",
-      "prtsTitle": "文件:技能 病入膏肓.png",
-      "sourceUrl": "https://media.prts.wiki/b/b2/%E6%8A%80%E8%83%BD_%E7%97%85%E5%85%A5%E8%86%8F%E8%82%93.png",
-      "localPath": "resources/images/skill/skchr_vodfox_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "e1b25bc7f58213a6b8a0c80afce343fe2781001e"
-    },
-    "skchr_vodfox_2": {
-      "name": "诅咒娃娃",
-      "prtsTitle": "文件:技能 诅咒娃娃.png",
-      "sourceUrl": "https://media.prts.wiki/b/b3/%E6%8A%80%E8%83%BD_%E8%AF%85%E5%92%92%E5%A8%83%E5%A8%83.png",
-      "localPath": "resources/images/skill/skchr_vodfox_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "2a8efe209864b5dd3669bdc655e5c0051449ae4b"
-    },
     "skchr_vrdant_1": {
       "name": "苍翠屏障",
       "prtsTitle": "文件:技能 苍翠屏障.png",
@@ -7191,6 +7221,15 @@
       "height": 128,
       "sha1": "608ee54c37b71a7b6857c95662158830aad62860"
     },
+    "skchr_vodfox_1": {
+      "name": "病入膏肓",
+      "prtsTitle": "文件:技能 病入膏肓.png",
+      "sourceUrl": "https://media.prts.wiki/b/b2/%E6%8A%80%E8%83%BD_%E7%97%85%E5%85%A5%E8%86%8F%E8%82%93.png",
+      "localPath": "resources/images/skill/skchr_vodfox_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "e1b25bc7f58213a6b8a0c80afce343fe2781001e"
+    },
     "skchr_vrdant_2": {
       "name": "双刃毒藤",
       "prtsTitle": "文件:技能 双刃毒藤.png",
@@ -7199,6 +7238,15 @@
       "width": 128,
       "height": 128,
       "sha1": "e4713b375a8e15176e06076f1722ed3667ff2c9e"
+    },
+    "skchr_vodfox_2": {
+      "name": "诅咒娃娃",
+      "prtsTitle": "文件:技能 诅咒娃娃.png",
+      "sourceUrl": "https://media.prts.wiki/b/b3/%E6%8A%80%E8%83%BD_%E8%AF%85%E5%92%92%E5%A8%83%E5%A8%83.png",
+      "localPath": "resources/images/skill/skchr_vodfox_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "2a8efe209864b5dd3669bdc655e5c0051449ae4b"
     },
     "skchr_vulpis_1": {
       "name": "小施惩戒",
@@ -7254,15 +7302,6 @@
       "height": 128,
       "sha1": "7fd2ff7a06edbba0e2ec28c32a57b5a6fdcd5155"
     },
-    "skchr_waaifu_1": {
-      "name": "寸劲",
-      "prtsTitle": "文件:技能 寸劲.png",
-      "sourceUrl": "https://media.prts.wiki/1/1e/%E6%8A%80%E8%83%BD_%E5%AF%B8%E5%8A%B2.png",
-      "localPath": "resources/images/skill/skchr_waaifu_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "d6476c3b3dc4cc2a99c242b7899d95b74fec96f5"
-    },
     "skchr_waaifu_2": {
       "name": "七武掠阵踢",
       "prtsTitle": "文件:技能 七武掠阵踢.png",
@@ -7271,6 +7310,15 @@
       "width": 128,
       "height": 128,
       "sha1": "e367173fda77c18f9b4917bbec0758a6050beea2"
+    },
+    "skchr_waaifu_1": {
+      "name": "寸劲",
+      "prtsTitle": "文件:技能 寸劲.png",
+      "sourceUrl": "https://media.prts.wiki/1/1e/%E6%8A%80%E8%83%BD_%E5%AF%B8%E5%8A%B2.png",
+      "localPath": "resources/images/skill/skchr_waaifu_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "d6476c3b3dc4cc2a99c242b7899d95b74fec96f5"
     },
     "skchr_wang_1": {
       "name": "取势",
@@ -7290,15 +7338,6 @@
       "height": 128,
       "sha1": "74f0a8079a9d833f276b5a4b83c1a50e5258969b"
     },
-    "skchr_wang_3": {
-      "name": "天下劫",
-      "prtsTitle": "文件:技能 天下劫.png",
-      "sourceUrl": "https://media.prts.wiki/6/6f/%E6%8A%80%E8%83%BD_%E5%A4%A9%E4%B8%8B%E5%8A%AB.png",
-      "localPath": "resources/images/skill/skchr_wang_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "c8591a6af829a6a88c634f36af86e28f3a22cff5"
-    },
     "skchr_wanqin_2": {
       "name": "应东风",
       "prtsTitle": "文件:技能 应东风.png",
@@ -7307,6 +7346,15 @@
       "width": 128,
       "height": 128,
       "sha1": "ff629f6112c51ac60e9ae8f0e60cec0b5ec8ff48"
+    },
+    "skchr_wang_3": {
+      "name": "天下劫",
+      "prtsTitle": "文件:技能 天下劫.png",
+      "sourceUrl": "https://media.prts.wiki/6/6f/%E6%8A%80%E8%83%BD_%E5%A4%A9%E4%B8%8B%E5%8A%AB.png",
+      "localPath": "resources/images/skill/skchr_wang_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "c8591a6af829a6a88c634f36af86e28f3a22cff5"
     },
     "skchr_warmy_1": {
       "name": "炎炎火焰",
@@ -7317,15 +7365,6 @@
       "height": 128,
       "sha1": "43e31e9e13835ac54637103f25e7bd3e892ae3cc"
     },
-    "skchr_weedy_1": {
-      "name": "炮管敲击",
-      "prtsTitle": "文件:技能 炮管敲击.png",
-      "sourceUrl": "https://media.prts.wiki/6/6a/%E6%8A%80%E8%83%BD_%E7%82%AE%E7%AE%A1%E6%95%B2%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_weedy_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "466bcc26cc7e6a7dd52f3f60f57be973c75cb476"
-    },
     "skchr_warmy_2": {
       "name": "滔滔热流",
       "prtsTitle": "文件:技能 滔滔热流.png",
@@ -7334,6 +7373,15 @@
       "width": 128,
       "height": 128,
       "sha1": "ce04c030063824bcbb6942e2ebd8c86cf77fba5b"
+    },
+    "skchr_weedy_1": {
+      "name": "炮管敲击",
+      "prtsTitle": "文件:技能 炮管敲击.png",
+      "sourceUrl": "https://media.prts.wiki/6/6a/%E6%8A%80%E8%83%BD_%E7%82%AE%E7%AE%A1%E6%95%B2%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_weedy_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "466bcc26cc7e6a7dd52f3f60f57be973c75cb476"
     },
     "skchr_weedy_2": {
       "name": "水炮模式",
@@ -7371,15 +7419,6 @@
       "height": 128,
       "sha1": "eef2dbd7434182d8135aea5a93cb56eb11f6cb3f"
     },
-    "skchr_whitew_2": {
-      "name": "狼魂",
-      "prtsTitle": "文件:技能 狼魂.png",
-      "sourceUrl": "https://media.prts.wiki/1/12/%E6%8A%80%E8%83%BD_%E7%8B%BC%E9%AD%82.png",
-      "localPath": "resources/images/skill/skchr_whitew_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "3b61dfd74b5bf2b41a895e222e612bfa8b87e941"
-    },
     "skchr_whitew_1": {
       "name": "日晷",
       "prtsTitle": "文件:技能 日晷.png",
@@ -7398,6 +7437,15 @@
       "height": 128,
       "sha1": "70b84a97e1e95a97e3aed62a293f16a89b98a0b9"
     },
+    "skchr_whitew_2": {
+      "name": "狼魂",
+      "prtsTitle": "文件:技能 狼魂.png",
+      "sourceUrl": "https://media.prts.wiki/1/12/%E6%8A%80%E8%83%BD_%E7%8B%BC%E9%AD%82.png",
+      "localPath": "resources/images/skill/skchr_whitew_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "3b61dfd74b5bf2b41a895e222e612bfa8b87e941"
+    },
     "skchr_whitw2_2": {
       "name": "逐猎狂飙",
       "prtsTitle": "文件:技能 逐猎狂飙.png",
@@ -7406,15 +7454,6 @@
       "width": 128,
       "height": 128,
       "sha1": "faa7a3080457176901704410eaf85eda572f7a17"
-    },
-    "skchr_wildmn_1": {
-      "name": "骑枪刺击",
-      "prtsTitle": "文件:技能 骑枪刺击.png",
-      "sourceUrl": "https://media.prts.wiki/e/e3/%E6%8A%80%E8%83%BD_%E9%AA%91%E6%9E%AA%E5%88%BA%E5%87%BB.png",
-      "localPath": "resources/images/skill/skchr_wildmn_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "65b2177cfc2dda77e91e5cb34ee87b8b54c2fc07"
     },
     "skchr_whitw2_3": {
       "name": "终幕·浩劫",
@@ -7425,15 +7464,6 @@
       "height": 128,
       "sha1": "279c37d3c9e0642d935957455a158e3427fc4d74"
     },
-    "skchr_wildmn_2": {
-      "name": "夹枪冲锋",
-      "prtsTitle": "文件:技能 夹枪冲锋.png",
-      "sourceUrl": "https://media.prts.wiki/b/bf/%E6%8A%80%E8%83%BD_%E5%A4%B9%E6%9E%AA%E5%86%B2%E9%94%8B.png",
-      "localPath": "resources/images/skill/skchr_wildmn_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "4b5afbe3440aa211ad2c99132293762b35485612"
-    },
     "skchr_windft_1": {
       "name": "此身为筑",
       "prtsTitle": "文件:技能 此身为筑.png",
@@ -7443,14 +7473,23 @@
       "height": 128,
       "sha1": "9ee5a95507605f12a930e9ff5aae9fc52baf3964"
     },
-    "skchr_windft_2": {
-      "name": "此身为源",
-      "prtsTitle": "文件:技能 此身为源.png",
-      "sourceUrl": "https://media.prts.wiki/4/41/%E6%8A%80%E8%83%BD_%E6%AD%A4%E8%BA%AB%E4%B8%BA%E6%BA%90.png",
-      "localPath": "resources/images/skill/skchr_windft_2.png",
+    "skchr_wildmn_1": {
+      "name": "骑枪刺击",
+      "prtsTitle": "文件:技能 骑枪刺击.png",
+      "sourceUrl": "https://media.prts.wiki/e/e3/%E6%8A%80%E8%83%BD_%E9%AA%91%E6%9E%AA%E5%88%BA%E5%87%BB.png",
+      "localPath": "resources/images/skill/skchr_wildmn_1.png",
       "width": 128,
       "height": 128,
-      "sha1": "d3378fbb3f18c6b01a33f69eb5aa6f3b99633e14"
+      "sha1": "65b2177cfc2dda77e91e5cb34ee87b8b54c2fc07"
+    },
+    "skchr_wildmn_2": {
+      "name": "夹枪冲锋",
+      "prtsTitle": "文件:技能 夹枪冲锋.png",
+      "sourceUrl": "https://media.prts.wiki/b/bf/%E6%8A%80%E8%83%BD_%E5%A4%B9%E6%9E%AA%E5%86%B2%E9%94%8B.png",
+      "localPath": "resources/images/skill/skchr_wildmn_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "4b5afbe3440aa211ad2c99132293762b35485612"
     },
     "skchr_wintim_1": {
       "name": "数据分析",
@@ -7460,6 +7499,15 @@
       "width": 128,
       "height": 128,
       "sha1": "baf13f5ed9f0e2500592a23d6fc0a0bf642caff5"
+    },
+    "skchr_windft_2": {
+      "name": "此身为源",
+      "prtsTitle": "文件:技能 此身为源.png",
+      "sourceUrl": "https://media.prts.wiki/4/41/%E6%8A%80%E8%83%BD_%E6%AD%A4%E8%BA%AB%E4%B8%BA%E6%BA%90.png",
+      "localPath": "resources/images/skill/skchr_windft_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "d3378fbb3f18c6b01a33f69eb5aa6f3b99633e14"
     },
     "skchr_wintim_2": {
       "name": "循理归因",
@@ -7578,15 +7626,6 @@
       "height": 128,
       "sha1": "f3835765b8a86da781160c53dbc59cca112c6ead"
     },
-    "skchr_yato2_3": {
-      "name": "空中回旋乱舞",
-      "prtsTitle": "文件:技能 空中回旋乱舞.png",
-      "sourceUrl": "https://media.prts.wiki/3/35/%E6%8A%80%E8%83%BD_%E7%A9%BA%E4%B8%AD%E5%9B%9E%E6%97%8B%E4%B9%B1%E8%88%9E.png",
-      "localPath": "resources/images/skill/skchr_yato2_3.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "5e695d62ed66b51e71164abd39f33f2e411b6b73"
-    },
     "skchr_yato2_2": {
       "name": "乱舞",
       "prtsTitle": "文件:技能 乱舞.png",
@@ -7596,14 +7635,14 @@
       "height": 128,
       "sha1": "5621f2c254aa0a300d1c34d77f99c35b7871d9f8"
     },
-    "skchr_yu_1": {
-      "name": "今日做东",
-      "prtsTitle": "文件:技能 今日做东.png",
-      "sourceUrl": "https://media.prts.wiki/e/e4/%E6%8A%80%E8%83%BD_%E4%BB%8A%E6%97%A5%E5%81%9A%E4%B8%9C.png",
-      "localPath": "resources/images/skill/skchr_yu_1.png",
+    "skchr_yato2_3": {
+      "name": "空中回旋乱舞",
+      "prtsTitle": "文件:技能 空中回旋乱舞.png",
+      "sourceUrl": "https://media.prts.wiki/3/35/%E6%8A%80%E8%83%BD_%E7%A9%BA%E4%B8%AD%E5%9B%9E%E6%97%8B%E4%B9%B1%E8%88%9E.png",
+      "localPath": "resources/images/skill/skchr_yato2_3.png",
       "width": 128,
       "height": 128,
-      "sha1": "89eb4b67935be32efbb687046461cd914f7766c4"
+      "sha1": "5e695d62ed66b51e71164abd39f33f2e411b6b73"
     },
     "skchr_yu_2": {
       "name": "厚礼上宾",
@@ -7613,6 +7652,15 @@
       "width": 128,
       "height": 128,
       "sha1": "35980a3daefb2b3160a468556566c559aa22d306"
+    },
+    "skchr_yu_1": {
+      "name": "今日做东",
+      "prtsTitle": "文件:技能 今日做东.png",
+      "sourceUrl": "https://media.prts.wiki/e/e4/%E6%8A%80%E8%83%BD_%E4%BB%8A%E6%97%A5%E5%81%9A%E4%B8%9C.png",
+      "localPath": "resources/images/skill/skchr_yu_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "89eb4b67935be32efbb687046461cd914f7766c4"
     },
     "skchr_yu_3": {
       "name": "灶里乾坤",
@@ -7659,15 +7707,6 @@
       "height": 128,
       "sha1": "7eb8491d5fe0999c6a201229a0e5e2a342002f78"
     },
-    "skchr_zumama_1": {
-      "name": "轻型挂斧",
-      "prtsTitle": "文件:技能 轻型挂斧.png",
-      "sourceUrl": "https://media.prts.wiki/c/cb/%E6%8A%80%E8%83%BD_%E8%BD%BB%E5%9E%8B%E6%8C%82%E6%96%A7.png",
-      "localPath": "resources/images/skill/skchr_zumama_1.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "c6fb6299f237f41c79b7e41e551a2a790cd2ed7c"
-    },
     "skchr_zumama_2": {
       "name": "震慑劈砍",
       "prtsTitle": "文件:技能 震慑劈砍.png",
@@ -7676,6 +7715,15 @@
       "width": 128,
       "height": 128,
       "sha1": "5bb408db39fe021bc2aca0b34c9f4bc2e026cc5d"
+    },
+    "skchr_zumama_1": {
+      "name": "轻型挂斧",
+      "prtsTitle": "文件:技能 轻型挂斧.png",
+      "sourceUrl": "https://media.prts.wiki/c/cb/%E6%8A%80%E8%83%BD_%E8%BD%BB%E5%9E%8B%E6%8C%82%E6%96%A7.png",
+      "localPath": "resources/images/skill/skchr_zumama_1.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "c6fb6299f237f41c79b7e41e551a2a790cd2ed7c"
     },
     "skchr_zumama_3": {
       "name": "钢铁意志",
@@ -7704,15 +7752,6 @@
       "height": 128,
       "sha1": "ae5a37c1664394f672bd381c01d51ca38b439631"
     },
-    "skcom_assist_cost_2": {
-      "name": "支援号令·β型",
-      "prtsTitle": "文件:技能 支援号令·β型.png",
-      "sourceUrl": "https://media.prts.wiki/c/c9/%E6%8A%80%E8%83%BD_%E6%94%AF%E6%8F%B4%E5%8F%B7%E4%BB%A4%C2%B7%CE%B2%E5%9E%8B.png",
-      "localPath": "resources/images/skill/skcom_assist_cost_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "f8b5be572274733febe7dfbdb863938b124d2e5d"
-    },
     "skchr_zuole_3": {
       "name": "佑序有炎",
       "prtsTitle": "文件:技能 佑序有炎.png",
@@ -7721,6 +7760,15 @@
       "width": 128,
       "height": 128,
       "sha1": "8b973a1ab071c2e79d4930c25dd9d03db1ea2ea4"
+    },
+    "skcom_assist_cost_2": {
+      "name": "支援号令·β型",
+      "prtsTitle": "文件:技能 支援号令·β型.png",
+      "sourceUrl": "https://media.prts.wiki/c/c9/%E6%8A%80%E8%83%BD_%E6%94%AF%E6%8F%B4%E5%8F%B7%E4%BB%A4%C2%B7%CE%B2%E5%9E%8B.png",
+      "localPath": "resources/images/skill/skcom_assist_cost_2.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "f8b5be572274733febe7dfbdb863938b124d2e5d"
     },
     "skcom_assist_cost_3": {
       "name": "支援号令·γ型",
@@ -7767,6 +7815,15 @@
       "height": 128,
       "sha1": "0822b93295ff308d083114f62d34ce1d6a727506"
     },
+    "skcom_heal_rage_3": {
+      "name": "掩护作战·γ型",
+      "prtsTitle": "文件:技能 掩护作战·γ型.png",
+      "sourceUrl": "https://media.prts.wiki/0/07/%E6%8A%80%E8%83%BD_%E6%8E%A9%E6%8A%A4%E4%BD%9C%E6%88%98%C2%B7%CE%B3%E5%9E%8B.png",
+      "localPath": "resources/images/skill/skcom_heal_rage_3.png",
+      "width": 128,
+      "height": 128,
+      "sha1": "8bc87d0e6ce7ae9b406c5efecfa3d102e069f8a7"
+    },
     "skcom_def_up_2": {
       "name": "防御力强化·β型",
       "prtsTitle": "文件:技能 防御力强化·β型.png",
@@ -7785,14 +7842,14 @@
       "height": 128,
       "sha1": "4a3fdab788fb208fa2861babaf0e6d4c13f93474"
     },
-    "skcom_heal_rage_3": {
-      "name": "掩护作战·γ型",
-      "prtsTitle": "文件:技能 掩护作战·γ型.png",
-      "sourceUrl": "https://media.prts.wiki/0/07/%E6%8A%80%E8%83%BD_%E6%8E%A9%E6%8A%A4%E4%BD%9C%E6%88%98%C2%B7%CE%B3%E5%9E%8B.png",
-      "localPath": "resources/images/skill/skcom_heal_rage_3.png",
+    "skcom_heal_self_2": {
+      "name": "生命回复·β型",
+      "prtsTitle": "文件:技能 生命回复·β型.png",
+      "sourceUrl": "https://media.prts.wiki/3/37/%E6%8A%80%E8%83%BD_%E7%94%9F%E5%91%BD%E5%9B%9E%E5%A4%8D%C2%B7%CE%B2%E5%9E%8B.png",
+      "localPath": "resources/images/skill/skcom_heal_self_2.png",
       "width": 128,
       "height": 128,
-      "sha1": "8bc87d0e6ce7ae9b406c5efecfa3d102e069f8a7"
+      "sha1": "95fe52a0aab2e14ab9895e1be360378514247d04"
     },
     "skcom_heal_self_3": {
       "name": "生命回复·γ型",
@@ -7802,15 +7859,6 @@
       "width": 128,
       "height": 128,
       "sha1": "2a9f6bbdfd525a0a12cb5dde42ee3da4de97afc5"
-    },
-    "skcom_heal_self_2": {
-      "name": "生命回复·β型",
-      "prtsTitle": "文件:技能 生命回复·β型.png",
-      "sourceUrl": "https://media.prts.wiki/3/37/%E6%8A%80%E8%83%BD_%E7%94%9F%E5%91%BD%E5%9B%9E%E5%A4%8D%C2%B7%CE%B2%E5%9E%8B.png",
-      "localPath": "resources/images/skill/skcom_heal_self_2.png",
-      "width": 128,
-      "height": 128,
-      "sha1": "95fe52a0aab2e14ab9895e1be360378514247d04"
     },
     "skcom_heal_up_2": {
       "name": "治疗强化·β型",

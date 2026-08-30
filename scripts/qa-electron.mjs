@@ -376,7 +376,7 @@ try {
   })()`);
 
   const pages = {};
-  for (const page of ['dashboard', 'operators', 'inventory', 'settings']) {
+  for (const page of ['dashboard', 'promotion', 'modules', 'operators', 'inventory', 'settings']) {
     await evaluate(`document.querySelector('.nav[data-page="${page}"]').click()`);
     await new Promise(resolve => setTimeout(resolve, 40));
     pages[page] = await evaluate(`(() => ({

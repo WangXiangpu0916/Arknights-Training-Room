@@ -20,7 +20,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出"
+    ]
   },
   "003_kalts": {
     "name": "凯尔希",
@@ -42,7 +45,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "召唤",
+      "治疗"
+    ]
   },
   "009_12fce": {
     "name": "12F",
@@ -65,7 +72,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "新手"
+    ]
   },
   "010_chen": {
     "name": "陈",
@@ -89,7 +99,11 @@
       "龙门近卫局"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "爆发",
+      "输出"
+    ]
   },
   "017_huang": {
     "name": "煌",
@@ -112,7 +126,11 @@
       "罗德岛",
       "罗德岛-精英干员"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "1001_amiya2": {
     "name": "阿米娅(近卫)",
@@ -135,7 +153,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "1011_lava2": {
     "name": "炎狱炎熔",
@@ -158,7 +180,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出"
+    ]
   },
   "1012_skadi2": {
     "name": "浊心斯卡蒂",
@@ -180,7 +205,12 @@
       "阿戈尔"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "支援",
+      "生存",
+      "输出"
+    ]
   },
   "1013_chen2": {
     "name": "假日威龙陈",
@@ -202,7 +232,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "群攻"
+    ]
   },
   "1014_nearl2": {
     "name": "耀骑士临光",
@@ -224,7 +258,10 @@
       "卡西米尔"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出"
+    ]
   },
   "1015_aglna2": {
     "name": "予愿安洁莉娜",
@@ -246,7 +283,12 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "高空",
+      "输出",
+      "控场"
+    ]
   },
   "1016_agoat2": {
     "name": "纯烬艾雅法拉",
@@ -268,7 +310,10 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "治疗"
+    ]
   },
   "1019_siege2": {
     "name": "维娜·维多利亚",
@@ -290,7 +335,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "101_sora": {
     "name": "空",
@@ -313,7 +362,11 @@
       "企鹅物流"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "支援",
+      "治疗"
+    ]
   },
   "1020_reed2": {
     "name": "焰影苇草",
@@ -336,7 +389,12 @@
       "塔拉"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "治疗",
+      "输出",
+      "削弱"
+    ]
   },
   "1021_kroos2": {
     "name": "寒芒克洛丝",
@@ -359,7 +417,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "1022_flwr2": {
     "name": "撷英调香师",
@@ -381,7 +442,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "支援",
+      "生存"
+    ]
   },
   "1023_ghost2": {
     "name": "归溟幽灵鲨",
@@ -404,7 +469,11 @@
       "深海猎人"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "快速复活"
+    ]
   },
   "1024_hbisc2": {
     "name": "濯尘芙蓉",
@@ -426,7 +495,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "治疗"
+    ]
   },
   "1026_gvial2": {
     "name": "百炼嘉维尔",
@@ -448,7 +520,12 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "爆发",
+      "输出",
+      "生存"
+    ]
   },
   "1027_greyy2": {
     "name": "承曦格雷伊",
@@ -470,7 +547,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出",
+      "减速"
+    ]
   },
   "1028_texas2": {
     "name": "缄默德克萨斯",
@@ -493,7 +574,11 @@
       "企鹅物流"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "快速复活",
+      "输出"
+    ]
   },
   "1029_yato2": {
     "name": "麒麟R夜刀",
@@ -517,7 +602,11 @@
     "teams": [
       "行动组A4"
     ],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "快速复活",
+      "爆发"
+    ]
   },
   "102_texas": {
     "name": "德克萨斯",
@@ -542,7 +631,11 @@
       "企鹅物流"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "费用回复",
+      "控场"
+    ]
   },
   "1030_noirc2": {
     "name": "火龙S黑角",
@@ -566,7 +659,11 @@
     "teams": [
       "行动组A4"
     ],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "生存",
+      "输出"
+    ]
   },
   "1031_slent2": {
     "name": "淬羽赫默",
@@ -590,7 +687,12 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "支援",
+      "生存",
+      "治疗"
+    ]
   },
   "1032_excu2": {
     "name": "圣约送葬人",
@@ -612,7 +714,10 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出"
+    ]
   },
   "1033_swire2": {
     "name": "琳琅诗怀雅",
@@ -634,7 +739,11 @@
       "炎-龙门"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "快速复活",
+      "爆发"
+    ]
   },
   "1034_jesca2": {
     "name": "涤火杰西卡",
@@ -657,7 +766,12 @@
       "黑钢国际"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "防护",
+      "生存",
+      "输出"
+    ]
   },
   "1035_wisdel": {
     "name": "维什戴尔",
@@ -678,7 +792,10 @@
     "organizations": [
       "巴别塔"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "1036_fang2": {
     "name": "历阵锐枪芬",
@@ -700,7 +817,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "1037_amiya3": {
     "name": "阿米娅(医疗)",
@@ -723,7 +844,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "治疗",
+      "输出"
+    ]
   },
   "1038_whitw2": {
     "name": "荒芜拉普兰德",
@@ -745,7 +870,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出",
+      "削弱"
+    ]
   },
   "1039_thorn2": {
     "name": "引星棘刺",
@@ -767,7 +896,12 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "支援",
+      "削弱"
+    ]
   },
   "103_angel": {
     "name": "能天使",
@@ -791,7 +925,10 @@
       "企鹅物流"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出"
+    ]
   },
   "1040_blaze2": {
     "name": "烛煌",
@@ -814,7 +951,12 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "元素",
+      "输出",
+      "群攻"
+    ]
   },
   "1041_angel2": {
     "name": "新约能天使",
@@ -837,7 +979,11 @@
       "企鹅物流"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "1042_phatm2": {
     "name": "酒神",
@@ -859,7 +1005,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "元素",
+      "控场"
+    ]
   },
   "1043_leizi2": {
     "name": "司霆惊蛰",
@@ -881,7 +1031,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "爆发"
+    ]
   },
   "1044_hsgma2": {
     "name": "斩业星熊",
@@ -904,7 +1058,11 @@
       "龙门近卫局"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "1045_svash2": {
     "name": "凛御银灰",
@@ -926,7 +1084,11 @@
       "谢拉格"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "费用回复",
+      "支援"
+    ]
   },
   "1046_sbell2": {
     "name": "圣聆初雪",
@@ -948,7 +1110,11 @@
       "谢拉格"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "群攻",
+      "控场"
+    ]
   },
   "1047_halo2": {
     "name": "溯光星源",
@@ -971,7 +1137,12 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "减速",
+      "支援",
+      "输出"
+    ]
   },
   "1048_orchd2": {
     "name": "焰狐龙梓兰",
@@ -995,7 +1166,11 @@
     "teams": [
       "行动预备组A6"
     ],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出",
+      "快速复活"
+    ]
   },
   "1049_catap2": {
     "name": "雷狼龙S空爆",
@@ -1019,7 +1194,12 @@
     "teams": [
       "行动预备组A6"
     ],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "群攻",
+      "输出",
+      "爆发"
+    ]
   },
   "1050_chen3": {
     "name": "赤刃明霄陈",
@@ -1041,7 +1221,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "爆发",
+      "输出"
+    ]
   },
   "1051_headb2": {
     "name": "怒潮凛冬",
@@ -1065,7 +1249,11 @@
     "teams": [
       "乌萨斯学生自治团"
     ],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "1052_kalts2": {
     "name": "凯尔希·思衡托",
@@ -1087,7 +1275,12 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "高空",
+      "治疗",
+      "支援"
+    ]
   },
   "106_franka": {
     "name": "芙兰卡",
@@ -1110,7 +1303,11 @@
       "黑钢国际"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "107_liskam": {
     "name": "雷蛇",
@@ -1134,7 +1331,11 @@
       "黑钢国际"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "防护",
+      "输出"
+    ]
   },
   "108_silent": {
     "name": "赫默",
@@ -1158,7 +1359,10 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "治疗"
+    ]
   },
   "109_fmout": {
     "name": "远山",
@@ -1182,7 +1386,10 @@
       "萨米"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "群攻"
+    ]
   },
   "110_deepcl": {
     "name": "深海色",
@@ -1205,7 +1412,10 @@
       "阿戈尔"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "召唤"
+    ]
   },
   "112_siege": {
     "name": "推进之王",
@@ -1229,7 +1439,11 @@
       "格拉斯哥帮"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "113_cqbw": {
     "name": "W",
@@ -1250,7 +1464,11 @@
     "organizations": [
       "巴别塔"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "115_headbr": {
     "name": "凛冬",
@@ -1275,7 +1493,11 @@
     "teams": [
       "乌萨斯学生自治团"
     ],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "费用回复",
+      "支援"
+    ]
   },
   "117_myrrh": {
     "name": "末药",
@@ -1299,7 +1521,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "治疗"
+    ]
   },
   "118_yuki": {
     "name": "白雪",
@@ -1323,7 +1548,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "群攻",
+      "减速"
+    ]
   },
   "120_hibisc": {
     "name": "芙蓉",
@@ -1350,7 +1579,10 @@
     "teams": [
       "行动预备组A1"
     ],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "治疗"
+    ]
   },
   "121_lava": {
     "name": "炎熔",
@@ -1377,7 +1609,10 @@
     "teams": [
       "行动预备组A1"
     ],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "群攻"
+    ]
   },
   "122_beagle": {
     "name": "米格鲁",
@@ -1404,7 +1639,10 @@
     "teams": [
       "行动预备组A1"
     ],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "防护"
+    ]
   },
   "123_fang": {
     "name": "芬",
@@ -1431,7 +1669,10 @@
     "teams": [
       "行动预备组A1"
     ],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "费用回复"
+    ]
   },
   "124_kroos": {
     "name": "克洛丝",
@@ -1458,7 +1699,10 @@
     "teams": [
       "行动预备组A1"
     ],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "126_shotst": {
     "name": "流星",
@@ -1482,7 +1726,11 @@
       "卡西米尔"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出",
+      "削弱"
+    ]
   },
   "127_estell": {
     "name": "艾丝黛尔",
@@ -1504,7 +1752,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "群攻",
+      "生存"
+    ]
   },
   "128_plosis": {
     "name": "白面鸮",
@@ -1528,7 +1780,11 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "129_bluep": {
     "name": "蓝毒",
@@ -1551,7 +1807,10 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出"
+    ]
   },
   "130_doberm": {
     "name": "杜宾",
@@ -1575,7 +1834,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "131_flameb": {
     "name": "炎客",
@@ -1598,7 +1861,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "133_mm": {
     "name": "梅",
@@ -1622,7 +1889,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出",
+      "减速"
+    ]
   },
   "134_ifrit": {
     "name": "伊芙利特",
@@ -1646,7 +1917,11 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "群攻",
+      "削弱"
+    ]
   },
   "135_halo": {
     "name": "星源",
@@ -1670,7 +1945,10 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出"
+    ]
   },
   "136_hsguma": {
     "name": "星熊",
@@ -1694,7 +1972,11 @@
       "龙门近卫局"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "防护",
+      "输出"
+    ]
   },
   "137_brownb": {
     "name": "猎蜂",
@@ -1718,7 +2000,10 @@
       "乌萨斯"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出"
+    ]
   },
   "140_whitew": {
     "name": "拉普兰德",
@@ -1740,7 +2025,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出",
+      "削弱"
+    ]
   },
   "141_nights": {
     "name": "夜烟",
@@ -1764,7 +2053,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出",
+      "削弱"
+    ]
   },
   "143_ghost": {
     "name": "幽灵鲨",
@@ -1788,7 +2081,11 @@
       "深海猎人"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "群攻",
+      "生存"
+    ]
   },
   "144_red": {
     "name": "红",
@@ -1812,7 +2109,11 @@
       "S.W.E.E.P."
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "快速复活",
+      "控场"
+    ]
   },
   "145_prove": {
     "name": "普罗旺斯",
@@ -1835,7 +2136,10 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "147_shining": {
     "name": "闪灵",
@@ -1858,7 +2162,11 @@
     "teams": [
       "使徒"
     ],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "148_nearl": {
     "name": "临光",
@@ -1881,7 +2189,11 @@
     "teams": [
       "使徒"
     ],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "防护",
+      "治疗"
+    ]
   },
   "149_scave": {
     "name": "清道夫",
@@ -1906,7 +2218,11 @@
       "S.W.E.E.P."
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "1502_crosly": {
     "name": "弑君者",
@@ -1928,7 +2244,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "快速复活"
+    ]
   },
   "150_snakek": {
     "name": "蛇屠箱",
@@ -1951,7 +2270,10 @@
     "organizations": [
       "哥伦比亚"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "防护"
+    ]
   },
   "151_myrtle": {
     "name": "桃金娘",
@@ -1975,7 +2297,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "费用回复",
+      "治疗"
+    ]
   },
   "154_morgan": {
     "name": "摩根",
@@ -1998,7 +2324,10 @@
       "格拉斯哥帮"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出"
+    ]
   },
   "155_tiger": {
     "name": "因陀罗",
@@ -2021,7 +2350,11 @@
       "格拉斯哥帮"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "157_dagda": {
     "name": "达格达",
@@ -2044,7 +2377,11 @@
       "格拉斯哥帮"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "158_milu": {
     "name": "守林人",
@@ -2066,7 +2403,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出",
+      "爆发"
+    ]
   },
   "159_peacok": {
     "name": "断罪者",
@@ -2087,7 +2428,13 @@
     "organizations": [
       "米诺斯"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出",
+      "生存",
+      "控场",
+      "爆发"
+    ]
   },
   "163_hpsts": {
     "name": "火神",
@@ -2109,7 +2456,12 @@
       "米诺斯"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "生存",
+      "防护",
+      "输出"
+    ]
   },
   "164_nightm": {
     "name": "夜魔",
@@ -2132,7 +2484,12 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出",
+      "治疗",
+      "减速"
+    ]
   },
   "166_skfire": {
     "name": "天火",
@@ -2154,7 +2511,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "群攻",
+      "控场"
+    ]
   },
   "171_bldsk": {
     "name": "华法琳",
@@ -2177,7 +2538,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "172_svrash": {
     "name": "银灰",
@@ -2201,7 +2566,11 @@
       "喀兰贸易"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "173_slchan": {
     "name": "崖心",
@@ -2224,7 +2593,11 @@
       "谢拉格"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "位移",
+      "输出"
+    ]
   },
   "174_slbell": {
     "name": "初雪",
@@ -2247,7 +2620,10 @@
       "谢拉格"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "削弱"
+    ]
   },
   "179_cgbird": {
     "name": "夜莺",
@@ -2270,7 +2646,11 @@
     "teams": [
       "使徒"
     ],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "180_amgoat": {
     "name": "艾雅法拉",
@@ -2292,7 +2672,11 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出",
+      "削弱"
+    ]
   },
   "181_flower": {
     "name": "调香师",
@@ -2316,7 +2700,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "治疗"
+    ]
   },
   "183_skgoat": {
     "name": "地灵",
@@ -2340,7 +2727,10 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "减速"
+    ]
   },
   "185_frncat": {
     "name": "慕斯",
@@ -2364,7 +2754,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "输出"
+    ]
   },
   "187_ccheal": {
     "name": "嘉维尔",
@@ -2386,7 +2779,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "治疗"
+    ]
   },
   "188_helage": {
     "name": "赫拉格",
@@ -2409,7 +2805,11 @@
       "乌萨斯"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "190_clour": {
     "name": "红云",
@@ -2433,7 +2833,10 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出"
+    ]
   },
   "192_falco": {
     "name": "翎羽",
@@ -2458,7 +2861,11 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出",
+      "费用回复"
+    ]
   },
   "193_frostl": {
     "name": "霜叶",
@@ -2482,7 +2889,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "减速",
+      "输出"
+    ]
   },
   "194_leto": {
     "name": "烈夏",
@@ -2506,7 +2917,11 @@
     "teams": [
       "乌萨斯学生自治团"
     ],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "195_glassb": {
     "name": "真理",
@@ -2531,7 +2946,11 @@
     "teams": [
       "乌萨斯学生自治团"
     ],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "减速",
+      "输出"
+    ]
   },
   "196_sunbr": {
     "name": "古米",
@@ -2557,7 +2976,11 @@
     "teams": [
       "乌萨斯学生自治团"
     ],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "防护",
+      "治疗"
+    ]
   },
   "197_poca": {
     "name": "早露",
@@ -2582,7 +3005,11 @@
     "teams": [
       "乌萨斯学生自治团"
     ],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "198_blackd": {
     "name": "讯使",
@@ -2605,7 +3032,11 @@
       "喀兰贸易"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "费用回复",
+      "防护"
+    ]
   },
   "199_yak": {
     "name": "角峰",
@@ -2630,7 +3061,10 @@
       "喀兰贸易"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "防护"
+    ]
   },
   "2012_typhon": {
     "name": "提丰",
@@ -2652,7 +3086,10 @@
       "萨米"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出"
+    ]
   },
   "2013_cerber": {
     "name": "刻俄柏",
@@ -2675,7 +3112,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "2014_nian": {
     "name": "年",
@@ -2698,7 +3139,11 @@
       "炎-岁"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "防护",
+      "支援"
+    ]
   },
   "2015_dusk": {
     "name": "夕",
@@ -2721,7 +3166,12 @@
       "炎-岁"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "群攻",
+      "输出",
+      "控场"
+    ]
   },
   "201_moeshd": {
     "name": "可颂",
@@ -2745,7 +3195,11 @@
       "企鹅物流"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "防护",
+      "位移"
+    ]
   },
   "2023_ling": {
     "name": "令",
@@ -2768,7 +3222,12 @@
       "炎-岁"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "召唤",
+      "支援",
+      "控场"
+    ]
   },
   "2024_chyue": {
     "name": "重岳",
@@ -2791,7 +3250,10 @@
       "炎-岁"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "爆发"
+    ]
   },
   "2025_shu": {
     "name": "黍",
@@ -2814,7 +3276,12 @@
       "炎-岁"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "防护",
+      "治疗",
+      "支援"
+    ]
   },
   "2026_yu": {
     "name": "余",
@@ -2837,7 +3304,11 @@
       "炎-岁"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "元素",
+      "防护"
+    ]
   },
   "2027_wang": {
     "name": "望",
@@ -2860,7 +3331,11 @@
       "炎-岁"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "召唤",
+      "输出"
+    ]
   },
   "202_demkni": {
     "name": "塞雷娅",
@@ -2884,7 +3359,12 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "防护",
+      "治疗",
+      "支援"
+    ]
   },
   "204_platnm": {
     "name": "白金",
@@ -2907,7 +3387,10 @@
       "卡西米尔"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出"
+    ]
   },
   "206_gnosis": {
     "name": "灵知",
@@ -2930,7 +3413,10 @@
       "喀兰贸易"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "削弱"
+    ]
   },
   "208_melan": {
     "name": "玫兰莎",
@@ -2957,7 +3443,11 @@
     "teams": [
       "行动预备组A4"
     ],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "209_ardign": {
     "name": "卡缇",
@@ -2982,7 +3472,10 @@
     "teams": [
       "行动预备组A4"
     ],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "防护"
+    ]
   },
   "210_stward": {
     "name": "史都华德",
@@ -3008,7 +3501,10 @@
     "teams": [
       "行动预备组A4"
     ],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出"
+    ]
   },
   "211_adnach": {
     "name": "安德切尔",
@@ -3033,7 +3529,10 @@
     "teams": [
       "行动预备组A4"
     ],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出"
+    ]
   },
   "212_ansel": {
     "name": "安赛尔",
@@ -3060,7 +3559,10 @@
     "teams": [
       "行动预备组A4"
     ],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "治疗"
+    ]
   },
   "213_mostma": {
     "name": "莫斯提马",
@@ -3083,7 +3585,12 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "群攻",
+      "支援",
+      "控场"
+    ]
   },
   "214_kafka": {
     "name": "卡夫卡",
@@ -3106,7 +3613,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "快速复活",
+      "控场"
+    ]
   },
   "215_mantic": {
     "name": "狮蝎",
@@ -3128,7 +3639,11 @@
     "organizations": [
       "萨尔贡"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "218_cuttle": {
     "name": "安哲拉",
@@ -3152,7 +3667,11 @@
       "深海猎人"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出",
+      "减速"
+    ]
   },
   "219_meteo": {
     "name": "陨星",
@@ -3175,7 +3694,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "群攻",
+      "削弱"
+    ]
   },
   "220_grani": {
     "name": "格拉尼",
@@ -3198,7 +3721,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "费用回复",
+      "防护"
+    ]
   },
   "222_bpipe": {
     "name": "风笛",
@@ -3221,7 +3748,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "225_haak": {
     "name": "阿",
@@ -3246,7 +3777,11 @@
     "teams": [
       "鲤氏侦探事务所"
     ],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "支援",
+      "输出"
+    ]
   },
   "226_hmau": {
     "name": "吽",
@@ -3271,7 +3806,11 @@
     "teams": [
       "鲤氏侦探事务所"
     ],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "防护",
+      "治疗"
+    ]
   },
   "230_savage": {
     "name": "暴行",
@@ -3294,7 +3833,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "群攻",
+      "爆发"
+    ]
   },
   "235_jesica": {
     "name": "杰西卡",
@@ -3320,7 +3863,11 @@
       "黑钢国际"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "236_rope": {
     "name": "暗索",
@@ -3344,7 +3891,10 @@
       "炎-龙门"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "位移"
+    ]
   },
   "237_gravel": {
     "name": "砾",
@@ -3368,7 +3918,11 @@
       "卡西米尔"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "快速复活",
+      "防护"
+    ]
   },
   "240_wyvern": {
     "name": "香草",
@@ -3393,7 +3947,10 @@
       "黑钢国际"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "费用回复"
+    ]
   },
   "241_panda": {
     "name": "食铁兽",
@@ -3416,7 +3973,11 @@
       "炎-龙门"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "位移",
+      "减速"
+    ]
   },
   "242_otter": {
     "name": "梅尔",
@@ -3440,7 +4001,11 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "召唤",
+      "控场"
+    ]
   },
   "243_waaifu": {
     "name": "槐琥",
@@ -3465,7 +4030,11 @@
     "teams": [
       "鲤氏侦探事务所"
     ],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "快速复活",
+      "削弱"
+    ]
   },
   "245_cello": {
     "name": "塑心",
@@ -3487,7 +4056,11 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "元素",
+      "支援"
+    ]
   },
   "248_mgllan": {
     "name": "麦哲伦",
@@ -3511,7 +4084,12 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "支援",
+      "减速",
+      "输出"
+    ]
   },
   "249_mlyss": {
     "name": "缪尔赛思",
@@ -3534,7 +4112,11 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "费用回复",
+      "控场"
+    ]
   },
   "250_phatom": {
     "name": "傀影",
@@ -3557,7 +4139,12 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "快速复活",
+      "控场",
+      "输出"
+    ]
   },
   "252_bibeak": {
     "name": "柏喙",
@@ -3580,7 +4167,11 @@
       "萨米"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "爆发",
+      "输出"
+    ]
   },
   "253_greyy": {
     "name": "格雷伊",
@@ -3604,7 +4195,11 @@
       "玻利瓦尔"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "群攻",
+      "减速"
+    ]
   },
   "254_vodfox": {
     "name": "巫恋",
@@ -3627,7 +4222,10 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "削弱"
+    ]
   },
   "258_podego": {
     "name": "波登可",
@@ -3651,7 +4249,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "减速",
+      "治疗"
+    ]
   },
   "260_durnar": {
     "name": "坚雷",
@@ -3673,7 +4275,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "防护",
+      "输出"
+    ]
   },
   "261_sddrag": {
     "name": "苇草",
@@ -3696,7 +4302,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "263_skadi": {
     "name": "斯卡蒂",
@@ -3720,7 +4330,11 @@
       "深海猎人"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "264_f12yin": {
     "name": "山",
@@ -3743,7 +4357,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "265_sophia": {
     "name": "鞭刃",
@@ -3766,7 +4384,11 @@
       "卡西米尔"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "271_spikes": {
     "name": "芳汀",
@@ -3790,7 +4412,10 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "输出"
+    ]
   },
   "272_strong": {
     "name": "孑",
@@ -3814,7 +4439,11 @@
       "炎-龙门"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "快速复活",
+      "输出"
+    ]
   },
   "274_astesi": {
     "name": "星极",
@@ -3837,7 +4466,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "防护"
+    ]
   },
   "275_breeze": {
     "name": "微风",
@@ -3859,7 +4492,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "277_sqrrel": {
     "name": "阿消",
@@ -3884,7 +4521,10 @@
       "炎-龙门"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "位移"
+    ]
   },
   "278_orchid": {
     "name": "梓兰",
@@ -3911,7 +4551,10 @@
     "teams": [
       "行动预备组A6"
     ],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "减速"
+    ]
   },
   "279_excu": {
     "name": "送葬人",
@@ -3934,7 +4577,10 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "群攻"
+    ]
   },
   "281_popka": {
     "name": "泡普卡",
@@ -3960,7 +4606,11 @@
     "teams": [
       "行动预备组A6"
     ],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "群攻",
+      "生存"
+    ]
   },
   "282_catap": {
     "name": "空爆",
@@ -3986,7 +4636,10 @@
     "teams": [
       "行动预备组A6"
     ],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "群攻"
+    ]
   },
   "283_midn": {
     "name": "月见夜",
@@ -4012,7 +4665,10 @@
     "teams": [
       "行动预备组A6"
     ],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出"
+    ]
   },
   "284_spot": {
     "name": "斑点",
@@ -4038,7 +4694,11 @@
     "teams": [
       "行动预备组A6"
     ],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "防护",
+      "治疗"
+    ]
   },
   "285_medic2": {
     "name": "Lancet-2",
@@ -4056,7 +4716,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "支援机械",
+      "治疗"
+    ]
   },
   "286_cast3": {
     "name": "Castle-3",
@@ -4073,7 +4737,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "支援机械",
+      "支援"
+    ]
   },
   "289_gyuki": {
     "name": "缠丸",
@@ -4097,7 +4765,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "生存",
+      "输出"
+    ]
   },
   "290_vigna": {
     "name": "红豆",
@@ -4121,7 +4793,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "费用回复"
+    ]
   },
   "291_aglina": {
     "name": "安洁莉娜",
@@ -4143,7 +4819,12 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "减速",
+      "输出",
+      "支援"
+    ]
   },
   "293_thorns": {
     "name": "棘刺",
@@ -4166,7 +4847,11 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "防护"
+    ]
   },
   "294_ayer": {
     "name": "断崖",
@@ -4189,7 +4874,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出",
+      "群攻"
+    ]
   },
   "297_hamoni": {
     "name": "和弦",
@@ -4212,7 +4901,10 @@
       "塔拉"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出"
+    ]
   },
   "298_susuro": {
     "name": "苏苏洛",
@@ -4236,7 +4928,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "治疗"
+    ]
   },
   "300_phenxi": {
     "name": "菲亚梅塔",
@@ -4258,7 +4953,10 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出"
+    ]
   },
   "301_cutter": {
     "name": "刻刀",
@@ -4282,7 +4980,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "爆发",
+      "输出"
+    ]
   },
   "302_glaze": {
     "name": "安比尔",
@@ -4306,7 +5008,11 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出",
+      "减速"
+    ]
   },
   "304_zebra": {
     "name": "暴雨",
@@ -4329,7 +5035,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "防护",
+      "支援"
+    ]
   },
   "306_leizi": {
     "name": "惊蛰",
@@ -4352,7 +5062,10 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出"
+    ]
   },
   "308_swire": {
     "name": "诗怀雅",
@@ -4376,7 +5089,11 @@
       "龙门近卫局"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "311_mudrok": {
     "name": "泥岩",
@@ -4399,7 +5116,12 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "生存",
+      "防护",
+      "输出"
+    ]
   },
   "322_lmlee": {
     "name": "老鲤",
@@ -4423,7 +5145,12 @@
     "teams": [
       "鲤氏侦探事务所"
     ],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "快速复活",
+      "生存",
+      "输出"
+    ]
   },
   "325_bison": {
     "name": "拜松",
@@ -4446,7 +5173,10 @@
       "炎-龙门"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "防护"
+    ]
   },
   "326_glacus": {
     "name": "格劳克斯",
@@ -4469,7 +5199,11 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "减速",
+      "控场"
+    ]
   },
   "328_cammou": {
     "name": "卡达",
@@ -4493,7 +5227,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "332_archet": {
     "name": "空弦",
@@ -4516,7 +5254,10 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "333_sidero": {
     "name": "铸铁",
@@ -4539,7 +5280,11 @@
       "米诺斯"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "生存",
+      "输出"
+    ]
   },
   "336_folivo": {
     "name": "稀音",
@@ -4562,7 +5307,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "召唤",
+      "支援"
+    ]
   },
   "337_utage": {
     "name": "宴",
@@ -4586,7 +5335,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "338_iris": {
     "name": "爱丽丝",
@@ -4609,7 +5362,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出"
+    ]
   },
   "340_shwaz": {
     "name": "黑",
@@ -4632,7 +5388,10 @@
       "哥伦比亚",
       "汐斯塔"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "341_sntlla": {
     "name": "寒檀",
@@ -4654,7 +5413,11 @@
       "萨米"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "群攻",
+      "控场"
+    ]
   },
   "343_tknogi": {
     "name": "月禾",
@@ -4677,7 +5440,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "支援",
+      "生存"
+    ]
   },
   "344_beewax": {
     "name": "蜜蜡",
@@ -4700,7 +5467,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "群攻",
+      "防护"
+    ]
   },
   "345_folnic": {
     "name": "亚叶",
@@ -4723,7 +5494,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "治疗",
+      "输出"
+    ]
   },
   "346_aosta": {
     "name": "奥斯塔",
@@ -4748,7 +5523,10 @@
     "teams": [
       "贾维团伙"
     ],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "群攻"
+    ]
   },
   "347_jaksel": {
     "name": "杰克",
@@ -4772,7 +5550,10 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "输出"
+    ]
   },
   "348_ceylon": {
     "name": "锡兰",
@@ -4796,7 +5577,10 @@
       "汐斯塔"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "治疗"
+    ]
   },
   "349_chiave": {
     "name": "贾维",
@@ -4821,7 +5605,11 @@
     "teams": [
       "贾维团伙"
     ],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "350_surtr": {
     "name": "史尔特尔",
@@ -4844,7 +5632,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出"
+    ]
   },
   "355_ethan": {
     "name": "伊桑",
@@ -4866,7 +5657,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "356_broca": {
     "name": "布洛卡",
@@ -4891,7 +5686,11 @@
     "teams": [
       "贾维团伙"
     ],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "群攻",
+      "生存"
+    ]
   },
   "358_lisa": {
     "name": "铃兰",
@@ -4914,7 +5713,12 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "减速",
+      "支援",
+      "输出"
+    ]
   },
   "362_saga": {
     "name": "嵯峨",
@@ -4937,7 +5741,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "363_toddi": {
     "name": "熔泉",
@@ -4960,7 +5768,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出"
+    ]
   },
   "365_aprl": {
     "name": "四月",
@@ -4983,7 +5794,10 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出"
+    ]
   },
   "366_acdrop": {
     "name": "酸糖",
@@ -5007,7 +5821,10 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "输出"
+    ]
   },
   "367_swllow": {
     "name": "灰喉",
@@ -5030,7 +5847,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "369_bena": {
     "name": "贝娜",
@@ -5053,7 +5873,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出",
+      "快速复活"
+    ]
   },
   "373_lionhd": {
     "name": "莱恩哈特",
@@ -5076,7 +5900,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "群攻",
+      "爆发"
+    ]
   },
   "376_therex": {
     "name": "THRM-EX",
@@ -5095,7 +5923,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "支援机械",
+      "爆发"
+    ]
   },
   "377_gdglow": {
     "name": "澄闪",
@@ -5117,7 +5949,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出"
+    ]
   },
   "378_asbest": {
     "name": "石棉",
@@ -5140,7 +5975,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "防护",
+      "输出"
+    ]
   },
   "379_sesa": {
     "name": "慑砂",
@@ -5163,7 +6002,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "群攻",
+      "削弱"
+    ]
   },
   "381_bubble": {
     "name": "泡泡",
@@ -5187,7 +6030,10 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "防护"
+    ]
   },
   "383_snsant": {
     "name": "雪雉",
@@ -5210,7 +6056,11 @@
       "炎-龙门"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "位移",
+      "减速"
+    ]
   },
   "385_finlpp": {
     "name": "清流",
@@ -5233,7 +6083,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "388_mint": {
     "name": "薄绿",
@@ -5256,7 +6110,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "群攻",
+      "控场"
+    ]
   },
   "391_rosmon": {
     "name": "迷迭香",
@@ -5279,7 +6137,10 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出"
+    ]
   },
   "394_hadiya": {
     "name": "哈蒂娅",
@@ -5301,7 +6162,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "4000_jnight": {
     "name": "正义骑士号",
@@ -5320,7 +6185,11 @@
       "卡西米尔",
       "红松骑士团"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "支援机械",
+      "支援"
+    ]
   },
   "4004_pudd": {
     "name": "布丁",
@@ -5342,7 +6211,10 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出"
+    ]
   },
   "4006_melnte": {
     "name": "玫拉",
@@ -5364,7 +6236,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "爆发"
+    ]
   },
   "4009_irene": {
     "name": "艾丽妮",
@@ -5386,7 +6262,12 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "爆发",
+      "输出",
+      "控场"
+    ]
   },
   "400_weedy": {
     "name": "温蒂",
@@ -5409,7 +6290,12 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "位移",
+      "输出",
+      "控场"
+    ]
   },
   "4010_etlchi": {
     "name": "隐德来希",
@@ -5431,7 +6317,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "4011_lessng": {
     "name": "止颂",
@@ -5454,7 +6344,10 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出"
+    ]
   },
   "4013_kjera": {
     "name": "耶拉",
@@ -5477,7 +6370,11 @@
       "谢拉格"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "4014_lunacu": {
     "name": "子月",
@@ -5499,7 +6396,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "4015_spuria": {
     "name": "空构",
@@ -5521,7 +6422,11 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "支援",
+      "输出"
+    ]
   },
   "4016_kazema": {
     "name": "风丸",
@@ -5543,7 +6448,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "快速复活"
+    ]
   },
   "4017_puzzle": {
     "name": "谜图",
@@ -5566,7 +6475,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "费用回复",
+      "快速复活"
+    ]
   },
   "4019_ncdeer": {
     "name": "九色鹿",
@@ -5588,7 +6501,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "支援",
+      "生存"
+    ]
   },
   "401_elysm": {
     "name": "极境",
@@ -5611,7 +6528,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "费用回复",
+      "支援"
+    ]
   },
   "4023_rfalcn": {
     "name": "红隼",
@@ -5632,7 +6553,11 @@
     "organizations": [
       "萨尔贡"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "4025_aprot2": {
     "name": "暮落",
@@ -5654,7 +6579,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "防护"
+    ]
   },
   "4026_vulpis": {
     "name": "忍冬",
@@ -5676,7 +6605,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "4027_heyak": {
     "name": "霍尔海雅",
@@ -5698,7 +6631,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "402_tuye": {
     "name": "图耶",
@@ -5721,7 +6658,10 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "治疗"
+    ]
   },
   "4031_liesel": {
     "name": "复奏",
@@ -5743,7 +6683,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "群攻",
+      "输出"
+    ]
   },
   "4032_provs": {
     "name": "但书",
@@ -5765,7 +6709,11 @@
       "卡西米尔"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "削弱",
+      "减速"
+    ]
   },
   "4036_forcer": {
     "name": "见行者",
@@ -5788,7 +6736,11 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "位移",
+      "控场"
+    ]
   },
   "4037_demetr": {
     "name": "贝洛内",
@@ -5810,7 +6762,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "输出",
+      "削弱"
+    ]
   },
   "4039_horn": {
     "name": "号角",
@@ -5832,7 +6788,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出",
+      "防护"
+    ]
   },
   "4040_rockr": {
     "name": "洛洛",
@@ -5854,7 +6814,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出"
+    ]
   },
   "4041_chnut": {
     "name": "褐果",
@@ -5877,7 +6840,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "治疗"
+    ]
   },
   "4042_lumen": {
     "name": "流明",
@@ -5900,7 +6866,11 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "4043_erato": {
     "name": "埃拉托",
@@ -5923,7 +6893,11 @@
       "米诺斯"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "4045_heidi": {
     "name": "海蒂",
@@ -5945,7 +6919,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "支援",
+      "治疗"
+    ]
   },
   "4046_ebnhlz": {
     "name": "黑键",
@@ -5967,7 +6945,10 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出"
+    ]
   },
   "4047_pianst": {
     "name": "车尔尼",
@@ -5990,7 +6971,11 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "防护",
+      "输出"
+    ]
   },
   "4048_doroth": {
     "name": "多萝西",
@@ -6013,7 +6998,11 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "召唤",
+      "控场"
+    ]
   },
   "4051_akkord": {
     "name": "协律",
@@ -6035,7 +7024,11 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "群攻",
+      "输出"
+    ]
   },
   "4052_surfer": {
     "name": "寻澜",
@@ -6058,7 +7051,11 @@
       "黑钢国际"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "费用回复",
+      "快速复活"
+    ]
   },
   "4054_malist": {
     "name": "至简",
@@ -6081,7 +7078,10 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出"
+    ]
   },
   "4055_bgsnow": {
     "name": "鸿雪",
@@ -6103,7 +7103,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出"
+    ]
   },
   "4056_titi": {
     "name": "缇缇",
@@ -6125,7 +7128,12 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "治疗",
+      "防护",
+      "控场"
+    ]
   },
   "4058_pepe": {
     "name": "佩佩",
@@ -6147,7 +7155,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "405_absin": {
     "name": "苦艾",
@@ -6172,7 +7184,10 @@
     "teams": [
       "乌萨斯学生自治团"
     ],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "4062_totter": {
     "name": "铅踝",
@@ -6195,7 +7210,10 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出"
+    ]
   },
   "4063_quartz": {
     "name": "石英",
@@ -6217,7 +7235,10 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "输出"
+    ]
   },
   "4064_mlynar": {
     "name": "玛恩纳",
@@ -6239,7 +7260,11 @@
       "卡西米尔"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "爆发"
+    ]
   },
   "4065_judge": {
     "name": "斥罪",
@@ -6261,7 +7286,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "生存",
+      "输出"
+    ]
   },
   "4066_highmo": {
     "name": "海沫",
@@ -6283,7 +7312,10 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "输出"
+    ]
   },
   "4067_lolxh": {
     "name": "罗小黑",
@@ -6305,7 +7337,10 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "4071_peper": {
     "name": "明椒",
@@ -6327,7 +7362,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "治疗"
+    ]
   },
   "4072_ironmn": {
     "name": "白铁",
@@ -6349,7 +7387,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "支援",
+      "输出"
+    ]
   },
   "4077_palico": {
     "name": "泰拉大陆调查团",
@@ -6370,7 +7412,10 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "控场"
+    ]
   },
   "4078_bdhkgt": {
     "name": "截云",
@@ -6393,7 +7438,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "群攻",
+      "减速"
+    ]
   },
   "4079_haini": {
     "name": "海霓",
@@ -6415,7 +7464,10 @@
       "阿戈尔"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "削弱"
+    ]
   },
   "4080_lin": {
     "name": "林",
@@ -6437,7 +7489,11 @@
       "炎-龙门"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "群攻",
+      "防护"
+    ]
   },
   "4081_warmy": {
     "name": "温米",
@@ -6459,7 +7515,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "元素",
+      "爆发"
+    ]
   },
   "4082_qiubai": {
     "name": "仇白",
@@ -6481,7 +7541,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "4083_chimes": {
     "name": "铎铃",
@@ -6503,7 +7567,10 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出"
+    ]
   },
   "4087_ines": {
     "name": "伊内丝",
@@ -6525,7 +7592,11 @@
       "巴别塔"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "费用回复",
+      "快速复活"
+    ]
   },
   "4088_hodrer": {
     "name": "赫德雷",
@@ -6547,7 +7618,10 @@
       "巴别塔"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出"
+    ]
   },
   "4091_ulika": {
     "name": "U-Official",
@@ -6569,7 +7643,10 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "控场"
+    ]
   },
   "4093_frston": {
     "name": "Friston-3",
@@ -6587,7 +7664,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "支援机械",
+      "防护"
+    ]
   },
   "4098_vvana": {
     "name": "薇薇安娜",
@@ -6609,7 +7690,11 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "4100_caper": {
     "name": "跃跃",
@@ -6631,7 +7716,10 @@
       "玻利瓦尔"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "输出"
+    ]
   },
   "4102_threye": {
     "name": "凛视",
@@ -6652,7 +7740,10 @@
     "organizations": [
       "萨米"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "元素"
+    ]
   },
   "4104_coldst": {
     "name": "冰酿",
@@ -6675,7 +7766,10 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出"
+    ]
   },
   "4105_almond": {
     "name": "杏仁",
@@ -6698,7 +7792,10 @@
       "黑钢国际"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "位移"
+    ]
   },
   "4106_bryota": {
     "name": "苍苔",
@@ -6722,7 +7819,11 @@
       "汐斯塔"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "4107_vrdant": {
     "name": "维荻",
@@ -6745,7 +7846,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "生存",
+      "快速复活"
+    ]
   },
   "4109_baslin": {
     "name": "深律",
@@ -6767,7 +7872,11 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "防护",
+      "治疗"
+    ]
   },
   "4110_delphn": {
     "name": "戴菲恩",
@@ -6789,7 +7898,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "4114_harold": {
     "name": "哈洛德",
@@ -6812,7 +7924,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "治疗"
+    ]
   },
   "4116_blkkgt": {
     "name": "锏",
@@ -6835,7 +7950,12 @@
       "喀兰贸易"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "爆发",
+      "输出",
+      "削弱"
+    ]
   },
   "4117_ray": {
     "name": "莱伊",
@@ -6857,7 +7977,10 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "输出"
+    ]
   },
   "4119_wanqin": {
     "name": "万顷",
@@ -6880,7 +8003,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "费用回复",
+      "支援"
+    ]
   },
   "411_tomimi": {
     "name": "特米米",
@@ -6903,7 +8030,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "4121_zuole": {
     "name": "左乐",
@@ -6925,7 +8056,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "4122_grabds": {
     "name": "小满",
@@ -6947,7 +8082,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "减速",
+      "控场"
+    ]
   },
   "4123_ela": {
     "name": "艾拉",
@@ -6969,7 +8108,12 @@
     "teams": [
       "彩虹小队"
     ],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "召唤",
+      "控场",
+      "输出"
+    ]
   },
   "4124_iana": {
     "name": "双月",
@@ -6991,7 +8135,11 @@
     "teams": [
       "彩虹小队"
     ],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "削弱",
+      "快速复活"
+    ]
   },
   "4125_rdoc": {
     "name": "医生",
@@ -7013,7 +8161,11 @@
     "teams": [
       "彩虹小队"
     ],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "4126_fuze": {
     "name": "导火索",
@@ -7035,7 +8187,11 @@
     "teams": [
       "彩虹小队"
     ],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "群攻",
+      "生存"
+    ]
   },
   "4130_luton": {
     "name": "露托",
@@ -7057,7 +8213,11 @@
     "organizations": [
       "玻利瓦尔"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "生存",
+      "防护"
+    ]
   },
   "4131_odda": {
     "name": "奥达",
@@ -7080,7 +8240,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "群攻",
+      "控场"
+    ]
   },
   "4132_ascln": {
     "name": "阿斯卡纶",
@@ -7102,7 +8266,11 @@
       "罗德岛",
       "S.W.E.E.P."
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "减速",
+      "输出"
+    ]
   },
   "4133_logos": {
     "name": "逻各斯",
@@ -7125,7 +8293,10 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "输出"
+    ]
   },
   "4134_cetsyr": {
     "name": "魔王",
@@ -7147,7 +8318,12 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "支援",
+      "生存",
+      "输出"
+    ]
   },
   "4136_phonor": {
     "name": "PhonoR-0",
@@ -7165,7 +8341,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "支援机械",
+      "元素"
+    ]
   },
   "4137_udflow": {
     "name": "深巡",
@@ -7187,7 +8367,12 @@
       "阿戈尔"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "防护",
+      "输出",
+      "减速"
+    ]
   },
   "4138_narant": {
     "name": "娜仁图亚",
@@ -7209,7 +8394,10 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出"
+    ]
   },
   "4139_papyrs": {
     "name": "莎草",
@@ -7231,7 +8419,10 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "治疗"
+    ]
   },
   "4140_lasher": {
     "name": "衡沙",
@@ -7253,7 +8444,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "召唤",
+      "减速"
+    ]
   },
   "4141_marcil": {
     "name": "玛露西尔",
@@ -7275,7 +8470,12 @@
     "teams": [
       "莱欧斯小队"
     ],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "群攻",
+      "治疗",
+      "控场"
+    ]
   },
   "4142_laios": {
     "name": "莱欧斯",
@@ -7297,7 +8497,11 @@
     "teams": [
       "莱欧斯小队"
     ],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "4143_sensi": {
     "name": "森西",
@@ -7319,7 +8523,11 @@
     "teams": [
       "莱欧斯小队"
     ],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "防护",
+      "治疗"
+    ]
   },
   "4144_chilc": {
     "name": "齐尔查克",
@@ -7341,7 +8549,11 @@
     "teams": [
       "莱欧斯小队"
     ],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "费用回复",
+      "快速复活"
+    ]
   },
   "4145_ulpia": {
     "name": "乌尔比安",
@@ -7364,7 +8576,11 @@
       "深海猎人"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "4146_nymph": {
     "name": "妮芙",
@@ -7386,7 +8602,12 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "元素",
+      "输出",
+      "控场"
+    ]
   },
   "4147_mitm": {
     "name": "渡桥",
@@ -7408,7 +8629,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "费用回复",
+      "爆发"
+    ]
   },
   "4148_philae": {
     "name": "菲莱",
@@ -7430,7 +8655,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "元素",
+      "防护"
+    ]
   },
   "4151_tinman": {
     "name": "锡人",
@@ -7451,7 +8680,11 @@
     "organizations": [
       "哥伦比亚"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "削弱",
+      "支援"
+    ]
   },
   "4155_talr": {
     "name": "裁度",
@@ -7473,7 +8706,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "快速复活",
+      "控场"
+    ]
   },
   "415_flint": {
     "name": "燧石",
@@ -7496,7 +8733,10 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "输出"
+    ]
   },
   "4162_cathy": {
     "name": "凯瑟琳",
@@ -7518,7 +8758,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "防护",
+      "支援"
+    ]
   },
   "4163_rosesa": {
     "name": "瑰盐",
@@ -7540,7 +8784,11 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "治疗",
+      "支援"
+    ]
   },
   "4164_tecno": {
     "name": "特克诺",
@@ -7562,7 +8810,10 @@
       "玻利瓦尔"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "召唤"
+    ]
   },
   "4165_ctrail": {
     "name": "云迹",
@@ -7584,7 +8835,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "高空",
+      "控场"
+    ]
   },
   "4166_varkis": {
     "name": "摆渡人",
@@ -7606,7 +8861,11 @@
       "米诺斯"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "群攻",
+      "生存"
+    ]
   },
   "416_zumama": {
     "name": "森蚺",
@@ -7629,7 +8888,12 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出",
+      "生存",
+      "防护"
+    ]
   },
   "4171_wulfen": {
     "name": "钼铅",
@@ -7651,7 +8915,11 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "召唤",
+      "削弱"
+    ]
   },
   "4172_xingzh": {
     "name": "行箸",
@@ -7673,7 +8941,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "支援",
+      "生存"
+    ]
   },
   "4173_nowell": {
     "name": "诺威尔",
@@ -7695,7 +8967,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "治疗"
+    ]
   },
   "4177_brigid": {
     "name": "水灯心",
@@ -7718,7 +8993,10 @@
       "塔拉"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出"
+    ]
   },
   "4178_alanna": {
     "name": "阿兰娜",
@@ -7740,7 +9018,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "4179_monstr": {
     "name": "Mon3tr",
@@ -7762,7 +9044,12 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "治疗",
+      "输出",
+      "支援"
+    ]
   },
   "4182_oblvns": {
     "name": "丰川祥子",
@@ -7784,7 +9071,10 @@
     "teams": [
       "Ave Mujica"
     ],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出"
+    ]
   },
   "4183_mortis": {
     "name": "若叶睦",
@@ -7806,7 +9096,11 @@
     "teams": [
       "Ave Mujica"
     ],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "防护",
+      "快速复活"
+    ]
   },
   "4184_dolris": {
     "name": "三角初华",
@@ -7828,7 +9122,11 @@
     "teams": [
       "Ave Mujica"
     ],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "支援",
+      "治疗"
+    ]
   },
   "4185_amoris": {
     "name": "祐天寺若麦",
@@ -7850,7 +9148,12 @@
     "teams": [
       "Ave Mujica"
     ],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "群攻",
+      "输出",
+      "削弱"
+    ]
   },
   "4186_tmoris": {
     "name": "八幡海铃",
@@ -7872,7 +9175,11 @@
     "teams": [
       "Ave Mujica"
     ],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "4187_graceb": {
     "name": "聆音",
@@ -7894,7 +9201,11 @@
       "玻利瓦尔"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "爆发",
+      "输出"
+    ]
   },
   "4188_confes": {
     "name": "CONFESS-47",
@@ -7912,7 +9223,11 @@
     "organizations": [
       "拉特兰"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "支援机械",
+      "控场"
+    ]
   },
   "4191_tippi": {
     "name": "蒂比",
@@ -7934,7 +9249,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "高空",
+      "生存"
+    ]
   },
   "4193_lemuen": {
     "name": "蕾缪安",
@@ -7956,7 +9275,11 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出",
+      "爆发"
+    ]
   },
   "4194_rmixer": {
     "name": "信仰搅拌机",
@@ -7978,7 +9301,12 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "防护",
+      "输出",
+      "支援"
+    ]
   },
   "4195_radian": {
     "name": "电弧",
@@ -8001,7 +9329,12 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "召唤",
+      "输出",
+      "支援"
+    ]
   },
   "4196_reckpr": {
     "name": "录武官",
@@ -8023,7 +9356,10 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "治疗"
+    ]
   },
   "4198_christ": {
     "name": "Miss.Christine",
@@ -8044,7 +9380,11 @@
     "organizations": [
       "维多利亚"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "元素",
+      "输出"
+    ]
   },
   "4199_makiri": {
     "name": "松桐",
@@ -8066,7 +9406,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "费用回复",
+      "支援"
+    ]
   },
   "4202_haruka": {
     "name": "遥",
@@ -8088,7 +9432,12 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "支援",
+      "生存",
+      "治疗"
+    ]
   },
   "4203_kichi": {
     "name": "吉星",
@@ -8110,7 +9459,10 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "群攻"
+    ]
   },
   "4204_mantra": {
     "name": "真言",
@@ -8133,7 +9485,12 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "元素",
+      "输出",
+      "控场"
+    ]
   },
   "4207_branch": {
     "name": "折桠",
@@ -8155,7 +9512,11 @@
       "乌萨斯"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "防护",
+      "生存"
+    ]
   },
   "4208_wintim": {
     "name": "冬时",
@@ -8177,7 +9538,11 @@
       "乌萨斯"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "费用回复",
+      "快速复活"
+    ]
   },
   "420_flamtl": {
     "name": "焰尾",
@@ -8200,7 +9565,11 @@
       "红松骑士团"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "费用回复",
+      "生存"
+    ]
   },
   "4211_snhunt": {
     "name": "雪猎",
@@ -8222,7 +9591,11 @@
       "谢拉格"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "爆发",
+      "控场"
+    ]
   },
   "4212_nasti": {
     "name": "娜斯提",
@@ -8245,7 +9618,11 @@
       "莱茵生命"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "支援",
+      "防护"
+    ]
   },
   "4213_skybx": {
     "name": "天空盒",
@@ -8267,7 +9644,10 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "群攻"
+    ]
   },
   "4214_cairn": {
     "name": "响石",
@@ -8289,7 +9669,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "元素",
+      "防护"
+    ]
   },
   "4215_buddy": {
     "name": "罗德岛隐秘队",
@@ -8310,7 +9694,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "费用回复",
+      "控场"
+    ]
   },
   "421_crow": {
     "name": "羽毛笔",
@@ -8333,7 +9721,10 @@
       "玻利瓦尔"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "输出"
+    ]
   },
   "4221_ju": {
     "name": "矩",
@@ -8354,7 +9745,10 @@
     "organizations": [
       "炎"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "4222_taraxa": {
     "name": "风絮",
@@ -8376,7 +9770,10 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "治疗"
+    ]
   },
   "4223_botany": {
     "name": "伯塔尼",
@@ -8398,7 +9795,10 @@
       "乌萨斯"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "元素"
+    ]
   },
   "4224_turdus": {
     "name": "乌啾",
@@ -8420,7 +9820,10 @@
       "乌萨斯"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "治疗"
+    ]
   },
   "4225_tanya": {
     "name": "裂响",
@@ -8442,7 +9845,11 @@
       "乌萨斯"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "元素",
+      "生存"
+    ]
   },
   "4226_veen": {
     "name": "维伊",
@@ -8464,7 +9871,10 @@
       "乌萨斯"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出"
+    ]
   },
   "4227_gallus": {
     "name": "GALLUS²",
@@ -8482,7 +9892,11 @@
     "organizations": [
       "罗德岛"
     ],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "支援机械",
+      "削弱"
+    ]
   },
   "4228_closur": {
     "name": "可露希尔",
@@ -8504,7 +9918,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "费用回复",
+      "控场"
+    ]
   },
   "4229_aphris": {
     "name": "谬因",
@@ -8526,7 +9944,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "群攻",
+      "输出"
+    ]
   },
   "422_aurora": {
     "name": "极光",
@@ -8548,7 +9970,11 @@
       "谢拉格"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "防护"
+    ]
   },
   "4230_mcnist": {
     "name": "机械师",
@@ -8571,7 +9997,12 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "生存",
+      "召唤",
+      "输出"
+    ]
   },
   "4234_pedro": {
     "name": "佩德洛",
@@ -8593,7 +10024,11 @@
       "玻利瓦尔"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "4235_thumpy": {
     "name": "珊比",
@@ -8615,7 +10050,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "元素",
+      "防护"
+    ]
   },
   "4236_tmslot": {
     "name": "时隙",
@@ -8637,7 +10076,10 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "输出"
+    ]
   },
   "4237_jcinta": {
     "name": "嘉辛塔",
@@ -8659,7 +10101,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "费用回复",
+      "防护"
+    ]
   },
   "423_blemsh": {
     "name": "瑕光",
@@ -8682,7 +10128,12 @@
       "卡西米尔"
     ],
     "teams": [],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "防护",
+      "治疗",
+      "输出"
+    ]
   },
   "426_billro": {
     "name": "卡涅利安",
@@ -8705,7 +10156,11 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "群攻",
+      "防护"
+    ]
   },
   "427_vigil": {
     "name": "伺夜",
@@ -8728,7 +10183,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "费用回复",
+      "控场"
+    ]
   },
   "430_fartth": {
     "name": "远牙",
@@ -8751,7 +10210,10 @@
       "红松骑士团"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "输出"
+    ]
   },
   "431_ashlok": {
     "name": "灰毫",
@@ -8774,7 +10236,11 @@
       "红松骑士团"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "防护"
+    ]
   },
   "433_windft": {
     "name": "掠风",
@@ -8796,7 +10262,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "436_whispr": {
     "name": "絮雨",
@@ -8819,7 +10289,10 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "治疗"
+    ]
   },
   "437_mizuki": {
     "name": "水月",
@@ -8842,7 +10315,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "440_pinecn": {
     "name": "松果",
@@ -8866,7 +10343,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "群攻",
+      "输出"
+    ]
   },
   "445_wscoot": {
     "name": "骋风",
@@ -8888,7 +10369,10 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "爆发"
+    ]
   },
   "446_aroma": {
     "name": "阿罗玛",
@@ -8910,7 +10394,11 @@
       "叙拉古"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "群攻",
+      "控场"
+    ]
   },
   "449_glider": {
     "name": "蜜莓",
@@ -8932,7 +10420,10 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "治疗"
+    ]
   },
   "450_necras": {
     "name": "死芒",
@@ -8955,7 +10446,11 @@
       "塔拉"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "召唤",
+      "输出"
+    ]
   },
   "451_robin": {
     "name": "罗宾",
@@ -8978,7 +10473,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "召唤",
+      "位移"
+    ]
   },
   "452_bstalk": {
     "name": "豆苗",
@@ -9002,7 +10501,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "费用回复",
+      "召唤"
+    ]
   },
   "455_nothin": {
     "name": "乌有",
@@ -9025,7 +10528,11 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "快速复活",
+      "输出"
+    ]
   },
   "456_ash": {
     "name": "灰烬",
@@ -9047,7 +10554,10 @@
     "teams": [
       "彩虹小队"
     ],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出"
+    ]
   },
   "457_blitz": {
     "name": "闪击",
@@ -9069,7 +10579,11 @@
     "teams": [
       "彩虹小队"
     ],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "防护",
+      "输出"
+    ]
   },
   "458_rfrost": {
     "name": "霜华",
@@ -9091,7 +10605,11 @@
     "teams": [
       "彩虹小队"
     ],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "召唤",
+      "控场"
+    ]
   },
   "459_tachak": {
     "name": "战车",
@@ -9113,7 +10631,11 @@
     "teams": [
       "彩虹小队"
     ],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "爆发",
+      "输出"
+    ]
   },
   "464_cement": {
     "name": "洋灰",
@@ -9135,7 +10657,10 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 10
+    "birthdayMonth": 10,
+    "tags": [
+      "防护"
+    ]
   },
   "466_qanik": {
     "name": "雪绒",
@@ -9157,7 +10682,11 @@
       "萨米"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "469_indigo": {
     "name": "深靛",
@@ -9181,7 +10710,11 @@
       "伊比利亚"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "输出",
+      "控场"
+    ]
   },
   "472_pasngr": {
     "name": "异客",
@@ -9204,7 +10737,10 @@
       "萨尔贡"
     ],
     "teams": [],
-    "birthdayMonth": 9
+    "birthdayMonth": 9,
+    "tags": [
+      "输出"
+    ]
   },
   "473_mberry": {
     "name": "桑葚",
@@ -9226,7 +10762,10 @@
       "炎"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "治疗"
+    ]
   },
   "474_glady": {
     "name": "歌蕾蒂娅",
@@ -9250,7 +10789,12 @@
       "深海猎人"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "位移",
+      "输出",
+      "控场"
+    ]
   },
   "475_akafyu": {
     "name": "赤冬",
@@ -9273,7 +10817,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "生存",
+      "输出"
+    ]
   },
   "476_blkngt": {
     "name": "夜半",
@@ -9295,7 +10843,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "费用回复",
+      "控场"
+    ]
   },
   "478_kirara": {
     "name": "绮良",
@@ -9318,7 +10870,11 @@
       "东"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "479_sleach": {
     "name": "琴柳",
@@ -9340,7 +10896,11 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "费用回复",
+      "支援"
+    ]
   },
   "484_robrta": {
     "name": "罗比菈塔",
@@ -9363,7 +10923,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "防护",
+      "支援"
+    ]
   },
   "485_pallas": {
     "name": "帕拉斯",
@@ -9386,7 +10950,11 @@
       "米诺斯"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出",
+      "支援"
+    ]
   },
   "486_takila": {
     "name": "龙舌兰",
@@ -9409,7 +10977,10 @@
       "玻利瓦尔"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "爆发"
+    ]
   },
   "487_bobb": {
     "name": "波卜",
@@ -9431,7 +11002,10 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 3
+    "birthdayMonth": 3,
+    "tags": [
+      "元素"
+    ]
   },
   "488_buildr": {
     "name": "青枳",
@@ -9454,7 +11028,11 @@
       "汐斯塔"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "费用回复",
+      "防护"
+    ]
   },
   "489_serum": {
     "name": "蚀清",
@@ -9476,7 +11054,11 @@
       "哥伦比亚"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "群攻",
+      "削弱"
+    ]
   },
   "491_humus": {
     "name": "休谟斯",
@@ -9499,7 +11081,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "492_quercu": {
     "name": "夏栎",
@@ -9521,7 +11107,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "支援",
+      "生存"
+    ]
   },
   "493_firwhl": {
     "name": "火哨",
@@ -9543,7 +11133,11 @@
       "雷姆必拓"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "输出",
+      "防护"
+    ]
   },
   "494_vendla": {
     "name": "刺玫",
@@ -9565,7 +11159,10 @@
       "维多利亚"
     ],
     "teams": [],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "治疗"
+    ]
   },
   "496_wildmn": {
     "name": "野鬃",
@@ -9589,7 +11186,11 @@
       "红松骑士团"
     ],
     "teams": [],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "497_ctable": {
     "name": "晓歌",
@@ -9611,7 +11212,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 4
+    "birthdayMonth": 4,
+    "tags": [
+      "费用回复",
+      "快速复活"
+    ]
   },
   "498_inside": {
     "name": "隐现",
@@ -9634,7 +11239,10 @@
       "拉特兰"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "输出"
+    ]
   },
   "499_kaitou": {
     "name": "折光",
@@ -9656,7 +11264,11 @@
       "莱塔尼亚"
     ],
     "teams": [],
-    "birthdayMonth": 1
+    "birthdayMonth": 1,
+    "tags": [
+      "元素",
+      "输出"
+    ]
   },
   "500_noirc": {
     "name": "黑角",
@@ -9680,7 +11292,10 @@
     "teams": [
       "行动组A4"
     ],
-    "birthdayMonth": 8
+    "birthdayMonth": 8,
+    "tags": [
+      "新手"
+    ]
   },
   "501_durin": {
     "name": "杜林",
@@ -9705,7 +11320,10 @@
     "teams": [
       "行动组A4"
     ],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "新手"
+    ]
   },
   "502_nblade": {
     "name": "夜刀",
@@ -9729,7 +11347,10 @@
     "teams": [
       "行动组A4"
     ],
-    "birthdayMonth": 5
+    "birthdayMonth": 5,
+    "tags": [
+      "新手"
+    ]
   },
   "503_rang": {
     "name": "巡林者",
@@ -9753,7 +11374,10 @@
     "teams": [
       "行动组A4"
     ],
-    "birthdayMonth": 7
+    "birthdayMonth": 7,
+    "tags": [
+      "新手"
+    ]
   },
   "504_rguard": {
     "name": "预备干员-近战",
@@ -9768,7 +11392,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "防护"
+    ]
   },
   "505_rcast": {
     "name": "预备干员-术师",
@@ -9783,7 +11410,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "506_rmedic": {
     "name": "预备干员-后勤",
@@ -9798,7 +11428,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "治疗"
+    ]
   },
   "507_rsnipe": {
     "name": "预备干员-狙击",
@@ -9813,7 +11446,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "508_aguard": {
     "name": "Sharp",
@@ -9836,7 +11472,11 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 12
+    "birthdayMonth": 12,
+    "tags": [
+      "输出",
+      "生存"
+    ]
   },
   "509_acast": {
     "name": "Pith",
@@ -9859,7 +11499,10 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 6
+    "birthdayMonth": 6,
+    "tags": [
+      "群攻"
+    ]
   },
   "510_amedic": {
     "name": "Touch",
@@ -9882,7 +11525,10 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "治疗"
+    ]
   },
   "511_asnipe": {
     "name": "Stormeye",
@@ -9905,7 +11551,10 @@
       "罗德岛-精英干员"
     ],
     "teams": [],
-    "birthdayMonth": 2
+    "birthdayMonth": 2,
+    "tags": [
+      "输出"
+    ]
   },
   "512_aprot": {
     "name": "暮落",
@@ -9920,7 +11569,11 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出",
+      "防护"
+    ]
   },
   "513_apionr": {
     "name": "郁金香",
@@ -9942,7 +11595,11 @@
       "罗德岛"
     ],
     "teams": [],
-    "birthdayMonth": 11
+    "birthdayMonth": 11,
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "514_rdfend": {
     "name": "预备干员-重装",
@@ -9957,7 +11614,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "防护"
+    ]
   },
   "600_cpione": {
     "name": "预备干员-先锋(卫戍协议)",
@@ -9972,7 +11632,11 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "601_cguard": {
     "name": "预备干员-近卫(卫戍协议)",
@@ -9987,7 +11651,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "602_cdfend": {
     "name": "预备干员-重装(卫戍协议)",
@@ -10002,7 +11669,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "防护"
+    ]
   },
   "603_csnipe": {
     "name": "预备干员-狙击(卫戍协议)",
@@ -10017,7 +11687,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "604_ccast": {
     "name": "预备干员-术师(卫戍协议)",
@@ -10032,7 +11705,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "605_cmedic": {
     "name": "预备干员-医疗(卫戍协议)",
@@ -10047,7 +11723,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "治疗"
+    ]
   },
   "606_csuppo": {
     "name": "预备干员-辅助(卫戍协议)",
@@ -10062,7 +11741,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "减速"
+    ]
   },
   "607_cspec": {
     "name": "预备干员-特种(卫戍协议)",
@@ -10077,7 +11759,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "快速复活"
+    ]
   },
   "608_acpion": {
     "name": "郁金香(卫戍协议)",
@@ -10092,7 +11777,11 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "费用回复",
+      "输出"
+    ]
   },
   "609_acguad": {
     "name": "Sharp(卫戍协议)",
@@ -10107,7 +11796,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "610_acfend": {
     "name": "Mechanist(卫戍协议)",
@@ -10122,7 +11814,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "防护"
+    ]
   },
   "611_acnipe": {
     "name": "Stormeye(卫戍协议)",
@@ -10137,7 +11832,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   },
   "612_accast": {
     "name": "Pith(卫戍协议)",
@@ -10152,7 +11850,11 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "群攻",
+      "输出"
+    ]
   },
   "613_acmedc": {
     "name": "Touch(卫戍协议)",
@@ -10167,7 +11869,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "治疗"
+    ]
   },
   "614_acsupo": {
     "name": "Raidian(卫戍协议)",
@@ -10182,7 +11887,11 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "减速",
+      "支援"
+    ]
   },
   "615_acspec": {
     "name": "Misery(卫戍协议)",
@@ -10197,7 +11906,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "快速复活"
+    ]
   },
   "616_pithst": {
     "name": "盟约·辅助干员",
@@ -10212,7 +11924,10 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "元素"
+    ]
   },
   "617_sharp2": {
     "name": "领主·Sharp",
@@ -10227,6 +11942,9 @@
     "races": [],
     "birthPlaces": [],
     "organizations": [],
-    "teams": []
+    "teams": [],
+    "tags": [
+      "输出"
+    ]
   }
 }
