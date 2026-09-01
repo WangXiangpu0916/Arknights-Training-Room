@@ -181,6 +181,9 @@ test('精英化与模组规划是同级页面并使用真实图标和独立状�
   assert.match(html, /data-page="modules"[^>]*>[^<]*<span>[^<]*<\/span>模组规划/);
   assert.match(renderer, /state\[kind === 'promotion' \? 'promotions' : 'modules'\]/);
   assert.match(renderer, /resources\/images\/elite\/e\$\{Number\(level\)\}\.png/);
+  assert.match(renderer, /resources\/images\/level\/elite-2\.png/);
+  assert.match(renderer, /operatorLevelBadge\(candidate\.currentLevel, candidate\.from\)/);
+  assert.match(renderer, /digits-\$\{String\(value\)\.length\}/);
   assert.match(renderer, /resources\/images\/module\/type\/\$\{encodeURIComponent\(String\(typeIcon\)\.toLowerCase\(\)\)\}\.png/);
   assert.match(renderer, /resources\/images\/module\/stage\/1\.png/);
   assert.match(renderer, /candidate\.module\.typeIcon/);
@@ -193,7 +196,13 @@ test('精英化与模组规划是同级页面并使用真实图标和独立状�
   assert.match(styles, /\.plan-card \.candidate-main \{ grid-template-columns: 72px/);
   assert.match(styles, /\.module-type-icon \{/);
   assert.match(styles, /\.module-stage-icon \{/);
-  assert.match(styles, /\.promotion-plan-card \.candidate-main \{ grid-template-columns: 72px minmax\(0, 1fr\); \}/);
+  assert.match(styles, /\.promotion-plan-card \.candidate-main \{ grid-template-columns: 72px minmax\(0, 1fr\) 58px; \}/);
+  assert.match(styles, /\.operator-level-badge \{[^}]*width: 54px; height: 58px/);
+  assert.match(styles, /\.module-stage-icon \{[^}]*border: 0;[^}]*background: transparent/);
+  assert.match(styles, /\.module-type-icon \{ width: 48px; height: 48px;[^}]*border-radius: 0;[^}]*background: transparent/);
+  assert.match(styles, /\.module-type-code \{ color: var\(--text\)/);
+  assert.match(styles, /\.module-name small \{[^}]*color: var\(--text\)/);
+  assert.doesNotMatch(renderer, /当前 Lv\./);
 });
 
 test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS 文本', () => {

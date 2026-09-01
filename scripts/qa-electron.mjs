@@ -39,6 +39,8 @@ for (const operatorId of ['002_amiya', '4132_ascln', '180_amgoat', '485_pallas',
 for (const itemId of Object.keys(JSON.parse(await readFile(path.join(root, 'resources', 'game-data', 'item.json'), 'utf8')))) {
   account.inventory[itemId] = 999;
 }
+const progression = JSON.parse(await readFile(path.join(root, 'resources', 'game-data', 'progression.json'), 'utf8'));
+for (const itemId of Object.keys(progression.expItems)) account.inventory[itemId] = 999;
 account.inventory['4001'] = 99_999_999;
 const promotionFixture = account.operators.find(operator => operator.operatorId === '002_amiya');
 if (promotionFixture) {
@@ -109,6 +111,7 @@ async function waitFor(expression, message) {
 }
 
 async function captureScreen(name) {
+  if (process.env.ATR_QA_SKIP_SCREENSHOTS === '1') return;
   await new Promise(resolve => setTimeout(resolve, 120));
   const screenshot = await send('Page.captureScreenshot', { format: 'png', fromSurface: true, captureBeyondViewport: false });
   await writeFile(path.join(output, name), Buffer.from(screenshot.data, 'base64'));
@@ -415,12 +418,39 @@ try {
   const plannerVisuals = {};
   await evaluate(`document.querySelector('.nav[data-page="promotion"]').click()`);
   await waitFor(`Boolean(document.querySelector('.promotion-plan-card') && [...document.querySelectorAll('.promotion-plan-card img')].every(image => image.complete && image.naturalWidth > 0))`, 'Promotion planner visuals did not load');
-  plannerVisuals.promotionSingle = await evaluate(`(() => ({
-    cards: document.querySelectorAll('.promotion-plan-card').length,
-    rightTargets: document.querySelectorAll('.promotion-plan-card .plan-target').length,
-    transitions: document.querySelectorAll('.promotion-plan-card .elite-card-transition').length,
-    imagesLoaded: [...document.querySelectorAll('.promotion-plan-card .elite-card-transition img')].every(image => image.complete && image.naturalWidth > 0),
-  }))()`);
+  plannerVisuals.promotionSingle = await evaluate(`(() => {
+    const cards = [...document.querySelectorAll('.promotion-plan-card')];
+    const levelBadges = cards.map(card => card.querySelector('.operator-level-badge'));
+    const eliteBottomAligned = cards.every(card => {
+      const avatarBottom = card.querySelector('.candidate-avatar').getBoundingClientRect().bottom;
+      return [...card.querySelectorAll('.elite-card-transition img')].every(image => Math.abs(image.getBoundingClientRect().bottom - avatarBottom) <= 1);
+    });
+    const testHost = document.createElement('div');
+    testHost.style.cssText = 'position:fixed;left:0;top:0;display:flex;gap:8px;z-index:-1';
+    testHost.innerHTML = [1, 20, 90].map(level => operatorLevelBadge(level, 2)).join('');
+    document.body.append(testHost);
+    const levelSamples = [...testHost.querySelectorAll('.operator-level-badge')].map(badge => {
+      const frame = badge.getBoundingClientRect();
+      const number = badge.querySelector('strong').getBoundingClientRect();
+      const image = badge.querySelector('img');
+      return {
+        value: badge.textContent,
+        loaded: image.complete && image.naturalWidth === 139 && image.naturalHeight === 147,
+        centered: Math.abs((number.left + number.width / 2) - (frame.left + frame.width / 2)) < .6
+          && Math.abs((number.top + number.height / 2) - (frame.top + 27)) < .6,
+        contained: number.left >= frame.left && number.right <= frame.right && number.top >= frame.top && number.bottom <= frame.bottom,
+      };
+    });
+    testHost.remove();
+    return {
+      cards: cards.length,
+      transitions: document.querySelectorAll('.promotion-plan-card .elite-card-transition').length,
+      levelBadges: levelBadges.filter(Boolean).length,
+      imagesLoaded: [...document.querySelectorAll('.promotion-plan-card img')].every(image => image.complete && image.naturalWidth > 0),
+      eliteBottomAligned,
+      levelSamples,
+    };
+  })()`);
   await captureScreen('promotion-planner-single.png');
   await evaluate(`document.querySelector('[data-planner-toggle="continuous"][data-planner-kind="promotion"]').click()`);
   await waitFor(`Boolean(document.querySelector('.promotion-plan-card'))`, 'Continuous promotion planner did not render a multi-stage candidate');
@@ -432,13 +462,56 @@ try {
 
   await evaluate(`document.querySelector('.nav[data-page="modules"]').click()`);
   await waitFor(`Boolean(document.querySelector('.module-plan-card') && [...document.querySelectorAll('.module-plan-card img')].every(image => image.complete && image.naturalWidth > 0))`, 'Module planner visuals did not load');
-  plannerVisuals.moduleSingle = await evaluate(`(() => ({
-    cards: document.querySelectorAll('.module-plan-card').length,
-    noteRemoved: !document.querySelector('#content').innerText.includes('模组开启仍需在游戏内完成对应任务；此处核对精英/等级门槛、现有模组等级与材料。'),
-    typeImagesLoaded: [...document.querySelectorAll('.module-plan-card .module-type-icon img')].every(image => image.complete && image.naturalWidth > 0),
-    stageImagesLoaded: [...document.querySelectorAll('.module-plan-card .module-stage-icon img')].every(image => image.complete && image.naturalWidth > 0),
-    codesUppercase: [...document.querySelectorAll('.module-plan-card .module-type-code')].every(node => /^[A-Z]+-[A-Z]$/.test(node.textContent)),
-  }))()`);
+  plannerVisuals.moduleSingle = await evaluate(`(() => {
+    const typeFrames = [...document.querySelectorAll('.module-plan-card .module-type-icon')];
+    const typeImages = typeFrames.map(frame => frame.querySelector('img'));
+    const stageFrames = [...document.querySelectorAll('.module-plan-card .module-stage-icon')];
+    const stageImages = stageFrames.map(frame => frame.querySelector('img'));
+    const transparentSquare = frame => {
+      const rect = frame.getBoundingClientRect();
+      const style = getComputedStyle(frame);
+      return Math.abs(rect.width - rect.height) < .1 && style.borderTopWidth === '0px'
+        && style.borderRadius === '0px' && style.backgroundColor === 'rgba(0, 0, 0, 0)';
+    };
+    const keepsAspect = image => {
+      const rect = image.getBoundingClientRect();
+      return Math.abs(rect.width / rect.height - image.naturalWidth / image.naturalHeight) < .02;
+    };
+    const stageTransparent = stageFrames.every(frame => {
+      const style = getComputedStyle(frame);
+      return style.borderTopWidth === '0px' && style.borderRadius === '0px' && style.backgroundColor === 'rgba(0, 0, 0, 0)';
+    });
+    const originalTheme = document.documentElement.dataset.theme;
+    const themeState = theme => {
+      document.documentElement.dataset.theme = theme;
+      const typeImage = getComputedStyle(typeImages[0]);
+      const stageImage = getComputedStyle(stageImages[0]);
+      const code = getComputedStyle(document.querySelector('.module-type-code'));
+      const name = getComputedStyle(document.querySelector('.module-name small'));
+      const textColor = getComputedStyle(document.body).color;
+      return {
+        typeFilter: typeImage.filter,
+        stageFilter: stageImage.filter,
+        codeUsesText: code.color === textColor,
+        nameUsesText: name.color === textColor,
+      };
+    };
+    const light = themeState('light');
+    const dark = themeState('dark');
+    document.documentElement.dataset.theme = originalTheme;
+    return {
+      cards: document.querySelectorAll('.module-plan-card').length,
+      noteRemoved: !document.querySelector('#content').innerText.includes('模组开启仍需在游戏内完成对应任务；此处核对精英/等级门槛、现有模组等级与材料。'),
+      typeImagesLoaded: typeImages.every(image => image.complete && image.naturalWidth > 0),
+      stageImagesLoaded: stageImages.every(image => image.complete && image.naturalWidth > 0),
+      codesUppercase: [...document.querySelectorAll('.module-plan-card .module-type-code')].every(node => /^[A-Z]+-[A-Z]$/.test(node.textContent)),
+      typeFramesSquare: typeFrames.every(transparentSquare),
+      typeAspectPreserved: typeImages.every(keepsAspect),
+      stageTransparent,
+      stageAspectPreserved: stageImages.every(keepsAspect),
+      themes: { light, dark },
+    };
+  })()`);
   await captureScreen('module-planner-single.png');
   await evaluate(`document.querySelector('[data-planner-toggle="continuous"][data-planner-kind="module"]').click()`);
   await waitFor(`Boolean(document.querySelector('.module-plan-card'))`, 'Continuous module planner did not render a multi-stage candidate');
@@ -485,9 +558,21 @@ try {
   if (pages.dashboard.cardWidth < 337 || pages.dashboard.cardWidth > 338 || pages.dashboard.masterySkillGap < 28 || pages.dashboard.masterySkillGap > 40) failures.push('dashboard card geometry');
   if (!pages.promotion.cardWidth || pages.promotion.cardWidth < 337 || pages.promotion.cardWidth > 338) failures.push('promotion card geometry');
   if (!pages.modules.cardWidth || pages.modules.cardWidth < 337 || pages.modules.cardWidth > 338) failures.push('module card geometry');
-  if (!plannerVisuals.promotionSingle.cards || plannerVisuals.promotionSingle.rightTargets || !plannerVisuals.promotionSingle.transitions || !plannerVisuals.promotionSingle.imagesLoaded) failures.push('promotion planner visuals');
+  if (!plannerVisuals.promotionSingle.cards || plannerVisuals.promotionSingle.levelBadges !== plannerVisuals.promotionSingle.cards
+    || !plannerVisuals.promotionSingle.transitions || !plannerVisuals.promotionSingle.imagesLoaded
+    || !plannerVisuals.promotionSingle.eliteBottomAligned
+    || plannerVisuals.promotionSingle.levelSamples.some(sample => !sample.loaded || !sample.centered || !sample.contained)) failures.push('promotion planner visuals');
   if (!plannerVisuals.promotionContinuous.cards || !plannerVisuals.promotionContinuous.allMultiStage) failures.push('promotion continuous visuals');
-  if (!plannerVisuals.moduleSingle.cards || !plannerVisuals.moduleSingle.noteRemoved || !plannerVisuals.moduleSingle.typeImagesLoaded || !plannerVisuals.moduleSingle.stageImagesLoaded || !plannerVisuals.moduleSingle.codesUppercase) failures.push('module planner visuals');
+  if (!plannerVisuals.moduleSingle.cards || !plannerVisuals.moduleSingle.noteRemoved || !plannerVisuals.moduleSingle.typeImagesLoaded
+    || !plannerVisuals.moduleSingle.stageImagesLoaded || !plannerVisuals.moduleSingle.codesUppercase
+    || !plannerVisuals.moduleSingle.typeFramesSquare || !plannerVisuals.moduleSingle.typeAspectPreserved
+    || !plannerVisuals.moduleSingle.stageTransparent || !plannerVisuals.moduleSingle.stageAspectPreserved
+    || plannerVisuals.moduleSingle.themes.light.typeFilter === 'none'
+    || plannerVisuals.moduleSingle.themes.light.stageFilter !== 'none'
+    || plannerVisuals.moduleSingle.themes.dark.typeFilter !== 'none'
+    || plannerVisuals.moduleSingle.themes.dark.stageFilter === 'none'
+    || !plannerVisuals.moduleSingle.themes.light.codeUsesText || !plannerVisuals.moduleSingle.themes.light.nameUsesText
+    || !plannerVisuals.moduleSingle.themes.dark.codeUsesText || !plannerVisuals.moduleSingle.themes.dark.nameUsesText) failures.push('module planner visuals');
   if (!plannerVisuals.moduleContinuous.cards || !plannerVisuals.moduleContinuous.allMultiStage || !plannerVisuals.moduleContinuous.includesSupportedSpan) failures.push('module continuous visuals');
   if (windowPolicy.bounds.width !== 1360 || windowPolicy.bounds.height !== 800
     || windowPolicy.minimumSize.join('x') !== '1360x800'

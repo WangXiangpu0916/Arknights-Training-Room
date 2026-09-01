@@ -83,6 +83,16 @@
       "sha1": "2a1fe62b506fdec9beb909f28f5f487c73cf8a0a"
     }
   },
+  "levelBadges": {
+    "elite2": {
+      "prtsTitle": "文件:图标 模组需求 精英2等级.png",
+      "sourceUrl": "https://media.prts.wiki/5/5f/%E5%9B%BE%E6%A0%87_%E6%A8%A1%E7%BB%84%E9%9C%80%E6%B1%82_%E7%B2%BE%E8%8B%B12%E7%AD%89%E7%BA%A7.png",
+      "localPath": "resources/images/level/elite-2.png",
+      "width": 139,
+      "height": 147,
+      "sha1": "3c8b93b9a2ef993cf0a7f683494ba8d49ee86398"
+    }
+  },
   "skills": {
     "skchr_acdrop_1": {
       "name": "花式点射",

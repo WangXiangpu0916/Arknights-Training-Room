@@ -55,6 +55,7 @@ const skillIcon = id => `../../resources/images/skill/${encodeURIComponent(id)}.
 const masteryIcon = level => `../../resources/images/mastery/m${level}.png`;
 const masteryBadge = level => `../../resources/images/mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`;
 const eliteIcon = level => `../../resources/images/elite/e${Number(level)}.png`;
+const operatorLevelFrame = '../../resources/images/level/elite-2.png';
 const professionIcon = name => `../../resources/images/profession-hd/${encodeURIComponent(name)}.png`;
 const moduleTypeIcon = typeIcon => `../../resources/images/module/type/${encodeURIComponent(String(typeIcon).toLowerCase())}.png`;
 const moduleStageIcons = Object.freeze({
@@ -63,6 +64,10 @@ const moduleStageIcons = Object.freeze({
   3: '../../resources/images/module/stage/3.png',
 });
 const moduleTypeCode = typeIcon => String(typeIcon || '').toUpperCase();
+const operatorLevelBadge = (level, elitePhase) => {
+  const value = Math.max(1, Math.min(90, Number(level) || 1));
+  return `<span class="operator-level-badge digits-${String(value).length}" role="img" aria-label="当前等级 ${value}，精英 ${Number(elitePhase) || 0}"><img src="${operatorLevelFrame}" alt="" aria-hidden="true"><strong>${value}</strong></span>`;
+};
 const moduleStage = (level, compact = false) => Number(level) === 0
   ? `<span class="module-uninstalled${compact ? ' compact' : ''}">未装配</span>`
   : `<span class="module-stage-icon${compact ? ' compact' : ''}"><img src="${moduleStageIcons[Number(level)]}" alt="模组阶段 ${Number(level)}"></span>`;
@@ -134,7 +139,7 @@ function promotionCard(candidate) {
     <div class="candidate-main">
       <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
       <div class="candidate-details"><div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
-        <div class="candidate-visuals"><div class="promotion-card-progress"><div class="elite-transition elite-card-transition"><img src="${eliteIcon(candidate.from)}" alt="精英 ${candidate.from}"><span>→</span><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"></div><small>当前 Lv.${candidate.currentLevel}</small></div></div></div>
+        <div class="candidate-visuals"><div class="promotion-card-progress"><div class="elite-transition elite-card-transition"><img src="${eliteIcon(candidate.from)}" alt="精英 ${candidate.from}"><span>→</span><img src="${eliteIcon(candidate.to)}" alt="精英 ${candidate.to}"></div></div>${operatorLevelBadge(candidate.currentLevel, candidate.from)}</div></div>
     </div>
   </article>`;
 }
