@@ -158,11 +158,14 @@ export class ToolboxGameDataProvider {
     materials.push({ itemId: progression.lmdItemId, name: '龙门币', rarity: 1, type: 4 });
 
     const operators: OperatorDefinition[] = [];
-    for (const [operatorId, raw] of Object.entries(cultivate)) {
-      const character = characters[operatorId];
+    for (const [operatorId, character] of Object.entries(characters)) {
+      const raw = cultivate[operatorId] ?? {};
       const elite = raw.skills?.elite ?? [];
-      if (!character || !characterNames[operatorId]) continue;
+      if (!characterNames[operatorId]) continue;
       const profile = operatorMetadata[operatorId] ?? {};
+      const hasE1Data = Boolean(raw.evolve?.[0] && Object.keys(raw.evolve[0]).length);
+      const hasE2Data = Boolean(raw.evolve?.[1] && Object.keys(raw.evolve[1]).length);
+      const maxElitePhase = hasE2Data ? 2 : hasE1Data || character.star === 3 ? 1 : 0;
       operators.push({
         operatorId,
         name: characterNames[operatorId],
@@ -181,6 +184,7 @@ export class ToolboxGameDataProvider {
         teams: profile.teams ?? [],
         birthdayMonth: profile.birthdayMonth,
         tags: profile.tags ?? [],
+        maxElitePhase,
         promotionRequirements: {
           1: this.amounts(raw.evolve?.[0] ?? {}),
           2: this.amounts(raw.evolve?.[1] ?? {}),

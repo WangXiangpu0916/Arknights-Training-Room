@@ -14,6 +14,10 @@ const plannerFilters = {
 let inventorySearch = '';
 let inventorySelectedId = null;
 let inventoryDetailRequest = 0;
+let statisticsScope = 'all';
+let cacheNoticeTimer = null;
+let activeCacheNoticeKey = '';
+let dismissedCacheNoticeKey = '';
 const operatorFilters = OperatorFilters.createState();
 let operatorSearchComposing = false;
 
@@ -55,7 +59,6 @@ const skillIcon = id => `../../resources/images/skill/${encodeURIComponent(id)}.
 const masteryIcon = level => `../../resources/images/mastery/m${level}.png`;
 const masteryBadge = level => `../../resources/images/mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`;
 const eliteIcon = level => `../../resources/images/elite/e${Number(level)}.png`;
-const operatorLevelFrame = '../../resources/images/level/elite-2.png';
 const professionIcon = name => `../../resources/images/profession-hd/${encodeURIComponent(name)}.png`;
 const moduleTypeIcon = typeIcon => `../../resources/images/module/type/${encodeURIComponent(String(typeIcon).toLowerCase())}.png`;
 const moduleStageIcons = Object.freeze({
@@ -66,7 +69,8 @@ const moduleStageIcons = Object.freeze({
 const moduleTypeCode = typeIcon => String(typeIcon || '').toUpperCase();
 const operatorLevelBadge = (level, elitePhase) => {
   const value = Math.max(1, Math.min(90, Number(level) || 1));
-  return `<span class="operator-level-badge digits-${String(value).length}" role="img" aria-label="当前等级 ${value}，精英 ${Number(elitePhase) || 0}"><img src="${operatorLevelFrame}" alt="" aria-hidden="true"><strong>${value}</strong></span>`;
+  const phase = Math.max(0, Math.min(2, Number(elitePhase) || 0));
+  return `<span class="operator-level-badge digits-${String(value).length}" role="img" aria-label="当前精英 ${phase}，等级 ${value}"><span class="operator-current-elite"><img src="${eliteIcon(phase)}" alt="" aria-hidden="true"></span><strong><small>Lv.</small>${value}</strong></span>`;
 };
 const moduleStage = (level, compact = false) => Number(level) === 0
   ? `<span class="module-uninstalled${compact ? ' compact' : ''}">未装配</span>`
@@ -96,9 +100,11 @@ function setBusy(button, busy, text = '处理中…') {
 function render() {
   document.documentElement.dataset.theme = state?.settings?.theme || 'system';
   updateChrome();
+  renderDataNotice();
   if (page === 'dashboard') renderDashboard();
   if (page === 'promotion') renderPromotionPlanner();
   if (page === 'modules') renderModulePlanner();
+  if (page === 'statistics') renderStatistics();
   if (page === 'operators') renderOperators();
   if (page === 'inventory') renderInventory();
   if (page === 'settings') renderSettings();
@@ -109,6 +115,7 @@ function updateChrome() {
     dashboard: ['当前可以专精', '基于真实仓库与加工站配方的确定性计算'],
     promotion: ['精英化规划', '当前干员状态与真实仓库可满足的晋升'],
     modules: ['模组规划', '已持有干员的模组开启与升级材料就绪情况'],
+    statistics: ['统计', '当前账号相对于已实装游戏内容的持有与培养完成度'],
     operators: ['干员', '已持有干员的培养与专精状态'],
     inventory: ['仓库', '真实库存、无限供应状态与加工关系'],
     settings: ['设置', '账号、游戏数据与本地缓存'],
@@ -197,7 +204,87 @@ function currentPlanCandidates(kind) {
 
 function banners() {
   const reauthenticate = state.lastError?.includes('重新认证') ? ' <button class="link-button" data-action="login">立即重新认证</button>' : '';
-  return `${state.lastError ? `<div class="error-banner">上次刷新失败：${esc(state.lastError)}。已保留旧数据。${reauthenticate}</div>` : ''}${state.usingCache ? `<div class="cache-banner">当前使用缓存数据 · 最后同步：${esc(fmtTime(state.account?.syncedAt))}</div>` : ''}`;
+  return state.lastError ? `<div class="error-banner">上次刷新失败：${esc(state.lastError)}。已保留旧数据。${reauthenticate}</div>` : '';
+}
+
+function clearCacheNoticeTimer() {
+  if (cacheNoticeTimer !== null) clearTimeout(cacheNoticeTimer);
+  cacheNoticeTimer = null;
+}
+
+function dismissCacheNotice(key) {
+  if (key !== activeCacheNoticeKey) return;
+  dismissedCacheNoticeKey = key;
+  clearCacheNoticeTimer();
+  const region = document.querySelector('#data-notice-region');
+  region.classList.remove('show');
+  region.replaceChildren();
+}
+
+function renderDataNotice() {
+  const region = document.querySelector('#data-notice-region');
+  const key = state?.usingCache && state.account ? `cache:${state.account.syncedAt}` : '';
+  if (!key || dismissedCacheNoticeKey === key) {
+    clearCacheNoticeTimer();
+    activeCacheNoticeKey = key;
+    region.classList.remove('show');
+    region.replaceChildren();
+    return;
+  }
+  if (activeCacheNoticeKey === key && region.firstElementChild) return;
+  clearCacheNoticeTimer();
+  activeCacheNoticeKey = key;
+  region.innerHTML = `<div class="data-notice cache-notice" role="status"><span>当前使用缓存数据 · 最后同步：${esc(fmtTime(state.account.syncedAt))}</span><button type="button" aria-label="关闭缓存数据提示" data-close-cache-notice>×</button></div>`;
+  region.classList.add('show');
+  region.querySelector('[data-close-cache-notice]').addEventListener('click', () => dismissCacheNotice(key), { once: true });
+  cacheNoticeTimer = setTimeout(() => dismissCacheNotice(key), 5000);
+}
+
+function percentage(statistic) {
+  return statistic.total ? Math.round(statistic.completed / statistic.total * 100) : 0;
+}
+
+function statisticCard(label, statistic, description, rarities) {
+  const breakdown = rarities
+    .map(rarity => [rarity, statistic.byRarity[rarity]])
+    .filter(([, value]) => value?.total)
+    .map(([rarity, value]) => `<div class="stat-breakdown-row"><span>${rarity} 星</span><strong>${value.completed} <small>/ ${value.total}</small></strong><span>${percentage(value)}%</span></div>`)
+    .join('');
+  return `<details class="stat-card">
+    <summary><div class="stat-card-copy"><span>${esc(label)}</span><strong>${statistic.completed} <small>/ ${statistic.total}</small></strong><p>${esc(description)}</p></div><div class="stat-rate">${percentage(statistic)}%</div><span class="stat-expand" aria-hidden="true">⌄</span><progress class="stat-progress" max="${Math.max(1, statistic.total)}" value="${statistic.completed}" aria-label="${esc(label)}完成率 ${percentage(statistic)}%"></progress></summary>
+    <div class="stat-breakdown">${breakdown || '<p>当前统计范围内没有有效对象。</p>'}</div>
+  </details>`;
+}
+
+function renderStatistics() {
+  if (!state.account) return renderDashboard();
+  const statistics = state.statistics;
+  const scoped = statistics.scopes[statisticsScope];
+  const scopeLabel = statisticsScope === 'all' ? '全部已实装' : '仅已持有';
+  content.innerHTML = `${banners()}<div class="statistics-page">
+    <section class="statistics-scope"><div><h2>统计范围</h2><p>专精、模组与精英化统一按“${scopeLabel}”计算有效总量；干员持有率始终以全部已实装干员为分母。</p></div><div class="segmented" role="group" aria-label="统计范围">
+      <button type="button" data-statistics-scope="all" class="${statisticsScope === 'all' ? 'active' : ''}" aria-pressed="${statisticsScope === 'all'}">全部已实装</button>
+      <button type="button" data-statistics-scope="owned" class="${statisticsScope === 'owned' ? 'active' : ''}" aria-pressed="${statisticsScope === 'owned'}">仅已持有</button>
+    </div></section>
+    <section class="statistics-section"><div class="statistics-heading"><div><h2>干员持有</h2><p>固定比较当前账号已持有干员与游戏数据中的全部已实装干员。</p></div><span class="badge muted">固定全量口径</span></div><div class="statistics-grid single-stat">
+      ${statisticCard('干员持有完成度', statistics.ownership, '已持有干员 / 已实装干员', [6, 5, 4, 3, 2, 1])}
+    </div></section>
+    <section class="statistics-section"><div class="statistics-heading"><div><h2>技能专精</h2><p>只统计数据源中存在完整 M1–M3 消耗的可专精技能。</p></div></div><div class="statistics-grid">
+      ${statisticCard('M3 技能', scoped.mastery, 'M3 技能 / 全部可专精技能', [6, 5, 4])}
+    </div></section>
+    <section class="statistics-section"><div class="statistics-heading"><div><h2>模组</h2><p>每个已实装具体模组独立计数，同一干员的不同模组不会合并。</p></div></div><div class="statistics-grid">
+      ${statisticCard('模组解锁', scoped.moduleUnlocked, '已解锁模组 / 全部可解锁模组', [6, 5, 4])}
+      ${statisticCard('三级模组', scoped.moduleStage3, 'Stage 3 模组 / 全部模组', [6, 5, 4])}
+    </div></section>
+    <section class="statistics-section"><div class="statistics-heading"><div><h2>精英化</h2><p>分母按干员真实培养上限计算；E2 干员同时计为已完成 E1。</p></div></div><div class="statistics-grid">
+      ${statisticCard('精英一', scoped.elite1, '已达到 E1 或以上 / 可进行 E1', [6, 5, 4, 3])}
+      ${statisticCard('精英二', scoped.elite2, '当前达到 E2 / 可进行 E2', [6, 5, 4])}
+    </div>
+    <div class="elite-distribution" aria-label="已持有干员当前精英化阶段分布">
+      ${[0, 1, 2].map(phase => `<div><img src="${eliteIcon(phase)}" alt="精英 ${phase}"><span>当前 E${phase}</span><strong>${statistics.eliteDistribution[phase]}</strong></div>`).join('')}
+    </div></section>
+  </div>`;
+  bindActions();
 }
 
 function renderDashboard() {
@@ -666,6 +753,10 @@ function renderSettings() {
 }
 
 function bindActions() {
+  document.querySelectorAll('[data-statistics-scope]').forEach(button => button.addEventListener('click', event => {
+    statisticsScope = event.currentTarget.dataset.statisticsScope;
+    renderStatistics();
+  }));
   document.querySelectorAll('[data-planner-filter]').forEach(input => input.addEventListener(input.tagName === 'INPUT' ? 'input' : 'change', event => {
     const kind = event.target.dataset.plannerKind;
     plannerFilters[kind][event.target.dataset.plannerFilter] = event.target.value;
@@ -867,4 +958,5 @@ document.querySelector('#refresh-button').addEventListener('click', async event 
 document.querySelectorAll('[data-close-modal]').forEach(x => x.addEventListener('click', () => modal.classList.add('hidden')));
 api.onStateChanged(loadState);
 api.onUpdateStateChanged(next => { updateState = next; if (page === 'settings') renderSettings(); });
+window.addEventListener('beforeunload', clearCacheNoticeTimer);
 loadState().catch(error => { content.innerHTML = `<div class="error-banner">应用初始化失败：${esc(error.message || error)}</div>`; });

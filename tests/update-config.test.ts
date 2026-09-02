@@ -104,7 +104,7 @@ test('专精顶部控制区固定为筛选行与三个统一模式开关', () =>
   assert.match(styles, /\.dashboard-mode-toggle \{[^}]*min-height: 38px;[^}]*padding: 6px 10px/);
   assert.match(renderer, /operatorFilterRegion\('common', '筛选'[\s\S]*operatorFilterRegion\('more', '更多筛选'/);
   assert.match(styles, /\.operator-filter-group \{[^}]*grid-template-columns: 116px minmax\(0, 1fr\)/);
-  assert.doesNotMatch(renderer, /<details|operatorFilterMenu|operator-filter-popover/);
+  assert.doesNotMatch(renderer, /operatorFilterMenu|operator-filter-popover/);
   assert.match(renderer, /dashboardFilters\.unlimited = event\.target\.checked \? 'with' : 'real'/);
   assert.doesNotMatch(renderer, /data-mode=|data-supply-mode=|技巧概要无限供应|仅真实仓库<\/button>/);
   const main = readFileSync('src/main.ts', 'utf8');
@@ -179,9 +179,11 @@ test('精英化与模组规划是同级页面并使用真实图标和独立状�
   const styles = readFileSync('renderer/styles.css', 'utf8');
   assert.match(html, /data-page="promotion"[^>]*>[^<]*<span>[^<]*<\/span>精英化规划/);
   assert.match(html, /data-page="modules"[^>]*>[^<]*<span>[^<]*<\/span>模组规划/);
+  assert.match(html, /data-page="statistics"[^>]*>[^<]*<span>[^<]*<\/span>统计/);
   assert.match(renderer, /state\[kind === 'promotion' \? 'promotions' : 'modules'\]/);
   assert.match(renderer, /resources\/images\/elite\/e\$\{Number\(level\)\}\.png/);
-  assert.match(renderer, /resources\/images\/level\/elite-2\.png/);
+  assert.doesNotMatch(renderer, /resources\/images\/level\/elite-2\.png/);
+  assert.match(renderer, /operator-current-elite/);
   assert.match(renderer, /operatorLevelBadge\(candidate\.currentLevel, candidate\.from\)/);
   assert.match(renderer, /digits-\$\{String\(value\)\.length\}/);
   assert.match(renderer, /resources\/images\/module\/type\/\$\{encodeURIComponent\(String\(typeIcon\)\.toLowerCase\(\)\)\}\.png/);
@@ -197,12 +199,27 @@ test('精英化与模组规划是同级页面并使用真实图标和独立状�
   assert.match(styles, /\.module-type-icon \{/);
   assert.match(styles, /\.module-stage-icon \{/);
   assert.match(styles, /\.promotion-plan-card \.candidate-main \{ grid-template-columns: 72px minmax\(0, 1fr\) 58px; \}/);
-  assert.match(styles, /\.operator-level-badge \{[^}]*width: 54px; height: 58px/);
+  assert.match(styles, /\.operator-level-badge \{[^}]*width: 54px; height: 61px/);
+  assert.match(styles, /\.operator-current-elite img \{[^}]*max-width: 52px; max-height: 40px; object-fit: contain/);
   assert.match(styles, /\.module-stage-icon \{[^}]*border: 0;[^}]*background: transparent/);
   assert.match(styles, /\.module-type-icon \{ width: 48px; height: 48px;[^}]*border-radius: 0;[^}]*background: transparent/);
   assert.match(styles, /\.module-type-code \{ color: var\(--text\)/);
   assert.match(styles, /\.module-name small \{[^}]*color: var\(--text\)/);
   assert.doesNotMatch(renderer, /当前 Lv\./);
+});
+
+test('缓存状态使用可关闭悬浮通知且统计页面共享统一完成度结构', () => {
+  const html = readFileSync('renderer/index.html', 'utf8');
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(html, /id="data-notice-region"/);
+  assert.match(renderer, /data-close-cache-notice/);
+  assert.match(renderer, /cacheNoticeTimer = setTimeout\(\(\) => dismissCacheNotice\(key\), 5000\)/);
+  assert.match(renderer, /beforeunload', clearCacheNoticeTimer/);
+  assert.doesNotMatch(renderer, /class="cache-banner"/);
+  assert.match(styles, /\.data-notice-region \{ position: fixed; z-index: 18;/);
+  assert.match(renderer, /statistics\.scopes\[statisticsScope\]/);
+  for (const key of ['mastery', 'moduleUnlocked', 'moduleStage3', 'elite1', 'elite2']) assert.match(renderer, new RegExp(`scoped\\.${key}`));
 });
 
 test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS 文本', () => {

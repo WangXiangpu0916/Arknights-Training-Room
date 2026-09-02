@@ -7,6 +7,7 @@ import { PromotionPlanner } from './engine/promotion';
 import { ModulePlanner } from './engine/module';
 import { recursiveCraftableQuantity } from './engine/crafting';
 import { unlimitedMaterialGroups } from './domain/mastery-materials';
+import { buildAccountStatistics } from './engine/statistics';
 
 export class AppService {
   private gameData!: GameData;
@@ -61,6 +62,7 @@ export class AppService {
       account: this.account,
       gameData: this.gameData,
       settings: this.settings,
+      statistics: buildAccountStatistics(this.gameData, this.account),
       unlimitedEligibleItemIds: [...unlimitedMaterials.blue],
       skillSummaryItemIds: [...unlimitedMaterials.skillSummaries],
       single,

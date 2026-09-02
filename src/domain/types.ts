@@ -55,6 +55,7 @@ export interface OperatorDefinition {
   teams?: string[];
   birthdayMonth?: number;
   tags?: string[];
+  maxElitePhase?: 0 | 1 | 2;
   promotionRequirements?: Partial<Record<1 | 2, MaterialAmount[]>>;
   modules?: ModuleDefinition[];
   skills: SkillDefinition[];
@@ -184,4 +185,30 @@ export interface GameData {
   operators: OperatorDefinition[];
   materials: Material[];
   progression: ProgressionData;
+}
+
+export interface CompletionCount {
+  completed: number;
+  total: number;
+}
+
+export interface CompletionStatistic extends CompletionCount {
+  byRarity: Record<number, CompletionCount>;
+}
+
+export interface TrainingStatisticsScope {
+  mastery: CompletionStatistic;
+  moduleUnlocked: CompletionStatistic;
+  moduleStage3: CompletionStatistic;
+  elite1: CompletionStatistic;
+  elite2: CompletionStatistic;
+}
+
+export interface AccountStatistics {
+  ownership: CompletionStatistic;
+  scopes: {
+    all: TrainingStatisticsScope;
+    owned: TrainingStatisticsScope;
+  };
+  eliteDistribution: Record<0 | 1 | 2, number>;
 }

@@ -178,6 +178,21 @@ try {
   await waitFor(`Boolean(document.querySelector('.nav[data-page="operators"]')
     && document.querySelector('#sidebar-status strong')
     && !document.querySelector('#content .loading'))`, 'Application did not finish loading');
+  await waitFor(`document.querySelector('#data-notice-region.show [data-close-cache-notice]')`, 'Cache notification did not appear');
+  const cacheNotice = await evaluate(`(() => {
+    const controls = document.querySelector('.dashboard-layout').getBoundingClientRect();
+    const region = document.querySelector('#data-notice-region');
+    const style = getComputedStyle(region);
+    return { beforeTop: controls.top, fixed: style.position === 'fixed', zIndex: Number(style.zIndex), outsideContent: !document.querySelector('#content').contains(region) };
+  })()`);
+  await evaluate(`document.querySelector('[data-close-cache-notice]').click()`);
+  await waitFor(`!document.querySelector('#data-notice-region.show')`, 'Cache notification did not close manually');
+  cacheNotice.afterManualTop = await evaluate(`document.querySelector('.dashboard-layout').getBoundingClientRect().top`);
+  await evaluate(`(() => { dismissedCacheNoticeKey = ''; activeCacheNoticeKey = ''; renderDataNotice(); })()`);
+  await waitFor(`document.querySelector('#data-notice-region.show')`, 'Cache notification did not reopen for auto-dismiss QA');
+  await new Promise(resolve => setTimeout(resolve, 5200));
+  cacheNotice.autoDismissed = await evaluate(`!document.querySelector('#data-notice-region.show') && cacheNoticeTimer === null`);
+  cacheNotice.afterAutoTop = await evaluate(`document.querySelector('.dashboard-layout').getBoundingClientRect().top`);
   await evaluate(`document.querySelector('.nav[data-page="operators"]').click()`);
   await waitFor(`Boolean(document.querySelector('[data-operator-search]'))`, 'Operators page did not render');
   const masteryBadgeLayout = await evaluate(`(() => {
@@ -398,7 +413,7 @@ try {
   })()`);
 
   const pages = {};
-  for (const page of ['dashboard', 'promotion', 'modules', 'operators', 'inventory', 'settings']) {
+  for (const page of ['dashboard', 'promotion', 'modules', 'statistics', 'operators', 'inventory', 'settings']) {
     await evaluate(`document.querySelector('.nav[data-page="${page}"]').click()`);
     await new Promise(resolve => setTimeout(resolve, 40));
     pages[page] = await evaluate(`(() => ({
@@ -415,6 +430,26 @@ try {
     }))()`);
   }
 
+  await evaluate(`document.querySelector('.nav[data-page="statistics"]').click()`);
+  const statisticsVisuals = await evaluate(`(() => {
+    const read = () => ({
+      scope: statisticsScope,
+      cards: document.querySelectorAll('.stat-card').length,
+      ownership: document.querySelector('.single-stat .stat-card-copy strong')?.textContent.trim(),
+      totals: [...document.querySelectorAll('.stat-card-copy strong')].map(node => node.textContent.trim()),
+      distribution: [...document.querySelectorAll('.elite-distribution strong')].map(node => Number(node.textContent)),
+      horizontalOverflow: document.querySelector('main').scrollWidth > document.querySelector('main').clientWidth,
+    });
+    const all = read();
+    document.querySelector('[data-statistics-scope="owned"]').click();
+    const owned = read();
+    const first = document.querySelector('.stat-card');
+    first.open = true;
+    const breakdownVisible = first.open && first.querySelectorAll('.stat-breakdown-row').length >= 3;
+    return { all, owned, breakdownVisible };
+  })()`);
+  await captureScreen('statistics-owned.png');
+
   const plannerVisuals = {};
   await evaluate(`document.querySelector('.nav[data-page="promotion"]').click()`);
   await waitFor(`Boolean(document.querySelector('.promotion-plan-card') && [...document.querySelectorAll('.promotion-plan-card img')].every(image => image.complete && image.naturalWidth > 0))`, 'Promotion planner visuals did not load');
@@ -427,18 +462,22 @@ try {
     });
     const testHost = document.createElement('div');
     testHost.style.cssText = 'position:fixed;left:0;top:0;display:flex;gap:8px;z-index:-1';
-    testHost.innerHTML = [1, 20, 90].map(level => operatorLevelBadge(level, 2)).join('');
+    testHost.innerHTML = [[0, 45], [1, 50], [2, 60]].map(([phase, level]) => operatorLevelBadge(level, phase)).join('');
     document.body.append(testHost);
-    const levelSamples = [...testHost.querySelectorAll('.operator-level-badge')].map(badge => {
+    const levelSamples = [...testHost.querySelectorAll('.operator-level-badge')].map((badge, phase) => {
       const frame = badge.getBoundingClientRect();
+      const iconFrame = badge.querySelector('.operator-current-elite').getBoundingClientRect();
       const number = badge.querySelector('strong').getBoundingClientRect();
       const image = badge.querySelector('img');
+      const imageRect = image.getBoundingClientRect();
       return {
         value: badge.textContent,
-        loaded: image.complete && image.naturalWidth === 139 && image.naturalHeight === 147,
-        centered: Math.abs((number.left + number.width / 2) - (frame.left + frame.width / 2)) < .6
-          && Math.abs((number.top + number.height / 2) - (frame.top + 27)) < .6,
-        contained: number.left >= frame.left && number.right <= frame.right && number.top >= frame.top && number.bottom <= frame.bottom,
+        correctPhase: badge.getAttribute('aria-label').includes('当前精英 ' + phase),
+        loaded: image.complete && image.naturalWidth > 0 && image.naturalHeight > 0,
+        aspectPreserved: Math.abs(imageRect.width / imageRect.height - image.naturalWidth / image.naturalHeight) < .02,
+        contained: imageRect.left >= iconFrame.left && imageRect.right <= iconFrame.right && imageRect.top >= iconFrame.top && imageRect.bottom <= iconFrame.bottom,
+        numberBelowIcon: number.top >= iconFrame.bottom,
+        frameContained: number.left >= frame.left && number.right <= frame.right && number.bottom <= frame.bottom,
       };
     });
     testHost.remove();
@@ -448,6 +487,7 @@ try {
       levelBadges: levelBadges.filter(Boolean).length,
       imagesLoaded: [...document.querySelectorAll('.promotion-plan-card img')].every(image => image.complete && image.naturalWidth > 0),
       eliteBottomAligned,
+      levelBottomAligned: cards.every(card => Math.abs(card.querySelector('.operator-level-badge').getBoundingClientRect().bottom - card.querySelector('.candidate-avatar').getBoundingClientRect().bottom) <= 1),
       levelSamples,
     };
   })()`);
@@ -531,6 +571,9 @@ try {
   console.log('QA phase: page overflow and window policy');
 
   const failures = [];
+  if (!cacheNotice.fixed || cacheNotice.zIndex < 10 || !cacheNotice.outsideContent
+    || Math.abs(cacheNotice.beforeTop - cacheNotice.afterManualTop) > .1
+    || Math.abs(cacheNotice.beforeTop - cacheNotice.afterAutoTop) > .1 || !cacheNotice.autoDismissed) failures.push('cache notification overlay');
   if (continuousInput.value !== 'abcdefghijkl' || !continuousInput.focused || !continuousInput.stable) failures.push('continuous input');
   if (afterBackspace !== 'abcdefghijk') failures.push('backspace');
   if (afterMiddleEdit !== 'abcdefghijZk') failures.push('middle edit');
@@ -554,14 +597,20 @@ try {
   if (!masteryBadgeLayout.valid) failures.push('mastery badge layout');
   if (!highlightSync.equal) failures.push('highlight source mismatch');
   if (Object.values(pages).some(page => page.horizontalOverflow)) failures.push('horizontal overflow');
+  if (statisticsVisuals.all.scope !== 'all' || statisticsVisuals.owned.scope !== 'owned'
+    || statisticsVisuals.all.cards !== 6 || statisticsVisuals.owned.cards !== 6
+    || statisticsVisuals.all.ownership !== statisticsVisuals.owned.ownership
+    || statisticsVisuals.owned.totals.some((value, index) => Number(value.split('/')[1]) > Number(statisticsVisuals.all.totals[index].split('/')[1]))
+    || statisticsVisuals.owned.distribution.reduce((sum, value) => sum + value, 0) !== account.operators.length
+    || !statisticsVisuals.breakdownVisible || statisticsVisuals.all.horizontalOverflow || statisticsVisuals.owned.horizontalOverflow) failures.push('statistics visuals');
   if (pages.dashboard.columns !== 3) failures.push('dashboard columns');
   if (pages.dashboard.cardWidth < 337 || pages.dashboard.cardWidth > 338 || pages.dashboard.masterySkillGap < 28 || pages.dashboard.masterySkillGap > 40) failures.push('dashboard card geometry');
   if (!pages.promotion.cardWidth || pages.promotion.cardWidth < 337 || pages.promotion.cardWidth > 338) failures.push('promotion card geometry');
   if (!pages.modules.cardWidth || pages.modules.cardWidth < 337 || pages.modules.cardWidth > 338) failures.push('module card geometry');
   if (!plannerVisuals.promotionSingle.cards || plannerVisuals.promotionSingle.levelBadges !== plannerVisuals.promotionSingle.cards
     || !plannerVisuals.promotionSingle.transitions || !plannerVisuals.promotionSingle.imagesLoaded
-    || !plannerVisuals.promotionSingle.eliteBottomAligned
-    || plannerVisuals.promotionSingle.levelSamples.some(sample => !sample.loaded || !sample.centered || !sample.contained)) failures.push('promotion planner visuals');
+    || !plannerVisuals.promotionSingle.eliteBottomAligned || !plannerVisuals.promotionSingle.levelBottomAligned
+    || plannerVisuals.promotionSingle.levelSamples.some(sample => !sample.loaded || !sample.correctPhase || !sample.aspectPreserved || !sample.contained || !sample.numberBelowIcon || !sample.frameContained)) failures.push('promotion planner visuals');
   if (!plannerVisuals.promotionContinuous.cards || !plannerVisuals.promotionContinuous.allMultiStage) failures.push('promotion continuous visuals');
   if (!plannerVisuals.moduleSingle.cards || !plannerVisuals.moduleSingle.noteRemoved || !plannerVisuals.moduleSingle.typeImagesLoaded
     || !plannerVisuals.moduleSingle.stageImagesLoaded || !plannerVisuals.moduleSingle.codesUppercase
