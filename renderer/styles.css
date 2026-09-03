@@ -307,12 +307,8 @@ tr:hover td { background: var(--panel-hover); }
 .module-uninstalled.compact { width: 42px; height: 28px; font-size: 9px; }
 .module-type-icon { width: 56px; height: 56px; display: grid; place-items: center; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .module-type-icon img { display: block; max-width: 56px; max-height: 56px; width: auto; height: auto; object-fit: contain; filter: var(--module-type-filter); }
-.module-target-copy { width: 56px; overflow: hidden; white-space: nowrap; color: var(--text); font-size: 9px; line-height: 16px; }
-.module-target-copy span { display: inline-block; min-width: 100%; height: 16px; line-height: 16px; white-space: nowrap; animation: module-name-scroll 5s 1s ease-in-out infinite alternate; }
-.module-target-copy strong, .module-target-copy small { line-height: inherit; }
-.module-type-code { font-size: 9px; font-weight: 700; letter-spacing: .25px; }
-.module-name { color: var(--text); }
-@keyframes module-name-scroll { to { transform: translateX(min(0px, calc(-100% + 56px))); } }
+.module-target-copy { width: 56px; height: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--text); line-height: 16px; text-align: center; white-space: nowrap; }
+.module-target-copy .module-type-code { display: block; width: 100%; max-width: none; overflow: visible; color: inherit; font-size: 9px; font-weight: 700; line-height: inherit; letter-spacing: .25px; text-align: center; text-overflow: clip; transform: none; }
 .elite-transition { display: flex; align-items: center; gap: 6px; color: var(--accent); }
 .elite-transition img { width: 46px; height: 46px; object-fit: contain; }
 .elite-transition span { font-size: 18px; }

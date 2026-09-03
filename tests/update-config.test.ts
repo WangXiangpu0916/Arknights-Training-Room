@@ -164,6 +164,17 @@ test('专精卡片按头像边界对齐图标并保持技能名称单行滚动',
   assert.match(styles, /@keyframes skill-name-scroll/);
 });
 
+test('模组卡片仅静态居中显示类型编号且不影响专精名称滚动', () => {
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(renderer, /class="module-target-copy"[^>]*><strong class="module-type-code"/);
+  assert.doesNotMatch(renderer, /class="module-target-copy"[^>]*>[\s\S]*?class="module-name"/);
+  assert.match(styles, /\.module-target-copy \{[^}]*display: flex;[^}]*justify-content: center;[^}]*text-align: center/);
+  assert.match(styles, /\.module-target-copy \.module-type-code \{[^}]*width: 100%;[^}]*text-align: center;[^}]*transform: none/);
+  assert.doesNotMatch(styles, /module-name-scroll|\.module-target-copy[^}]*animation:/);
+  assert.match(styles, /@keyframes skill-name-scroll/);
+});
+
 test('专精候选与干员列表复用六星纵向渐变', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
@@ -206,7 +217,7 @@ test('精英化与模组规划是同级页面并使用真实图标和独立状�
   assert.match(styles, /\.module-stage-icon \{[^}]*border: 0;[^}]*background: transparent/);
   assert.match(styles, /\.module-type-icon \{ width: 56px; height: 56px;[^}]*border-radius: 0;[^}]*background: transparent/);
   assert.match(styles, /\.module-target-copy \{[^}]*width: 56px;[^}]*color: var\(--text\)/);
-  assert.match(renderer, /class="module-target-copy"[^>]*>.*class="module-type-code".*class="module-name"/);
+  assert.match(renderer, /class="module-target-copy"[^>]*><strong class="module-type-code"/);
   assert.doesNotMatch(renderer, /当前 Lv\./);
 });
 
@@ -257,11 +268,18 @@ test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS �
 test('应用壳使用窄侧栏与圆角工作区，主题支持系统、黑色和浅色', () => {
   const main = readFileSync('src/main.ts', 'utf8');
   const index = readFileSync('renderer/index.html', 'utf8');
+  const bootstrap = readFileSync('renderer/theme-bootstrap.js', 'utf8');
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
   const types = readFileSync('src/domain/types.ts', 'utf8');
   const store = readFileSync('src/data/local-store.ts', 'utf8');
   assert.match(main, /nativeTheme\.themeSource = theme === 'black' \? 'dark' : theme/);
+  assert.match(main, /backgroundColor = theme === 'light'[\s\S]*theme === 'black' \|\| nativeTheme\.shouldUseDarkColors/);
+  assert.match(main, /loadFile\([^;]+query: \{ theme \}/);
+  assert.match(index, /<html lang="zh-CN" data-theme="system">/);
+  assert.ok(index.indexOf('<script src="theme-bootstrap.js"></script>') < index.indexOf('<link rel="stylesheet" href="styles.css">'));
+  assert.match(bootstrap, /URLSearchParams\(window\.location\.search\)\.get\('theme'\)/);
+  assert.match(bootstrap, /initialTheme === 'light' \|\| initialTheme === 'black'/);
   assert.match(index, /class="sidebar-brand"/);
   assert.match(index, /class="sidebar-spacer"/);
   assert.match(styles, /#app \{[^}]*grid-template-columns: minmax\(0, 15fr\) minmax\(0, 85fr\)/);

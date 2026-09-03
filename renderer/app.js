@@ -165,7 +165,7 @@ function moduleCard(candidate) {
       <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
       <div class="candidate-details"><div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
         <div class="candidate-visuals">${moduleStageTransition(candidate.from, candidate.to)}
-          <div class="plan-target module-target"><span class="module-type-icon"><img src="${moduleTypeIcon(candidate.module.typeIcon)}" alt="${esc(moduleTypeCode(candidate.module.typeIcon))} 模组类型图标" loading="lazy" decoding="async" data-img-fallback></span><div class="module-target-copy" title="${esc(moduleTypeCode(candidate.module.typeIcon))} · ${esc(candidate.module.name)}"><span><strong class="module-type-code">${esc(moduleTypeCode(candidate.module.typeIcon))}</strong><span aria-hidden="true"> · </span><small class="module-name">${esc(candidate.module.name)}</small></span></div></div></div></div>
+          <div class="plan-target module-target"><span class="module-type-icon"><img src="${moduleTypeIcon(candidate.module.typeIcon)}" alt="${esc(moduleTypeCode(candidate.module.typeIcon))} 模组类型图标" loading="lazy" decoding="async" data-img-fallback></span><div class="module-target-copy" title="${esc(moduleTypeCode(candidate.module.typeIcon))} · ${esc(candidate.module.name)}"><strong class="module-type-code">${esc(moduleTypeCode(candidate.module.typeIcon))}</strong></div></div></div></div>
     </div>
   </article>`;
 }

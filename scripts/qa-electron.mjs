@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -22,7 +22,9 @@ const runtime = await mkdtemp(path.join(tmpdir(), 'atr-electron-qa-'));
 const windowPolicyPath = path.join(runtime, 'window-policy.json');
 const output = path.join(root, 'output', 'playwright');
 await mkdir(output, { recursive: true });
-await cp(path.join(root, 'qa-fixture', 'settings.json'), path.join(runtime, 'settings.json'));
+const settings = JSON.parse(await readFile(path.join(root, 'qa-fixture', 'settings.json'), 'utf8'));
+if (['system', 'black', 'light'].includes(process.env.ATR_QA_THEME)) settings.theme = process.env.ATR_QA_THEME;
+await writeFile(path.join(runtime, 'settings.json'), `${JSON.stringify(settings, null, 2)}\n`, 'utf8');
 
 const account = JSON.parse(await readFile(path.join(root, 'qa-fixture', 'account-cache.json'), 'utf8'));
 const cultivate = JSON.parse(await readFile(path.join(root, 'resources', 'game-data', 'cultivate.json'), 'utf8'));
@@ -175,10 +177,20 @@ try {
   });
   await send('Runtime.enable');
   await send('Page.enable');
+  await waitFor(`Boolean(document.body && document.styleSheets.length)`, 'Initial themed document did not render');
+  const startupTheme = await evaluate(`(() => ({
+    saved: ${JSON.stringify(settings.theme ?? 'system')},
+    query: new URLSearchParams(location.search).get('theme'),
+    applied: document.documentElement.dataset.theme,
+    prefersLight: matchMedia('(prefers-color-scheme: light)').matches,
+    bodyBackground: getComputedStyle(document.body).backgroundColor,
+  }))()`);
   await waitFor(`Boolean(document.querySelector('.nav[data-page="operators"]')
     && document.querySelector('#sidebar-status strong')
     && !document.querySelector('#content .loading'))`, 'Application did not finish loading');
   await waitFor(`document.querySelector('#data-notice-region.show [data-close-cache-notice]')`, 'Cache notification did not appear');
+  await evaluate(`(() => { clearCacheNoticeTimer(); activeCacheNoticeKey = ''; renderDataNotice(); })()`);
+  await waitFor(`document.querySelector('#data-notice-region.show [data-close-cache-notice]')`, 'Cache notification did not reset for QA');
   await new Promise(resolve => setTimeout(resolve, 320));
   const cacheNotice = await evaluate(`(() => {
     const controls = document.querySelector('.dashboard-layout').getBoundingClientRect();
@@ -203,6 +215,7 @@ try {
   await captureScreen('cache-notice-final.png');
   cacheNotice.animation = await evaluate(`(async () => {
     const region = document.querySelector('#data-notice-region');
+    clearCacheNoticeTimer();
     region.classList.remove('show');
     await new Promise(resolve => setTimeout(resolve, 300));
     const startTop = region.firstElementChild.getBoundingClientRect().top;
@@ -616,19 +629,42 @@ try {
       const typeImage = getComputedStyle(typeImages[0]);
       const stageImage = getComputedStyle(stageImages[0]);
       const code = getComputedStyle(document.querySelector('.module-type-code'));
-      const name = getComputedStyle(document.querySelector('.module-name'));
       const textColor = getComputedStyle(document.body).color;
       return {
         typeFilter: typeImage.filter,
         stageFilter: stageImage.filter,
         codeUsesText: code.color === textColor,
-        nameUsesText: name.color === textColor,
       };
     };
     const light = themeState('light');
     const dark = themeState('dark');
     const black = themeState('black');
     document.documentElement.dataset.theme = originalTheme;
+    const masterySample = document.createElement('div');
+    masterySample.className = 'skill-copy';
+    masterySample.innerHTML = '<strong>足够长的专精技能名称</strong>';
+    masterySample.style.position = 'fixed';
+    masterySample.style.visibility = 'hidden';
+    document.body.append(masterySample);
+    const masteryScrollPreserved = getComputedStyle(masterySample.firstElementChild).animationName === 'skill-name-scroll';
+    masterySample.remove();
+    const codeSamples = ['EA-X', 'AMB-X', 'IAC-Y'].map(text => {
+      const sample = document.createElement('div');
+      sample.className = 'module-target-copy';
+      sample.style.cssText = 'position:fixed;visibility:hidden';
+      sample.innerHTML = '<strong class="module-type-code">' + text + '</strong>';
+      document.body.append(sample);
+      const code = sample.firstElementChild;
+      const style = getComputedStyle(code);
+      const result = {
+        text,
+        fits: code.scrollWidth <= sample.clientWidth,
+        static: style.animationName === 'none' && style.transform === 'none',
+        centered: style.textAlign === 'center',
+      };
+      sample.remove();
+      return result;
+    });
     return {
       cards: document.querySelectorAll('.module-plan-card').length,
       noteRemoved: !document.querySelector('#content').innerText.includes('模组开启仍需在游戏内完成对应任务；此处核对精英/等级门槛、现有模组等级与材料。'),
@@ -652,6 +688,21 @@ try {
         return Math.abs(frame.width - 56) < .1 && frame.height <= 17.5 && frame.bottom <= target.bottom + 1
           && style.overflowX === 'hidden' && style.overflowY === 'hidden' && style.whiteSpace === 'nowrap';
       }),
+      codeLengths: new Set([...document.querySelectorAll('.module-type-code')].map(code => code.textContent.length)).size,
+      codeSamples,
+      codesStaticAndCentered: [...document.querySelectorAll('.module-plan-card')].every(card => {
+        const icon = card.querySelector('.module-type-icon').getBoundingClientRect();
+        const copy = card.querySelector('.module-target-copy').getBoundingClientRect();
+        const codeNode = card.querySelector('.module-type-code');
+        const code = codeNode.getBoundingClientRect();
+        const style = getComputedStyle(codeNode);
+        return style.animationName === 'none' && style.transform === 'none'
+          && Math.abs((code.left + code.right) / 2 - (icon.left + icon.right) / 2) <= .5
+          && Math.abs((copy.left + copy.right) / 2 - (icon.left + icon.right) / 2) <= .5
+          && code.left >= copy.left - 1 && code.right <= copy.right + 1
+          && copy.top >= icon.bottom - 1 && copy.bottom <= card.querySelector('.module-target').getBoundingClientRect().bottom + 1;
+      }),
+      masteryScrollPreserved,
       themes: { light, dark, black },
     };
   })()`);
@@ -671,9 +722,17 @@ try {
   await evaluate(`document.querySelector('[data-close-modal]').click()`);
 
   const windowPolicy = JSON.parse(await readFile(windowPolicyPath, 'utf8'));
+  startupTheme.windowBackground = windowPolicy.backgroundColor;
   console.log('QA phase: page overflow and window policy');
 
   const failures = [];
+  const startupShouldBeLight = startupTheme.saved === 'light'
+    || (startupTheme.saved === 'system' && startupTheme.prefersLight);
+  const expectedStartupBackground = startupShouldBeLight ? 'rgb(223, 231, 237)' : 'rgb(15, 15, 15)';
+  const expectedWindowBackground = startupShouldBeLight ? '#dfe7ed' : '#0f0f0f';
+  if (startupTheme.query !== startupTheme.saved || startupTheme.applied !== startupTheme.saved
+    || startupTheme.bodyBackground !== expectedStartupBackground
+    || startupTheme.windowBackground.toLowerCase() !== expectedWindowBackground) failures.push('startup theme');
   if (!cacheNotice.fixed || cacheNotice.zIndex < 10 || !cacheNotice.outsideContent
     || cacheNotice.finalTop < 0 || cacheNotice.finalTop > 12 || cacheNotice.width >= cacheNotice.viewportWidth * .5
     || !cacheNotice.transitionProperty.includes('transform') || cacheNotice.transitionDuration === '0s'
@@ -743,15 +802,18 @@ try {
     || !plannerVisuals.moduleSingle.typeFramesSquare || !plannerVisuals.moduleSingle.typeAspectPreserved
     || !plannerVisuals.moduleSingle.stageTransparent || !plannerVisuals.moduleSingle.stageAspectPreserved
     || !plannerVisuals.moduleSingle.targetsMatchMastery || !plannerVisuals.moduleSingle.copyContained
+    || plannerVisuals.moduleSingle.codeSamples.some(sample => !sample.fits || !sample.static || !sample.centered)
+    || !plannerVisuals.moduleSingle.codesStaticAndCentered
+    || !plannerVisuals.moduleSingle.masteryScrollPreserved
     || plannerVisuals.moduleSingle.themes.light.typeFilter === 'none'
     || plannerVisuals.moduleSingle.themes.light.stageFilter !== 'none'
     || plannerVisuals.moduleSingle.themes.dark.typeFilter !== 'none'
     || plannerVisuals.moduleSingle.themes.dark.stageFilter === 'none'
     || plannerVisuals.moduleSingle.themes.black.typeFilter !== 'none'
     || plannerVisuals.moduleSingle.themes.black.stageFilter === 'none'
-    || !plannerVisuals.moduleSingle.themes.light.codeUsesText || !plannerVisuals.moduleSingle.themes.light.nameUsesText
-    || !plannerVisuals.moduleSingle.themes.dark.codeUsesText || !plannerVisuals.moduleSingle.themes.dark.nameUsesText
-    || !plannerVisuals.moduleSingle.themes.black.codeUsesText || !plannerVisuals.moduleSingle.themes.black.nameUsesText) failures.push('module planner visuals');
+    || !plannerVisuals.moduleSingle.themes.light.codeUsesText
+    || !plannerVisuals.moduleSingle.themes.dark.codeUsesText
+    || !plannerVisuals.moduleSingle.themes.black.codeUsesText) failures.push('module planner visuals');
   if (!plannerVisuals.moduleContinuous.cards || !plannerVisuals.moduleContinuous.allMultiStage || !plannerVisuals.moduleContinuous.includesSupportedSpan) failures.push('module continuous visuals');
   if (Math.abs(windowPolicy.bounds.width - 1360) > 1 || Math.abs(windowPolicy.bounds.height - 800) > 1
     || windowPolicy.minimumSize.join('x') !== '1360x800'
@@ -763,6 +825,7 @@ try {
     pass: failures.length === 0,
     failures,
     cacheNotice,
+    startupTheme,
     window: windowPolicy,
     continuousInput,
     keyboard: { afterBackspace, afterMiddleEdit, afterPaste },

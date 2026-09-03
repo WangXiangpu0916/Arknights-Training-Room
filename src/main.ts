@@ -144,6 +144,9 @@ function registerIpc(): void {
 async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> {
   const width = process.env.ATR_SCREENSHOT ? Number(process.env.ATR_WINDOW_WIDTH) || FIXED_WINDOW_WIDTH : FIXED_WINDOW_WIDTH;
   const height = process.env.ATR_SCREENSHOT ? Number(process.env.ATR_WINDOW_HEIGHT) || FIXED_WINDOW_HEIGHT : FIXED_WINDOW_HEIGHT;
+  const backgroundColor = theme === 'light'
+    ? '#dfe7ed'
+    : theme === 'black' || nativeTheme.shouldUseDarkColors ? '#0f0f0f' : '#dfe7ed';
   mainWindow = new BrowserWindow({
     width,
     height,
@@ -157,7 +160,7 @@ async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> 
     fullscreenable: false,
     title: '训练室',
     icon: path.join(app.getAppPath(), 'build', 'icon.png'),
-    backgroundColor: nativeTheme.shouldUseDarkColors ? '#0f0f0f' : '#dfe7ed',
+    backgroundColor,
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -174,10 +177,13 @@ async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> 
   mainWindow.once('ready-to-show', () => {
     if (!process.env.ATR_QA_HIDDEN) mainWindow?.show();
   });
-  await mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
+  await mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'), {
+    query: { theme },
+  });
   if (process.env.ATR_WINDOW_POLICY_REPORT) {
     await writeFile(process.env.ATR_WINDOW_POLICY_REPORT, JSON.stringify({
       bounds: mainWindow.getBounds(),
+      backgroundColor: mainWindow.getBackgroundColor(),
       minimumSize: mainWindow.getMinimumSize(),
       maximumSize: mainWindow.getMaximumSize(),
       resizable: mainWindow.isResizable(),
