@@ -92,6 +92,7 @@ test('固定窗口锁定 1360×800 且不再运行 resize-only FLIP', () => {
   assert.match(main, /minimizable: true/);
   assert.match(main, /fullscreenable: false/);
   assert.doesNotMatch(renderer, /ResizeObserver|gridColumnCount|data-card-motion|requestAnimationFrame/);
+  assert.ok(main.indexOf("mainWindow.once('ready-to-show'") < main.indexOf('await mainWindow.loadFile'), '窗口显示监听必须在页面加载前注册');
 });
 
 test('专精顶部控制区固定为筛选行与三个统一模式开关', () => {

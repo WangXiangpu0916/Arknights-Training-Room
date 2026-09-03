@@ -171,6 +171,9 @@ async function createWindow(theme: 'system' | 'dark' | 'black' | 'light'): Promi
     if (url.startsWith('https://')) void shell.openExternal(url);
     return { action: 'deny' };
   });
+  mainWindow.once('ready-to-show', () => {
+    if (!process.env.ATR_QA_HIDDEN) mainWindow?.show();
+  });
   await mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
   if (process.env.ATR_WINDOW_POLICY_REPORT) {
     await writeFile(process.env.ATR_WINDOW_POLICY_REPORT, JSON.stringify({
@@ -185,9 +188,6 @@ async function createWindow(theme: 'system' | 'dark' | 'black' | 'light'): Promi
       fullscreenable: mainWindow.isFullScreenable(),
     }, null, 2));
   }
-  mainWindow.once('ready-to-show', () => {
-    if (!process.env.ATR_QA_HIDDEN) mainWindow?.show();
-  });
   if (process.env.ATR_SCREENSHOT) {
     await new Promise(resolve => setTimeout(resolve, 700));
     if (process.env.ATR_SCREENSHOT_PAGE) {
