@@ -561,6 +561,7 @@ try {
     };
     const light = themeState('light');
     const dark = themeState('dark');
+    const black = themeState('black');
     document.documentElement.dataset.theme = originalTheme;
     return {
       cards: document.querySelectorAll('.module-plan-card').length,
@@ -572,7 +573,7 @@ try {
       typeAspectPreserved: typeImages.every(keepsAspect),
       stageTransparent,
       stageAspectPreserved: stageImages.every(keepsAspect),
-      themes: { light, dark },
+      themes: { light, dark, black },
     };
   })()`);
   await captureScreen('module-planner-single.png');
@@ -650,8 +651,11 @@ try {
     || plannerVisuals.moduleSingle.themes.light.stageFilter !== 'none'
     || plannerVisuals.moduleSingle.themes.dark.typeFilter !== 'none'
     || plannerVisuals.moduleSingle.themes.dark.stageFilter === 'none'
+    || plannerVisuals.moduleSingle.themes.black.typeFilter !== 'none'
+    || plannerVisuals.moduleSingle.themes.black.stageFilter === 'none'
     || !plannerVisuals.moduleSingle.themes.light.codeUsesText || !plannerVisuals.moduleSingle.themes.light.nameUsesText
-    || !plannerVisuals.moduleSingle.themes.dark.codeUsesText || !plannerVisuals.moduleSingle.themes.dark.nameUsesText) failures.push('module planner visuals');
+    || !plannerVisuals.moduleSingle.themes.dark.codeUsesText || !plannerVisuals.moduleSingle.themes.dark.nameUsesText
+    || !plannerVisuals.moduleSingle.themes.black.codeUsesText || !plannerVisuals.moduleSingle.themes.black.nameUsesText) failures.push('module planner visuals');
   if (!plannerVisuals.moduleContinuous.cards || !plannerVisuals.moduleContinuous.allMultiStage || !plannerVisuals.moduleContinuous.includesSupportedSpan) failures.push('module continuous visuals');
   if (windowPolicy.bounds.width !== 1360 || windowPolicy.bounds.height !== 800
     || windowPolicy.minimumSize.join('x') !== '1360x800'

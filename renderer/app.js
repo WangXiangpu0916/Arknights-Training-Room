@@ -127,8 +127,8 @@ function updateChrome() {
   badge.textContent = state.account ? `最后同步 ${fmtTime(state.account.syncedAt)}` : '尚未同步账号';
   badge.className = 'sync-status';
   document.querySelector('#sidebar-status').innerHTML = state.account
-    ? `<strong>${esc(state.account.nickname || `UID ${state.account.uid}`)}</strong>${state.usingCache ? '当前使用缓存数据<br>' : ''}游戏数据 ${esc(fmtTime(state.gameData.updatedAt))}`
-    : `<strong>尚未连接账号</strong>游戏数据 ${esc(fmtTime(state.gameData.updatedAt))}`;
+    ? `<strong>${esc(state.account.nickname || `UID ${state.account.uid}`)}</strong>${state.usingCache ? '当前使用缓存数据<br>' : ''}${esc(fmtTime(state.gameData.updatedAt))}`
+    : `<strong>尚未连接账号</strong>${esc(fmtTime(state.gameData.updatedAt))}`;
   document.querySelector('#refresh-button').disabled = !state.loggedIn;
 }
 
@@ -744,7 +744,7 @@ function renderSettings() {
   content.innerHTML = `${banners()}<div class="settings-list">
     <section class="setting-row"><div><h3>森空岛账号</h3><p>${state.loggedIn ? `已连接${state.account ? ` · UID ${esc(state.account.uid)}` : ''}` : '未连接。凭据使用 Windows DPAPI 加密保存。'}</p></div><div>${state.loggedIn ? '<button class="secondary" data-action="login">重新认证</button> <button class="danger" data-action="logout">退出 / 删除认证</button>' : '<button class="primary" data-action="login">扫码连接</button>'}</div></section>
     <section class="setting-row"><div><h3>游戏数据</h3><p>最后更新：${esc(fmtTime(state.gameData.updatedAt))}<br>版本：${esc(state.gameData.version)}</p></div><button class="secondary" data-action="update-game">检查并更新</button></section>
-    <section class="setting-row"><div><h3>主题</h3><p>跟随系统会使用 Electron 原生系统主题状态并实时响应切换。</p></div><div class="radio-stack theme-options"><label><input type="radio" name="theme" value="system" ${state.settings.theme === 'system' ? 'checked' : ''}> 跟随系统</label><label><input type="radio" name="theme" value="dark" ${state.settings.theme === 'dark' ? 'checked' : ''}> 深色</label><label><input type="radio" name="theme" value="light" ${state.settings.theme === 'light' ? 'checked' : ''}> 浅色</label></div></section>
+    <section class="setting-row"><div><h3>主题</h3><p>跟随系统会使用 Electron 原生系统主题状态并实时响应切换。</p></div><div class="radio-stack theme-options"><label><input type="radio" name="theme" value="system" ${state.settings.theme === 'system' ? 'checked' : ''}> 跟随系统</label><label><input type="radio" name="theme" value="dark" ${state.settings.theme === 'dark' ? 'checked' : ''}> 深蓝色</label><label><input type="radio" name="theme" value="black" ${state.settings.theme === 'black' ? 'checked' : ''}> 黑色</label><label><input type="radio" name="theme" value="light" ${state.settings.theme === 'light' ? 'checked' : ''}> 浅色</label></div></section>
     <section class="setting-row"><div><h3>启动时自动刷新</h3><p>先显示缓存结果，再在后台同步森空岛。</p></div><label class="switch"><input type="checkbox" data-auto-refresh ${state.settings.autoRefresh ? 'checked' : ''}><span></span></label></section>
     <section class="setting-row update-row"><div><h3>应用更新</h3><p>当前版本 v${esc(updateState.currentVersion)}<br><span class="update-message ${updateState.phase === 'error' ? 'error' : ''}">${esc(updateState.message)}</span></p>${updateState.phase === 'downloading' ? `<div class="update-progress"><span style="width:${Math.max(0, Math.min(100, updateState.progress || 0))}%"></span></div>` : ''}</div><div>${updateActions[updateState.phase] || updateActions.idle}</div></section>
     <section class="setting-row"><div><h3>缓存</h3><p>清除最近一次账号快照；不会删除登录凭据或内置游戏数据。</p></div><button class="danger" data-action="clear-cache">清理账号缓存</button></section>

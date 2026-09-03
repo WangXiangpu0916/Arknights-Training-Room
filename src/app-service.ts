@@ -127,7 +127,7 @@ export class AppService {
       unlimitedItemIds: (patch.unlimitedItemIds ?? this.settings.unlimitedItemIds)
         .filter(id => materialIds.has(id)),
       autoRefresh: typeof patch.autoRefresh === 'boolean' ? patch.autoRefresh : this.settings.autoRefresh,
-      theme: patch.theme === 'light' || patch.theme === 'dark' || patch.theme === 'system'
+      theme: patch.theme === 'light' || patch.theme === 'dark' || patch.theme === 'black' || patch.theme === 'system'
         ? patch.theme
         : this.settings.theme,
     };

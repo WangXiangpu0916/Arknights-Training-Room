@@ -78,8 +78,8 @@ test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保�
   assert.match(styles, /\.cards \{[^}]*grid-template-columns: repeat\(3, minmax\(0, 338px\)\);[^}]*justify-content: start/);
   assert.doesNotMatch(styles, /@container|repeat\(2, minmax\(0, 338px\)\)|repeat\(4, minmax\(0, 338px\)\)/);
   assert.doesNotMatch(styles, /\.cards \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
-  assert.match(styles, /main \{[^}]*height: 100vh;[^}]*overflow-y: auto/);
-  assert.match(styles, /\.sidebar \{[^}]*height: 100vh;[^}]*overflow: hidden/);
+  assert.match(styles, /main \{[^}]*height: 100%;[^}]*overflow-y: auto/);
+  assert.match(styles, /\.sidebar \{[^}]*height: 100%;[^}]*overflow: hidden/);
 });
 
 test('固定窗口锁定 1360×800 且不再运行 resize-only FLIP', () => {
@@ -250,17 +250,34 @@ test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS �
   assert.ok(metadata['30023'].description.length > 30);
 });
 
-test('主题使用 Electron nativeTheme 三态并完整定义浅色层级', () => {
+test('应用壳使用窄侧栏与圆角工作区，主题支持系统、深蓝、黑色和浅色', () => {
   const main = readFileSync('src/main.ts', 'utf8');
+  const index = readFileSync('renderer/index.html', 'utf8');
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
-  assert.match(main, /nativeTheme\.themeSource = theme/);
+  const types = readFileSync('src/domain/types.ts', 'utf8');
+  const store = readFileSync('src/data/local-store.ts', 'utf8');
+  assert.match(main, /nativeTheme\.themeSource = theme === 'black' \? 'dark' : theme/);
+  assert.match(index, /class="sidebar-brand"/);
+  assert.match(index, /class="sidebar-spacer"/);
+  assert.match(styles, /#app \{[^}]*grid-template-columns: minmax\(0, 15fr\) minmax\(0, 85fr\)/);
+  assert.match(styles, /main \{[^}]*border-radius: 18px/);
+  assert.doesNotMatch(styles, /\.sidebar \{[^}]*border-right/);
   assert.match(renderer, /name="theme" value="system"/);
   assert.match(renderer, /name="theme" value="dark"/);
+  assert.match(renderer, /name="theme" value="black"/);
   assert.match(renderer, /name="theme" value="light"/);
+  assert.match(renderer, /> 深蓝色<\/label>/);
+  assert.match(renderer, /> 黑色<\/label>/);
+  assert.doesNotMatch(renderer, /游戏数据 \$\{esc\(fmtTime\(state\.gameData\.updatedAt\)\)\}/);
+  assert.match(types, /'system' \| 'dark' \| 'black' \| 'light'/);
+  assert.match(store, /value\?\.theme === 'black'/);
+  assert.match(styles, /:root\[data-theme="black"\]/);
   assert.match(styles, /:root\[data-theme="light"\]/);
   assert.match(styles, /@media \(prefers-color-scheme: light\)/);
-  assert.match(styles, /--bg: #edf2f6/);
+  assert.match(styles, /--app-bg: #091018/);
+  assert.match(styles, /--app-bg: #0f0f0f/);
+  assert.match(styles, /--app-bg: #dfe7ed/);
 });
 
 test('更新异常被记录并转换成短消息，设置页使用列表且更新项位于倒数第二项', () => {

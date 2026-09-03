@@ -30,7 +30,7 @@ export class LocalStore {
         : [],
       selectedUid: typeof value?.selectedUid === 'string' ? value.selectedUid : undefined,
       autoRefresh: value?.autoRefresh === true,
-      theme: value?.theme === 'dark' || value?.theme === 'light' ? value.theme : 'system',
+      theme: value?.theme === 'dark' || value?.theme === 'black' || value?.theme === 'light' ? value.theme : 'system',
     };
   }
 
