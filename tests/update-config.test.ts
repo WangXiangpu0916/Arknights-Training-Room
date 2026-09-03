@@ -222,9 +222,17 @@ test('缓存状态使用可关闭悬浮通知且统计页面共享统一完成�
   for (const key of ['mastery', 'moduleUnlocked', 'moduleStage3', 'elite1', 'elite2']) assert.match(renderer, new RegExp(`scoped\\.${key}`));
   assert.match(renderer, /class="statistics-toolbar"/);
   assert.match(renderer, /class="statistics-list"/);
-  assert.match(renderer, /class="stat-row"/);
-  assert.doesNotMatch(renderer, /stat-card|elite-distribution|当前 E0|当前 E1|当前 E2/);
-  assert.doesNotMatch(styles, /\.stat-card|\.elite-distribution/);
+  assert.match(renderer, /class="stat-line \$\{kind\}"/);
+  assert.match(renderer, /statisticGroup\('专精三级技能总进度'/);
+  assert.match(renderer, /statisticGroup\('精英阶段1及以上总进度'/);
+  assert.match(renderer, /statisticGroup\('精英阶段2总进度'/);
+  assert.doesNotMatch(renderer, /<details|<summary|stat-expand/);
+  assert.doesNotMatch(renderer, /statistics-heading"><h2>[^<]+<\/h2><p>/);
+  assert.doesNotMatch(renderer, /stat-card|stat-row|elite-distribution|当前 E0|当前 E1|当前 E2/);
+  assert.match(styles, /\.stat-line \{[^}]*grid-template-columns: minmax\(0, 1fr\) var\(--stat-progress-width\) var\(--stat-count-width\) var\(--stat-rate-width\)/);
+  assert.match(styles, /\.stat-child \.stat-label \{[^}]*padding-left: 1em;[^}]*font-weight: 400/);
+  assert.match(styles, /\.stat-progress \{[^}]*height: 4px/);
+  assert.doesNotMatch(styles, /\.stat-card|\.stat-row|\.stat-expand|\.elite-distribution/);
 });
 
 test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS 文本', () => {
@@ -255,14 +263,22 @@ test('主题使用 Electron nativeTheme 三态并完整定义浅色层级', () =
   assert.match(styles, /--bg: #edf2f6/);
 });
 
-test('更新异常被记录并转换成短消息，设置卡片可断开任意长字符串', () => {
+test('更新异常被记录并转换成短消息，设置页使用列表且更新项位于倒数第二项', () => {
   const main = readFileSync('src/main.ts', 'utf8');
+  const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
+  const types = readFileSync('src/domain/types.ts', 'utf8');
+  const store = readFileSync('src/data/local-store.ts', 'utf8');
+  const service = readFileSync('src/app-service.ts', 'utf8');
   assert.match(main, /friendlyUpdateError/);
   assert.match(main, /service\?\.store\.log\(event, detail\)/);
   assert.doesNotMatch(main, /message: `检查更新失败：\$\{error instanceof Error \? error\.message/);
   assert.match(styles, /\.update-message \{[^}]*max-width: 100%;[^}]*overflow-wrap: anywhere;[^}]*word-break: break-word/);
-  assert.match(styles, /\.setting-card \{[^}]*grid-template-columns: minmax\(0, 1fr\) auto/);
+  assert.match(styles, /\.setting-row \{[^}]*grid-template-columns: minmax\(0, 1fr\) auto/);
+  assert.match(renderer, /class="settings-list"/);
+  assert.doesNotMatch(renderer, /setting-card|settings-grid|连续专精排序|name="sort"/);
+  assert.match(renderer, /启动时自动刷新[\s\S]*应用更新[\s\S]*缓存/);
+  assert.doesNotMatch(`${types}\n${store}\n${service}`, /continuousSort/);
 });
 
 test('干员列表区分 Rank 与专精并提供默认培养排序、紧凑技能和职业图标', () => {

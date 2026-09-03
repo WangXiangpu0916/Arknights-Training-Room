@@ -86,7 +86,6 @@ export interface AccountSnapshot {
 
 export interface Settings {
   unlimitedItemIds: string[];
-  continuousSort: 'forward' | 'reverse';
   selectedUid?: string;
   autoRefresh: boolean;
   theme: 'system' | 'dark' | 'light';

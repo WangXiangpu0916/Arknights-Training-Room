@@ -48,14 +48,13 @@ export class AppService {
           this.account.operators,
           this.account.inventory,
           this.settings.unlimitedItemIds,
-          this.settings.continuousSort,
         )
       : [];
     const singleReal = this.account
       ? planner.singleStage(this.account.operators, this.account.inventory, [])
       : [];
     const continuousReal = this.account
-      ? planner.continuous(this.account.operators, this.account.inventory, [], this.settings.continuousSort)
+      ? planner.continuous(this.account.operators, this.account.inventory, [])
       : [];
     return {
       loggedIn,
@@ -125,11 +124,9 @@ export class AppService {
     const materialIds = unlimitedMaterialGroups(this.gameData).allowed;
     this.settings = {
       ...this.settings,
-      ...patch,
       unlimitedItemIds: (patch.unlimitedItemIds ?? this.settings.unlimitedItemIds)
         .filter(id => materialIds.has(id)),
-      continuousSort: patch.continuousSort === 'reverse' ? 'reverse' :
-        patch.continuousSort === 'forward' ? 'forward' : this.settings.continuousSort,
+      autoRefresh: typeof patch.autoRefresh === 'boolean' ? patch.autoRefresh : this.settings.autoRefresh,
       theme: patch.theme === 'light' || patch.theme === 'dark' || patch.theme === 'system'
         ? patch.theme
         : this.settings.theme,

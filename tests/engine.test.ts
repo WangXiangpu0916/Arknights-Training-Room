@@ -229,27 +229,27 @@ test('Case 5: 单阶段 M2 → M3 可行', () => {
 });
 
 test('Case 6: 仅 M0 → M1 连续可行时不生成候选', () => {
-  const result = new MasteryPlanner(gameData).continuous([owned([0])], { A: 2 }, [], 'forward');
+  const result = new MasteryPlanner(gameData).continuous([owned([0])], { A: 2 }, []);
   assert.deepEqual(result, []);
 });
 
 test('连续专精跨度边界覆盖 M0 → M2、M1 → M2 与 M2 → M3', () => {
   const planner = new MasteryPlanner(gameData);
-  const m0ToM2 = planner.continuous([owned([0])], { A: 5 }, [], 'forward');
+  const m0ToM2 = planner.continuous([owned([0])], { A: 5 }, []);
   assert.deepEqual(m0ToM2.map(x => [x.from, x.to]), [[0, 2]]);
-  assert.deepEqual(planner.continuous([owned([1])], { A: 3 }, [], 'forward'), []);
-  assert.deepEqual(planner.continuous([owned([2])], { A: 6 }, [], 'forward'), []);
+  assert.deepEqual(planner.continuous([owned([1])], { A: 3 }, []), []);
+  assert.deepEqual(planner.continuous([owned([2])], { A: 6 }, []), []);
 });
 
 test('Case 7: M0 → M3 全部连续可行且顺序扣除', () => {
-  const result = new MasteryPlanner(gameData).continuous([owned([0])], { A: 11 }, [], 'forward');
+  const result = new MasteryPlanner(gameData).continuous([owned([0])], { A: 11 }, []);
   assert.deepEqual([result[0].from, result[0].to], [0, 3]);
   assert.equal(result[0].stages.length, 3);
   assert.equal(result[0].remainingInventory.A, 0);
 });
 
 test('Case 8: M1 → M3 连续可行', () => {
-  const result = new MasteryPlanner(gameData).continuous([owned([1])], { A: 12 }, [], 'forward');
+  const result = new MasteryPlanner(gameData).continuous([owned([1])], { A: 12 }, []);
   assert.deepEqual([result[0].from, result[0].to], [1, 3]);
 });
 
@@ -327,11 +327,11 @@ test('连续专精保留路线优先级，同路线按星级降序', () => {
     skills: [{ skillId: definition.skills[0].skillId, masteryLevel: 0 as MasteryLevel }],
   }));
   const planner = new MasteryPlanner({ ...gameData, operators: definitions });
-  const actual = planner.continuous(ownedOperators, { A: 100, B: 100, C: 100 }, [], 'forward');
+  const actual = planner.continuous(ownedOperators, { A: 100, B: 100, C: 100 }, []);
   assert.deepEqual(actual.map(candidate => candidate.operator.rarity), [6, 5, 4]);
 });
 
-test('Case 15: 连续专精只保留跨度至少两级的路线并按指定顺序排序', () => {
+test('Case 15: 连续专精只保留跨度至少两级的路线并按固定顺序排序', () => {
   const definitions: OperatorDefinition[] = [[0, 3], [1, 3], [2, 3], [0, 2], [1, 2], [0, 1]].map(
     ([from, to], i) => ({
       ...operator,
@@ -360,17 +360,14 @@ test('Case 15: 连续专精只保留跨度至少两级的路线并按指定顺�
     for (let level = ([0, 1, 2, 0, 1, 0][i] + 1); level <= ends[i]; level++) inventory[`R${i}${level}`] = 1;
   });
   const planner = new MasteryPlanner({ ...gameData, operators: definitions, materials: [] });
-  const forward = planner.continuous(ownedOps, inventory, [], 'forward');
-  assert.deepEqual(forward.map(x => `${x.from}-${x.to}`), ['0-3', '1-3', '0-2']);
-
-  const reverse = planner.continuous(ownedOps, inventory, [], 'reverse');
-  assert.deepEqual(reverse.map(x => `${x.from}-${x.to}`), ['0-2', '1-3', '0-3']);
+  const result = planner.continuous(ownedOps, inventory, []);
+  assert.deepEqual(result.map(x => `${x.from}-${x.to}`), ['0-3', '1-3', '0-2']);
 });
 
 test('Case 17: M3 技能不进入候选', () => {
   const planner = new MasteryPlanner(gameData);
   assert.equal(planner.singleStage([owned([3])], { A: 999 }, []).length, 0);
-  assert.equal(planner.continuous([owned([3])], { A: 999 }, [], 'forward').length, 0);
+  assert.equal(planner.continuous([owned([3])], { A: 999 }, []).length, 0);
 });
 
 test('专精前置条件：精二且技能 Rank 7', () => {

@@ -52,7 +52,6 @@ export class MasteryPlanner {
     ownedOperators: OwnedOperator[],
     inventory: Record<string, number>,
     unlimitedIds: string[],
-    order: 'forward' | 'reverse',
   ): MasteryCandidate[] {
     const candidates: MasteryCandidate[] = [];
     for (const owned of ownedOperators) {
@@ -97,9 +96,8 @@ export class MasteryPlanner {
       }
     }
 
-    const ranks = order === 'forward' ? CONTINUOUS_FORWARD : [...CONTINUOUS_FORWARD].reverse();
     return candidates.sort((a, b) =>
-      ranks.indexOf(`${a.from}-${a.to}`) - ranks.indexOf(`${b.from}-${b.to}`)
+      CONTINUOUS_FORWARD.indexOf(`${a.from}-${a.to}`) - CONTINUOUS_FORWARD.indexOf(`${b.from}-${b.to}`)
       || b.operator.rarity - a.operator.rarity
       || a.operator.name.localeCompare(b.operator.name, 'zh-CN')
       || a.skill.index - b.skill.index,

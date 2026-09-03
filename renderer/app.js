@@ -244,16 +244,21 @@ function percentage(statistic) {
   return statistic.total ? Math.round(statistic.completed / statistic.total * 100) : 0;
 }
 
-function statisticRow(label, statistic, rarities) {
+function statisticLine(label, statistic, kind) {
+  const rate = percentage(statistic);
+  return `<div class="stat-line ${kind}"><span class="stat-label">${esc(label)}</span><progress class="stat-progress" max="${Math.max(1, statistic.total)}" value="${statistic.completed}" aria-label="${esc(label)}完成率 ${rate}%"></progress><strong class="stat-count">${statistic.completed} <small>/ ${statistic.total}</small></strong><span class="stat-rate">${rate}%</span></div>`;
+}
+
+function statisticGroup(label, statistic, rarities) {
   const breakdown = rarities
     .map(rarity => [rarity, statistic.byRarity[rarity]])
     .filter(([, value]) => value?.total)
-    .map(([rarity, value]) => `<div class="stat-breakdown-row"><span>${rarity} 星</span><strong>${value.completed} <small>/ ${value.total}</small></strong><span>${percentage(value)}%</span><span aria-hidden="true"></span></div>`)
+    .map(([rarity, value]) => statisticLine(`${rarity} 星`, value, 'stat-child'))
     .join('');
-  return `<details class="stat-row">
-    <summary><span class="stat-label">${esc(label)}</span><strong class="stat-count">${statistic.completed} <small>/ ${statistic.total}</small></strong><span class="stat-rate">${percentage(statistic)}%</span><span class="stat-expand" aria-hidden="true">⌄</span><progress class="stat-progress" max="${Math.max(1, statistic.total)}" value="${statistic.completed}" aria-label="${esc(label)}完成率 ${percentage(statistic)}%"></progress></summary>
+  return `<div class="stat-group">
+    ${statisticLine(label, statistic, 'stat-total')}
     <div class="stat-breakdown">${breakdown || '<p>当前统计范围内没有有效对象。</p>'}</div>
-  </details>`;
+  </div>`;
 }
 
 function renderStatistics() {
@@ -265,19 +270,19 @@ function renderStatistics() {
       <button type="button" data-statistics-scope="all" class="${statisticsScope === 'all' ? 'active' : ''}" aria-pressed="${statisticsScope === 'all'}">全部已实装</button>
       <button type="button" data-statistics-scope="owned" class="${statisticsScope === 'owned' ? 'active' : ''}" aria-pressed="${statisticsScope === 'owned'}">仅已持有</button>
     </div></div>
-    <section class="statistics-section"><div class="statistics-heading"><h2>干员持有</h2><p>固定按全部已实装干员计算</p></div><div class="statistics-list">
-      ${statisticRow('持有进度', statistics.ownership, [6, 5, 4, 3, 2, 1])}
+    <section class="statistics-section"><div class="statistics-heading"><h2>干员持有</h2></div><div class="statistics-list">
+      ${statisticGroup('总持有进度', statistics.ownership, [6, 5, 4, 3, 2, 1])}
     </div></section>
-    <section class="statistics-section"><div class="statistics-heading"><h2>技能专精</h2><p>统计可专精技能</p></div><div class="statistics-list">
-      ${statisticRow('M3 技能', scoped.mastery, [6, 5, 4])}
+    <section class="statistics-section"><div class="statistics-heading"><h2>技能专精</h2></div><div class="statistics-list">
+      ${statisticGroup('专精三级技能总进度', scoped.mastery, [6, 5, 4])}
     </div></section>
-    <section class="statistics-section"><div class="statistics-heading"><h2>模组</h2><p>每个已实装模组独立计数</p></div><div class="statistics-list">
-      ${statisticRow('已解锁模组', scoped.moduleUnlocked, [6, 5, 4])}
-      ${statisticRow('三级模组', scoped.moduleStage3, [6, 5, 4])}
+    <section class="statistics-section"><div class="statistics-heading"><h2>模组</h2></div><div class="statistics-list">
+      ${statisticGroup('模组解锁总进度', scoped.moduleUnlocked, [6, 5, 4])}
+      ${statisticGroup('三级模组总进度', scoped.moduleStage3, [6, 5, 4])}
     </div></section>
-    <section class="statistics-section"><div class="statistics-heading"><h2>精英化</h2><p>按干员真实培养上限计算</p></div><div class="statistics-list">
-      ${statisticRow('达到 E1+', scoped.elite1, [6, 5, 4, 3])}
-      ${statisticRow('达到 E2', scoped.elite2, [6, 5, 4])}
+    <section class="statistics-section"><div class="statistics-heading"><h2>精英化</h2></div><div class="statistics-list">
+      ${statisticGroup('精英阶段1及以上总进度', scoped.elite1, [6, 5, 4, 3])}
+      ${statisticGroup('精英阶段2总进度', scoped.elite2, [6, 5, 4])}
     </div></section>
   </div>`;
   bindActions();
@@ -736,14 +741,13 @@ function renderSettings() {
     installing: '<button class="secondary" disabled>正在安装…</button>',
     error: '<button class="secondary" data-action="check-update">重新检查</button>',
   };
-  content.innerHTML = `${banners()}<div class="settings-grid">
-    <section class="setting-card"><div><h3>森空岛账号</h3><p>${state.loggedIn ? `已连接${state.account ? ` · UID ${esc(state.account.uid)}` : ''}` : '未连接。凭据使用 Windows DPAPI 加密保存。'}</p></div><div>${state.loggedIn ? '<button class="secondary" data-action="login">重新认证</button> <button class="danger" data-action="logout">退出 / 删除认证</button>' : '<button class="primary" data-action="login">扫码连接</button>'}</div></section>
-    <section class="setting-card"><div><h3>游戏数据</h3><p>最后更新：${esc(fmtTime(state.gameData.updatedAt))}<br>版本：${esc(state.gameData.version)}</p></div><button class="secondary" data-action="update-game">检查并更新</button></section>
-    <section class="setting-card"><div><h3>主题</h3><p>跟随系统会使用 Electron 原生系统主题状态并实时响应切换。</p></div><div class="radio-stack theme-options"><label><input type="radio" name="theme" value="system" ${state.settings.theme === 'system' ? 'checked' : ''}> 跟随系统</label><label><input type="radio" name="theme" value="dark" ${state.settings.theme === 'dark' ? 'checked' : ''}> 深色</label><label><input type="radio" name="theme" value="light" ${state.settings.theme === 'light' ? 'checked' : ''}> 浅色</label></div></section>
-    <section class="setting-card"><div><h3>连续专精排序</h3><p>严格使用指定的六档顺序或完全倒序。</p></div><div class="radio-stack"><label><input type="radio" name="sort" value="forward" ${state.settings.continuousSort === 'forward' ? 'checked' : ''}> 连续跨度优先</label><label><input type="radio" name="sort" value="reverse" ${state.settings.continuousSort === 'reverse' ? 'checked' : ''}> 完全反向</label></div></section>
-    <section class="setting-card update-card"><div><h3>应用更新</h3><p>当前版本 v${esc(updateState.currentVersion)}<br><span class="update-message ${updateState.phase === 'error' ? 'error' : ''}">${esc(updateState.message)}</span></p>${updateState.phase === 'downloading' ? `<div class="update-progress"><span style="width:${Math.max(0, Math.min(100, updateState.progress || 0))}%"></span></div>` : ''}</div><div>${updateActions[updateState.phase] || updateActions.idle}</div></section>
-    <section class="setting-card"><div><h3>启动时自动刷新</h3><p>先显示缓存结果，再在后台同步森空岛。</p></div><label class="switch"><input type="checkbox" data-auto-refresh ${state.settings.autoRefresh ? 'checked' : ''}><span></span></label></section>
-    <section class="setting-card"><div><h3>缓存</h3><p>清除最近一次账号快照；不会删除登录凭据或内置游戏数据。</p></div><button class="danger" data-action="clear-cache">清理账号缓存</button></section>
+  content.innerHTML = `${banners()}<div class="settings-list">
+    <section class="setting-row"><div><h3>森空岛账号</h3><p>${state.loggedIn ? `已连接${state.account ? ` · UID ${esc(state.account.uid)}` : ''}` : '未连接。凭据使用 Windows DPAPI 加密保存。'}</p></div><div>${state.loggedIn ? '<button class="secondary" data-action="login">重新认证</button> <button class="danger" data-action="logout">退出 / 删除认证</button>' : '<button class="primary" data-action="login">扫码连接</button>'}</div></section>
+    <section class="setting-row"><div><h3>游戏数据</h3><p>最后更新：${esc(fmtTime(state.gameData.updatedAt))}<br>版本：${esc(state.gameData.version)}</p></div><button class="secondary" data-action="update-game">检查并更新</button></section>
+    <section class="setting-row"><div><h3>主题</h3><p>跟随系统会使用 Electron 原生系统主题状态并实时响应切换。</p></div><div class="radio-stack theme-options"><label><input type="radio" name="theme" value="system" ${state.settings.theme === 'system' ? 'checked' : ''}> 跟随系统</label><label><input type="radio" name="theme" value="dark" ${state.settings.theme === 'dark' ? 'checked' : ''}> 深色</label><label><input type="radio" name="theme" value="light" ${state.settings.theme === 'light' ? 'checked' : ''}> 浅色</label></div></section>
+    <section class="setting-row"><div><h3>启动时自动刷新</h3><p>先显示缓存结果，再在后台同步森空岛。</p></div><label class="switch"><input type="checkbox" data-auto-refresh ${state.settings.autoRefresh ? 'checked' : ''}><span></span></label></section>
+    <section class="setting-row update-row"><div><h3>应用更新</h3><p>当前版本 v${esc(updateState.currentVersion)}<br><span class="update-message ${updateState.phase === 'error' ? 'error' : ''}">${esc(updateState.message)}</span></p>${updateState.phase === 'downloading' ? `<div class="update-progress"><span style="width:${Math.max(0, Math.min(100, updateState.progress || 0))}%"></span></div>` : ''}</div><div>${updateActions[updateState.phase] || updateActions.idle}</div></section>
+    <section class="setting-row"><div><h3>缓存</h3><p>清除最近一次账号快照；不会删除登录凭据或内置游戏数据。</p></div><button class="danger" data-action="clear-cache">清理账号缓存</button></section>
   </div>`;
   bindActions();
 }
@@ -828,7 +832,6 @@ function bindActions() {
     render();
   });
   document.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click', () => handleAction(button.dataset.action, button)));
-  document.querySelectorAll('input[name="sort"]').forEach(input => input.addEventListener('change', async () => { state = await api.updateSettings({ continuousSort: input.value }); render(); }));
   document.querySelectorAll('input[name="theme"]').forEach(input => input.addEventListener('change', async () => { state = await api.updateSettings({ theme: input.value }); render(); }));
   document.querySelector('[data-auto-refresh]')?.addEventListener('change', async event => { state = await api.updateSettings({ autoRefresh: event.target.checked }); render(); });
   bindImageFallbacks();

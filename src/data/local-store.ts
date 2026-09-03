@@ -3,13 +3,6 @@ import { appendFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:f
 import path from 'node:path';
 import { AccountSnapshot, Settings } from '../domain/types';
 
-const DEFAULT_SETTINGS: Settings = {
-  unlimitedItemIds: [],
-  continuousSort: 'forward',
-  autoRefresh: false,
-  theme: 'system',
-};
-
 export interface StoredCredentials {
   accessToken: string;
   cred: string;
@@ -32,12 +25,11 @@ export class LocalStore {
   async readSettings(): Promise<Settings> {
     const value = await this.readJson<Partial<Settings>>(this.settingsPath);
     return {
-      ...DEFAULT_SETTINGS,
-      ...value,
       unlimitedItemIds: Array.isArray(value?.unlimitedItemIds)
         ? value.unlimitedItemIds.filter(x => typeof x === 'string')
         : [],
-      continuousSort: value?.continuousSort === 'reverse' ? 'reverse' : 'forward',
+      selectedUid: typeof value?.selectedUid === 'string' ? value.selectedUid : undefined,
+      autoRefresh: value?.autoRefresh === true,
       theme: value?.theme === 'dark' || value?.theme === 'light' ? value.theme : 'system',
     };
   }

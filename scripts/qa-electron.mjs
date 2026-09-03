@@ -432,26 +432,46 @@ try {
 
   await evaluate(`document.querySelector('.nav[data-page="statistics"]').click()`);
   const statisticsVisuals = await evaluate(`(() => {
-    const read = () => ({
-      scope: statisticsScope,
-      rows: document.querySelectorAll('.stat-row').length,
-      sections: [...document.querySelectorAll('.statistics-heading h2')].map(node => node.textContent.trim()),
-      ownership: document.querySelector('.stat-row .stat-count')?.textContent.trim(),
-      totals: [...document.querySelectorAll('.stat-row .stat-count')].map(node => node.textContent.trim()),
-      distributionRemoved: !document.querySelector('.elite-distribution')
-        && !['当前 E0', '当前 E1', '当前 E2'].some(label => document.body.textContent.includes(label)),
-      scopeCompact: document.querySelector('.statistics-scope').getBoundingClientRect().width < 260,
-      horizontalOverflow: document.querySelector('main').scrollWidth > document.querySelector('main').clientWidth,
-    });
+    const read = () => {
+      const lines = [...document.querySelectorAll('.stat-line')];
+      const columnAligned = ['.stat-progress', '.stat-count', '.stat-rate'].every(selector => (
+        new Set(lines.map(line => Math.round(line.querySelector(selector).getBoundingClientRect().left))).size === 1
+      ));
+      return {
+        scope: statisticsScope,
+        rows: document.querySelectorAll('.stat-total').length,
+        sections: [...document.querySelectorAll('.statistics-heading h2')].map(node => node.textContent.trim()),
+        ownership: document.querySelector('.stat-total .stat-count')?.textContent.trim(),
+        totals: [...document.querySelectorAll('.stat-total .stat-count')].map(node => node.textContent.trim()),
+        permanentBreakdowns: !document.querySelector('details, summary, .stat-expand')
+          && [...document.querySelectorAll('.stat-group')].every(group => group.querySelectorAll('.stat-child').length >= 3),
+        progressForEveryLine: document.querySelectorAll('.stat-progress').length === lines.length,
+        columnAligned,
+        distributionRemoved: !document.querySelector('.elite-distribution')
+          && !['当前 E0', '当前 E1', '当前 E2'].some(label => document.body.textContent.includes(label)),
+        scopeCompact: document.querySelector('.statistics-scope').getBoundingClientRect().width < 260,
+        horizontalOverflow: document.querySelector('main').scrollWidth > document.querySelector('main').clientWidth,
+      };
+    };
     const all = read();
     document.querySelector('[data-statistics-scope="owned"]').click();
     const owned = read();
-    const first = document.querySelector('.stat-row');
-    first.open = true;
-    const breakdownVisible = first.open && first.querySelectorAll('.stat-breakdown-row').length >= 3;
-    return { all, owned, breakdownVisible };
+    return { all, owned };
   })()`);
   await captureScreen('statistics-owned.png');
+
+  await evaluate(`document.querySelector('.nav[data-page="settings"]').click()`);
+  const settingsVisuals = await evaluate(`(() => {
+    const titles = [...document.querySelectorAll('.setting-row h3')].map(node => node.textContent.trim());
+    return {
+      rows: titles.length,
+      cardsRemoved: !document.querySelector('.setting-card, .settings-grid'),
+      sortRemoved: !document.body.textContent.includes('连续专精排序') && !document.querySelector('input[name="sort"]'),
+      updatePenultimate: titles.at(-2) === '应用更新',
+      horizontalOverflow: document.querySelector('main').scrollWidth > document.querySelector('main').clientWidth,
+    };
+  })()`);
+  await captureScreen('settings-list.png');
 
   const plannerVisuals = {};
   await evaluate(`document.querySelector('.nav[data-page="promotion"]').click()`);
@@ -607,7 +627,12 @@ try {
     || statisticsVisuals.owned.totals.some((value, index) => Number(value.split('/')[1]) > Number(statisticsVisuals.all.totals[index].split('/')[1]))
     || !statisticsVisuals.all.distributionRemoved || !statisticsVisuals.owned.distributionRemoved
     || !statisticsVisuals.all.scopeCompact || !statisticsVisuals.owned.scopeCompact
-    || !statisticsVisuals.breakdownVisible || statisticsVisuals.all.horizontalOverflow || statisticsVisuals.owned.horizontalOverflow) failures.push('statistics visuals');
+    || !statisticsVisuals.all.permanentBreakdowns || !statisticsVisuals.owned.permanentBreakdowns
+    || !statisticsVisuals.all.progressForEveryLine || !statisticsVisuals.owned.progressForEveryLine
+    || !statisticsVisuals.all.columnAligned || !statisticsVisuals.owned.columnAligned
+    || statisticsVisuals.all.horizontalOverflow || statisticsVisuals.owned.horizontalOverflow) failures.push('statistics visuals');
+  if (settingsVisuals.rows !== 6 || !settingsVisuals.cardsRemoved || !settingsVisuals.sortRemoved
+    || !settingsVisuals.updatePenultimate || settingsVisuals.horizontalOverflow) failures.push('settings visuals');
   if (pages.dashboard.columns !== 3) failures.push('dashboard columns');
   if (pages.dashboard.cardWidth < 337 || pages.dashboard.cardWidth > 338 || pages.dashboard.masterySkillGap < 28 || pages.dashboard.masterySkillGap > 40) failures.push('dashboard card geometry');
   if (!pages.promotion.cardWidth || pages.promotion.cardWidth < 337 || pages.promotion.cardWidth > 338) failures.push('promotion card geometry');
