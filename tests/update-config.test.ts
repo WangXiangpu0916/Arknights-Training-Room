@@ -75,7 +75,7 @@ test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保�
   assert.match(styles, /\.operator-skill-icon \{[^}]*width: 100%; height: 100%/);
   assert.doesNotMatch(renderer, /class="skill-pills"|class="skill-pill/);
   assert.match(styles, /\.dashboard-layout \{[^}]*max-width: 1680px/);
-  assert.match(styles, /\.cards \{[^}]*grid-template-columns: repeat\(3, minmax\(0, 338px\)\);[^}]*justify-content: start/);
+  assert.match(styles, /\.cards \{[^}]*grid-template-columns: repeat\(3, 338px\);[^}]*justify-content: start/);
   assert.doesNotMatch(styles, /@container|repeat\(2, minmax\(0, 338px\)\)|repeat\(4, minmax\(0, 338px\)\)/);
   assert.doesNotMatch(styles, /\.cards \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(styles, /main \{[^}]*height: 100%;[^}]*overflow-y: auto/);
@@ -164,14 +164,16 @@ test('专精卡片按头像边界对齐图标并保持技能名称单行滚动',
   assert.match(styles, /@keyframes skill-name-scroll/);
 });
 
-test('专精候选竖线直接按真实星级使用游戏稀有度配色', () => {
+test('专精候选与干员列表复用六星纵向渐变', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
   assert.match(renderer, /candidate rarity-\$\{candidate\.operator\.rarity\}/);
   assert.match(styles, /\.candidate\.rarity-4 \{ --rarity-line: #BF96ED; \}/);
   assert.match(styles, /\.candidate\.rarity-5 \{ --rarity-line: #EFD691; \}/);
-  assert.match(styles, /\.candidate\.rarity-6 \{[^}]*linear-gradient\(180deg, #C82A36 0%, #FF9433 100%\)[^}]*background-size: 3px 100%/);
-  assert.doesNotMatch(styles, /\.candidate\.rarity-6 \{[^}]*linear-gradient\(90deg/);
+  assert.match(styles, /--rarity-6-line: linear-gradient\(180deg, #C82A36 0%, #FF9433 100%\)/);
+  assert.match(styles, /\.candidate\.rarity-6 \{[^}]*background-image: var\(--rarity-6-line\)[^}]*background-size: 3px 100%/);
+  assert.match(styles, /\.operator-row\.rarity-6::before \{[^}]*width: 3px; background: var\(--rarity-6-line\)/);
+  assert.doesNotMatch(styles, /--rarity-6-line: linear-gradient\(90deg/);
 });
 
 test('精英化与模组规划是同级页面并使用真实图标和独立状态', () => {
@@ -196,16 +198,15 @@ test('精英化与模组规划是同级页面并使用真实图标和独立状�
   assert.match(renderer, /data-planner-toggle="continuous"/);
   assert.match(renderer, /data-planner-toggle="unlimited"/);
   assert.doesNotMatch(renderer, /ready-badge|材料已就绪|torappu\.prts\.wiki\/assets\/uniequip_img|模组开启仍需在游戏内完成对应任务；此处核对/);
-  assert.match(styles, /\.plan-card \.candidate-main \{ grid-template-columns: 72px/);
+  assert.match(styles, /\.plan-card \.candidate-main \{ grid-template-columns: 72px minmax\(0, 1fr\) 56px; grid-template-rows: 21px 51px; min-height: 72px; \}/);
   assert.match(styles, /\.module-type-icon \{/);
   assert.match(styles, /\.module-stage-icon \{/);
-  assert.match(styles, /\.promotion-plan-card \.candidate-main \{ grid-template-columns: 72px minmax\(0, 1fr\) 58px; \}/);
-  assert.match(styles, /\.operator-level-badge \{[^}]*width: 54px; height: 61px/);
-  assert.match(styles, /\.operator-current-elite img \{[^}]*max-width: 52px; max-height: 40px; object-fit: contain/);
+  assert.match(styles, /\.operator-level-badge \{[^}]*width: 56px; height: 72px;[^}]*grid-template-rows: 56px 16px/);
+  assert.match(styles, /\.operator-current-elite img \{[^}]*max-width: 56px; max-height: 54px; object-fit: contain/);
   assert.match(styles, /\.module-stage-icon \{[^}]*border: 0;[^}]*background: transparent/);
-  assert.match(styles, /\.module-type-icon \{ width: 48px; height: 48px;[^}]*border-radius: 0;[^}]*background: transparent/);
-  assert.match(styles, /\.module-type-code \{ color: var\(--text\)/);
-  assert.match(styles, /\.module-name small \{[^}]*color: var\(--text\)/);
+  assert.match(styles, /\.module-type-icon \{ width: 56px; height: 56px;[^}]*border-radius: 0;[^}]*background: transparent/);
+  assert.match(styles, /\.module-target-copy \{[^}]*width: 56px;[^}]*color: var\(--text\)/);
+  assert.match(renderer, /class="module-target-copy"[^>]*>.*class="module-type-code".*class="module-name"/);
   assert.doesNotMatch(renderer, /当前 Lv\./);
 });
 
@@ -218,7 +219,9 @@ test('缓存状态使用可关闭悬浮通知且统计页面共享统一完成�
   assert.match(renderer, /cacheNoticeTimer = setTimeout\(\(\) => dismissCacheNotice\(key\), 5000\)/);
   assert.match(renderer, /beforeunload', clearCacheNoticeTimer/);
   assert.doesNotMatch(renderer, /class="cache-banner"/);
-  assert.match(styles, /\.data-notice-region \{ position: fixed; z-index: 18;/);
+  assert.match(styles, /\.data-notice-region \{ position: fixed; z-index: 40; inset: 0 0 auto;/);
+  assert.match(styles, /transform: translateY\(calc\(-100% - 2px\)\)[^}]*transition:[^}]*transform/);
+  assert.match(styles, /\.data-notice \{ width: max-content; max-width: calc\(100vw - 32px\)/);
   assert.match(renderer, /statistics\.scopes\[statisticsScope\]/);
   for (const key of ['mastery', 'moduleUnlocked', 'moduleStage3', 'elite1', 'elite2']) assert.match(renderer, new RegExp(`scoped\\.${key}`));
   assert.match(renderer, /class="statistics-toolbar"/);

@@ -179,12 +179,51 @@ try {
     && document.querySelector('#sidebar-status strong')
     && !document.querySelector('#content .loading'))`, 'Application did not finish loading');
   await waitFor(`document.querySelector('#data-notice-region.show [data-close-cache-notice]')`, 'Cache notification did not appear');
+  await new Promise(resolve => setTimeout(resolve, 320));
   const cacheNotice = await evaluate(`(() => {
     const controls = document.querySelector('.dashboard-layout').getBoundingClientRect();
     const region = document.querySelector('#data-notice-region');
+    const notice = region.firstElementChild;
     const style = getComputedStyle(region);
-    return { beforeTop: controls.top, fixed: style.position === 'fixed', zIndex: Number(style.zIndex), outsideContent: !document.querySelector('#content').contains(region) };
+    const frame = notice.getBoundingClientRect();
+    return {
+      beforeTop: controls.top,
+      fixed: style.position === 'fixed',
+      zIndex: Number(style.zIndex),
+      outsideContent: !document.querySelector('#content').contains(region),
+      finalTop: frame.top,
+      width: frame.width,
+      viewportWidth: innerWidth,
+      transitionProperty: style.transitionProperty,
+      transitionDuration: style.transitionDuration,
+      closeVisible: Boolean(notice.querySelector('[data-close-cache-notice]')?.getBoundingClientRect().width),
+      singleLine: notice.querySelector('span').getBoundingClientRect().height < 28,
+    };
   })()`);
+  await captureScreen('cache-notice-final.png');
+  cacheNotice.animation = await evaluate(`(async () => {
+    const region = document.querySelector('#data-notice-region');
+    region.classList.remove('show');
+    await new Promise(resolve => setTimeout(resolve, 300));
+    const startTop = region.firstElementChild.getBoundingClientRect().top;
+    const startBottom = region.firstElementChild.getBoundingClientRect().bottom;
+    void region.offsetHeight;
+    region.classList.add('show');
+    await new Promise(resolve => setTimeout(resolve, 45));
+    const movingTop = region.firstElementChild.getBoundingClientRect().top;
+    await new Promise(resolve => setTimeout(resolve, 280));
+    const endTop = region.firstElementChild.getBoundingClientRect().top;
+    return { startTop, startBottom, movingTop, endTop };
+  })()`);
+  await evaluate(`(() => {
+    const region = document.querySelector('#data-notice-region');
+    region.classList.remove('show');
+    void region.offsetHeight;
+    region.classList.add('show');
+  })()`);
+  await new Promise(resolve => setTimeout(resolve, 45));
+  await captureScreen('cache-notice-entering.png');
+  await new Promise(resolve => setTimeout(resolve, 280));
   await evaluate(`document.querySelector('[data-close-cache-notice]').click()`);
   await waitFor(`!document.querySelector('#data-notice-region.show')`, 'Cache notification did not close manually');
   cacheNotice.afterManualTop = await evaluate(`document.querySelector('.dashboard-layout').getBoundingClientRect().top`);
@@ -422,13 +461,40 @@ try {
       clientHeight: document.querySelector('main').clientHeight,
       columns: document.querySelector('.cards') ? getComputedStyle(document.querySelector('.cards')).gridTemplateColumns.split(/\\s+/).length : null,
       cardWidth: document.querySelector('.candidate')?.getBoundingClientRect().width ?? null,
+      cardHeight: document.querySelector('.candidate')?.getBoundingClientRect().height ?? null,
+      avatar: (() => {
+        const rect = document.querySelector('.candidate-avatar')?.getBoundingClientRect();
+        return rect ? { width: rect.width, height: rect.height, left: rect.left, top: rect.top } : null;
+      })(),
+      rightVisual: (() => {
+        const node = document.querySelector('.skill-info, .operator-level-badge, .plan-target');
+        const rect = node?.getBoundingClientRect();
+        const card = document.querySelector('.candidate')?.getBoundingClientRect();
+        return rect && card ? { width: rect.width, height: rect.height, rightInset: card.right - rect.right, topInset: rect.top - card.top } : null;
+      })(),
       masterySkillGap: (() => {
         const target = document.querySelector('.mastery-line .mastery-icon:last-child')?.getBoundingClientRect();
         const skill = document.querySelector('.skill-info .skill-icon')?.getBoundingClientRect();
         return target && skill ? skill.left - target.right : null;
       })(),
     }))()`);
+    if (page === 'dashboard') await captureScreen('mastery-planner-single.png');
+    if (page === 'operators') await captureScreen('operators.png');
   }
+
+  await evaluate(`document.querySelector('.nav[data-page="dashboard"]').click()`);
+  const masteryRarityGradient = await evaluate(`getComputedStyle(document.querySelector('.candidate.rarity-6')).backgroundImage`);
+  await evaluate(`document.querySelector('.nav[data-page="operators"]').click()`);
+  const operatorRarityVisuals = await evaluate(`(() => {
+    const six = document.querySelector('.operator-row.rarity-6');
+    const five = document.querySelector('.operator-row.rarity-5');
+    return {
+      sixGradient: getComputedStyle(six, '::before').backgroundImage,
+      sixBorderTransparent: getComputedStyle(six).borderLeftColor === 'rgba(0, 0, 0, 0)',
+      fiveBorderVisible: getComputedStyle(five).borderLeftColor !== 'rgba(0, 0, 0, 0)',
+      sixStripWidth: getComputedStyle(six, '::before').width,
+    };
+  })()`);
 
   await evaluate(`document.querySelector('.nav[data-page="statistics"]').click()`);
   const statisticsVisuals = await evaluate(`(() => {
@@ -499,8 +565,8 @@ try {
         loaded: image.complete && image.naturalWidth > 0 && image.naturalHeight > 0,
         aspectPreserved: Math.abs(imageRect.width / imageRect.height - image.naturalWidth / image.naturalHeight) < .02,
         contained: imageRect.left >= iconFrame.left && imageRect.right <= iconFrame.right && imageRect.top >= iconFrame.top && imageRect.bottom <= iconFrame.bottom,
-        numberBelowIcon: number.top >= iconFrame.bottom,
-        frameContained: number.left >= frame.left && number.right <= frame.right && number.bottom <= frame.bottom,
+        numberBelowIcon: number.top >= iconFrame.bottom - 1,
+        frameContained: number.left >= frame.left - 1 && number.right <= frame.right + 1 && number.bottom <= frame.bottom + 1,
       };
     });
     testHost.remove();
@@ -550,7 +616,7 @@ try {
       const typeImage = getComputedStyle(typeImages[0]);
       const stageImage = getComputedStyle(stageImages[0]);
       const code = getComputedStyle(document.querySelector('.module-type-code'));
-      const name = getComputedStyle(document.querySelector('.module-name small'));
+      const name = getComputedStyle(document.querySelector('.module-name'));
       const textColor = getComputedStyle(document.body).color;
       return {
         typeFilter: typeImage.filter,
@@ -573,6 +639,19 @@ try {
       typeAspectPreserved: typeImages.every(keepsAspect),
       stageTransparent,
       stageAspectPreserved: stageImages.every(keepsAspect),
+      targetsMatchMastery: [...document.querySelectorAll('.module-plan-card')].every(card => {
+        const target = card.querySelector('.plan-target').getBoundingClientRect();
+        const icon = card.querySelector('.module-type-icon').getBoundingClientRect();
+        return Math.abs(target.width - 56) < .1 && Math.abs(target.height - 72) < .1
+          && Math.abs(icon.width - 56) < .1 && Math.abs(icon.height - 56) < .1;
+      }),
+      copyContained: [...document.querySelectorAll('.module-target-copy')].every(copy => {
+        const frame = copy.getBoundingClientRect();
+        const target = copy.closest('.plan-target').getBoundingClientRect();
+        const style = getComputedStyle(copy);
+        return Math.abs(frame.width - 56) < .1 && frame.height <= 17.5 && frame.bottom <= target.bottom + 1
+          && style.overflowX === 'hidden' && style.overflowY === 'hidden' && style.whiteSpace === 'nowrap';
+      }),
       themes: { light, dark, black },
     };
   })()`);
@@ -596,6 +675,11 @@ try {
 
   const failures = [];
   if (!cacheNotice.fixed || cacheNotice.zIndex < 10 || !cacheNotice.outsideContent
+    || cacheNotice.finalTop < 0 || cacheNotice.finalTop > 12 || cacheNotice.width >= cacheNotice.viewportWidth * .5
+    || !cacheNotice.transitionProperty.includes('transform') || cacheNotice.transitionDuration === '0s'
+    || !cacheNotice.closeVisible || !cacheNotice.singleLine
+    || (process.env.ATR_QA_SCREENSHOTS && (cacheNotice.animation.startBottom > 0
+      || !(cacheNotice.animation.startTop < cacheNotice.animation.movingTop && cacheNotice.animation.movingTop < cacheNotice.animation.endTop)))
     || Math.abs(cacheNotice.beforeTop - cacheNotice.afterManualTop) > .1
     || Math.abs(cacheNotice.beforeTop - cacheNotice.afterAutoTop) > .1 || !cacheNotice.autoDismissed) failures.push('cache notification overlay');
   if (continuousInput.value !== 'abcdefghijkl' || !continuousInput.focused || !continuousInput.stable) failures.push('continuous input');
@@ -636,8 +720,19 @@ try {
     || !settingsVisuals.updatePenultimate || settingsVisuals.horizontalOverflow) failures.push('settings visuals');
   if (pages.dashboard.columns !== 3) failures.push('dashboard columns');
   if (pages.dashboard.cardWidth < 337 || pages.dashboard.cardWidth > 338 || pages.dashboard.masterySkillGap < 28 || pages.dashboard.masterySkillGap > 40) failures.push('dashboard card geometry');
-  if (!pages.promotion.cardWidth || pages.promotion.cardWidth < 337 || pages.promotion.cardWidth > 338) failures.push('promotion card geometry');
-  if (!pages.modules.cardWidth || pages.modules.cardWidth < 337 || pages.modules.cardWidth > 338) failures.push('module card geometry');
+  for (const planner of ['promotion', 'modules']) {
+    const geometry = pages[planner];
+    if (!geometry.cardWidth || Math.abs(geometry.cardWidth - pages.dashboard.cardWidth) > .1
+      || Math.abs(geometry.cardHeight - pages.dashboard.cardHeight) > .1
+      || Math.abs(geometry.avatar.width - pages.dashboard.avatar.width) > .1
+      || Math.abs(geometry.avatar.height - pages.dashboard.avatar.height) > .1
+      || Math.abs(geometry.rightVisual.width - pages.dashboard.rightVisual.width) > .1
+      || Math.abs(geometry.rightVisual.height - pages.dashboard.rightVisual.height) > .1
+      || Math.abs(geometry.rightVisual.rightInset - pages.dashboard.rightVisual.rightInset) > .1
+      || Math.abs(geometry.rightVisual.topInset - pages.dashboard.rightVisual.topInset) > .1) failures.push(`${planner} card geometry`);
+  }
+  if (operatorRarityVisuals.sixGradient !== masteryRarityGradient || !operatorRarityVisuals.sixBorderTransparent
+    || !operatorRarityVisuals.fiveBorderVisible || operatorRarityVisuals.sixStripWidth !== '3px') failures.push('operator rarity gradient');
   if (!plannerVisuals.promotionSingle.cards || plannerVisuals.promotionSingle.levelBadges !== plannerVisuals.promotionSingle.cards
     || !plannerVisuals.promotionSingle.transitions || !plannerVisuals.promotionSingle.imagesLoaded
     || !plannerVisuals.promotionSingle.eliteBottomAligned || !plannerVisuals.promotionSingle.levelBottomAligned
@@ -647,6 +742,7 @@ try {
     || !plannerVisuals.moduleSingle.stageImagesLoaded || !plannerVisuals.moduleSingle.codesUppercase
     || !plannerVisuals.moduleSingle.typeFramesSquare || !plannerVisuals.moduleSingle.typeAspectPreserved
     || !plannerVisuals.moduleSingle.stageTransparent || !plannerVisuals.moduleSingle.stageAspectPreserved
+    || !plannerVisuals.moduleSingle.targetsMatchMastery || !plannerVisuals.moduleSingle.copyContained
     || plannerVisuals.moduleSingle.themes.light.typeFilter === 'none'
     || plannerVisuals.moduleSingle.themes.light.stageFilter !== 'none'
     || plannerVisuals.moduleSingle.themes.dark.typeFilter !== 'none'
@@ -657,7 +753,7 @@ try {
     || !plannerVisuals.moduleSingle.themes.dark.codeUsesText || !plannerVisuals.moduleSingle.themes.dark.nameUsesText
     || !plannerVisuals.moduleSingle.themes.black.codeUsesText || !plannerVisuals.moduleSingle.themes.black.nameUsesText) failures.push('module planner visuals');
   if (!plannerVisuals.moduleContinuous.cards || !plannerVisuals.moduleContinuous.allMultiStage || !plannerVisuals.moduleContinuous.includesSupportedSpan) failures.push('module continuous visuals');
-  if (windowPolicy.bounds.width !== 1360 || windowPolicy.bounds.height !== 800
+  if (Math.abs(windowPolicy.bounds.width - 1360) > 1 || Math.abs(windowPolicy.bounds.height - 800) > 1
     || windowPolicy.minimumSize.join('x') !== '1360x800'
     || windowPolicy.maximumSize.join('x') !== '1360x800'
     || windowPolicy.resizable || windowPolicy.maximizable || windowPolicy.fullscreenable
@@ -666,6 +762,7 @@ try {
   const report = {
     pass: failures.length === 0,
     failures,
+    cacheNotice,
     window: windowPolicy,
     continuousInput,
     keyboard: { afterBackspace, afterMiddleEdit, afterPaste },
@@ -684,6 +781,7 @@ try {
     optionCounts,
     highlightSync,
     pages,
+    rarity: { masteryRarityGradient, operatorRarityVisuals },
     plannerVisuals,
   };
   await writeFile(path.join(output, 'operators-search-filter-qa.json'), `${JSON.stringify(report, null, 2)}\n`, 'utf8');

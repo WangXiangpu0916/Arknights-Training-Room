@@ -165,7 +165,7 @@ function moduleCard(candidate) {
       <img class="candidate-avatar" src="${avatar(candidate.operator.operatorId)}" alt="${esc(candidate.operator.name)}头像" data-img-fallback>
       <div class="candidate-details"><div class="candidate-heading"><div class="candidate-identity"><h3>${esc(candidate.operator.name)}</h3><span class="identity-separator">|</span><span>${esc(candidate.operator.profession)}</span><span class="identity-separator">|</span><span>${esc(candidate.operator.subProfession)}</span></div></div>
         <div class="candidate-visuals">${moduleStageTransition(candidate.from, candidate.to)}
-          <div class="plan-target module-target"><span class="module-type-icon"><img src="${moduleTypeIcon(candidate.module.typeIcon)}" alt="${esc(moduleTypeCode(candidate.module.typeIcon))} 模组类型图标" loading="lazy" decoding="async" data-img-fallback></span><strong class="module-type-code">${esc(moduleTypeCode(candidate.module.typeIcon))}</strong><div class="module-name" title="${esc(candidate.module.name)}"><small>${esc(candidate.module.name)}</small></div></div></div></div>
+          <div class="plan-target module-target"><span class="module-type-icon"><img src="${moduleTypeIcon(candidate.module.typeIcon)}" alt="${esc(moduleTypeCode(candidate.module.typeIcon))} 模组类型图标" loading="lazy" decoding="async" data-img-fallback></span><div class="module-target-copy" title="${esc(moduleTypeCode(candidate.module.typeIcon))} · ${esc(candidate.module.name)}"><span><strong class="module-type-code">${esc(moduleTypeCode(candidate.module.typeIcon))}</strong><span aria-hidden="true"> · </span><small class="module-name">${esc(candidate.module.name)}</small></span></div></div></div></div>
     </div>
   </article>`;
 }
@@ -218,7 +218,12 @@ function dismissCacheNotice(key) {
   clearCacheNoticeTimer();
   const region = document.querySelector('#data-notice-region');
   region.classList.remove('show');
-  region.replaceChildren();
+  const notice = region.firstElementChild;
+  const removeNotice = () => {
+    if (activeCacheNoticeKey === key && !region.classList.contains('show')) region.replaceChildren();
+  };
+  notice?.addEventListener('transitionend', removeNotice, { once: true });
+  setTimeout(removeNotice, 320);
 }
 
 function renderDataNotice() {
@@ -235,6 +240,7 @@ function renderDataNotice() {
   clearCacheNoticeTimer();
   activeCacheNoticeKey = key;
   region.innerHTML = `<div class="data-notice cache-notice" role="status"><span>当前使用缓存数据 · 最后同步：${esc(fmtTime(state.account.syncedAt))}</span><button type="button" aria-label="关闭缓存数据提示" data-close-cache-notice>×</button></div>`;
+  void region.offsetHeight;
   region.classList.add('show');
   region.querySelector('[data-close-cache-notice]').addEventListener('click', () => dismissCacheNotice(key), { once: true });
   cacheNoticeTimer = setTimeout(() => dismissCacheNotice(key), 5000);
