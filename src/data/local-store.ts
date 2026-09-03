@@ -23,14 +23,14 @@ export class LocalStore {
   }
 
   async readSettings(): Promise<Settings> {
-    const value = await this.readJson<Partial<Settings>>(this.settingsPath);
+    const value = await this.readJson<Omit<Partial<Settings>, 'theme'> & { theme?: string }>(this.settingsPath);
     return {
       unlimitedItemIds: Array.isArray(value?.unlimitedItemIds)
         ? value.unlimitedItemIds.filter(x => typeof x === 'string')
         : [],
       selectedUid: typeof value?.selectedUid === 'string' ? value.selectedUid : undefined,
       autoRefresh: value?.autoRefresh === true,
-      theme: value?.theme === 'dark' || value?.theme === 'black' || value?.theme === 'light' ? value.theme : 'system',
+      theme: value?.theme === 'dark' ? 'black' : value?.theme === 'black' || value?.theme === 'light' ? value.theme : 'system',
     };
   }
 

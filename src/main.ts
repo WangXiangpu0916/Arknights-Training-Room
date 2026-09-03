@@ -55,7 +55,7 @@ function reportUpdateError(event: string, error: unknown, action: string): Updat
   return setUpdateState({ phase: 'error', message: friendlyUpdateError(error, action) });
 }
 
-function applyTheme(theme: 'system' | 'dark' | 'black' | 'light'): void {
+function applyTheme(theme: 'system' | 'black' | 'light'): void {
   nativeTheme.themeSource = theme === 'black' ? 'dark' : theme;
   mainWindow?.webContents.send('theme:changed', { theme, dark: nativeTheme.shouldUseDarkColors });
 }
@@ -141,7 +141,7 @@ function registerIpc(): void {
   });
 }
 
-async function createWindow(theme: 'system' | 'dark' | 'black' | 'light'): Promise<void> {
+async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> {
   const width = process.env.ATR_SCREENSHOT ? Number(process.env.ATR_WINDOW_WIDTH) || FIXED_WINDOW_WIDTH : FIXED_WINDOW_WIDTH;
   const height = process.env.ATR_SCREENSHOT ? Number(process.env.ATR_WINDOW_HEIGHT) || FIXED_WINDOW_HEIGHT : FIXED_WINDOW_HEIGHT;
   mainWindow = new BrowserWindow({
@@ -157,7 +157,7 @@ async function createWindow(theme: 'system' | 'dark' | 'black' | 'light'): Promi
     fullscreenable: false,
     title: '训练室',
     icon: path.join(app.getAppPath(), 'build', 'icon.png'),
-    backgroundColor: theme === 'black' ? '#0f0f0f' : nativeTheme.shouldUseDarkColors ? '#091018' : '#dfe7ed',
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#0f0f0f' : '#dfe7ed',
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

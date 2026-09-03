@@ -88,7 +88,7 @@ export interface Settings {
   unlimitedItemIds: string[];
   selectedUid?: string;
   autoRefresh: boolean;
-  theme: 'system' | 'dark' | 'black' | 'light';
+  theme: 'system' | 'black' | 'light';
 }
 
 export interface CraftStep {

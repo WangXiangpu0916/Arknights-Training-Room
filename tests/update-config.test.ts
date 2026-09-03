@@ -251,7 +251,7 @@ test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS �
   assert.ok(metadata['30023'].description.length > 30);
 });
 
-test('应用壳使用窄侧栏与圆角工作区，主题支持系统、深蓝、黑色和浅色', () => {
+test('应用壳使用窄侧栏与圆角工作区，主题支持系统、黑色和浅色', () => {
   const main = readFileSync('src/main.ts', 'utf8');
   const index = readFileSync('renderer/index.html', 'utf8');
   const renderer = readFileSync('renderer/app.js', 'utf8');
@@ -265,18 +265,16 @@ test('应用壳使用窄侧栏与圆角工作区，主题支持系统、深蓝�
   assert.match(styles, /main \{[^}]*border-radius: 18px/);
   assert.doesNotMatch(styles, /\.sidebar \{[^}]*border-right/);
   assert.match(renderer, /name="theme" value="system"/);
-  assert.match(renderer, /name="theme" value="dark"/);
   assert.match(renderer, /name="theme" value="black"/);
   assert.match(renderer, /name="theme" value="light"/);
-  assert.match(renderer, /> 深蓝色<\/label>/);
+  assert.doesNotMatch(renderer, /name="theme" value="dark"|深蓝色/);
   assert.match(renderer, /> 黑色<\/label>/);
   assert.doesNotMatch(renderer, /游戏数据 \$\{esc\(fmtTime\(state\.gameData\.updatedAt\)\)\}/);
-  assert.match(types, /'system' \| 'dark' \| 'black' \| 'light'/);
-  assert.match(store, /value\?\.theme === 'black'/);
-  assert.match(styles, /:root\[data-theme="black"\]/);
+  assert.match(types, /'system' \| 'black' \| 'light'/);
+  assert.match(store, /value\?\.theme === 'dark' \? 'black'/);
+  assert.doesNotMatch(styles, /:root\[data-theme="black"\]/);
   assert.match(styles, /:root\[data-theme="light"\]/);
   assert.match(styles, /@media \(prefers-color-scheme: light\)/);
-  assert.match(styles, /--app-bg: #091018/);
   assert.match(styles, /--app-bg: #0f0f0f/);
   assert.match(styles, /--app-bg: #dfe7ed/);
 });

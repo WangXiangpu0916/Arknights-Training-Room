@@ -1,12 +1,12 @@
 :root {
   color-scheme: dark;
-  --app-bg: #091018;
-  --bg: #0f1822;
-  --panel: #16222d;
-  --panel-2: #1c2a36;
-  --line: #2a3946;
-  --text: #edf3f7;
-  --muted: #8fa1b0;
+  --app-bg: #0f0f0f;
+  --bg: #181818;
+  --panel: #1e1e1e;
+  --panel-2: #252525;
+  --line: #303030;
+  --text: #f0f0f0;
+  --muted: #9b9b9b;
   --accent: #0098DC;
   --accent-hover: #22BBFF;
   --accent-bright: #18D1FF;
@@ -16,28 +16,13 @@
   --ok: #5bd89b;
   --danger: #ff6b6b;
   --blue: #62aafc;
-  --sidebar: #091018;
-  --topbar: rgba(15,24,34,.96);
-  --field: #0d1720;
-  --panel-hover: #1b2a36;
-  --shell-shadow: rgba(0,0,0,.24);
-  --module-stage-filter: invert(1) brightness(.88);
-  --module-type-filter: none;
-}
-:root[data-theme="black"] {
-  color-scheme: dark;
-  --app-bg: #0f0f0f;
-  --bg: #181818;
-  --panel: #1e1e1e;
-  --panel-2: #252525;
-  --line: #303030;
-  --text: #f0f0f0;
-  --muted: #9b9b9b;
   --sidebar: #0f0f0f;
   --topbar: rgba(24,24,24,.96);
   --field: #161616;
   --panel-hover: #242424;
   --shell-shadow: rgba(0,0,0,.32);
+  --module-stage-filter: invert(1) brightness(.88);
+  --module-type-filter: none;
 }
 :root[data-theme="light"] {
   color-scheme: light;
