@@ -434,16 +434,19 @@ try {
   const statisticsVisuals = await evaluate(`(() => {
     const read = () => ({
       scope: statisticsScope,
-      cards: document.querySelectorAll('.stat-card').length,
-      ownership: document.querySelector('.single-stat .stat-card-copy strong')?.textContent.trim(),
-      totals: [...document.querySelectorAll('.stat-card-copy strong')].map(node => node.textContent.trim()),
-      distribution: [...document.querySelectorAll('.elite-distribution strong')].map(node => Number(node.textContent)),
+      rows: document.querySelectorAll('.stat-row').length,
+      sections: [...document.querySelectorAll('.statistics-heading h2')].map(node => node.textContent.trim()),
+      ownership: document.querySelector('.stat-row .stat-count')?.textContent.trim(),
+      totals: [...document.querySelectorAll('.stat-row .stat-count')].map(node => node.textContent.trim()),
+      distributionRemoved: !document.querySelector('.elite-distribution')
+        && !['当前 E0', '当前 E1', '当前 E2'].some(label => document.body.textContent.includes(label)),
+      scopeCompact: document.querySelector('.statistics-scope').getBoundingClientRect().width < 260,
       horizontalOverflow: document.querySelector('main').scrollWidth > document.querySelector('main').clientWidth,
     });
     const all = read();
     document.querySelector('[data-statistics-scope="owned"]').click();
     const owned = read();
-    const first = document.querySelector('.stat-card');
+    const first = document.querySelector('.stat-row');
     first.open = true;
     const breakdownVisible = first.open && first.querySelectorAll('.stat-breakdown-row').length >= 3;
     return { all, owned, breakdownVisible };
@@ -598,10 +601,12 @@ try {
   if (!highlightSync.equal) failures.push('highlight source mismatch');
   if (Object.values(pages).some(page => page.horizontalOverflow)) failures.push('horizontal overflow');
   if (statisticsVisuals.all.scope !== 'all' || statisticsVisuals.owned.scope !== 'owned'
-    || statisticsVisuals.all.cards !== 6 || statisticsVisuals.owned.cards !== 6
+    || statisticsVisuals.all.rows !== 6 || statisticsVisuals.owned.rows !== 6
+    || statisticsVisuals.all.sections.join('|') !== '干员持有|技能专精|模组|精英化'
     || statisticsVisuals.all.ownership !== statisticsVisuals.owned.ownership
     || statisticsVisuals.owned.totals.some((value, index) => Number(value.split('/')[1]) > Number(statisticsVisuals.all.totals[index].split('/')[1]))
-    || statisticsVisuals.owned.distribution.reduce((sum, value) => sum + value, 0) !== account.operators.length
+    || !statisticsVisuals.all.distributionRemoved || !statisticsVisuals.owned.distributionRemoved
+    || !statisticsVisuals.all.scopeCompact || !statisticsVisuals.owned.scopeCompact
     || !statisticsVisuals.breakdownVisible || statisticsVisuals.all.horizontalOverflow || statisticsVisuals.owned.horizontalOverflow) failures.push('statistics visuals');
   if (pages.dashboard.columns !== 3) failures.push('dashboard columns');
   if (pages.dashboard.cardWidth < 337 || pages.dashboard.cardWidth > 338 || pages.dashboard.masterySkillGap < 28 || pages.dashboard.masterySkillGap > 40) failures.push('dashboard card geometry');

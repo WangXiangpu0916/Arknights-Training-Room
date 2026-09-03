@@ -210,5 +210,4 @@ export interface AccountStatistics {
     all: TrainingStatisticsScope;
     owned: TrainingStatisticsScope;
   };
-  eliteDistribution: Record<0 | 1 | 2, number>;
 }

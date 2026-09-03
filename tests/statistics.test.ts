@@ -84,7 +84,6 @@ test('精英化完成度按真实上限且 E2 同时完成 E1', () => {
   assert.deepEqual([statistics.scopes.all.elite2.completed, statistics.scopes.all.elite2.total], [1, 3]);
   assert.deepEqual([statistics.scopes.owned.elite1.completed, statistics.scopes.owned.elite1.total], [2, 2]);
   assert.deepEqual([statistics.scopes.owned.elite2.completed, statistics.scopes.owned.elite2.total], [1, 2]);
-  assert.deepEqual(statistics.eliteDistribution, { 0: 1, 1: 1, 2: 1 });
 });
 
 test('星级子统计严格汇总到主统计且完成数不超过总数', () => {
@@ -98,9 +97,4 @@ test('星级子统计严格汇总到主统计且完成数不超过总数', () =>
     assert.equal(Object.values(value.byRarity).reduce((sum, item) => sum + item.completed, 0), value.completed);
     assert.equal(Object.values(value.byRarity).reduce((sum, item) => sum + item.total, 0), value.total);
   }
-});
-
-test('未持有干员不会被计入当前 E0 分布', () => {
-  const statistics = buildAccountStatistics(gameData, { ...account, operators: [account.operators[0]] });
-  assert.deepEqual(statistics.eliteDistribution, { 0: 0, 1: 0, 2: 1 });
 });

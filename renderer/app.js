@@ -244,14 +244,14 @@ function percentage(statistic) {
   return statistic.total ? Math.round(statistic.completed / statistic.total * 100) : 0;
 }
 
-function statisticCard(label, statistic, description, rarities) {
+function statisticRow(label, statistic, rarities) {
   const breakdown = rarities
     .map(rarity => [rarity, statistic.byRarity[rarity]])
     .filter(([, value]) => value?.total)
-    .map(([rarity, value]) => `<div class="stat-breakdown-row"><span>${rarity} 星</span><strong>${value.completed} <small>/ ${value.total}</small></strong><span>${percentage(value)}%</span></div>`)
+    .map(([rarity, value]) => `<div class="stat-breakdown-row"><span>${rarity} 星</span><strong>${value.completed} <small>/ ${value.total}</small></strong><span>${percentage(value)}%</span><span aria-hidden="true"></span></div>`)
     .join('');
-  return `<details class="stat-card">
-    <summary><div class="stat-card-copy"><span>${esc(label)}</span><strong>${statistic.completed} <small>/ ${statistic.total}</small></strong><p>${esc(description)}</p></div><div class="stat-rate">${percentage(statistic)}%</div><span class="stat-expand" aria-hidden="true">⌄</span><progress class="stat-progress" max="${Math.max(1, statistic.total)}" value="${statistic.completed}" aria-label="${esc(label)}完成率 ${percentage(statistic)}%"></progress></summary>
+  return `<details class="stat-row">
+    <summary><span class="stat-label">${esc(label)}</span><strong class="stat-count">${statistic.completed} <small>/ ${statistic.total}</small></strong><span class="stat-rate">${percentage(statistic)}%</span><span class="stat-expand" aria-hidden="true">⌄</span><progress class="stat-progress" max="${Math.max(1, statistic.total)}" value="${statistic.completed}" aria-label="${esc(label)}完成率 ${percentage(statistic)}%"></progress></summary>
     <div class="stat-breakdown">${breakdown || '<p>当前统计范围内没有有效对象。</p>'}</div>
   </details>`;
 }
@@ -260,28 +260,24 @@ function renderStatistics() {
   if (!state.account) return renderDashboard();
   const statistics = state.statistics;
   const scoped = statistics.scopes[statisticsScope];
-  const scopeLabel = statisticsScope === 'all' ? '全部已实装' : '仅已持有';
   content.innerHTML = `${banners()}<div class="statistics-page">
-    <section class="statistics-scope"><div><h2>统计范围</h2><p>专精、模组与精英化统一按“${scopeLabel}”计算有效总量；干员持有率始终以全部已实装干员为分母。</p></div><div class="segmented" role="group" aria-label="统计范围">
+    <div class="statistics-toolbar"><span>统计范围</span><div class="segmented statistics-scope" role="group" aria-label="统计范围">
       <button type="button" data-statistics-scope="all" class="${statisticsScope === 'all' ? 'active' : ''}" aria-pressed="${statisticsScope === 'all'}">全部已实装</button>
       <button type="button" data-statistics-scope="owned" class="${statisticsScope === 'owned' ? 'active' : ''}" aria-pressed="${statisticsScope === 'owned'}">仅已持有</button>
+    </div></div>
+    <section class="statistics-section"><div class="statistics-heading"><h2>干员持有</h2><p>固定按全部已实装干员计算</p></div><div class="statistics-list">
+      ${statisticRow('持有进度', statistics.ownership, [6, 5, 4, 3, 2, 1])}
     </div></section>
-    <section class="statistics-section"><div class="statistics-heading"><div><h2>干员持有</h2><p>固定比较当前账号已持有干员与游戏数据中的全部已实装干员。</p></div><span class="badge muted">固定全量口径</span></div><div class="statistics-grid single-stat">
-      ${statisticCard('干员持有完成度', statistics.ownership, '已持有干员 / 已实装干员', [6, 5, 4, 3, 2, 1])}
+    <section class="statistics-section"><div class="statistics-heading"><h2>技能专精</h2><p>统计可专精技能</p></div><div class="statistics-list">
+      ${statisticRow('M3 技能', scoped.mastery, [6, 5, 4])}
     </div></section>
-    <section class="statistics-section"><div class="statistics-heading"><div><h2>技能专精</h2><p>只统计数据源中存在完整 M1–M3 消耗的可专精技能。</p></div></div><div class="statistics-grid">
-      ${statisticCard('M3 技能', scoped.mastery, 'M3 技能 / 全部可专精技能', [6, 5, 4])}
+    <section class="statistics-section"><div class="statistics-heading"><h2>模组</h2><p>每个已实装模组独立计数</p></div><div class="statistics-list">
+      ${statisticRow('已解锁模组', scoped.moduleUnlocked, [6, 5, 4])}
+      ${statisticRow('三级模组', scoped.moduleStage3, [6, 5, 4])}
     </div></section>
-    <section class="statistics-section"><div class="statistics-heading"><div><h2>模组</h2><p>每个已实装具体模组独立计数，同一干员的不同模组不会合并。</p></div></div><div class="statistics-grid">
-      ${statisticCard('模组解锁', scoped.moduleUnlocked, '已解锁模组 / 全部可解锁模组', [6, 5, 4])}
-      ${statisticCard('三级模组', scoped.moduleStage3, 'Stage 3 模组 / 全部模组', [6, 5, 4])}
-    </div></section>
-    <section class="statistics-section"><div class="statistics-heading"><div><h2>精英化</h2><p>分母按干员真实培养上限计算；E2 干员同时计为已完成 E1。</p></div></div><div class="statistics-grid">
-      ${statisticCard('精英一', scoped.elite1, '已达到 E1 或以上 / 可进行 E1', [6, 5, 4, 3])}
-      ${statisticCard('精英二', scoped.elite2, '当前达到 E2 / 可进行 E2', [6, 5, 4])}
-    </div>
-    <div class="elite-distribution" aria-label="已持有干员当前精英化阶段分布">
-      ${[0, 1, 2].map(phase => `<div><img src="${eliteIcon(phase)}" alt="精英 ${phase}"><span>当前 E${phase}</span><strong>${statistics.eliteDistribution[phase]}</strong></div>`).join('')}
+    <section class="statistics-section"><div class="statistics-heading"><h2>精英化</h2><p>按干员真实培养上限计算</p></div><div class="statistics-list">
+      ${statisticRow('达到 E1+', scoped.elite1, [6, 5, 4, 3])}
+      ${statisticRow('达到 E2', scoped.elite2, [6, 5, 4])}
     </div></section>
   </div>`;
   bindActions();

@@ -97,11 +97,6 @@ export function buildAccountStatistics(gameData: GameData, account: AccountSnaps
   const ownedById = new Map(ownedOperators.map(operator => [operator.operatorId, operator]));
   const allOperators = gameData.operators;
   const ownedDefinitions = allOperators.filter(operator => ownedById.has(operator.operatorId));
-  const eliteDistribution: AccountStatistics['eliteDistribution'] = { 0: 0, 1: 0, 2: 0 };
-  for (const operator of ownedOperators) {
-    const phase = Math.max(0, Math.min(2, Math.trunc(Number(operator.elitePhase) || 0))) as 0 | 1 | 2;
-    eliteDistribution[phase] += 1;
-  }
 
   return {
     ownership: completionStatistic(allOperators.map(operator => ({
@@ -112,6 +107,5 @@ export function buildAccountStatistics(gameData: GameData, account: AccountSnaps
       all: scopeStatistics(allOperators, ownedById),
       owned: scopeStatistics(ownedDefinitions, ownedById),
     },
-    eliteDistribution,
   };
 }

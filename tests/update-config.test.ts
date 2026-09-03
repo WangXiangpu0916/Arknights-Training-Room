@@ -220,6 +220,11 @@ test('缓存状态使用可关闭悬浮通知且统计页面共享统一完成�
   assert.match(styles, /\.data-notice-region \{ position: fixed; z-index: 18;/);
   assert.match(renderer, /statistics\.scopes\[statisticsScope\]/);
   for (const key of ['mastery', 'moduleUnlocked', 'moduleStage3', 'elite1', 'elite2']) assert.match(renderer, new RegExp(`scoped\\.${key}`));
+  assert.match(renderer, /class="statistics-toolbar"/);
+  assert.match(renderer, /class="statistics-list"/);
+  assert.match(renderer, /class="stat-row"/);
+  assert.doesNotMatch(renderer, /stat-card|elite-distribution|当前 E0|当前 E1|当前 E2/);
+  assert.doesNotMatch(styles, /\.stat-card|\.elite-distribution/);
 });
 
 test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS 文本', () => {
