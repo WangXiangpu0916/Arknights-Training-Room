@@ -71,8 +71,8 @@ button { cursor: pointer; }
 .sidebar-brand strong { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sidebar nav { display: grid; gap: 2px; }
 .sidebar-spacer { flex: 1; min-height: 16px; }
-.nav { border: 0; background: transparent; color: var(--muted); text-align: left; padding: 9px 10px; border-radius: 7px; white-space: nowrap; }
-.nav span { display: inline-block; width: 26px; color: #65788a; }
+.nav { border: 0; background: transparent; color: var(--muted); text-align: left; padding: 9px 10px; border-radius: 7px; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+.nav-icon { width: 18px; height: 18px; flex: 0 0 18px; color: currentColor; }
 .nav:hover { background: color-mix(in srgb, var(--panel) 72%, transparent); color: var(--text); }
 .nav.active { background: var(--accent-soft); color: var(--accent-hover); }
 .sidebar-status { min-width: 0; padding: 12px 8px 0; color: var(--muted); font-size: 12px; white-space: nowrap; }
@@ -246,7 +246,7 @@ tr:hover td { background: var(--panel-hover); }
 .operator-reset { width: auto; margin-left: auto; }
 .operator-reset:disabled { cursor: default; }
 .operator-result-summary { margin-top: 0; }
-.operator-row { position: relative; isolation: isolate; min-width: 0; overflow: hidden; display: grid; grid-template-columns: 78px minmax(360px, 1fr) 252px; gap: 16px; align-items: center; background: color-mix(in srgb, var(--panel) 68%, transparent); border: 0; border-bottom: 1px solid var(--line); border-left: 3px solid var(--rarity-color, var(--line)); border-radius: 0; padding: 14px 18px 14px 14px; }
+.operator-row { position: relative; isolation: isolate; min-width: 0; overflow: hidden; display: grid; grid-template-columns: 78px minmax(360px, 1fr) 252px; gap: 16px; align-items: center; content-visibility: auto; contain-intrinsic-size: auto 107px; background: color-mix(in srgb, var(--panel) 68%, transparent); border: 0; border-bottom: 1px solid var(--line); border-left: 3px solid var(--rarity-color, var(--line)); border-radius: 0; padding: 14px 18px 14px 14px; }
 .operator-row.rarity-1 { --rarity-color: #7c8792; }
 .operator-row.rarity-2 { --rarity-color: #4fa769; }
 .operator-row.rarity-3 { --rarity-color: #4b94dc; }

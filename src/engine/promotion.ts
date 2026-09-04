@@ -1,4 +1,5 @@
 import { GameData, OwnedOperator, PromotionCandidate, PromotionStagePlan } from '../domain/types';
+import { CraftingEngine } from './crafting';
 import { fulfillStages, mergeRequirements, totalRequirements } from './planning';
 
 const promotionLevel: Record<number, Partial<Record<1 | 2, number>>> = {
@@ -31,6 +32,8 @@ export class PromotionPlanner {
 
   private plan(ownedOperators: OwnedOperator[], inventory: Record<string, number>, unlimitedIds: string[], continuous: boolean): PromotionCandidate[] {
     const candidates: PromotionCandidate[] = [];
+    const plannedEngine = new CraftingEngine(this.recipes, new Set(unlimitedIds));
+    const finiteEngine = unlimitedIds.length ? new CraftingEngine(this.recipes) : plannedEngine;
     const experienceAvailable = Object.entries(this.gameData.progression.expItems)
       .reduce((sum, [itemId, value]) => sum + (inventory[itemId] ?? 0) * value, 0);
     for (const owned of ownedOperators) {
@@ -58,9 +61,9 @@ export class PromotionPlanner {
           requirements: mergeRequirements(promotion, [{ itemId: this.gameData.progression.lmdItemId, quantity: levelLmd + promotionLmd }]),
         });
       }
-      const planned = fulfillStages(this.recipes, inventory, requested, unlimitedIds);
+      const planned = fulfillStages(plannedEngine, inventory, requested);
       if (!planned.length || (continuous && planned.length < 2)) continue;
-      const finite = fulfillStages(this.recipes, inventory, requested);
+      const finite = unlimitedIds.length ? fulfillStages(finiteEngine, inventory, requested) : planned;
       const stages = (planned.length > finite.length ? planned : finite).slice(0, planned.length);
       const usesUnlimited = planned.length > finite.length;
       const last = stages.at(-1)!;

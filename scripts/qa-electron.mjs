@@ -56,8 +56,10 @@ const env = {
   ATR_USER_DATA: runtime,
   ATR_WINDOW_POLICY_REPORT: windowPolicyPath,
 };
-if (!process.env.ATR_QA_SCREENSHOTS) env.ATR_QA_HIDDEN = '1';
+const screenshotsEnabled = process.env.ATR_QA_SKIP_SCREENSHOTS !== '1';
+if (!screenshotsEnabled) env.ATR_QA_HIDDEN = '1';
 delete env.ELECTRON_RUN_AS_NODE;
+const launchStarted = performance.now();
 const child = spawn(executable, launchArguments, {
   cwd: root,
   env,
@@ -188,6 +190,7 @@ try {
   await waitFor(`Boolean(document.querySelector('.nav[data-page="operators"]')
     && document.querySelector('#sidebar-status strong')
     && !document.querySelector('#content .loading'))`, 'Application did not finish loading');
+  const startupMs = performance.now() - launchStarted;
   await waitFor(`document.querySelector('#data-notice-region.show [data-close-cache-notice]')`, 'Cache notification did not appear');
   await evaluate(`(() => { clearCacheNoticeTimer(); activeCacheNoticeKey = ''; renderDataNotice(); })()`);
   await waitFor(`document.querySelector('#data-notice-region.show [data-close-cache-notice]')`, 'Cache notification did not reset for QA');
@@ -555,7 +558,7 @@ try {
   const plannerVisuals = {};
   await evaluate(`document.querySelector('.nav[data-page="promotion"]').click()`);
   await waitFor(`Boolean(document.querySelector('.promotion-plan-card') && [...document.querySelectorAll('.promotion-plan-card img')].every(image => image.complete && image.naturalWidth > 0))`, 'Promotion planner visuals did not load');
-  plannerVisuals.promotionSingle = await evaluate(`(() => {
+  plannerVisuals.promotionSingle = await evaluate(`(async () => {
     const cards = [...document.querySelectorAll('.promotion-plan-card')];
     const levelBadges = cards.map(card => card.querySelector('.operator-level-badge'));
     const eliteBottomAligned = cards.every(card => {
@@ -566,6 +569,7 @@ try {
     testHost.style.cssText = 'position:fixed;left:0;top:0;display:flex;gap:8px;z-index:-1';
     testHost.innerHTML = [[0, 45], [1, 50], [2, 60]].map(([phase, level]) => operatorLevelBadge(level, phase)).join('');
     document.body.append(testHost);
+    await Promise.all([...testHost.querySelectorAll('img')].map(image => image.decode()));
     const levelSamples = [...testHost.querySelectorAll('.operator-level-badge')].map((badge, phase) => {
       const frame = badge.getBoundingClientRect();
       const iconFrame = badge.querySelector('.operator-current-elite').getBoundingClientRect();
@@ -721,6 +725,81 @@ try {
   await captureScreen('module-planner-detail.png');
   await evaluate(`document.querySelector('[data-close-modal]').click()`);
 
+  const performanceReport = await evaluate(`(async () => {
+    const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
+    const sample = async task => {
+      const values = [];
+      await task();
+      for (let index = 0; index < 7; index += 1) {
+        const started = performance.now();
+        await task();
+        values.push(performance.now() - started);
+      }
+      return { medianMs: median(values), samples: values };
+    };
+    const navigate = target => document.querySelector('.nav[data-page="' + target + '"]').click();
+    const getState = await sample(() => window.trainingRoom.getState());
+    navigate('dashboard');
+    const dashboardFilter = await sample(() => {
+      const input = document.querySelector('[data-dashboard-filter="search"]');
+      input.value = input.value ? '' : '阿';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    dashboardFilters.search = '';
+    renderDashboard();
+    navigate('promotion');
+    const promotionFilter = await sample(() => {
+      const input = document.querySelector('[data-planner-filter="search"][data-planner-kind="promotion"]');
+      input.value = input.value ? '' : '阿';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    plannerFilters.promotion.search = '';
+    renderPromotionPlanner();
+    navigate('modules');
+    const moduleFilter = await sample(() => {
+      const input = document.querySelector('[data-planner-filter="search"][data-planner-kind="module"]');
+      input.value = input.value ? '' : '阿';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    plannerFilters.module.search = '';
+    renderModulePlanner();
+    navigate('operators');
+    const operatorFilter = await sample(() => {
+      const input = document.querySelector('[data-operator-search]');
+      input.value = input.value ? '' : 'a';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    operatorFilters.search = '';
+    updateOperatorResults();
+    navigate('statistics');
+    const statisticsSwitch = await sample(() => {
+      const target = statisticsScope === 'all' ? 'owned' : 'all';
+      document.querySelector('[data-statistics-scope="' + target + '"]').click();
+    });
+    statisticsScope = 'all';
+    renderStatistics();
+    const heapBefore = performance.memory?.usedJSHeapSize ?? 0;
+    const navigation = await sample(() => {
+      for (const target of ['dashboard', 'promotion', 'modules', 'statistics', 'operators', 'inventory', 'settings']) navigate(target);
+    });
+    navigate('dashboard');
+    const heapAfter = performance.memory?.usedJSHeapSize ?? 0;
+    return {
+      getState,
+      dashboardFilter,
+      promotionFilter,
+      moduleFilter,
+      operatorFilter,
+      statisticsSwitch,
+      navigation,
+      heapBefore,
+      heapAfter,
+      finalDomNodes: document.querySelectorAll('*').length,
+      finalImages: document.images.length,
+    };
+  })()`);
+  performanceReport.startupMs = startupMs;
+
   const windowPolicy = JSON.parse(await readFile(windowPolicyPath, 'utf8'));
   startupTheme.windowBackground = windowPolicy.backgroundColor;
   console.log('QA phase: page overflow and window policy');
@@ -843,6 +922,7 @@ try {
     filterPanelToggle: { opened: clickOpened, stayedOpen: clickStayedOpen, moveAwayStayedOpen, closed: clickClosed, hoverNoOpen, moreHoverNoOpen, moreOpened: moreClickOpened, moreClosed: moreClickClosed, horizontalOverflow: filterPanelOverflow },
     optionCounts,
     highlightSync,
+    performance: performanceReport,
     pages,
     rarity: { masteryRarityGradient, operatorRarityVisuals },
     plannerVisuals,

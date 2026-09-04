@@ -92,13 +92,24 @@ export class ToolboxGameDataProvider {
     await rm(nextDir, { recursive: true, force: true });
     await mkdir(nextDir, { recursive: true });
     let version = '';
-    for (const [remote, local] of FILES) {
-      const response = await fetch(`${RAW_ROOT}/${remote}`, { headers: { 'User-Agent': 'Arknights-Training-Room/1.0' } });
-      if (!response.ok) throw new Error(`游戏数据下载失败：${local}（HTTP ${response.status}）`);
-      const text = await response.text();
-      JSON.parse(text);
-      await writeFile(path.join(nextDir, local), text, 'utf8');
-      version ||= response.headers.get('etag')?.replaceAll('"', '') ?? '';
+    for (let index = 0; index < FILES.length; index += 3) {
+      const batch = await Promise.all(FILES.slice(index, index + 3).map(async ([remote, local]) => {
+        try {
+          const response = await fetch(`${RAW_ROOT}/${remote}`, {
+            redirect: 'error',
+            headers: { 'User-Agent': 'Arknights-Training-Room/1.0' },
+          });
+          if (!response.ok) throw new Error(`游戏数据下载失败：${local}（HTTP ${response.status}）`);
+          const text = await response.text();
+          await writeFile(path.join(nextDir, local), text, 'utf8');
+          return { etag: response.headers.get('etag')?.replaceAll('"', '') ?? '' };
+        } catch (error) {
+          return { etag: '', error };
+        }
+      }));
+      const failed = batch.find(result => result.error);
+      if (failed?.error) throw failed.error;
+      version ||= batch.find(result => result.etag)?.etag ?? '';
     }
     const updatedAt = new Date().toISOString();
     await writeFile(

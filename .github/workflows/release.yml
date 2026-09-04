@@ -25,16 +25,25 @@ jobs:
           if ($version -notmatch '-(alpha|beta|rc)(\.|$)') { throw "Only test/pre-release versions may be published" }
           $expected = "v$version"
           if ("${{ github.ref_name }}" -ne $expected) { throw "Tag must be $expected" }
-      - name: Create GitHub pre-release if needed
+      - name: Build and test release artifacts
+        run: npm run dist -- --publish never
+      - name: Upload and publish GitHub pre-release
         shell: pwsh
         run: |
-          gh release view "${{ github.ref_name }}" 2>$null
+          $tag = "${{ github.ref_name }}"
+          $assets = Get-ChildItem release -File | Where-Object {
+            $_.Name -eq 'latest.yml' -or
+            $_.Name -like '*-Setup-*.exe' -or
+            $_.Name -like '*-Setup-*.exe.blockmap' -or
+            $_.Name -like '*-Portable-*.exe'
+          } | ForEach-Object { $_.FullName }
+          if ($assets.Count -lt 4) { throw "Release artifacts are incomplete" }
+
+          gh release view $tag 2>$null
           if ($LASTEXITCODE -ne 0) {
-            gh release create "${{ github.ref_name }}" --prerelease --title "${{ github.ref_name }}" --notes-file release-notes.md
+            gh release create $tag --draft --prerelease --title $tag --notes-file release-notes.md
           }
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build, test and publish GitHub pre-release
-        run: npm run dist -- --publish always
+          gh release upload $tag @assets --clobber
+          gh release edit $tag --draft=false --prerelease
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

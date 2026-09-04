@@ -2,6 +2,14 @@ node_modules/
 dist/
 release/
 *.log
+.env
+.env.*
+!.env.example
+credentials.bin
+account-cache.json
+settings.json
+*.dmp
+crashpad/
 .cache/
 qa-runtime/
 .qa-artifacts/

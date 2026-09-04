@@ -1,7 +1,8 @@
-import { app, BrowserWindow, ipcMain, Menu, nativeTheme, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, nativeTheme } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import path from 'node:path';
 import { writeFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
 import { AppService } from './app-service';
 import { LocalStore } from './data/local-store';
 
@@ -9,6 +10,7 @@ let mainWindow: BrowserWindow | null = null;
 let service: AppService;
 const FIXED_WINDOW_WIDTH = 1360;
 const FIXED_WINDOW_HEIGHT = 800;
+const qaEnvironmentEnabled = !app.isPackaged;
 
 type UpdatePhase = 'idle' | 'unsupported' | 'checking' | 'current' | 'available' | 'downloading' | 'ready' | 'installing' | 'error';
 type UpdateState = {
@@ -28,7 +30,7 @@ let updateState: UpdateState = {
   message: updateSupported ? '可从 GitHub Releases 检查新的测试版本。' : '自动更新仅支持 Windows 安装版。',
 };
 
-if (process.env.ATR_USER_DATA) app.setPath('userData', process.env.ATR_USER_DATA);
+if (qaEnvironmentEnabled && process.env.ATR_USER_DATA) app.setPath('userData', process.env.ATR_USER_DATA);
 
 function notifyStateChanged(): void {
   mainWindow?.webContents.send('app:state-changed');
@@ -74,47 +76,65 @@ function configureUpdater(): void {
 }
 
 function registerIpc(): void {
-  ipcMain.handle('app:get-state', () => service.state());
-  ipcMain.handle('auth:start-qr', async () => {
+  const rendererUrl = pathToFileURL(path.join(__dirname, '..', 'renderer', 'index.html')).href;
+  const secureHandle = (channel: string, listener: Parameters<typeof ipcMain.handle>[1]): void => {
+    ipcMain.handle(channel, (event, ...args) => {
+      const frameUrl = event.senderFrame?.url ?? '';
+      const trustedUrl = frameUrl === rendererUrl
+        || frameUrl.startsWith(`${rendererUrl}?`)
+        || frameUrl.startsWith(`${rendererUrl}#`);
+      if (!mainWindow
+        || event.sender !== mainWindow.webContents
+        || event.senderFrame !== event.sender.mainFrame
+        || !trustedUrl) {
+        throw new Error('拒绝来自非应用主窗口的 IPC 请求');
+      }
+      return listener(event, ...args);
+    });
+  };
+  const requiredText = (value: unknown, label: string, maxLength: number): string => {
+    if (typeof value !== 'string' || !value || value.length > maxLength || /[\u0000-\u001f]/.test(value)) {
+      throw new Error(`${label}格式无效`);
+    }
+    return value;
+  };
+
+  secureHandle('app:get-state', () => service.state());
+  secureHandle('auth:start-qr', async () => {
     await service.store.log('qr-login-start');
     return service.skland.startQrLogin();
   });
-  ipcMain.handle('auth:finish-qr', async (_event, scanId: string) => {
-    const bindings = await service.skland.finishQrLogin(scanId);
+  secureHandle('auth:finish-qr', async (_event, scanId: unknown) => {
+    const bindings = await service.skland.finishQrLogin(requiredText(scanId, '扫码标识', 128));
+    service.credentialsChanged();
     await service.store.log('qr-login-success');
     notifyStateChanged();
     return bindings;
   });
-  ipcMain.handle('auth:get-bindings', () => service.skland.getBindings());
-  ipcMain.handle('auth:logout', async () => {
-    const result = await service.logout();
-    notifyStateChanged();
-    return result;
+  secureHandle('auth:get-bindings', () => service.skland.getBindings());
+  secureHandle('auth:logout', async () => {
+    return service.logout();
   });
-  ipcMain.handle('account:refresh', async (_event, uid?: string) => {
-    const result = await service.refreshAccount(uid);
-    notifyStateChanged();
-    return result;
+  secureHandle('account:refresh', async (_event, uid?: unknown) => {
+    return service.refreshAccount(uid === undefined ? undefined : requiredText(uid, '角色 UID', 64));
   });
-  ipcMain.handle('game:update', async () => {
-    const result = await service.updateGameData();
-    notifyStateChanged();
-    return result;
+  secureHandle('game:update', async () => {
+    return service.updateGameData();
   });
-  ipcMain.handle('settings:update', async (_event, settings) => {
+  secureHandle('settings:update', async (_event, settings) => {
+    if (!settings || typeof settings !== 'object' || Array.isArray(settings)) {
+      throw new Error('设置内容格式无效');
+    }
     const result = await service.updateSettings(settings);
     applyTheme(result.settings.theme);
-    notifyStateChanged();
     return result;
   });
-  ipcMain.handle('cache:clear', async () => {
-    const result = await service.clearCache();
-    notifyStateChanged();
-    return result;
+  secureHandle('cache:clear', async () => {
+    return service.clearCache();
   });
-  ipcMain.handle('material:detail', (_event, itemId: string) => service.materialDetail(itemId));
-  ipcMain.handle('update:get-state', () => updateState);
-  ipcMain.handle('update:check', async () => {
+  secureHandle('material:detail', (_event, itemId: unknown) => service.materialDetail(requiredText(itemId, '材料标识', 128)));
+  secureHandle('update:get-state', () => updateState);
+  secureHandle('update:check', async () => {
     if (!updateSupported) return updateState;
     try {
       await autoUpdater.checkForUpdates();
@@ -123,7 +143,7 @@ function registerIpc(): void {
     }
     return updateState;
   });
-  ipcMain.handle('update:download', async () => {
+  secureHandle('update:download', async () => {
     if (!updateSupported || updateState.phase !== 'available') return updateState;
     try {
       setUpdateState({ phase: 'downloading', message: `正在下载 v${updateState.availableVersion ?? ''}…`, progress: 0 });
@@ -133,7 +153,7 @@ function registerIpc(): void {
     }
     return updateState;
   });
-  ipcMain.handle('update:install', () => {
+  secureHandle('update:install', () => {
     if (!updateSupported || updateState.phase !== 'ready') return updateState;
     setUpdateState({ phase: 'installing', message: '正在重启并安装更新…' });
     setImmediate(() => autoUpdater.quitAndInstall(false, true));
@@ -142,8 +162,9 @@ function registerIpc(): void {
 }
 
 async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> {
-  const width = process.env.ATR_SCREENSHOT ? Number(process.env.ATR_WINDOW_WIDTH) || FIXED_WINDOW_WIDTH : FIXED_WINDOW_WIDTH;
-  const height = process.env.ATR_SCREENSHOT ? Number(process.env.ATR_WINDOW_HEIGHT) || FIXED_WINDOW_HEIGHT : FIXED_WINDOW_HEIGHT;
+  const screenshotEnabled = qaEnvironmentEnabled && Boolean(process.env.ATR_SCREENSHOT);
+  const width = screenshotEnabled ? Number(process.env.ATR_WINDOW_WIDTH) || FIXED_WINDOW_WIDTH : FIXED_WINDOW_WIDTH;
+  const height = screenshotEnabled ? Number(process.env.ATR_WINDOW_HEIGHT) || FIXED_WINDOW_HEIGHT : FIXED_WINDOW_HEIGHT;
   const backgroundColor = theme === 'light'
     ? '#dfe7ed'
     : theme === 'black' || nativeTheme.shouldUseDarkColors ? '#0f0f0f' : '#dfe7ed';
@@ -167,20 +188,25 @@ async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> 
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
+      devTools: qaEnvironmentEnabled,
+      webSecurity: true,
+      allowRunningInsecureContent: false,
+      webviewTag: false,
     },
   });
   Menu.setApplicationMenu(null);
-  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-    if (url.startsWith('https://')) void shell.openExternal(url);
-    return { action: 'deny' };
-  });
+  mainWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  mainWindow.webContents.on('will-navigate', event => event.preventDefault());
+  mainWindow.webContents.on('will-redirect', event => event.preventDefault());
+  mainWindow.webContents.session.setPermissionCheckHandler(() => false);
+  mainWindow.webContents.session.setPermissionRequestHandler((_webContents, _permission, callback) => callback(false));
   mainWindow.once('ready-to-show', () => {
-    if (!process.env.ATR_QA_HIDDEN) mainWindow?.show();
+    if (!qaEnvironmentEnabled || !process.env.ATR_QA_HIDDEN) mainWindow?.show();
   });
   await mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'), {
     query: { theme },
   });
-  if (process.env.ATR_WINDOW_POLICY_REPORT) {
+  if (qaEnvironmentEnabled && process.env.ATR_WINDOW_POLICY_REPORT) {
     await writeFile(process.env.ATR_WINDOW_POLICY_REPORT, JSON.stringify({
       bounds: mainWindow.getBounds(),
       backgroundColor: mainWindow.getBackgroundColor(),
@@ -194,7 +220,7 @@ async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> 
       fullscreenable: mainWindow.isFullScreenable(),
     }, null, 2));
   }
-  if (process.env.ATR_SCREENSHOT) {
+  if (screenshotEnabled && process.env.ATR_SCREENSHOT) {
     await new Promise(resolve => setTimeout(resolve, 700));
     if (process.env.ATR_SCREENSHOT_PAGE) {
       await mainWindow.webContents.executeJavaScript(
@@ -203,8 +229,9 @@ async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> 
       await new Promise(resolve => setTimeout(resolve, 300));
     }
     if (process.env.ATR_SCREENSHOT_INVENTORY_ITEM) {
+      const inventoryItem = JSON.stringify(process.env.ATR_SCREENSHOT_INVENTORY_ITEM);
       await mainWindow.webContents.executeJavaScript(
-        `document.querySelector('[data-inventory-item="${process.env.ATR_SCREENSHOT_INVENTORY_ITEM}"]')?.click()`,
+        `[...document.querySelectorAll('[data-inventory-item]')].find(element => element.dataset.inventoryItem === ${inventoryItem})?.click()`,
       );
       await new Promise(resolve => setTimeout(resolve, Number(process.env.ATR_SCREENSHOT_DELAY) || 1200));
     }
@@ -233,9 +260,11 @@ async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> 
       await new Promise(resolve => setTimeout(resolve, 200));
     }
     if (process.env.ATR_SCREENSHOT_OPERATOR_FILTER) {
+      const operatorFilter = JSON.stringify(process.env.ATR_SCREENSHOT_OPERATOR_FILTER);
       await mainWindow.webContents.executeJavaScript(
         `(() => {
-          const region = document.querySelector('[data-operator-filter-region="${process.env.ATR_SCREENSHOT_OPERATOR_FILTER}"]');
+          const region = [...document.querySelectorAll('[data-operator-filter-region]')]
+            .find(element => element.dataset.operatorFilterRegion === ${operatorFilter});
           if (!region) return;
           region.classList.add('open');
           region.querySelector('[data-operator-filter-panel]').hidden = false;
@@ -256,12 +285,12 @@ app.whenReady().then(async () => {
   app.setAppUserModelId('io.github.arknights.trainingroom');
   service = new AppService(new LocalStore());
   await service.initialize();
-  const state = await service.state();
-  applyTheme(state.settings.theme);
+  const startup = await service.startupContext();
+  applyTheme(startup.theme);
   configureUpdater();
   registerIpc();
-  await createWindow(state.settings.theme);
-  if (state.loggedIn && state.account && state.settings.autoRefresh) {
+  await createWindow(startup.theme);
+  if (startup.loggedIn && startup.hasAccount && startup.autoRefresh) {
     service.refreshAccount().then(notifyStateChanged).catch(() => notifyStateChanged());
   }
 });

@@ -20,6 +20,13 @@ let activeCacheNoticeKey = '';
 let dismissedCacheNoticeKey = '';
 const operatorFilters = OperatorFilters.createState();
 let operatorSearchComposing = false;
+let stateLoadPromise = null;
+let stateLoadQueued = false;
+let toastTimer = null;
+let cachedMaterialMap = null;
+let cachedOperatorRows = null;
+let cachedMasterySource = null;
+let cachedMasteryAvailable = null;
 
 const professions = ['先锋', '近卫', '重装', '狙击', '术师', '医疗', '辅助', '特种'];
 const commonOperatorFilterGroups = [
@@ -77,17 +84,44 @@ const moduleStage = (level, compact = false) => Number(level) === 0
   : `<span class="module-stage-icon${compact ? ' compact' : ''}"><img src="${moduleStageIcons[Number(level)]}" alt="模组阶段 ${Number(level)}"></span>`;
 const moduleStageTransition = (from, to, compact = false) => `<div class="module-stage-transition${compact ? ' compact' : ''}" aria-label="模组从${Number(from) === 0 ? '未装配' : `阶段 ${Number(from)}`}升级到阶段 ${Number(to)}">${moduleStage(from, compact)}<span class="stage-arrow">→</span>${moduleStage(to, compact)}</div>`;
 const skillPlaceholder = '../../resources/images/skill/placeholder.svg';
-const materialMap = () => new Map(state.gameData.materials.map(x => [x.itemId, x]));
+const materialMap = () => cachedMaterialMap ??= new Map(state.gameData.materials.map(x => [x.itemId, x]));
+const setState = next => {
+  state = next;
+  cachedMaterialMap = null;
+  cachedOperatorRows = null;
+  cachedMasterySource = null;
+  cachedMasteryAvailable = null;
+};
 const showToast = message => {
   const toast = document.querySelector('#toast');
   toast.textContent = message;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3200);
+  if (toastTimer !== null) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+    toastTimer = null;
+  }, 3200);
 };
 
 async function loadState() {
-  [state, updateState] = await Promise.all([api.getState(), api.getUpdateState()]);
-  render();
+  if (stateLoadPromise) {
+    stateLoadQueued = true;
+    return stateLoadPromise;
+  }
+  stateLoadPromise = (async () => {
+    do {
+      stateLoadQueued = false;
+      const [nextState, nextUpdateState] = await Promise.all([api.getState(), api.getUpdateState()]);
+      setState(nextState);
+      updateState = nextUpdateState;
+      render();
+    } while (stateLoadQueued);
+  })();
+  try {
+    await stateLoadPromise;
+  } finally {
+    stateLoadPromise = null;
+  }
 }
 
 function setBusy(button, busy, text = '处理中…') {
@@ -378,10 +412,12 @@ function renderOperators() {
 }
 
 function ownedOperatorRows() {
+  if (cachedOperatorRows) return cachedOperatorRows;
   const defs = new Map(state.gameData.operators.map(operator => [operator.operatorId, operator]));
-  return state.account.operators
+  cachedOperatorRows = state.account.operators
     .map(owned => ({ owned, definition: defs.get(owned.operatorId) }))
     .filter(row => row.definition);
+  return cachedOperatorRows;
 }
 
 function operatorFilterRegion(id, label, groups, rows) {
@@ -419,15 +455,20 @@ function updateOperatorResults(allRows = ownedOperatorRows()) {
 }
 
 function operatorRowsHtml(rows) {
-  const available = new Map(currentMasteryCandidates().map(candidate => [
-    `${candidate.operator.operatorId}\u0000${candidate.skill.skillId}`,
-    candidate,
-  ]));
+  const source = currentMasteryCandidates();
+  if (source !== cachedMasterySource) {
+    cachedMasterySource = source;
+    cachedMasteryAvailable = new Map(source.map(candidate => [
+      `${candidate.operator.operatorId}\u0000${candidate.skill.skillId}`,
+      candidate,
+    ]));
+  }
+  const available = cachedMasteryAvailable;
   return rows.map(({ owned, definition }) => `<article class="operator-row rarity-${definition.rarity}">
-    <img class="operator-avatar" src="${avatar(definition.operatorId)}" alt="${esc(definition.name)}头像" data-img-fallback>
+    <img class="operator-avatar" src="${avatar(definition.operatorId)}" alt="${esc(definition.name)}头像" loading="lazy" decoding="async" data-img-fallback>
     <div class="operator-info">
       <div class="operator-identity"><h3>${esc(definition.name)}</h3><span>${esc(definition.profession)} <i>|</i> ${esc(definition.subProfession)}</span></div>
-      <div class="operator-status"><span class="rarity-badge rarity-${definition.rarity}">${definition.rarity}★</span><span><img src="${eliteIcon(owned.elitePhase)}" alt="">精英 ${owned.elitePhase} · Lv.${owned.level}</span><span class="rank-badge">Rank ${owned.skillLevel}</span></div>
+      <div class="operator-status"><span class="rarity-badge rarity-${definition.rarity}">${definition.rarity}★</span><span><img src="${eliteIcon(owned.elitePhase)}" alt="" loading="lazy" decoding="async">精英 ${owned.elitePhase} · Lv.${owned.level}</span><span class="rank-badge">Rank ${owned.skillLevel}</span></div>
       <div class="operator-tags">${[definition.position, ...(definition.tags || [])].filter(Boolean).map(tag => `<span>${esc(tag)}</span>`).join('')}</div>
     </div>
     <div class="operator-skills ${definition.skills.length > 3 ? 'many-skills' : ''}" aria-label="${esc(definition.name)}技能专精状态">${[...definition.skills].sort((a, b) => a.index - b.index).map(skill => {
@@ -436,11 +477,11 @@ function operatorRowsHtml(rows) {
       const masteryLevel = ownedSkill?.masteryLevel ?? 0;
       const status = candidate ? `当前可升级到 M${candidate.to}` : masteryLevel === 3 ? '已完成专精' : '当前不可升级';
       return `<div class="operator-skill ${candidate ? 'can-upgrade' : ''}" data-operator-skill="${esc(`${definition.operatorId}:${skill.skillId}`)}" title="${esc(`第${skill.index}技能 · ${skill.name} · M${masteryLevel} · ${status}`)}" aria-label="${esc(`${skill.name}，当前 M${masteryLevel}，${status}`)}">
-        <img class="operator-skill-icon" src="${skillIcon(skill.skillId)}" alt="${esc(skill.name)}技能图标" data-img-fallback="skill">
-        <span class="mastery-badge" aria-hidden="true"><img class="operator-skill-mastery" src="${masteryBadge(masteryLevel)}" alt=""></span>
+        <img class="operator-skill-icon" src="${skillIcon(skill.skillId)}" alt="${esc(skill.name)}技能图标" loading="lazy" decoding="async" data-img-fallback="skill">
+        <span class="mastery-badge" aria-hidden="true"><img class="operator-skill-mastery" src="${masteryBadge(masteryLevel)}" alt="" loading="lazy" decoding="async"></span>
       </div>`;
     }).join('')}</div>
-    <div class="operator-watermark" aria-hidden="true"><img src="${professionIcon(definition.profession)}" alt=""></div>
+    <div class="operator-watermark" aria-hidden="true"><img src="${professionIcon(definition.profession)}" alt="" loading="lazy" decoding="async"></div>
   </article>`).join('');
 }
 
@@ -561,7 +602,7 @@ function renderInventoryIconCell(item, selectedId) {
   const selected = item.itemId === selectedId;
   return `<button type="button" class="inventory-icon-cell${selected ? ' selected' : ''}" data-inventory-item="${esc(item.itemId)}" title="${esc(item.name)}" aria-pressed="${selected}">
     <span class="inventory-icon-frame">
-      <img class="inventory-icon-image" src="${itemIcon(item.itemId)}" alt="" data-img-fallback>
+      <img class="inventory-icon-image" src="${itemIcon(item.itemId)}" alt="" loading="lazy" decoding="async" data-img-fallback>
       <span class="inventory-icon-qty">${formatInventoryQty(quantity)}</span>
     </span>
   </button>`;
@@ -834,12 +875,17 @@ function bindActions() {
   document.querySelector('[data-unlimited-summaries]')?.addEventListener('change', async event => {
     const ids = new Set(state.settings.unlimitedItemIds);
     for (const id of state.skillSummaryItemIds) event.target.checked ? ids.add(id) : ids.delete(id);
-    state = await api.updateSettings({ unlimitedItemIds: [...ids] });
+    setState(await api.updateSettings({ unlimitedItemIds: [...ids] }));
     render();
   });
   document.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click', () => handleAction(button.dataset.action, button)));
-  document.querySelectorAll('input[name="theme"]').forEach(input => input.addEventListener('change', async () => { state = await api.updateSettings({ theme: input.value }); render(); }));
-  document.querySelector('[data-auto-refresh]')?.addEventListener('change', async event => { state = await api.updateSettings({ autoRefresh: event.target.checked }); render(); });
+  document.querySelectorAll('input[name="theme"]').forEach(input => input.addEventListener('change', async () => {
+    setState(await api.updateSettings({ theme: input.value }));
+    document.documentElement.dataset.theme = state.settings.theme;
+  }));
+  document.querySelector('[data-auto-refresh]')?.addEventListener('change', async event => {
+    setState(await api.updateSettings({ autoRefresh: event.target.checked }));
+  });
   bindImageFallbacks();
 }
 
@@ -856,7 +902,7 @@ function bindInventoryDetailActions(root = document) {
     input.addEventListener('change', async () => {
       const ids = new Set(state.settings.unlimitedItemIds);
       input.checked ? ids.add(input.dataset.inventoryUnlimited) : ids.delete(input.dataset.inventoryUnlimited);
-      state = await api.updateSettings({ unlimitedItemIds: [...ids] });
+      setState(await api.updateSettings({ unlimitedItemIds: [...ids] }));
       if (page === 'inventory' && inventorySelectedId) loadInventoryDetail(inventorySelectedId);
       else render();
     });
@@ -881,12 +927,12 @@ async function handleAction(action, button) {
   try {
     setBusy(button, true);
     if (action === 'login') await beginLogin();
-    if (action === 'logout') state = await api.logout();
-    if (action === 'update-game') { state = await api.updateGameData(); showToast('游戏数据已更新'); }
+    if (action === 'logout') setState(await api.logout());
+    if (action === 'update-game') { setState(await api.updateGameData()); showToast('游戏数据已更新'); }
     if (action === 'check-update') updateState = await api.checkForUpdates();
     if (action === 'download-update') updateState = await api.downloadUpdate();
     if (action === 'install-update') updateState = await api.installUpdate();
-    if (action === 'clear-cache' && confirm('确定清除账号缓存？登录凭据和无限材料设置会保留。')) state = await api.clearCache();
+    if (action === 'clear-cache' && confirm('确定清除账号缓存？登录凭据和无限材料设置会保留。')) setState(await api.clearCache());
     render();
   } catch (error) {
     showToast(error.message || String(error));
@@ -905,7 +951,7 @@ async function beginLogin() {
   await new Promise(resolve => document.querySelector('#binding-confirm').addEventListener('click', resolve, { once: true }));
   const uid = document.querySelector('#binding-select').value;
   modal.classList.add('hidden');
-  state = await api.refreshAccount(uid);
+  setState(await api.refreshAccount(uid));
   page = 'dashboard';
   showToast('账号数据同步完成');
 }
@@ -956,12 +1002,15 @@ document.querySelectorAll('.nav').forEach(button => button.addEventListener('cli
 }));
 document.querySelector('#refresh-button').addEventListener('click', async event => {
   const button = event.currentTarget;
-  try { setBusy(button, true, '同步中…'); state = await api.refreshAccount(); showToast('账号数据已刷新'); render(); }
-  catch (error) { showToast(error.message || String(error)); state = await api.getState(); render(); }
+  try { setBusy(button, true, '同步中…'); setState(await api.refreshAccount()); showToast('账号数据已刷新'); render(); }
+  catch (error) { showToast(error.message || String(error)); setState(await api.getState()); render(); }
   finally { setBusy(button, false); }
 });
 document.querySelectorAll('[data-close-modal]').forEach(x => x.addEventListener('click', () => modal.classList.add('hidden')));
 api.onStateChanged(loadState);
 api.onUpdateStateChanged(next => { updateState = next; if (page === 'settings') renderSettings(); });
-window.addEventListener('beforeunload', clearCacheNoticeTimer);
+window.addEventListener('beforeunload', () => {
+  clearCacheNoticeTimer();
+  if (toastTimer !== null) clearTimeout(toastTimer);
+});
 loadState().catch(error => { content.innerHTML = `<div class="error-banner">应用初始化失败：${esc(error.message || error)}</div>`; });

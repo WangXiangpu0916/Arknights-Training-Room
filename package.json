@@ -1,6 +1,6 @@
 {
   "name": "arknights-training-room",
-  "version": "0.0.20-beta.13",
+  "version": "0.0.20-beta.14",
   "description": "训练室（测试版）：明日方舟本地专精规划桌面应用",
   "repository": "https://github.com/WangXiangpu0916/Arknights-Training-Room.git",
   "main": "dist/src/main.js",
@@ -10,9 +10,10 @@
     "clean": "node scripts/clean.mjs",
     "metadata:sync": "node scripts/sync-prts-metadata.mjs",
     "assets:sync": "node scripts/sync-prts-assets.mjs",
-    "build": "npm run clean && tsc && node scripts/copy-static.mjs",
+    "build": "npm run clean && tsc && node scripts/copy-static.mjs && node scripts/generate-third-party-licenses.mjs",
     "start": "npm run build && electron .",
     "test": "npm run build && node --test dist/tests/*.test.js",
+    "benchmark:performance": "npm run build && node scripts/benchmark-performance.mjs",
     "qa:electron": "node scripts/qa-electron.mjs",
     "dist": "npm test && electron-builder --win nsis portable"
   },
@@ -36,9 +37,12 @@
     },
     "files": [
       "build/icon.png",
-      "dist/**/*",
-      "renderer/**/*",
+      "dist/src/**/*",
+      "dist/renderer/**/*",
+      "dist/THIRD_PARTY_LICENSES.txt",
       "resources/images/**/*",
+      "LICENSE",
+      "THIRD_PARTY_NOTICES.md",
       "package.json"
     ],
     "extraResources": [
@@ -58,6 +62,14 @@
       "releaseType": "prerelease"
     },
     "asar": true,
+    "electronFuses": {
+      "runAsNode": false,
+      "enableCookieEncryption": true,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true
+    },
     "nsis": {
       "artifactName": "Arknights-Training-Room-${version}-Setup-${arch}.${ext}",
       "oneClick": false,

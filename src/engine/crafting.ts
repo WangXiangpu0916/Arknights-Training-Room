@@ -19,7 +19,8 @@ export function directCraftableQuantity(inventory: Inventory, recipe?: Recipe): 
 export function recursiveCraftableQuantity(inventory: Inventory, recipe: Recipe | undefined, recipes: Recipe[]): number {
   if (!recipe?.ingredients.length || !Number.isSafeInteger(recipe.outputQuantity) || recipe.outputQuantity <= 0) return 0;
   const available = { ...inventory, [recipe.productItemId]: 0 };
-  const feasible = (quantity: number) => new CraftingEngine(recipes)
+  const engine = new CraftingEngine(recipes);
+  const feasible = (quantity: number) => engine
     .fulfill(available, [{ itemId: recipe.productItemId, quantity }]).feasible;
   let low = 0;
   let high = recipe.outputQuantity;

@@ -12,7 +12,8 @@ test('HTTP 401 时自动刷新 cred_token 后重试', async () => {
   const originalFetch = globalThis.fetch;
   const credentials: StoredCredentials = { accessToken: 'access', cred: 'cred', credToken: 'expired' };
   let bindingCalls = 0;
-  globalThis.fetch = async input => {
+  globalThis.fetch = async (input, init) => {
+    assert.equal(init?.redirect, 'error');
     const url = String(input);
     if (url.endsWith('/api/v1/auth/refresh')) return json({ code: 0, data: { token: 'fresh' } });
     if (url.includes('/api/v1/game/player/binding')) {
@@ -40,7 +41,10 @@ test('HTTP 401 时自动刷新 cred_token 后重试', async () => {
 
 test('两级凭据续期均失败时提示重新认证', async () => {
   const originalFetch = globalThis.fetch;
-  globalThis.fetch = async () => json({}, 401);
+  globalThis.fetch = async (_input, init) => {
+    assert.equal(init?.redirect, 'error');
+    return json({}, 401);
+  };
 
   try {
     const store = {

@@ -60,7 +60,7 @@ test('应用主题使用青蓝重点色并降低最后同步信息权重', () =>
 test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保持在展示层', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
-  assert.match(renderer, /const available = new Map\(currentMasteryCandidates\(\)/);
+  assert.match(renderer, /cachedMasteryAvailable = new Map\(source\.map/);
   assert.match(renderer, /function currentMasteryCandidates\(\)/);
   assert.match(renderer, /class="operator-skill \$\{candidate \? 'can-upgrade' : ''\}"/);
   assert.match(renderer, /class="operator-skill-icon"/);
@@ -164,6 +164,23 @@ test('专精卡片按头像边界对齐图标并保持技能名称单行滚动',
   assert.match(styles, /@keyframes skill-name-scroll/);
 });
 
+test('长干员列表延迟解码屏外图片并跳过屏外布局绘制', () => {
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  const styles = readFileSync('renderer/styles.css', 'utf8');
+  assert.match(styles, /\.operator-row \{[^}]*content-visibility: auto;[^}]*contain-intrinsic-size: auto 107px/);
+  assert.match(renderer, /class="operator-avatar"[^>]*loading="lazy" decoding="async"/);
+  assert.match(renderer, /class="operator-skill-icon"[^>]*loading="lazy" decoding="async"/);
+  assert.match(renderer, /class="inventory-icon-image"[^>]*loading="lazy" decoding="async"/);
+});
+
+test('renderer 合并并发状态刷新并缓存随 state 更新失效的派生索引', () => {
+  const renderer = readFileSync('renderer/app.js', 'utf8');
+  assert.match(renderer, /if \(stateLoadPromise\) \{\s*stateLoadQueued = true;/);
+  assert.match(renderer, /cachedMaterialMap \?\?= new Map/);
+  assert.match(renderer, /if \(cachedOperatorRows\) return cachedOperatorRows/);
+  assert.match(renderer, /if \(source !== cachedMasterySource\)/);
+});
+
 test('模组卡片仅静态居中显示类型编号且不影响专精名称滚动', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
@@ -187,13 +204,15 @@ test('专精候选与干员列表复用六星纵向渐变', () => {
   assert.doesNotMatch(styles, /--rarity-6-line: linear-gradient\(90deg/);
 });
 
-test('精英化与模组规划是同级页面并使用真实图标和独立状态', () => {
+test('侧边栏使用统一矢量图标，精英化与模组规划保持同级页面和独立状态', () => {
   const html = readFileSync('renderer/index.html', 'utf8');
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
-  assert.match(html, /data-page="promotion"[^>]*>[^<]*<span>[^<]*<\/span>精英化规划/);
-  assert.match(html, /data-page="modules"[^>]*>[^<]*<span>[^<]*<\/span>模组规划/);
-  assert.match(html, /data-page="statistics"[^>]*>[^<]*<span>[^<]*<\/span>统计/);
+  assert.equal((html.match(/<svg class="nav-icon"/g) ?? []).length, 7);
+  assert.match(html, /data-page="promotion"[^>]*><svg class="nav-icon"[^>]*stroke="currentColor"[\s\S]*?<\/svg>精英化规划/);
+  assert.match(html, /data-page="modules"[^>]*><svg class="nav-icon"[^>]*stroke="currentColor"[\s\S]*?<\/svg>模组规划/);
+  assert.match(html, /data-page="statistics"[^>]*><svg class="nav-icon"[^>]*stroke="currentColor"[\s\S]*?<\/svg>统计/);
+  assert.match(styles, /\.nav-icon \{[^}]*width: 18px; height: 18px;[^}]*color: currentColor/);
   assert.match(renderer, /state\[kind === 'promotion' \? 'promotions' : 'modules'\]/);
   assert.match(renderer, /resources\/images\/elite\/e\$\{Number\(level\)\}\.png/);
   assert.doesNotMatch(renderer, /resources\/images\/level\/elite-2\.png/);
@@ -228,7 +247,7 @@ test('缓存状态使用可关闭悬浮通知且统计页面共享统一完成�
   assert.match(html, /id="data-notice-region"/);
   assert.match(renderer, /data-close-cache-notice/);
   assert.match(renderer, /cacheNoticeTimer = setTimeout\(\(\) => dismissCacheNotice\(key\), 5000\)/);
-  assert.match(renderer, /beforeunload', clearCacheNoticeTimer/);
+  assert.match(renderer, /beforeunload', \(\) => \{\s*clearCacheNoticeTimer\(\)/);
   assert.doesNotMatch(renderer, /class="cache-banner"/);
   assert.match(styles, /\.data-notice-region \{ position: fixed; z-index: 40; inset: 0 0 auto;/);
   assert.match(styles, /transform: translateY\(calc\(-100% - 2px\)\)[^}]*transition:[^}]*transform/);

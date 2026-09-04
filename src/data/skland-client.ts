@@ -225,6 +225,7 @@ export class SklandClient {
     const hmac = createHmac('sha256', credentials.credToken).update(payload).digest('hex');
     const sign = createHash('md5').update(hmac).digest('hex');
     const response = await fetch(url, {
+      redirect: 'error',
       headers: {
         cred: credentials.cred,
         sign,
@@ -270,6 +271,7 @@ export class SklandClient {
   private async request<T>(url: string, init: RequestInit = {}): Promise<T> {
     const response = await fetch(url, {
       ...init,
+      redirect: 'error',
       headers: { 'User-Agent': USER_AGENT, ...init.headers },
     });
     if (!response.ok) throw new HttpStatusError(response.status, '网络请求失败');

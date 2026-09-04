@@ -1,4 +1,5 @@
 import { GameData, ModuleCandidate, OwnedOperator } from '../domain/types';
+import { CraftingEngine } from './crafting';
 import { fulfillStages, totalRequirements } from './planning';
 
 const unlockLevelByRarity: Record<number, number> = { 4: 40, 5: 50, 6: 60 };
@@ -26,6 +27,8 @@ export class ModulePlanner {
 
   private plan(ownedOperators: OwnedOperator[], inventory: Record<string, number>, unlimitedIds: string[], continuous: boolean): ModuleCandidate[] {
     const candidates: ModuleCandidate[] = [];
+    const plannedEngine = new CraftingEngine(this.recipes, new Set(unlimitedIds));
+    const finiteEngine = unlimitedIds.length ? new CraftingEngine(this.recipes) : plannedEngine;
     for (const owned of ownedOperators) {
       const operator = this.definitions.get(owned.operatorId);
       if (!operator || owned.elitePhase < 2 || owned.level < (unlockLevelByRarity[operator.rarity] ?? Infinity)) continue;
@@ -38,9 +41,9 @@ export class ModulePlanner {
           if (!requirements.length) break;
           requested.push({ from: level - 1, to: level, requirements });
         }
-        const planned = fulfillStages(this.recipes, inventory, requested, unlimitedIds);
+        const planned = fulfillStages(plannedEngine, inventory, requested);
         if (!planned.length || (continuous && planned.length < 2)) continue;
-        const finite = fulfillStages(this.recipes, inventory, requested);
+        const finite = unlimitedIds.length ? fulfillStages(finiteEngine, inventory, requested) : planned;
         const stages = (planned.length > finite.length ? planned : finite).slice(0, planned.length);
         const usesUnlimited = planned.length > finite.length;
         const last = stages.at(-1)!;
