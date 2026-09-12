@@ -1,0 +1,8 @@
+# Keep vendored resource bytes identical across Windows and CI checkouts.
+resources/game-data/*.json text eol=crlf
+resources/images/**/*.json text eol=crlf
+resources/images/**/*.svg text eol=crlf
+resources/notices.md text eol=crlf
+resources/module-icons.lock.json text eol=lf
+resources/resource-build.json text eol=lf
+resources/resource-inputs.json text eol=lf

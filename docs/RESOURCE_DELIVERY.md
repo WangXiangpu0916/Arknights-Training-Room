@@ -24,6 +24,7 @@
 |---|---|
 | npm test（含 build / tsc） | 99 / 99 通过，无跳过 |
 | 固定种子资源重复构建 | 两次完整包 SHA-256 一致 |
+| 全新 Git checkout 重建 | .gitattributes 固定输入换行后，与本地验收包 SHA-256 完全一致 |
 | 在线固定版本准备 / resource build | 两个 Git commit 均固定，Git blob 内容校验；完整 B 通过相对 A 的门禁 |
 | npm run qa:resource | 真实 Electron Main / preload / Renderer A→B 通过 |
 | npm run qa:electron | 现有搜索、输入、筛选、规划、统计、图片、主题与布局检查通过 |
@@ -31,6 +32,8 @@
 | npm run qa:packaged | 解包应用启动、真实版本、资源与 PNG 字节检查通过 |
 
 卡片布局检查曾在图片解码前测量 intrinsic width，现改为等待首张卡片的图片加载，复验通过。最终打包的 Electron 下载曾因直连超时失败，改用本机已配置的系统代理继续构建。
+
+首次远端应用 CI 因 Git 换行转换导致 module-icons.lock.json 哈希不同，被门禁拦截且未公开应用 Release；增加明确的输入换行属性，并用全新 Git checkout 验证字节一致后，重新触发尚未发布的 beta.15 标签。
 
 ## End-to-End Verification
 
