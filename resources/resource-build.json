@@ -1,0 +1,19 @@
+{
+  "resourceVersion": "2026.09.12.1",
+  "buildTime": "2026-09-12T00:00:00.000Z",
+  "minAppVersion": "0.0.20-beta.15",
+  "sources": [
+    {
+      "repository": "https://github.com/arkntools/arknights-toolbox-data",
+      "commit": "5eebd23466e01e989d3bee0e7b6c730fee89c9c8"
+    },
+    {
+      "repository": "https://github.com/WangXiangpu0916/Arknights-Training-Room",
+      "commit": "28e6f6b1efbea75fb4811209b27ce6de06cdd420"
+    },
+    {
+      "repository": "https://torappu.prts.wiki/assets/uniequip_type",
+      "dataVersion": "sha256:9dfad1751f493905af70e10af15e29d7fb53d333a4074c34783bdeb5c85d62dc"
+    }
+  ]
+}

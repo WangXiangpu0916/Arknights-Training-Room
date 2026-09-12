@@ -1,251 +1,166 @@
-import { app } from 'electron';
 import { cp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { GameData, Material, MaterialAmount, OperatorDefinition, ProgressionData } from '../domain/types';
-import { professionFromToolboxId } from '../domain/professions';
-import { LocalStore } from './local-store';
+import { GameData } from '../domain/types';
+import type { LocalStore } from './local-store';
+import { MAX_PACKAGE_BYTES, RESOURCE_MANIFEST_URL, ResourceSnapshot, compareResourceVersions } from '../resources/schema';
+import { loadSnapshot, safeResourcePath, validateManifest } from '../resources/validation';
+import { unpackSnapshot } from '../resources/package';
 
-type Dict<T> = Record<string, T>;
-
-interface RawCharacter {
-  star: number;
-  profession: number;
+export interface ResourceProviderOptions {
+  bundledDirectory: string;
+  appVersion: string;
+  manifestUrl?: string;
+  // Only main's unpackaged QA entry point may enable loopback HTTP fixtures.
+  allowLoopback?: boolean;
+  fetch?: typeof fetch;
 }
-
-interface RawItem {
-  type: number;
-  rare: number;
-  formula?: Record<string, number>;
-}
-
-interface RawCultivate {
-  evolve?: Array<Record<string, number>>;
-  skills?: {
-    elite?: Array<{
-      name: string;
-      cost: Array<Record<string, number>>;
-    }>;
-  };
-  uniequip?: Array<{
-    id: string;
-    cost: Array<Record<string, number>>;
-  }>;
-}
-
-interface OperatorMetadata {
-  name?: string;
-  pinyin?: string;
-  pinyinInitials?: string;
-  implementationDate?: string;
-  gender?: string;
-  position?: string;
-  obtainMethods?: string[];
-  races?: string[];
-  birthPlaces?: string[];
-  organizations?: string[];
-  teams?: string[];
-  birthdayMonth?: number;
-  tags?: string[];
-}
-
-interface MaterialMetadata {
-  purpose?: string;
-  description?: string;
-}
-
-interface ModuleMetadata {
-  typeIcon: string;
-  typeLabel: string;
-  requirements: Record<1 | 2 | 3, MaterialAmount[]>;
-}
-
-const FILES = [
-  ['data/character.json', 'character.json'],
-  ['data/cultivate.json', 'cultivate.json'],
-  ['data/item.json', 'item.json'],
-  ['locales/cn/character.json', 'character-cn.json'],
-  ['locales/cn/material.json', 'material-cn.json'],
-  ['locales/cn/skill.json', 'skill-cn.json'],
-  ['locales/cn/uniequip.json', 'uniequip-cn.json'],
-] as const;
-
-const RAW_ROOT = 'https://raw.githubusercontent.com/arkntools/arknights-toolbox-data/master/assets';
 
 export class ToolboxGameDataProvider {
-  constructor(private readonly store: LocalStore) {}
+  private active!: ResourceSnapshot;
+  private previous?: ResourceSnapshot;
+  private updatePromise?: Promise<GameData>;
+  private readonly nextDir: string;
+  private readonly backupDir: string;
+  private readonly journal: string;
+  constructor(private readonly store: Pick<LocalStore, 'gameDataDir' | 'log'>, private readonly options: ResourceProviderOptions) {
+    this.nextDir = `${store.gameDataDir}.next`;
+    this.backupDir = `${store.gameDataDir}.backup`;
+    this.journal = `${store.gameDataDir}.transaction.json`;
+  }
 
   async initialize(): Promise<GameData> {
-    await mkdir(this.store.gameDataDir, { recursive: true });
-    try {
-      return await this.load();
-    } catch {
-      await rm(this.store.gameDataDir, { recursive: true, force: true });
-      await cp(this.bundledGameDataDir(), this.store.gameDataDir, { recursive: true });
-      await this.store.log('game-data-cache-recovered', '已回退到内置游戏数据');
-      return this.load();
+    await mkdir(path.dirname(this.store.gameDataDir), { recursive: true });
+    const interrupted = await readFile(this.journal).then(() => true).catch(() => false);
+    if (interrupted) {
+      const backup = await this.tryLoad(this.backupDir);
+      if (backup) {
+        await rm(this.store.gameDataDir, { recursive: true, force: true });
+        await rename(this.backupDir, this.store.gameDataDir);
+      }
+      await rm(this.journal, { force: true });
+      await this.store.log('resource-interrupted-update-recovered');
     }
+    await rm(this.nextDir, { recursive: true, force: true });
+    let current = await this.tryLoad(this.store.gameDataDir);
+    if (!current) {
+      const backup = await this.tryLoad(this.backupDir);
+      if (backup) {
+        await rm(this.store.gameDataDir, { recursive: true, force: true });
+        await rename(this.backupDir, this.store.gameDataDir);
+      } else {
+        await loadSnapshot(this.options.bundledDirectory, this.options.appVersion);
+        await cp(this.options.bundledDirectory, this.nextDir, { recursive: true });
+        await loadSnapshot(this.nextDir, this.options.appVersion);
+        await rm(this.store.gameDataDir, { recursive: true, force: true });
+        await rename(this.nextDir, this.store.gameDataDir);
+        await this.store.log('game-data-cache-recovered', '已迁移到完整内置资源快照');
+      }
+      current = await loadSnapshot(this.store.gameDataDir, this.options.appVersion);
+    }
+    this.active = current;
+    this.previous = await this.tryLoad(this.backupDir);
+    return current.data;
   }
 
-  async update(): Promise<GameData> {
-    const nextDir = `${this.store.gameDataDir}.next`;
-    const backupDir = `${this.store.gameDataDir}.backup`;
-    await rm(nextDir, { recursive: true, force: true });
-    await mkdir(nextDir, { recursive: true });
-    let version = '';
-    for (let index = 0; index < FILES.length; index += 3) {
-      const batch = await Promise.all(FILES.slice(index, index + 3).map(async ([remote, local]) => {
-        try {
-          const response = await fetch(`${RAW_ROOT}/${remote}`, {
-            redirect: 'error',
-            headers: { 'User-Agent': 'Arknights-Training-Room/1.0' },
-          });
-          if (!response.ok) throw new Error(`游戏数据下载失败：${local}（HTTP ${response.status}）`);
-          const text = await response.text();
-          await writeFile(path.join(nextDir, local), text, 'utf8');
-          return { etag: response.headers.get('etag')?.replaceAll('"', '') ?? '' };
-        } catch (error) {
-          return { etag: '', error };
+  async load(): Promise<GameData> { return (await loadSnapshot(this.store.gameDataDir, this.options.appVersion)).data; }
+  get assetBase(): string { return `atr-resource://snapshot/${this.active.manifest.resourceVersion}/images/`; }
+
+  assetPath(version: string, name: string): string | undefined {
+    const snapshot = this.active?.manifest.resourceVersion === version ? this.active
+      : this.previous?.manifest.resourceVersion === version ? this.previous : undefined;
+    if (!snapshot) return undefined;
+    try { safeResourcePath(name); } catch { return undefined; }
+    if (!name.startsWith('images/') || !snapshot.manifest.files[name]) return undefined;
+    return path.join(snapshot.directory, name);
+  }
+
+  update(activate: (data: GameData) => Promise<void>): Promise<GameData> {
+    if (this.updatePromise) return this.updatePromise;
+    const pending = this.performUpdate(activate);
+    this.updatePromise = pending;
+    void pending.finally(() => { if (this.updatePromise === pending) this.updatePromise = undefined; }).catch(() => undefined);
+    return pending;
+  }
+
+  private async performUpdate(activate: (data: GameData) => Promise<void>): Promise<GameData> {
+    const manifest = validateManifest(JSON.parse((await this.download(this.options.manifestUrl ?? RESOURCE_MANIFEST_URL, 2 * 1024 * 1024, true)).toString('utf8')), this.options.appVersion);
+    if (compareResourceVersions(manifest.resourceVersion, this.active.manifest.resourceVersion) <= 0) return this.active.data;
+    const bytes = await this.download(manifest.package.url, MAX_PACKAGE_BYTES);
+    await rm(this.nextDir, { recursive: true, force: true });
+    await mkdir(this.nextDir, { recursive: true });
+    try {
+      await unpackSnapshot(bytes, this.nextDir, manifest);
+      const { package: _package, ...expected } = manifest;
+      const next = await loadSnapshot(this.nextDir, this.options.appVersion, this.active.data, expected);
+      await rm(this.backupDir, { recursive: true, force: true });
+      this.previous = undefined;
+      // Presence means an uncommitted transaction. Startup restores the backup.
+      await writeFile(this.journal, JSON.stringify({ from: this.active.manifest.resourceVersion, to: manifest.resourceVersion }));
+      const old = this.active;
+      let moved = false;
+      try {
+        await rename(this.store.gameDataDir, this.backupDir);
+        moved = true;
+        await rename(this.nextDir, this.store.gameDataDir);
+        this.previous = { ...old, directory: this.backupDir };
+        this.active = { ...next, directory: this.store.gameDataDir };
+        await activate(next.data);
+        await rm(this.journal, { force: true });
+        // Keep one backup for recovery and requests from the previous renderer state.
+        return next.data;
+      } catch (error) {
+        if (moved) {
+          await rm(this.store.gameDataDir, { recursive: true, force: true });
+          await rename(this.backupDir, this.store.gameDataDir);
         }
-      }));
-      const failed = batch.find(result => result.error);
-      if (failed?.error) throw failed.error;
-      version ||= batch.find(result => result.etag)?.etag ?? '';
+        this.active = old;
+        this.previous = undefined;
+        await activate(old.data);
+        await rm(this.journal, { force: true });
+        throw error;
+      }
+    } finally { await rm(this.nextDir, { recursive: true, force: true }); }
+  }
+
+  private async tryLoad(directory: string): Promise<ResourceSnapshot | undefined> {
+    return loadSnapshot(directory, this.options.appVersion).catch(() => undefined);
+  }
+
+  private trustedUrl(url: string, initial: boolean, manifest = false): URL {
+    const parsed = new URL(url);
+    if (parsed.username || parsed.password) throw new Error('资源地址不允许凭据');
+    if (this.options.allowLoopback && parsed.protocol === 'http:' && parsed.hostname === '127.0.0.1') return parsed;
+    if (parsed.protocol !== 'https:') throw new Error('资源更新仅允许 HTTPS');
+    if (manifest && url !== RESOURCE_MANIFEST_URL) throw new Error('未受信任的资源清单地址');
+    const repoPrefix = '/WangXiangpu0916/Arknights-Training-Room/releases/download/';
+    if (parsed.hostname === 'github.com' && parsed.pathname.startsWith(repoPrefix)) return parsed;
+    if (!initial && ['release-assets.githubusercontent.com', 'objects.githubusercontent.com'].includes(parsed.hostname)) return parsed;
+    throw new Error('未受信任的资源下载地址');
+  }
+
+  private async download(url: string, limit: number, manifest = false): Promise<Buffer> {
+    let target = this.trustedUrl(url, true, manifest);
+    const request = this.options.fetch ?? fetch;
+    for (let redirects = 0; redirects <= 5; redirects++) {
+      const response = await request(target, { redirect: 'manual', signal: AbortSignal.timeout(120_000), headers: { 'User-Agent': 'Arknights-Training-Room' } });
+      if ([301, 302, 303, 307, 308].includes(response.status)) {
+        const location = response.headers.get('location');
+        await response.body?.cancel();
+        if (!location) throw new Error('资源下载重定向缺少地址');
+        target = this.trustedUrl(new URL(location, target).href, false);
+        continue;
+      }
+      if (!response.ok || !response.body) throw new Error(`资源下载失败：HTTP ${response.status}，保留当前资源。`);
+      const declared = Number(response.headers.get('content-length') || 0);
+      if (declared > limit) { await response.body.cancel(); throw new Error('资源下载超过大小限制'); }
+      const chunks: Buffer[] = []; let size = 0;
+      for await (const part of response.body as any) {
+        size += part.length;
+        if (size > limit) throw new Error('资源下载超过大小限制');
+        chunks.push(Buffer.from(part));
+      }
+      return Buffer.concat(chunks);
     }
-    const updatedAt = new Date().toISOString();
-    await writeFile(
-      path.join(nextDir, 'data-version.json'),
-      JSON.stringify({ version: version || updatedAt, updatedAt, source: RAW_ROOT }, null, 2),
-      'utf8',
-    );
-    const parsed = await this.loadFrom(nextDir);
-    await rm(backupDir, { recursive: true, force: true });
-    await rename(this.store.gameDataDir, backupDir);
-    try {
-      await rename(nextDir, this.store.gameDataDir);
-      await rm(backupDir, { recursive: true, force: true });
-    } catch (error) {
-      await rename(backupDir, this.store.gameDataDir).catch(() => undefined);
-      throw error;
-    }
-    return parsed;
-  }
-
-  async load(): Promise<GameData> {
-    return this.loadFrom(this.store.gameDataDir);
-  }
-
-  private async loadFrom(directory: string): Promise<GameData> {
-    const [characters, cultivate, items, characterNames, materialNames, skillNames, moduleNames, subProfessionNames, operatorMetadata, materialMetadata, moduleMetadata, progression, metadata] = await Promise.all([
-      this.json<Dict<RawCharacter>>(directory, 'character.json'),
-      this.json<Dict<RawCultivate>>(directory, 'cultivate.json'),
-      this.json<Dict<RawItem>>(directory, 'item.json'),
-      this.json<Dict<string>>(directory, 'character-cn.json'),
-      this.json<Dict<string>>(directory, 'material-cn.json'),
-      this.json<Dict<string>>(directory, 'skill-cn.json'),
-      this.json<Dict<string>>(directory, 'uniequip-cn.json'),
-      this.json<Dict<string>>(this.bundledGameDataDir(), 'subprofession-cn.json'),
-      this.json<Dict<OperatorMetadata>>(this.bundledGameDataDir(), 'operator-metadata.json'),
-      this.json<Dict<MaterialMetadata>>(this.bundledGameDataDir(), 'material-metadata.json'),
-      this.json<Dict<ModuleMetadata>>(this.bundledGameDataDir(), 'uniequip-metadata.json'),
-      this.json<ProgressionData>(this.bundledGameDataDir(), 'progression.json'),
-      this.json<{ version: string; updatedAt: string; sourceCommit?: string }>(directory, 'data-version.json'),
-    ]);
-
-    const materials: Material[] = Object.entries(items).map(([itemId, item]) => ({
-      itemId,
-      name: materialNames[itemId] ?? `未知材料 ${itemId}`,
-      rarity: item.rare,
-      type: item.type,
-      purpose: materialMetadata[itemId]?.purpose ?? '',
-      description: materialMetadata[itemId]?.description ?? '',
-      recipe: item.formula && Object.keys(item.formula).length
-        ? {
-            productItemId: itemId,
-            outputQuantity: item.type === 1 && (item.rare === 3 || item.rare === 4) ? 2 : 1,
-            ingredients: this.amounts(item.formula),
-          }
-        : undefined,
-    }));
-    materials.push({ itemId: progression.lmdItemId, name: '龙门币', rarity: 1, type: 4 });
-
-    const operators: OperatorDefinition[] = [];
-    for (const [operatorId, character] of Object.entries(characters)) {
-      const raw = cultivate[operatorId] ?? {};
-      const elite = raw.skills?.elite ?? [];
-      if (!characterNames[operatorId]) continue;
-      const profile = operatorMetadata[operatorId] ?? {};
-      const hasE1Data = Boolean(raw.evolve?.[0] && Object.keys(raw.evolve[0]).length);
-      const hasE2Data = Boolean(raw.evolve?.[1] && Object.keys(raw.evolve[1]).length);
-      const maxElitePhase = hasE2Data ? 2 : hasE1Data || character.star === 3 ? 1 : 0;
-      operators.push({
-        operatorId,
-        name: characterNames[operatorId],
-        rarity: character.star,
-        profession: professionFromToolboxId(character.profession),
-        subProfession: subProfessionNames[operatorId] ?? '未知分支',
-        searchPinyin: profile.pinyin ?? '',
-        searchPinyinInitials: profile.pinyinInitials ?? '',
-        implementationDate: profile.implementationDate,
-        gender: profile.gender ?? '',
-        position: profile.position ?? '',
-        obtainMethods: profile.obtainMethods ?? [],
-        races: profile.races ?? [],
-        birthPlaces: profile.birthPlaces ?? [],
-        organizations: profile.organizations ?? [],
-        teams: profile.teams ?? [],
-        birthdayMonth: profile.birthdayMonth,
-        tags: profile.tags ?? [],
-        maxElitePhase,
-        promotionRequirements: {
-          1: this.amounts(raw.evolve?.[0] ?? {}),
-          2: this.amounts(raw.evolve?.[1] ?? {}),
-        },
-        modules: (raw.uniequip ?? []).map(module => ({
-          moduleId: module.id,
-          name: moduleNames[module.id] ?? module.id,
-          typeIcon: moduleMetadata[module.id]?.typeIcon ?? '',
-          typeLabel: moduleMetadata[module.id]?.typeLabel ?? '特殊模组',
-          requirements: moduleMetadata[module.id]?.requirements ?? {
-            1: this.amounts(module.cost[0] ?? {}),
-            2: this.amounts(module.cost[1] ?? {}),
-            3: this.amounts(module.cost[2] ?? {}),
-          },
-        })),
-        skills: elite.map((skill, index) => ({
-          skillId: skill.name,
-          operatorId,
-          index: index + 1,
-          name: skillNames[skill.name] ?? `技能 ${index + 1}`,
-          requirements: {
-            1: this.amounts(skill.cost[0] ?? {}),
-            2: this.amounts(skill.cost[1] ?? {}),
-            3: this.amounts(skill.cost[2] ?? {}),
-          },
-        })),
-      });
-    }
-
-    return {
-      version: metadata.version,
-      updatedAt: metadata.updatedAt,
-      sourceCommit: metadata.sourceCommit,
-      operators,
-      materials,
-      progression,
-    };
-  }
-
-  private amounts(value: Record<string, number>): MaterialAmount[] {
-    return Object.entries(value).map(([itemId, quantity]) => ({ itemId, quantity }));
-  }
-
-  private async json<T>(directory: string, name: string): Promise<T> {
-    return JSON.parse(await readFile(path.join(directory, name), 'utf8')) as T;
-  }
-
-  private bundledGameDataDir(): string {
-    return app.isPackaged
-      ? path.join(process.resourcesPath, 'game-data')
-      : path.join(app.getAppPath(), 'resources', 'game-data');
+    throw new Error('资源下载重定向次数过多');
   }
 }

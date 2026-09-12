@@ -14,5 +14,6 @@ crashpad/
 qa-runtime/
 .qa-artifacts/
 output/
+resource-publish/
 qa-fixture-runtime/
 qa-*.png

@@ -1,0 +1,51 @@
+name: Build and publish game resources
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: training-room-resources
+  cancel-in-progress: false
+
+jobs:
+  resource:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run qa:resource
+      - run: node scripts/fetch-resource-baseline.mjs
+      - name: Freeze, convert and validate upstream resource snapshot
+        shell: pwsh
+        run: |
+          $previous = 'dist/resource/snapshot'
+          if (Test-Path 'output/resource-baseline/snapshot/manifest.json') { $previous = 'output/resource-baseline/snapshot' }
+          npm run resource:prepare -- --baseline $previous --skip-unchanged
+          if ($LASTEXITCODE -ne 0) { throw 'Resource preparation failed' }
+          if (Test-Path 'output/resource-input/unchanged') { exit 0 }
+          npm run resource:build -- --input output/resource-input/input --output resource-publish --previous $previous
+          if ($LASTEXITCODE -ne 0) { throw 'Resource validation failed; publication is forbidden' }
+      - name: Publish only a changed, validated snapshot
+        shell: pwsh
+        run: |
+          if (!(Test-Path 'output/resource-input/unchanged')) {
+            node scripts/publish-resource.mjs resource-publish
+            if ($LASTEXITCODE -ne 0) { throw 'Resource publication failed' }
+          }

@@ -470,7 +470,9 @@ try {
   const pages = {};
   for (const page of ['dashboard', 'promotion', 'modules', 'statistics', 'operators', 'inventory', 'settings']) {
     await evaluate(`document.querySelector('.nav[data-page="${page}"]').click()`);
-    await new Promise(resolve => setTimeout(resolve, 40));
+    if (['dashboard', 'promotion', 'modules'].includes(page)) {
+      await waitFor(`Boolean(document.querySelector('.candidate') && [...document.querySelector('.candidate').querySelectorAll('img')].every(image => image.complete && image.naturalWidth > 0))`, `${page} first card images did not load before geometry measurement`);
+    }
     pages[page] = await evaluate(`(() => ({
       horizontalOverflow: document.querySelector('main').scrollWidth > document.querySelector('main').clientWidth,
       scrollHeight: document.querySelector('main').scrollHeight,

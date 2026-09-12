@@ -2,6 +2,8 @@
 
 审计日期：2026-08-30。
 
+游戏资源更新实现已在 2026-09-12 升级；以下历史数据源审计仍供参考，当前资源快照、固定输入、兼容性和事务机制以 [RESOURCE_UPDATES.md](RESOURCE_UPDATES.md) 为准。
+
 ## 森空岛账号数据
 
 ### 采用的链路
@@ -73,7 +75,7 @@ GET  zonai.skland.com/api/v1/game/cultivate/player?uid=...
 
 `cultivate.skills.elite[].cost[0..2]` 分别映射 M1/M2/M3；`cultivate.evolve` 与 `cultivate.uniequip` 分别提供精英化和模组需求。`item.formula` 是确定输入；普通加工产出 1，芯片转换按游戏规则产出 2。随机副产物字段不进入模型。
 
-“检查并更新”先把六个文件下载到旁路目录，全部完成 JSON 与领域解析后再目录交换；任一下载或解析失败时继续使用旧目录。缓存损坏则回退到安装包内置快照。
+当前“检查并更新资源”以 manifest 为唯一入口，下载完整快照，校验 SHA-256、schema、引用、资产和兼容性后才切换；失败保留旧目录。数据、补充 metadata 和图片一起更新，缓存损坏优先恢复可用备份，再恢复内置完整快照。
 
 ## Adapter 边界与替换策略
 

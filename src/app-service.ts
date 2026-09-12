@@ -1,6 +1,6 @@
 import { AccountSnapshot, GameData, Settings } from './domain/types';
 import { LocalStore } from './data/local-store';
-import { ToolboxGameDataProvider } from './data/game-data-provider';
+import { ResourceProviderOptions, ToolboxGameDataProvider } from './data/game-data-provider';
 import { SklandClient } from './data/skland-client';
 import { MasteryPlanner } from './engine/mastery';
 import { PromotionPlanner } from './engine/promotion';
@@ -26,13 +26,21 @@ export class AppService {
   private parentMaterials = new Map<string, GameData['materials']>();
   private recipes: NonNullable<GameData['materials'][number]['recipe']>[] = [];
   private unlimitedMaterials!: ReturnType<typeof unlimitedMaterialGroups>;
+  private operationQueue: Promise<unknown> = Promise.resolve();
 
   readonly gameProvider: ToolboxGameDataProvider;
   readonly skland: SklandClient;
 
-  constructor(readonly store: LocalStore) {
-    this.gameProvider = new ToolboxGameDataProvider(store);
+  constructor(readonly store: LocalStore, resourceOptions: ResourceProviderOptions) {
+    this.gameProvider = new ToolboxGameDataProvider(store, resourceOptions);
     this.skland = new SklandClient(store);
+  }
+
+  // All IPC uses the same barrier. No account/settings/planning read can cross a resource transaction.
+  exclusive<T>(operation: () => Promise<T> | T): Promise<T> {
+    const pending = this.operationQueue.then(operation);
+    this.operationQueue = pending.catch(() => undefined);
+    return pending;
   }
 
   async initialize(): Promise<void> {
@@ -78,9 +86,11 @@ export class AppService {
     const loggedIn = Boolean(await this.store.readCredentials());
     const plans = this.cachedPlans ??= this.buildPlans();
     return {
+      revision: this.stateRevision,
       loggedIn,
       account: this.account,
       gameData: this.gameData,
+      resourceAssetBase: this.gameProvider.assetBase,
       settings: this.settings,
       statistics: buildAccountStatistics(this.gameData, this.account),
       unlimitedEligibleItemIds: [...this.unlimitedMaterials.blue],
@@ -161,9 +171,13 @@ export class AppService {
 
   async updateGameData(): Promise<ReturnType<AppService['state']>> {
     try {
-      this.gameData = await this.gameProvider.update();
-      this.rebuildDerivedData();
-      await this.sanitizeUnlimitedItems();
+      this.gameData = await this.gameProvider.update(async data => {
+        this.gameData = data;
+        this.rebuildDerivedData();
+        this.invalidateState(true);
+        // Build the complete derived state before committing; failures trigger provider rollback.
+        await this.state();
+      });
       this.lastError = '';
       this.invalidateState(true);
       await this.store.log('game-data-update-success', this.gameData.version);

@@ -60,19 +60,15 @@ const inventorySectionLabels = {
 };
 const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]));
 const fmtTime = value => value ? new Date(value).toLocaleString('zh-CN', { hour12: false }) : '从未';
-const avatar = id => `../../resources/images/avatar/${encodeURIComponent(id)}.png`;
-const itemIcon = id => `../../resources/images/item/${encodeURIComponent(id)}.png`;
-const skillIcon = id => `../../resources/images/skill/${encodeURIComponent(id)}.png`;
-const masteryIcon = level => `../../resources/images/mastery/m${level}.png`;
-const masteryBadge = level => `../../resources/images/mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`;
-const eliteIcon = level => `../../resources/images/elite/e${Number(level)}.png`;
-const professionIcon = name => `../../resources/images/profession-hd/${encodeURIComponent(name)}.png`;
-const moduleTypeIcon = typeIcon => `../../resources/images/module/type/${encodeURIComponent(String(typeIcon).toLowerCase())}.png`;
-const moduleStageIcons = Object.freeze({
-  1: '../../resources/images/module/stage/1.png',
-  2: '../../resources/images/module/stage/2.png',
-  3: '../../resources/images/module/stage/3.png',
-});
+const resourceImage = name => `${state.resourceAssetBase}${name}`;
+const avatar = id => resourceImage(`avatar/${encodeURIComponent(id)}.png`);
+const itemIcon = id => resourceImage(`item/${encodeURIComponent(id)}.png`);
+const skillIcon = id => resourceImage(`skill/${encodeURIComponent(id)}.png`);
+const masteryIcon = level => resourceImage(`mastery/m${level}.png`);
+const masteryBadge = level => resourceImage(`mastery/${encodeURIComponent(`专精_${level}_角标.png`)}`);
+const eliteIcon = level => resourceImage(`elite/e${Number(level)}.png`);
+const professionIcon = name => resourceImage(`profession-hd/${encodeURIComponent(name)}.png`);
+const moduleTypeIcon = typeIcon => resourceImage(`module/type/${encodeURIComponent(String(typeIcon).toLowerCase())}.png`);
 const moduleTypeCode = typeIcon => String(typeIcon || '').toUpperCase();
 const operatorLevelBadge = (level, elitePhase) => {
   const value = Math.max(1, Math.min(90, Number(level) || 1));
@@ -81,11 +77,16 @@ const operatorLevelBadge = (level, elitePhase) => {
 };
 const moduleStage = (level, compact = false) => Number(level) === 0
   ? `<span class="module-uninstalled${compact ? ' compact' : ''}">未装配</span>`
-  : `<span class="module-stage-icon${compact ? ' compact' : ''}"><img src="${moduleStageIcons[Number(level)]}" alt="模组阶段 ${Number(level)}"></span>`;
+  : `<span class="module-stage-icon${compact ? ' compact' : ''}"><img src="${resourceImage(`module/stage/${Number(level)}.png`)}" alt="模组阶段 ${Number(level)}"></span>`;
 const moduleStageTransition = (from, to, compact = false) => `<div class="module-stage-transition${compact ? ' compact' : ''}" aria-label="模组从${Number(from) === 0 ? '未装配' : `阶段 ${Number(from)}`}升级到阶段 ${Number(to)}">${moduleStage(from, compact)}<span class="stage-arrow">→</span>${moduleStage(to, compact)}</div>`;
-const skillPlaceholder = '../../resources/images/skill/placeholder.svg';
+const skillPlaceholder = () => resourceImage('skill/placeholder.svg');
 const materialMap = () => cachedMaterialMap ??= new Map(state.gameData.materials.map(x => [x.itemId, x]));
 const setState = next => {
+  if (state && next.revision < state.revision) return;
+  if (state && state.gameData.version !== next.gameData.version) {
+    inventoryDetailRequest++;
+    modal.classList.add('hidden');
+  }
   state = next;
   cachedMaterialMap = null;
   cachedOperatorRows = null;
@@ -752,9 +753,10 @@ async function loadInventoryDetail(itemId) {
   panel.innerHTML = renderInventoryDetailLoading(itemId);
   bindImageFallbacks(panel);
   const requestId = ++inventoryDetailRequest;
+  const resourceVersion = state.gameData.version;
   try {
     const detail = await api.materialDetail(itemId);
-    if (requestId !== inventoryDetailRequest || inventorySelectedId !== itemId) return;
+    if (requestId !== inventoryDetailRequest || inventorySelectedId !== itemId || resourceVersion !== state.gameData.version) return;
     panel.innerHTML = renderInventoryDetailContent(itemId, detail);
     bindInventoryDetailActions(panel);
     bindImageFallbacks(panel);
@@ -790,7 +792,7 @@ function renderSettings() {
   };
   content.innerHTML = `${banners()}<div class="settings-list">
     <section class="setting-row"><div><h3>森空岛账号</h3><p>${state.loggedIn ? `已连接${state.account ? ` · UID ${esc(state.account.uid)}` : ''}` : '未连接。凭据使用 Windows DPAPI 加密保存。'}</p></div><div>${state.loggedIn ? '<button class="secondary" data-action="login">重新认证</button> <button class="danger" data-action="logout">退出 / 删除认证</button>' : '<button class="primary" data-action="login">扫码连接</button>'}</div></section>
-    <section class="setting-row"><div><h3>游戏数据</h3><p>最后更新：${esc(fmtTime(state.gameData.updatedAt))}<br>版本：${esc(state.gameData.version)}</p></div><button class="secondary" data-action="update-game">检查并更新</button></section>
+    <section class="setting-row"><div><h3>游戏资源</h3><p>最后更新：${esc(fmtTime(state.gameData.updatedAt))}<br>资源版本：${esc(state.gameData.version)}</p></div><button class="secondary" data-action="update-game">检查并更新资源</button></section>
     <section class="setting-row"><div><h3>主题</h3><p>跟随系统会在系统深色模式下使用黑色主题，并实时响应切换。</p></div><div class="radio-stack theme-options"><label><input type="radio" name="theme" value="system" ${state.settings.theme === 'system' ? 'checked' : ''}> 跟随系统</label><label><input type="radio" name="theme" value="black" ${state.settings.theme === 'black' ? 'checked' : ''}> 黑色</label><label><input type="radio" name="theme" value="light" ${state.settings.theme === 'light' ? 'checked' : ''}> 浅色</label></div></section>
     <section class="setting-row"><div><h3>启动时自动刷新</h3><p>先显示缓存结果，再在后台同步森空岛。</p></div><label class="switch"><input type="checkbox" data-auto-refresh ${state.settings.autoRefresh ? 'checked' : ''}><span></span></label></section>
     <section class="setting-row update-row"><div><h3>应用更新</h3><p>当前版本 v${esc(updateState.currentVersion)}<br><span class="update-message ${updateState.phase === 'error' ? 'error' : ''}">${esc(updateState.message)}</span></p>${updateState.phase === 'downloading' ? `<div class="update-progress"><span style="width:${Math.max(0, Math.min(100, updateState.progress || 0))}%"></span></div>` : ''}</div><div>${updateActions[updateState.phase] || updateActions.idle}</div></section>
@@ -914,7 +916,7 @@ function bindImageFallbacks(root = document) {
     img.dataset.fallbackBound = 'true';
     img.addEventListener('error', () => {
     if (img.dataset.imgFallback === 'skill') {
-      img.src = skillPlaceholder;
+      img.src = skillPlaceholder();
       img.classList.add('missing');
       return;
     }
@@ -928,7 +930,11 @@ async function handleAction(action, button) {
     setBusy(button, true);
     if (action === 'login') await beginLogin();
     if (action === 'logout') setState(await api.logout());
-    if (action === 'update-game') { setState(await api.updateGameData()); showToast('游戏数据已更新'); }
+    if (action === 'update-game') {
+      const previousVersion = state.gameData.version;
+      setState(await api.updateGameData());
+      showToast(previousVersion === state.gameData.version ? '当前已是最新兼容资源' : '游戏资源已更新');
+    }
     if (action === 'check-update') updateState = await api.checkForUpdates();
     if (action === 'download-update') updateState = await api.downloadUpdate();
     if (action === 'install-update') updateState = await api.installUpdate();

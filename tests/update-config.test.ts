@@ -14,7 +14,7 @@ test('GitHub Releases 更新配置只发布可自动更新的测试版 NSIS 产�
   assert.equal(pkg.build.win.target, 'nsis');
   assert.equal(pkg.build.productName, '训练室');
   assert.equal(pkg.build.nsis.shortcutName, '训练室');
-  assert.deepEqual(pkg.build.extraResources, [{ from: 'resources/game-data', to: 'game-data' }]);
+  assert.deepEqual(pkg.build.extraResources, [{ from: 'dist/resource/snapshot', to: 'training-room-resource' }]);
   assert.match(pkg.build.nsis.artifactName, /^[\x20-\x7E]+$/);
   assert.ok(pkg.dependencies['electron-updater']);
 
@@ -214,13 +214,13 @@ test('侧边栏使用统一矢量图标，精英化与模组规划保持同级�
   assert.match(html, /data-page="statistics"[^>]*><svg class="nav-icon"[^>]*stroke="currentColor"[\s\S]*?<\/svg>统计/);
   assert.match(styles, /\.nav-icon \{[^}]*width: 18px; height: 18px;[^}]*color: currentColor/);
   assert.match(renderer, /state\[kind === 'promotion' \? 'promotions' : 'modules'\]/);
-  assert.match(renderer, /resources\/images\/elite\/e\$\{Number\(level\)\}\.png/);
+  assert.match(renderer, /resourceImage\(`elite\/e\$\{Number\(level\)\}\.png`\)/);
   assert.doesNotMatch(renderer, /resources\/images\/level\/elite-2\.png/);
   assert.match(renderer, /operator-current-elite/);
   assert.match(renderer, /operatorLevelBadge\(candidate\.currentLevel, candidate\.from\)/);
   assert.match(renderer, /digits-\$\{String\(value\)\.length\}/);
-  assert.match(renderer, /resources\/images\/module\/type\/\$\{encodeURIComponent\(String\(typeIcon\)\.toLowerCase\(\)\)\}\.png/);
-  assert.match(renderer, /resources\/images\/module\/stage\/1\.png/);
+  assert.match(renderer, /resourceImage\(`module\/type\/\$\{encodeURIComponent\(String\(typeIcon\)\.toLowerCase\(\)\)\}\.png`\)/);
+  assert.match(renderer, /resourceImage\(`module\/stage\/\$\{Number\(level\)\}\.png`\)/);
   assert.match(renderer, /candidate\.module\.typeIcon/);
   assert.match(renderer, /candidate\.module\.moduleId/);
   assert.match(renderer, /candidate\.module\.typeLabel/);
@@ -345,7 +345,7 @@ test('干员列表区分 Rank 与专精并提供默认培养排序、紧凑技�
   assert.match(renderer, /definition\.position, \.\.\.\(definition\.tags \|\| \[\]\)/);
   assert.match(renderer, /operator-watermark/);
   assert.match(renderer, /professionIcon\(definition\.profession\)/);
-  assert.match(renderer, /resources\/images\/profession-hd/);
+  assert.match(renderer, /resourceImage\(`profession-hd/);
   assert.match(styles, /\.operator-watermark \{[^}]*filter: invert\(1\)/);
   assert.match(styles, /data-theme="light"[^}]*operator-watermark \{[^}]*filter: none/);
   assert.doesNotMatch(styles, /operator-watermark[^}]*mix-blend-mode/);

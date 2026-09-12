@@ -1,7 +1,7 @@
-import { app, BrowserWindow, ipcMain, Menu, nativeTheme } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, nativeTheme, protocol, net } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import path from 'node:path';
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { AppService } from './app-service';
 import { LocalStore } from './data/local-store';
@@ -31,6 +31,7 @@ let updateState: UpdateState = {
 };
 
 if (qaEnvironmentEnabled && process.env.ATR_USER_DATA) app.setPath('userData', process.env.ATR_USER_DATA);
+protocol.registerSchemesAsPrivileged([{ scheme: 'atr-resource', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
 
 function notifyStateChanged(): void {
   mainWindow?.webContents.send('app:state-changed');
@@ -67,6 +68,7 @@ function configureUpdater(): void {
   autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = false;
   autoUpdater.allowPrerelease = true;
+  autoUpdater.channel = 'beta'; // Skip non-semver resource releases in the shared repository.
   autoUpdater.on('checking-for-update', () => setUpdateState({ phase: 'checking', message: '正在检查 GitHub Releases…' }));
   autoUpdater.on('update-not-available', () => setUpdateState({ phase: 'current', message: '当前已是最新测试版本。', availableVersion: undefined, progress: undefined }));
   autoUpdater.on('update-available', info => setUpdateState({ phase: 'available', message: `发现新测试版本 v${info.version}，可选择下载更新。`, availableVersion: info.version, progress: undefined }));
@@ -89,7 +91,7 @@ function registerIpc(): void {
         || !trustedUrl) {
         throw new Error('拒绝来自非应用主窗口的 IPC 请求');
       }
-      return listener(event, ...args);
+      return service.exclusive(() => listener(event, ...args));
     });
   };
   const requiredText = (value: unknown, label: string, maxLength: number): string => {
@@ -119,7 +121,9 @@ function registerIpc(): void {
     return service.refreshAccount(uid === undefined ? undefined : requiredText(uid, '角色 UID', 64));
   });
   secureHandle('game:update', async () => {
-    return service.updateGameData();
+    const next = await service.updateGameData();
+    notifyStateChanged();
+    return next;
   });
   secureHandle('settings:update', async (_event, settings) => {
     if (!settings || typeof settings !== 'object' || Array.isArray(settings)) {
@@ -283,15 +287,40 @@ async function createWindow(theme: 'system' | 'black' | 'light'): Promise<void> 
 
 app.whenReady().then(async () => {
   app.setAppUserModelId('io.github.arknights.trainingroom');
-  service = new AppService(new LocalStore());
+  service = new AppService(new LocalStore(), {
+    bundledDirectory: app.isPackaged ? path.join(process.resourcesPath, 'training-room-resource') : process.env.ATR_RESOURCE_BUNDLED_DIR || path.join(app.getAppPath(), 'dist', 'resource', 'snapshot'),
+    appVersion: app.getVersion(),
+    // Electron networking respects the desktop's proxy configuration.
+    fetch: (input, init) => net.fetch(input instanceof URL ? input.href : typeof input === 'string' ? input : input.url, init),
+    ...(qaEnvironmentEnabled && process.env.ATR_RESOURCE_MANIFEST_URL ? {
+      manifestUrl: process.env.ATR_RESOURCE_MANIFEST_URL,
+      allowLoopback: true,
+    } : {}),
+  });
   await service.initialize();
+  protocol.handle('atr-resource', async request => {
+    try {
+      const url = new URL(request.url);
+      return await service.exclusive(async () => {
+        const [version, ...segments] = url.pathname.slice(1).split('/');
+        const file = url.hostname === 'snapshot' ? service.gameProvider.assetPath(version, decodeURIComponent(segments.join('/'))) : undefined;
+        if (qaEnvironmentEnabled && process.env.ATR_RESOURCE_TRACE) console.log('ATR-RESOURCE', request.url, file ?? 'NOT_FOUND');
+        if (!file) return new Response('Resource not found', { status: 404 });
+        const bytes = await readFile(file);
+        return new Response(bytes, { headers: { 'Content-Type': file.endsWith('.svg') ? 'image/svg+xml' : 'image/png', 'Cache-Control': 'no-store' } });
+      });
+    } catch (error) {
+      if (qaEnvironmentEnabled && process.env.ATR_RESOURCE_TRACE) console.error('ATR-RESOURCE-ERROR', error);
+      return new Response('Invalid resource path', { status: 400 });
+    }
+  });
   const startup = await service.startupContext();
   applyTheme(startup.theme);
   configureUpdater();
   registerIpc();
   await createWindow(startup.theme);
   if (startup.loggedIn && startup.hasAccount && startup.autoRefresh) {
-    service.refreshAccount().then(notifyStateChanged).catch(() => notifyStateChanged());
+    service.exclusive(() => service.refreshAccount()).then(notifyStateChanged).catch(() => notifyStateChanged());
   }
 });
 

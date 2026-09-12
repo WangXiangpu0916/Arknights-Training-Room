@@ -14,7 +14,6 @@ test('发布包仅包含运行时文件与合规声明', () => {
       'dist/src/**/*',
       'dist/renderer/**/*',
       'dist/THIRD_PARTY_LICENSES.txt',
-      'resources/images/**/*',
       'LICENSE',
       'THIRD_PARTY_NOTICES.md',
       'package.json',

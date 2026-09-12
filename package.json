@@ -1,6 +1,6 @@
 {
   "name": "arknights-training-room",
-  "version": "0.0.20-beta.14",
+  "version": "0.0.20-beta.15",
   "description": "训练室（测试版）：明日方舟本地专精规划桌面应用",
   "repository": "https://github.com/WangXiangpu0916/Arknights-Training-Room.git",
   "main": "dist/src/main.js",
@@ -10,7 +10,11 @@
     "clean": "node scripts/clean.mjs",
     "metadata:sync": "node scripts/sync-prts-metadata.mjs",
     "assets:sync": "node scripts/sync-prts-assets.mjs",
-    "build": "npm run clean && tsc && node scripts/copy-static.mjs && node scripts/generate-third-party-licenses.mjs",
+    "build": "npm run clean && tsc && node scripts/copy-static.mjs && node scripts/generate-third-party-licenses.mjs && node scripts/build-resource.mjs",
+    "resource:build": "tsc && node scripts/build-resource.mjs",
+    "resource:prepare": "node scripts/prepare-resource.mjs",
+    "qa:resource": "node scripts/qa-resource-update.mjs",
+    "qa:packaged": "node scripts/qa-packaged-resource.mjs",
     "start": "npm run build && electron .",
     "test": "npm run build && node --test dist/tests/*.test.js",
     "benchmark:performance": "npm run build && node scripts/benchmark-performance.mjs",
@@ -40,15 +44,14 @@
       "dist/src/**/*",
       "dist/renderer/**/*",
       "dist/THIRD_PARTY_LICENSES.txt",
-      "resources/images/**/*",
       "LICENSE",
       "THIRD_PARTY_NOTICES.md",
       "package.json"
     ],
     "extraResources": [
       {
-        "from": "resources/game-data",
-        "to": "game-data"
+        "from": "dist/resource/snapshot",
+        "to": "training-room-resource"
       }
     ],
     "win": {

@@ -27,6 +27,8 @@ jobs:
           if ("${{ github.ref_name }}" -ne $expected) { throw "Tag must be $expected" }
       - name: Build and test release artifacts
         run: npm run dist -- --publish never
+      - name: Verify resource reload and packaged resource protocol
+        run: npm run qa:resource && npm run qa:packaged
       - name: Upload and publish GitHub pre-release
         shell: pwsh
         run: |
