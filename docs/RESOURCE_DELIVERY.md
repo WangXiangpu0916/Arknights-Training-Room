@@ -2,7 +2,7 @@
 
 ## Implemented
 
-应用 `0.0.20-beta.15` 与资源 `2026.09.12.1 / 2026.09.12.2` 分别更新。设置页的“检查并更新资源”读取可信 manifest，下载完整资源包，验证兼容性、SHA-256、内容和图片后安全切换并刷新界面。首次升级自动迁移旧缓存。现有 schema 能表示的干员、技能、材料、模组、消耗、metadata 和图片可只发布资源。
+应用 `0.0.20-beta.16` 与资源 `2026.09.12.1 / 2026.09.12.2` 分别更新。设置页的“检查并更新资源”读取可信 manifest，下载完整资源包，验证兼容性、SHA-256、内容和图片后安全切换并刷新界面。首次升级自动迁移旧缓存。现有 schema 能表示的干员、技能、材料、模组、消耗、metadata 和图片可只发布资源。
 
 ## Architecture
 
@@ -30,16 +30,22 @@
 | npm run qa:electron | 现有搜索、输入、筛选、规划、统计、图片、主题与布局检查通过 |
 | node scripts/benchmark-performance.mjs | 现有全部规划基准运行成功 |
 | npm run qa:packaged | 解包应用启动、真实版本、资源与 PNG 字节检查通过 |
+| npm run qa:packaged -- --update | 正式解包应用通过生产 HTTPS 清单 A→B 更新，新干员“埃癸斯”与实际图片响应已验证 |
+| 公开资源下载与定时更新检查 | 无认证 HTTPS 清单与本地完全一致；下载远端包解包通过；上游 / 种子未变化时正确跳过发布 |
 
 卡片布局检查曾在图片解码前测量 intrinsic width，现改为等待首张卡片的图片加载，复验通过。最终打包的 Electron 下载曾因直连超时失败，改用本机已配置的系统代理继续构建。
 
 首次远端应用 CI 因 Git 换行转换导致 module-icons.lock.json 哈希不同，被门禁拦截且未公开应用 Release；增加明确的输入换行属性，并用全新 Git checkout 验证字节一致后，重新触发尚未发布的 beta.15 标签。
+
+随后真实 HTTPS 复核发现 Electron net.fetch 的 manual redirect 会取消 GitHub 跳转，立即将 beta.15 收回为草稿。改用 net.request 将每跳重定向交给 provider 信任校验，保持系统代理、流式大小上限与超时取消；新增清单和资源包 302 fixture 并复验通过，再以 beta.16 发布修复。资源内容未变化，继续使用相同的 2026.09.12.1 / 2026.09.12.2 清单，不因 App 修复递增资源版本。
 
 ## End-to-End Verification
 
 真实 Electron 先读取 A `2026.09.12.1`，独立 HTTP fixture 随后提供 B `2026.09.12.2`；点击设置页更新，完成清单、下载、校验、替换、重载。Renderer 显示改名的阿米娅、新干员 / 技能 / 模组及 metadata 和新材料详情，CDP 实际返回的头像 PNG SHA-256 与 B 相同：`4893e1ff59011bcac3c95025d958c8e0b5243b233a5b9372e4413d6130f17d10`。重启继续读取 B；未提交事务重启恢复 A。
 
 fixture 仅在临时 user-data / 输出目录中生成，不进入 production 资源。报告及截图在 output/resource-qa，现有界面报告在 output/playwright，打包检查在 output/packaged-resource-qa。
+
+实际生产 HTTPS 测试从公开 GitHub 的 resources-latest 读取清单，经过逐跳校验后下载 8.36 MB 的 B 包。Renderer 的设置页显示 B，新干员“埃癸斯”的实际 PNG 响应 SHA-256 为 `26c2e448ea91d589e3e3db3621a4456784036fabdb04538e89bf26d7660827fb`。该测试使用正式打包入口，没有开发环境 manifest 重定向或 production fixture。
 
 实际生产 B 固定来源：
 
@@ -57,11 +63,11 @@ B 包 8,358,495 字节，SHA-256：`7cf5a5a898b9c48a254e186c17dc44c7db7aa49e0686
 
 ## 发布位置
 
-- [应用 beta.15](https://github.com/WangXiangpu0916/Arknights-Training-Room/releases/tag/v0.0.20-beta.15)
+- [应用 beta.16](https://github.com/WangXiangpu0916/Arknights-Training-Room/releases/tag/v0.0.20-beta.16)
 - [独立资源 B](https://github.com/WangXiangpu0916/Arknights-Training-Room/releases/tag/resource-2026.09.12.2)
 - [资源清单](https://github.com/WangXiangpu0916/Arknights-Training-Room/releases/download/resources-latest/manifest.json)
 
-仓库按用户授权公开。应用版本发布仍走原 v* 标签工作流；资源指针仅在不可变包上传并公开后更新。本地只保留 release/win-unpacked 一个解包目录；训练室.exe 文件版本为 0.0.20-beta.15，旧 beta.14 安装包 / Portable / blockmap 已清理。
+仓库按用户授权公开。应用版本发布仍走原 v* 标签工作流；资源指针仅在不可变包上传并公开后更新。本地只保留 release/win-unpacked 一个解包目录；训练室.exe 文件版本为 0.0.20-beta.16，旧 beta.14 / beta.15 安装包 / Portable / blockmap 已清理。
 
 ## Failure Recovery
 

@@ -109,6 +109,7 @@ npm run resource:build
 npm run qa:resource
 npm run qa:electron
 npm run qa:packaged # 先构建 release/win-unpacked
+# 实际公开 HTTPS 更新：先 fetch-resource-baseline，再 qa:packaged -- --update
 # 在线准备，命令需要 gh 能读取公开 API
 npm run resource:prepare
 npm run resource:build -- --input output/resource-input/input --output resource-publish --previous dist/resource/snapshot

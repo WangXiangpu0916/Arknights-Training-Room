@@ -49,7 +49,9 @@ const packageBytes = await packSnapshot(b, manifest);
 let servedManifest;
 let interruptDownload = false;
 const server = createServer((request, response) => {
-  if (request.url === '/manifest') { response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(servedManifest)); }
+  if (request.url === '/manifest') { response.writeHead(302, { Location: '/channel' }); response.end(); }
+  else if (request.url === '/channel') { response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(servedManifest)); }
+  else if (request.url === '/package') { response.writeHead(302, { Location: '/payload' }); response.end(); }
   else if (interruptDownload) { response.writeHead(200, { 'Content-Length': packageBytes.length }); response.write(packageBytes.subarray(0, 100)); response.destroy(); }
   else response.end(packageBytes);
 });

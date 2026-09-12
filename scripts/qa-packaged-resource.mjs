@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 const root = process.cwd();
 const executable = path.join(root, 'release/win-unpacked/训练室.exe');
 const expectedApp = JSON.parse(await readFile('package.json', 'utf8')).version;
-const bundled = JSON.parse(await readFile('release/win-unpacked/resources/training-room-resource/manifest.json', 'utf8'));
+let bundled = JSON.parse(await readFile('release/win-unpacked/resources/training-room-resource/manifest.json', 'utf8'));
 const runtime = await mkdtemp(path.join(tmpdir(), 'atr-packaged-resource-'));
 const output = path.join(root, 'output/packaged-resource-qa');
 await mkdir(output, { recursive: true });
@@ -60,23 +60,42 @@ try {
   await new Promise((resolve, reject) => { socket.onopen = resolve; socket.onerror = reject; });
   await send('Runtime.enable'); await send('Network.enable');
   while (!(await evaluate(`Boolean(typeof api !== 'undefined' && typeof state !== 'undefined' && state?.gameData)`)) && Date.now() < deadline) await pause();
-  const current = await evaluate(`api.getState()`);
+  let current = await evaluate(`api.getState()`);
   const update = await evaluate(`api.getUpdateState()`);
   assert.equal(update.currentVersion, expectedApp);
   assert.equal(current.gameData.version, bundled.resourceVersion);
+  const initialVersion = current.gameData.version;
+  let added;
+  if (process.argv.includes('--update')) {
+    const remote = JSON.parse(await readFile('output/resource-baseline/manifest.json', 'utf8'));
+    const oldIds = new Set(current.gameData.operators.map(o => o.operatorId));
+    await evaluate(`document.querySelector('.nav[data-page="settings"]').click()`);
+    await evaluate(`document.querySelector('[data-action="update-game"]').click()`);
+    const updateDeadline = Date.now() + 180_000;
+    while (await evaluate('state.gameData.version') !== remote.resourceVersion && Date.now() < updateDeadline) {
+      const error = await evaluate(`document.querySelector('#toast').textContent`);
+      if (error.includes('Error invoking')) throw new Error(error);
+      await pause();
+    }
+    assert.equal(await evaluate('state.gameData.version'), remote.resourceVersion);
+    current = await evaluate('api.getState()');
+    added = current.gameData.operators.find(o => !oldIds.has(o.operatorId));
+    bundled = remote;
+  }
   await evaluate(`document.querySelector('.nav[data-page="settings"]').click()`);
-  const asset = `${current.resourceAssetBase}avatar/002_amiya.png`;
+  const imageId = added?.operatorId ?? '002_amiya';
+  const asset = `${current.resourceAssetBase}avatar/${imageId}.png`;
   await evaluate(`(async () => { const image = new Image(); image.src = ${JSON.stringify(asset)}; await image.decode(); return image.naturalWidth; })()`);
   const requestId = responses.get(asset);
   assert.ok(requestId, 'Packaged custom resource protocol did not return an image');
   const response = await send('Network.getResponseBody', { requestId });
   const imageBytes = Buffer.from(response.body, response.base64Encoded ? 'base64' : 'utf8');
   const imageSha256 = createHash('sha256').update(imageBytes).digest('hex');
-  assert.equal(imageSha256, bundled.files['images/avatar/002_amiya.png'].sha256);
+  assert.equal(imageSha256, bundled.files[`images/avatar/${imageId}.png`].sha256);
   assert.deepEqual(exceptions, []);
   const screenshot = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
   await writeFile(path.join(output, 'settings.png'), Buffer.from(screenshot.data, 'base64'));
-  const report = { pass: true, appVersion: expectedApp, resourceVersion: current.gameData.version, operators: current.gameData.operators.length, imageSha256 };
+  const report = { pass: true, appVersion: expectedApp, initialVersion, resourceVersion: current.gameData.version, network: process.argv.includes('--update') ? 'production-https' : 'bundled', addedOperator: added?.name, operators: current.gameData.operators.length, imageSha256 };
   await writeFile(path.join(output, 'report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report));
 } finally {

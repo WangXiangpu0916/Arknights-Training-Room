@@ -1,10 +1,11 @@
-import { app, BrowserWindow, ipcMain, Menu, nativeTheme, protocol, net } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, nativeTheme, protocol } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import path from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { AppService } from './app-service';
 import { LocalStore } from './data/local-store';
+import { electronResourceFetch } from './data/electron-resource-fetch';
 
 let mainWindow: BrowserWindow | null = null;
 let service: AppService;
@@ -291,7 +292,7 @@ app.whenReady().then(async () => {
     bundledDirectory: app.isPackaged ? path.join(process.resourcesPath, 'training-room-resource') : process.env.ATR_RESOURCE_BUNDLED_DIR || path.join(app.getAppPath(), 'dist', 'resource', 'snapshot'),
     appVersion: app.getVersion(),
     // Electron networking respects the desktop's proxy configuration.
-    fetch: (input, init) => net.fetch(input instanceof URL ? input.href : typeof input === 'string' ? input : input.url, init),
+    fetch: electronResourceFetch,
     ...(qaEnvironmentEnabled && process.env.ATR_RESOURCE_MANIFEST_URL ? {
       manifestUrl: process.env.ATR_RESOURCE_MANIFEST_URL,
       allowLoopback: true,
