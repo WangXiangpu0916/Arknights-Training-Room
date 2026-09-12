@@ -32,6 +32,8 @@
 | npm run qa:packaged | 解包应用启动、真实版本、资源与 PNG 字节检查通过 |
 | npm run qa:packaged -- --update | 正式解包应用通过生产 HTTPS 清单 A→B 更新，新干员“埃癸斯”与实际图片响应已验证 |
 | 公开资源下载与定时更新检查 | 无认证 HTTPS 清单与本地完全一致；下载远端包解包通过；上游 / 种子未变化时正确跳过发布 |
+| GitHub 应用发布 CI | 构建、99 项测试、302 Renderer A→B、正式打包检查和资产发布全部成功 |
+| GitHub 资源定时 CI | 测试、真实 Renderer、远端 baseline 校验、固定上游与无变化跳过全部成功 |
 
 卡片布局检查曾在图片解码前测量 intrinsic width，现改为等待首张卡片的图片加载，复验通过。最终打包的 Electron 下载曾因直连超时失败，改用本机已配置的系统代理继续构建。
 
@@ -66,6 +68,8 @@ B 包 8,358,495 字节，SHA-256：`7cf5a5a898b9c48a254e186c17dc44c7db7aa49e0686
 - [应用 beta.16](https://github.com/WangXiangpu0916/Arknights-Training-Room/releases/tag/v0.0.20-beta.16)
 - [独立资源 B](https://github.com/WangXiangpu0916/Arknights-Training-Room/releases/tag/resource-2026.09.12.2)
 - [资源清单](https://github.com/WangXiangpu0916/Arknights-Training-Room/releases/download/resources-latest/manifest.json)
+- [成功的应用发布流水线](https://github.com/WangXiangpu0916/Arknights-Training-Room/actions/runs/34676819050)
+- [成功的资源更新流水线](https://github.com/WangXiangpu0916/Arknights-Training-Room/actions/runs/34676823602)
 
 仓库按用户授权公开。应用版本发布仍走原 v* 标签工作流；资源指针仅在不可变包上传并公开后更新。本地只保留 release/win-unpacked 一个解包目录；训练室.exe 文件版本为 0.0.20-beta.16，旧 beta.14 / beta.15 安装包 / Portable / blockmap 已清理。
 
