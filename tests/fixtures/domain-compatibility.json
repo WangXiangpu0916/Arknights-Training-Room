@@ -1,0 +1,129 @@
+{
+  "gameSha256": "bfb149725433850c9cf5aef562fdc5d001c8ffdabeac07f22963acef3d8453ee",
+  "cases": [
+    {
+      "name": "empty",
+      "sha256": "83f7ec41e0c510e161637be78264cd602f881c367aeb7f00c8236d544276198c"
+    },
+    {
+      "name": "fixture-real",
+      "sha256": "e609ad79d0550ed7e2c016546c97470a1c3304dc8c37b2085e157059d850c0a8"
+    },
+    {
+      "name": "fixture-unlimited",
+      "sha256": "e609ad79d0550ed7e2c016546c97470a1c3304dc8c37b2085e157059d850c0a8"
+    },
+    {
+      "name": "all-e0-m0",
+      "sha256": "f3bf013c14bbf779d4661a2eb00be895c4f3e3cc2fda00bbd6c1d99ae67d2e5f"
+    },
+    {
+      "name": "all-e0-m1",
+      "sha256": "5b8529ab2e5b0424d2252ca8a6aa09ee31d8f6e1597a3c511935dadb5e03edc0"
+    },
+    {
+      "name": "all-e0-m2",
+      "sha256": "5b8529ab2e5b0424d2252ca8a6aa09ee31d8f6e1597a3c511935dadb5e03edc0"
+    },
+    {
+      "name": "all-e0-m3",
+      "sha256": "ec01b1ca29577014eae1a2773e1484b8173f57f41c366a487a6761569295aa70"
+    },
+    {
+      "name": "all-e1-m0",
+      "sha256": "52dbb085947a12c55a12aa025de9cb6c1f9e088ce8fe3efb5f5f99f4f617863f"
+    },
+    {
+      "name": "all-e1-m1",
+      "sha256": "afef8e4bfcefd86ab2996ae1d987bd1429501782a156ae6b26cdf2ea34607bca"
+    },
+    {
+      "name": "all-e1-m2",
+      "sha256": "afef8e4bfcefd86ab2996ae1d987bd1429501782a156ae6b26cdf2ea34607bca"
+    },
+    {
+      "name": "all-e1-m3",
+      "sha256": "598ebf469736ce707dd54057b7a2cac441e19c41864a478e579d2e5843bca2b1"
+    },
+    {
+      "name": "all-e2-m0",
+      "sha256": "06f95ab0a0dad07e14d0253322a24ebe4e02a17bf1c443e11e16f92278623760"
+    },
+    {
+      "name": "all-e2-m1",
+      "sha256": "595277b3bebfc8b0d519d12a1fc4d20b40ef7d9d1a91a65d34760ea1cfab12a7"
+    },
+    {
+      "name": "all-e2-m2",
+      "sha256": "09d28a20e27a8757817d7c209eaa9665858bbda89c37157d355322b2111f380b"
+    },
+    {
+      "name": "all-e2-m3",
+      "sha256": "8d69542488c264101f2295a77f1bbfe663be6589b934503402bf6cc295775cab"
+    },
+    {
+      "name": "scarce-e0-q0-real",
+      "sha256": "57574d668f107a63ea2ea67d18941102055f759df70d9e593d606e793d147700"
+    },
+    {
+      "name": "scarce-e0-q0-unlimited",
+      "sha256": "57574d668f107a63ea2ea67d18941102055f759df70d9e593d606e793d147700"
+    },
+    {
+      "name": "scarce-e0-q1-real",
+      "sha256": "57574d668f107a63ea2ea67d18941102055f759df70d9e593d606e793d147700"
+    },
+    {
+      "name": "scarce-e0-q1-unlimited",
+      "sha256": "57574d668f107a63ea2ea67d18941102055f759df70d9e593d606e793d147700"
+    },
+    {
+      "name": "scarce-e0-q3-real",
+      "sha256": "57574d668f107a63ea2ea67d18941102055f759df70d9e593d606e793d147700"
+    },
+    {
+      "name": "scarce-e0-q3-unlimited",
+      "sha256": "57574d668f107a63ea2ea67d18941102055f759df70d9e593d606e793d147700"
+    },
+    {
+      "name": "scarce-e0-q17-real",
+      "sha256": "4b89f64ec869aeac0b06f78590c136c38df4b949f00df3b22bb3259a9ba607d9"
+    },
+    {
+      "name": "scarce-e0-q17-unlimited",
+      "sha256": "4b89f64ec869aeac0b06f78590c136c38df4b949f00df3b22bb3259a9ba607d9"
+    },
+    {
+      "name": "scarce-e2-q0-real",
+      "sha256": "ac273d74723f4f98815fa68fc8ced6bb8447942a8dbe1dda33333cb9e2b3e1f6"
+    },
+    {
+      "name": "scarce-e2-q0-unlimited",
+      "sha256": "54f3cf01a39c528c517b194e9744db836ed42004e36342995a490c59225bd201"
+    },
+    {
+      "name": "scarce-e2-q1-real",
+      "sha256": "c5a47293906676cf6cdef494c15c9c43394f13fa3b4d0ed4176995d41e12e3a6"
+    },
+    {
+      "name": "scarce-e2-q1-unlimited",
+      "sha256": "ea7d9d0f0bb467f1133485b435fb89668f6db756abd04efcc134738e93a133f3"
+    },
+    {
+      "name": "scarce-e2-q3-real",
+      "sha256": "b4d031863d986dc8806621242d90fa6a897a93f730cd99ae6ecf27c9e71aff48"
+    },
+    {
+      "name": "scarce-e2-q3-unlimited",
+      "sha256": "09e67e25a9df3c68b7ce0120baf749f2a61b79f139b8b7e290b3bd59d0ac6737"
+    },
+    {
+      "name": "scarce-e2-q17-real",
+      "sha256": "ed05845b6e065fa8bfe1a95415c02455b398810290f923f08391e842dd454679"
+    },
+    {
+      "name": "scarce-e2-q17-unlimited",
+      "sha256": "0fead14dc578b1dc5e8be6384d6300b7adba97ea058393b713219005388231df"
+    }
+  ]
+}

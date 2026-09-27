@@ -7,9 +7,9 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 
 const root = process.cwd();
-const executable = path.join(root, 'release/win-unpacked/训练室.exe');
+const executable = process.env.ATR_QA_EXECUTABLE || path.resolve(process.env.CARGO_TARGET_DIR || 'src-tauri/target', 'release/训练室.exe');
 const expectedApp = JSON.parse(await readFile('package.json', 'utf8')).version;
-let bundled = JSON.parse(await readFile('release/win-unpacked/resources/training-room-resource/manifest.json', 'utf8'));
+let bundled = JSON.parse(await readFile(path.join(path.dirname(executable), 'training-room-resource/manifest.json'), 'utf8'));
 const runtime = await mkdtemp(path.join(tmpdir(), 'atr-packaged-resource-'));
 const output = path.join(root, 'output/packaged-resource-qa');
 await mkdir(output, { recursive: true });
@@ -17,7 +17,9 @@ const port = await new Promise(resolve => {
   const server = createServer();
   server.listen(0, '127.0.0.1', () => { const port = server.address().port; server.close(() => resolve(port)); });
 });
-const child = spawn(executable, [`--remote-debugging-port=${port}`, `--user-data-dir=${runtime}`], {
+const child = spawn(executable, [], {
+  env: {...process.env, ATR_QA_PORT: String(port), ATR_USER_DATA: runtime,
+    ATR_RESOURCE_BUNDLED_DIR: path.join(path.dirname(executable), 'training-room-resource')},
   cwd: root, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],
 });
 let childOutput = '';
@@ -64,6 +66,13 @@ try {
   const update = await evaluate(`api.getUpdateState()`);
   assert.equal(update.currentVersion, expectedApp);
   assert.equal(current.gameData.version, bundled.resourceVersion);
+  assert.equal(await evaluate(`typeof require === 'undefined' && typeof process === 'undefined'`),true);
+  assert.equal(await evaluate(`window.__TAURI__.core.invoke('training_room',{request:{action:'readAnyFile',path:'settings.json'}}).then(()=>false,()=>true)`),true);
+  assert.equal(await evaluate(`window.__TAURI__.core.invoke('training_room',{request:{action:'getState',unexpected:true}}).then(()=>false,()=>true)`),true);
+  const viewport=await evaluate(`({width:innerWidth,ratio:devicePixelRatio,scale:visualViewport.scale})`);
+  await send('Input.dispatchMouseEvent',{type:'mouseWheel',x:1000,y:400,deltaX:0,deltaY:-120,modifiers:2});
+  await new Promise(r=>setTimeout(r,250));
+  assert.deepEqual(await evaluate(`({width:innerWidth,ratio:devicePixelRatio,scale:visualViewport.scale})`),viewport,'Ctrl+wheel must preserve the fixed UI scale');
   const initialVersion = current.gameData.version;
   let added;
   if (process.argv.includes('--update')) {
@@ -95,11 +104,11 @@ try {
   assert.deepEqual(exceptions, []);
   const screenshot = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
   await writeFile(path.join(output, 'settings.png'), Buffer.from(screenshot.data, 'base64'));
-  const report = { pass: true, appVersion: expectedApp, initialVersion, resourceVersion: current.gameData.version, network: process.argv.includes('--update') ? 'production-https' : 'bundled', addedOperator: added?.name, operators: current.gameData.operators.length, imageSha256 };
+  const report = { pass: true, appVersion: expectedApp, initialVersion, resourceVersion: current.gameData.version, nodeUnavailable:true,ipcValidation:true,fixedZoom:true,network: process.argv.includes('--update') ? 'production-https' : 'bundled', addedOperator: added?.name, operators: current.gameData.operators.length, imageSha256 };
   await writeFile(path.join(output, 'report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report));
 } finally {
   socket?.close();
   if (child.exitCode === null) { child.kill(); await new Promise(resolve => child.once('exit', resolve)); }
-  await rm(runtime, { recursive: true, force: true });
+  await rm(runtime, { recursive: true, force: true, maxRetries:10, retryDelay:200 });
 }

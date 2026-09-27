@@ -2,28 +2,16 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
 
-test('GitHub Releases 更新配置只发布可自动更新的测试版 NSIS 产物', () => {
-  const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-  assert.match(pkg.version, /-(?:alpha|beta|rc)(?:\.|$)/);
-  assert.deepEqual(pkg.build.publish, {
-    provider: 'github',
-    owner: 'WangXiangpu0916',
-    repo: 'Arknights-Training-Room',
-    releaseType: 'prerelease',
-  });
-  assert.equal(pkg.build.win.target, 'nsis');
-  assert.equal(pkg.build.productName, '训练室');
-  assert.equal(pkg.build.nsis.shortcutName, '训练室');
-  assert.deepEqual(pkg.build.extraResources, [{ from: 'dist/resource/snapshot', to: 'training-room-resource' }]);
-  assert.match(pkg.build.nsis.artifactName, /^[\x20-\x7E]+$/);
-  assert.ok(pkg.dependencies['electron-updater']);
-
-  const main = readFileSync('src/main.ts', 'utf8');
-  const workflow = readFileSync('.github/workflows/release.yml', 'utf8');
-  assert.match(main, /autoUpdater\.allowPrerelease = true/);
-  assert.match(workflow, /Only test\/pre-release versions may be published/);
-  assert.match(workflow, /gh release view/);
-  assert.match(workflow, /gh release create[\s\S]*--prerelease/);
+test('GitHub Releases 保留测试版、NSIS 和原安装标识', () => {
+ const config=JSON.parse(readFileSync('src-tauri/tauri.conf.json','utf8'));
+ const installer=readFileSync('build/nsis/installer.nsi','utf8');
+ const updater=readFileSync('src-tauri/src/updater.rs','utf8');
+ assert.deepEqual(config.bundle.targets,['nsis']);assert.equal(config.productName,'训练室');
+ assert.match(installer,/89035d73-f384-5e6c-bda4-e2c88d3f133f/);
+ assert.match(updater,/beta.yml/);assert.match(updater,/latest.yml/);
+ const workflow=readFileSync('.github/workflows/release.yml','utf8');
+ assert.match(workflow,/Only test\/pre-release versions may be published/);
+ assert.match(workflow,/gh release create[\s\S]*--prerelease/);
 });
 
 test('专精规划默认使用真实仓库且不再显示旧筛选和依赖标签', () => {
@@ -84,15 +72,12 @@ test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保�
 
 test('固定窗口锁定 1360×800 且不再运行 resize-only FLIP', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
-  const main = readFileSync('src/main.ts', 'utf8');
-  assert.match(main, /FIXED_WINDOW_WIDTH = 1360/);
-  assert.match(main, /FIXED_WINDOW_HEIGHT = 800/);
-  assert.match(main, /resizable: false/);
-  assert.match(main, /maximizable: false/);
-  assert.match(main, /minimizable: true/);
-  assert.match(main, /fullscreenable: false/);
+  const main = readFileSync('src-tauri/src/main.rs', 'utf8');
+  assert.match(main, /inner_size\(1360.0,800.0\)/);
+  assert.match(main, /resizable\(false\)/);assert.match(main, /maximizable\(false\)/);
+  assert.match(main, /minimizable\(true\)/);assert.match(main, /fullscreen\(false\)/);
   assert.doesNotMatch(renderer, /ResizeObserver|gridColumnCount|data-card-motion|requestAnimationFrame/);
-  assert.ok(main.indexOf("mainWindow.once('ready-to-show'") < main.indexOf('await mainWindow.loadFile'), '窗口显示监听必须在页面加载前注册');
+  assert.match(main, /PageLoadEvent::Finished/);
 });
 
 test('专精顶部控制区固定为筛选行与三个统一模式开关', () => {
@@ -108,8 +93,6 @@ test('专精顶部控制区固定为筛选行与三个统一模式开关', () =>
   assert.doesNotMatch(renderer, /operatorFilterMenu|operator-filter-popover/);
   assert.match(renderer, /dashboardFilters\.unlimited = event\.target\.checked \? 'with' : 'real'/);
   assert.doesNotMatch(renderer, /data-mode=|data-supply-mode=|技巧概要无限供应|仅真实仓库<\/button>/);
-  const main = readFileSync('src/main.ts', 'utf8');
-  assert.match(main, /ATR_SCREENSHOT_MODE === 'continuous'[\s\S]*querySelector\('\[data-continuous-mode\]'\)/);
 });
 
 test('专精候选整卡打开材料详情且不再显示查看材料按钮', () => {
@@ -200,7 +183,7 @@ test('专精候选与干员列表复用六星纵向渐变', () => {
   assert.match(styles, /\.candidate\.rarity-5 \{ --rarity-line: #EFD691; \}/);
   assert.match(styles, /--rarity-6-line: linear-gradient\(180deg, #C82A36 0%, #FF9433 100%\)/);
   assert.match(styles, /\.candidate\.rarity-6 \{[^}]*background-image: var\(--rarity-6-line\)[^}]*background-size: 3px 100%/);
-  assert.match(styles, /\.operator-row\.rarity-6::before \{[^}]*width: 3px; background: var\(--rarity-6-line\)/);
+  assert.match(styles, /\.operator-row\.rarity-6 \{[^}]*background-image: var\(--rarity-6-line\)[^}]*background-size: 3px 100%/);
   assert.doesNotMatch(styles, /--rarity-6-line: linear-gradient\(90deg/);
 });
 
@@ -260,7 +243,8 @@ test('缓存状态使用可关闭悬浮通知且统计页面共享统一完成�
   assert.match(renderer, /statisticGroup\('专精三级技能总进度'/);
   assert.match(renderer, /statisticGroup\('精英阶段1及以上总进度'/);
   assert.match(renderer, /statisticGroup\('精英阶段2总进度'/);
-  assert.doesNotMatch(renderer, /<details|<summary|stat-expand/);
+  const statisticsRenderer = renderer.slice(renderer.indexOf('function statisticLine('), renderer.indexOf('function renderDashboard('));
+  assert.doesNotMatch(statisticsRenderer, /<details|<summary|stat-expand/);
   assert.doesNotMatch(renderer, /statistics-heading"><h2>[^<]+<\/h2><p>/);
   assert.doesNotMatch(renderer, /stat-card|stat-row|elite-distribution|当前 E0|当前 E1|当前 E2/);
   assert.match(styles, /\.stat-line \{[^}]*grid-template-columns: minmax\(0, 1fr\) var\(--stat-progress-width\) var\(--stat-count-width\) var\(--stat-rate-width\)/);
@@ -276,7 +260,7 @@ test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS �
   assert.match(renderer, /detail\.material\.description/);
   assert.match(renderer, /可合成 × \$\{detail\.craftable\}/);
   assert.match(styles, /\.inventory-detail \{[^}]*position: sticky;[^}]*top: 130px;[^}]*overflow-y: auto/);
-  assert.match(readFileSync('src/app-service.ts', 'utf8'), /recursiveCraftableQuantity/);
+  assert.match(readFileSync('src-tauri/src/domain/planning.rs', 'utf8'), /recursive_quantity/);
   assert.match(styles, /\.craftable-badge \{[^}]*position: absolute/);
   assert.match(styles, /\.inventory-copy-block p \{[^}]*overflow-wrap: anywhere;[^}]*word-break: break-word/);
   const metadata = JSON.parse(readFileSync('resources/game-data/material-metadata.json', 'utf8'));
@@ -285,16 +269,16 @@ test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS �
 });
 
 test('应用壳使用窄侧栏与圆角工作区，主题支持系统、黑色和浅色', () => {
-  const main = readFileSync('src/main.ts', 'utf8');
+  const main = readFileSync('src-tauri/src/main.rs', 'utf8');
   const index = readFileSync('renderer/index.html', 'utf8');
   const bootstrap = readFileSync('renderer/theme-bootstrap.js', 'utf8');
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
   const types = readFileSync('src/domain/types.ts', 'utf8');
-  const store = readFileSync('src/data/local-store.ts', 'utf8');
-  assert.match(main, /nativeTheme\.themeSource = theme === 'black' \? 'dark' : theme/);
-  assert.match(main, /backgroundColor = theme === 'light'[\s\S]*theme === 'black' \|\| nativeTheme\.shouldUseDarkColors/);
-  assert.match(main, /loadFile\([^;]+query: \{ theme \}/);
+  const store = readFileSync('src-tauri/src/storage.rs', 'utf8');
+  assert.match(main, /Some\(tauri::Theme::Dark\)/);
+  assert.match(main, /system_dark/);
+  assert.match(main, /initialization_script[\s\S]*theme=/);
   assert.match(index, /<html lang="zh-CN" data-theme="system">/);
   assert.ok(index.indexOf('<script src="theme-bootstrap.js"></script>') < index.indexOf('<link rel="stylesheet" href="styles.css">'));
   assert.match(bootstrap, /URLSearchParams\(window\.location\.search\)\.get\('theme'\)/);
@@ -311,7 +295,7 @@ test('应用壳使用窄侧栏与圆角工作区，主题支持系统、黑色�
   assert.match(renderer, /> 黑色<\/label>/);
   assert.doesNotMatch(renderer, /游戏数据 \$\{esc\(fmtTime\(state\.gameData\.updatedAt\)\)\}/);
   assert.match(types, /'system' \| 'black' \| 'light'/);
-  assert.match(store, /value\?\.theme === 'dark' \? 'black'/);
+  assert.match(store, /"dark"[\s\S]*"black"/);
   assert.doesNotMatch(styles, /:root\[data-theme="black"\]/);
   assert.match(styles, /:root\[data-theme="light"\]/);
   assert.match(styles, /@media \(prefers-color-scheme: light\)/);
@@ -320,14 +304,15 @@ test('应用壳使用窄侧栏与圆角工作区，主题支持系统、黑色�
 });
 
 test('更新异常被记录并转换成短消息，设置页使用列表且更新项位于倒数第二项', () => {
-  const main = readFileSync('src/main.ts', 'utf8');
+  const main = readFileSync('src-tauri/src/main.rs', 'utf8');
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
   const types = readFileSync('src/domain/types.ts', 'utf8');
-  const store = readFileSync('src/data/local-store.ts', 'utf8');
-  const service = readFileSync('src/app-service.ts', 'utf8');
-  assert.match(main, /friendlyUpdateError/);
-  assert.match(main, /service\?\.store\.log\(event, detail\)/);
+  const store = readFileSync('src-tauri/src/storage.rs', 'utf8');
+  const service = readFileSync('src-tauri/src/service.rs', 'utf8');
+  const updater=readFileSync('src-tauri/src/updater.rs','utf8');
+  assert.match(updater,/暂时无法获取版本信息/);
+  assert.match(updater,/storage::log/);
   assert.doesNotMatch(main, /message: `检查更新失败：\$\{error instanceof Error \? error\.message/);
   assert.match(styles, /\.update-message \{[^}]*max-width: 100%;[^}]*overflow-wrap: anywhere;[^}]*word-break: break-word/);
   assert.match(styles, /\.setting-row \{[^}]*grid-template-columns: minmax\(0, 1fr\) auto/);

@@ -17,3 +17,6 @@ output/
 resource-publish/
 qa-fixture-runtime/
 qa-*.png
+
+src-tauri/target/
+src-tauri/gen/

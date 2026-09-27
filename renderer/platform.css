@@ -1,0 +1,2 @@
+/* Preserve the original Chromium radio accent on WebView2's native controls. */
+.radio-stack input { accent-color: #0075ff; }

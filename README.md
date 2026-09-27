@@ -37,7 +37,7 @@ Windows 10/11 本地桌面测试应用。读取森空岛的真实仓库、持有
 
 数据默认保存在 `%APPDATA%/arknights-training-room`：
 
-- `credentials.bin`：Electron `safeStorage` 加密；Windows 上使用 DPAPI
+- `credentials.bin`：与原版兼容的 AES-256-GCM 密文，密钥由 Windows DPAPI 保护；继续读取原 `Local State`，无需重新登录
 - `account-cache.json`：最近一次成功的账号快照，不含登录凭据
 - `settings.json`：无限材料、主题、选中 UID 和自动刷新开关
 - `game-data/`：最近一次成功的完整游戏资源快照（数据、metadata、图片与 manifest）
@@ -48,7 +48,7 @@ Windows 10/11 本地桌面测试应用。读取森空岛的真实仓库、持有
 
 ## 从干净环境构建
 
-要求：Windows 10/11、Node.js 20+。最终用户不需要这些开发工具。
+要求：Windows 10/11、Node.js 22+、Rust MSVC stable、Visual Studio C++ Build Tools / Windows SDK。运行时使用系统 Microsoft Edge WebView2；安装器在缺少时下载引导程序。最终用户不需要 Node.js 或 Rust。
 
 ```powershell
 npm ci
@@ -56,7 +56,7 @@ npm test
 npm run dist
 ```
 
-测试版输出位于 `release/`：NSIS 安装包和 portable `.exe`。
+测试版输出位于 `release/`：NSIS 安装包、portable `.exe`、更新元数据和校验和。`npm run build` 与 `npm run dist` 都会覆盖唯一的 `release/win-unpacked`，且不会自动更改版本号。直接运行其中的 `训练室.exe` 可检查本地最新构建。
 
 开发启动：
 
@@ -68,22 +68,21 @@ npm start
 ## 项目结构
 
 ```text
-src/
-├─ domain/types.ts                  统一领域模型
-├─ engine/crafting.ts               确定性加工与库存模拟
-├─ engine/mastery.ts                单阶段/连续专精规划
-├─ engine/promotion.ts              精英化规划
-├─ engine/module.ts                 模组开启与升级规划
-├─ data/skland-client.ts            森空岛 adapter
-├─ data/game-data-provider.ts       游戏数据 provider 与原子更新
-├─ resources/                       稳定资源 schema、转换、打包与校验
-├─ data/local-store.ts              缓存、DPAPI 凭据与日志
-├─ app-service.ts                   应用用例与自动重算
-├─ main.ts                          Electron 主进程
-└─ preload.ts                       受限 IPC 边界
-renderer/                           中文桌面 UI
+src-tauri/src/
+├─ domain/                          独立 Rust 加工、规划、统计核心
+├─ service.rs                       聚合用例、状态和规划缓存
+├─ resources/                       完整资源校验、事务更新和恢复
+├─ network/skland.rs                森空岛认证、签名、续期与账号规范化
+├─ storage.rs                       相同路径的 JSON、凭据和脱敏日志
+├─ platform/                        Windows HTTP、DPAPI、窗口/原生对话框
+├─ updater.rs                       兼容 GitHub beta.yml/latest.yml 的更新器
+└─ main.rs                          Tauri 窗口与受限 command/event 边界
+src/resources/                      仅构建时使用的资源转换与打包工具
+src/domain/                         资源和测试使用的 TypeScript 类型
+renderer/                           原有中文 UI、平台桥和 Intl 展示排序
 resources/                          内置离线数据与图标
-tests/engine.test.ts                核心自动化测试
+tests/                              原有断言运行于 Rust 核心、前端契约测试
+src-tauri/tests/                     原生资源事务与旧数据兼容测试
 docs/DATA_SOURCES.md                2026 数据源技术审计
 ```
 
@@ -99,7 +98,11 @@ docs/DATA_SOURCES.md                2026 数据源技术审计
 npm test
 ```
 
-测试覆盖 79 个 Case，包括精英化与模组连续路线、经验/龙门币累计、共享库存递归合成、多产物整数批次、循环配方、发布流程、默认排序和静态 UI 契约。
+测试覆盖精英化与模组连续路线、经验/龙门币累计、共享库存递归合成、多产物整数批次、循环配方、认证续期、旧数据、资源回滚、发布流程及静态 UI 契约；另有 31 组迁移前完整结果哈希对照。
+
+`npm run qa:desktop` 检查窗口、输入、筛选、排序、详情和截图；`npm run qa:resource` 检查真实 HTTP 下载、失败保留、图片切换和重启恢复；`npm run qa:packaged` 使用显式启用测试端口的优化构建检查打包资源，然后恢复正式构建并同步本地应用。生产构建禁止测试端口和测试路径覆盖。架构、测量方法与验收限制见 [迁移报告](docs/ELECTRON_TAURI_MIGRATION.md)。
+
+`npm run benchmark:performance` 测量八组原生核心计算；`npm run benchmark:desktop` 构建优化 QA 版本，测量三次完整窗口流程，再恢复正式构建并同步。桌面测量默认复制本地账号快照并匿名化，不复制凭据；可用 `ATR_PERF_PROFILE` 指定测试数据目录。结果保存在 `output/performance/`。
 
 ## 已知限制
 
@@ -109,7 +112,7 @@ npm test
 - 新增干员、技能、材料、模组、metadata 和图片通过完整资源包更新；不兼容 schema 会提示升级应用并保留旧资源。
 - 模组规划可以校验森空岛已返回的阶段、等级、当前模组等级与材料；游戏内模组任务和信赖条件不在当前接口数据中，首次开启前仍须在游戏内确认。
 - 森空岛培养快照当前未稳定提供干员本级已积累经验；字段缺失时精英化规划按本级 0 经验保守计算，若接口未来返回该字段则自动扣除已有经验。
-- GitHub 仓库为私有时，未认证的 `electron-updater` 无法读取 Releases；应用会给出简短错误并写入完整本地日志。要启用应用内自动更新，需要将发布仓库设为公开或迁移到公开更新源，不能把私人访问令牌写进客户端。
+- GitHub 仓库为私有时，未认证的更新器无法读取 Releases；应用会给出简短错误并写入脱敏本地日志。要启用应用内自动更新，需要将发布仓库设为公开或迁移到公开更新源，不能把私人访问令牌写进客户端。
 - 当前构建没有商业 Authenticode 证书，Windows SmartScreen 可能在首次运行时显示“未知发布者”；可核对下方交付哈希后选择继续运行。
 
 ## 测试版与第三方权利

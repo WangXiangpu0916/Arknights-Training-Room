@@ -48,9 +48,13 @@ await loadSnapshot(b, JSON.parse(await readFile('package.json', 'utf8')).version
 const packageBytes = await packSnapshot(b, manifest);
 let servedManifest;
 let interruptDownload = false;
+let holdManifest=false, releaseManifest;
 const server = createServer((request, response) => {
   if (request.url === '/manifest') { response.writeHead(302, { Location: '/channel' }); response.end(); }
-  else if (request.url === '/channel') { response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(servedManifest)); }
+  else if (request.url === '/channel') {
+    const reply=()=>{response.setHeader('Content-Type', 'application/json');response.end(JSON.stringify(servedManifest));};
+    if(holdManifest)releaseManifest=reply;else reply();
+  }
   else if (request.url === '/package') { response.writeHead(302, { Location: '/payload' }); response.end(); }
   else if (interruptDownload) { response.writeHead(200, { 'Content-Length': packageBytes.length }); response.write(packageBytes.subarray(0, 100)); response.destroy(); }
   else response.end(packageBytes);
@@ -76,19 +80,18 @@ const networkFailures = [];
 
 async function start() {
   const port = await new Promise(resolve => { const portServer = createPortServer(); portServer.listen(0, '127.0.0.1', () => { const value = portServer.address().port; portServer.close(() => resolve(value)); }); });
-  const env = { ...process.env, ATR_USER_DATA: userData, ATR_RESOURCE_TRACE: '1', ATR_RESOURCE_MANIFEST_URL: `${base}/manifest` };
+  const env = { ...process.env, ATR_QA_PORT: String(port), ATR_USER_DATA: userData, ATR_RESOURCE_TRACE: '1', ATR_RESOURCE_MANIFEST_URL: `${base}/manifest` };
   delete env.ATR_QA_HIDDEN; // Real screenshot / lazy-image verification requires a visible window.
-  delete env.ELECTRON_RUN_AS_NODE;
-  child = spawn(path.join(root, 'node_modules/electron/dist/electron.exe'), [`--remote-debugging-port=${port}`, '.'], { cwd: root, env, windowsHide: true });
+  child = spawn(process.env.ATR_QA_EXECUTABLE || path.resolve(process.env.CARGO_TARGET_DIR || 'src-tauri/target','debug/训练室.exe'), [], { cwd: root, env, windowsHide: true });
   for (const stream of [child.stdout, child.stderr]) stream.on('data', chunk => { childOutput = (childOutput + chunk).slice(-6000); });
   let target;
   for (let attempt = 0; attempt < 300; attempt++) {
-    if (child.exitCode !== null) throw new Error(`Electron exited: ${childOutput}`);
+    if (child.exitCode !== null) throw new Error(`Native app exited: ${childOutput}`);
     try { target = (await (await fetch(`http://127.0.0.1:${port}/json`)).json()).find(t => t.type === 'page' && t.url.includes('renderer/index.html')); } catch {}
     if (target) break;
     await new Promise(r => setTimeout(r, 100));
   }
-  if (!target) throw new Error(`Electron startup timeout: ${childOutput}`);
+  if (!target) throw new Error(`Native app startup timeout: ${childOutput}`);
   socket = new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((resolve, reject) => { socket.addEventListener('open', resolve, { once: true }); socket.addEventListener('error', reject, { once: true }); });
   socket.addEventListener('message', event => {
@@ -96,7 +99,7 @@ async function start() {
     if (message.method === 'Runtime.exceptionThrown') diagnostics.push(message.params.exceptionDetails.text);
     if (message.method === 'Runtime.consoleAPICalled' && ['error', 'warning'].includes(message.params.type)) networkFailures.push(message.params.args.map(a=>a.value ?? a.description));
     if (message.method === 'Network.loadingFailed') networkFailures.push(message.params);
-    if (message.method === 'Network.responseReceived' && message.params.response.url.includes(`atr-resource://snapshot/${versionB}/images/avatar/002_amiya.png`)) imageResponses.push(message.params);
+    if (message.method === 'Network.responseReceived' && message.params.response.url.includes(`http://atr-resource.localhost/${versionB}/images/avatar/002_amiya.png`)) imageResponses.push(message.params);
     const task = pending.get(message.id);
     if (task) { pending.delete(message.id); message.error ? task.reject(new Error(message.error.message)) : task.resolve(message.result); }
   });
@@ -130,6 +133,14 @@ const results = {};
 try {
   await start();
   assert.equal(await evaluate('state.gameData.version'), versionA);
+  holdManifest=true;
+  await evaluate(`window.__resourceUpdate = api.updateGameData(); void 0`);
+  for(let i=0;i<100&&!releaseManifest;i++)await new Promise(r=>setTimeout(r,50));
+  assert.ok(releaseManifest,'Update request did not reach the test server');
+  results.imagesDuringDownload=await evaluate(`Promise.race([(async()=>{const image=new Image();image.src=state.resourceAssetBase+'avatar/002_amiya.png';await image.decode();return image.naturalWidth>0;})(),new Promise(r=>setTimeout(()=>r(false),3000))])`);
+  releaseManifest();holdManifest=false;releaseManifest=undefined;
+  assert.equal(results.imagesDuringDownload,true,'Resource HTTP requests must not block the image protocol');
+  await evaluate(`window.__resourceUpdate;`);
   await evaluate(`page = 'operators'; render()`);
   await waitFor(`document.querySelector('.operator-row h3')`);
   results.initial = await evaluate(`({version: state.gameData.version, amiya: state.gameData.operators.find(o=>o.operatorId==='002_amiya').name})`);
@@ -151,7 +162,7 @@ try {
   await waitFor(`Boolean([...document.querySelectorAll('.operator-avatar')].find(i => i.src.includes('/avatar/002_amiya.png'))?.naturalWidth)`);
   results.updated = await evaluate(`({ version: state.gameData.version, avatar: [...document.querySelectorAll('.operator-avatar')].find(i=>i.src.includes('/avatar/002_amiya.png')).src,
     synthetic: state.gameData.operators.find(o=>o.operatorId==='fixture_resource_B'), statistics: state.statistics })`);
-  assert.ok(results.updated.avatar.startsWith(`atr-resource://snapshot/${versionB}/`), results.updated.avatar);
+  assert.ok(results.updated.avatar.startsWith(`http://atr-resource.localhost/${versionB}/`), results.updated.avatar);
   assert.equal(results.updated.synthetic.gender, '资源 B 元数据');
   assert.ok(results.updated.synthetic.modules.length);
   assert.ok(imageResponses.length, 'New version image was requested through the resource protocol');
@@ -177,5 +188,5 @@ try {
   console.log(JSON.stringify({ pass: true, versionA, versionB, imageBChecksum: results.imageBChecksum, report: path.join(output, 'report.json') }));
 } finally {
   await stop(); server.closeAllConnections(); await new Promise(r => server.close(r));
-  await rm(runtime, { recursive: true, force: true });
+  await rm(runtime, { recursive: true, force: true, maxRetries:10, retryDelay:200 });
 }

@@ -1,0 +1,54 @@
+[package]
+name = "training-room"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+default-run = "training-room"
+
+[lib]
+name = "training_room"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+sha2 = "0.10"
+hmac = "0.12"
+md-5 = "0.10"
+base64 = "0.22"
+aes-gcm = "0.10"
+getrandom = "0.3"
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde"] }
+regex = "1"
+flate2 = "1"
+semver = "1"
+serde_yaml = "0.9"
+url = "2"
+percent-encoding = "2"
+qrcode = { version = "0.14", default-features = false }
+png = "0.17"
+tauri = { version = "2", optional = true, features = ["image-png"] }
+webview2-com = { version = "0.39", optional = true }
+windows = { version = "0.62", optional = true }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Security_Cryptography", "Win32_System_Memory", "Win32_Storage_FileSystem", "Win32_Networking_WinHttp", "Win32_UI_WindowsAndMessaging", "Win32_UI_Controls", "Win32_UI_Shell", "Win32_System_Com", "Win32_System_Registry"] }
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[features]
+default = []
+qa = []
+desktop = ["dep:tauri", "dep:webview2-com", "dep:windows"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[[bin]]
+name = "training-room"
+path = "src/main.rs"
+required-features = ["desktop"]
+
+[profile.release]
+strip = true
+lto = "thin"
+codegen-units = 1
+panic = "unwind"

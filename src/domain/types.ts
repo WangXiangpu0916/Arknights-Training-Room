@@ -94,7 +94,9 @@ export interface Settings {
 export interface CraftStep {
   itemId: string;
   requested: number;
+  availableInventory: number;
   fromInventory: number;
+  exchangeQuantity: number;
   crafted: number;
   batches: number;
   outputQuantity: number;
@@ -109,6 +111,7 @@ export interface CraftResult {
   steps: CraftStep[];
   unlimitedRoots: string[];
   error?: string;
+  exchanges: MaterialAmount[];
 }
 
 export interface MasteryStagePlan {

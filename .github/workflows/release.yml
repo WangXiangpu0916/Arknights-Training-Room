@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - uses: dtolnay/rust-toolchain@stable
       - run: npm ci
       - name: Verify tag matches package version
         shell: pwsh
@@ -26,7 +27,7 @@ jobs:
           $expected = "v$version"
           if ("${{ github.ref_name }}" -ne $expected) { throw "Tag must be $expected" }
       - name: Build and test release artifacts
-        run: npm run dist -- --publish never
+        run: npm run dist
       - name: Verify resource reload and packaged resource protocol
         run: npm run qa:resource && npm run qa:packaged
       - name: Upload and publish GitHub pre-release
@@ -36,7 +37,7 @@ jobs:
           $assets = Get-ChildItem release -File | Where-Object {
             $_.Name -eq 'latest.yml' -or
             $_.Name -like '*-Setup-*.exe' -or
-            $_.Name -like '*-Setup-*.exe.blockmap' -or
+            $_.Name -eq 'beta.yml' -or
             $_.Name -like '*-Portable-*.exe'
           } | ForEach-Object { $_.FullName }
           if ($assets.Count -lt 4) { throw "Release artifacts are incomplete" }

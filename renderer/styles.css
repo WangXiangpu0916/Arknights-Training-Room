@@ -252,8 +252,7 @@ tr:hover td { background: var(--panel-hover); }
 .operator-row.rarity-3 { --rarity-color: #4b94dc; }
 .operator-row.rarity-4 { --rarity-color: #a86fdd; }
 .operator-row.rarity-5 { --rarity-color: #d5aa3f; }
-.operator-row.rarity-6 { --rarity-color: transparent; }
-.operator-row.rarity-6::before { content: ""; position: absolute; z-index: 3; inset: 0 auto 0 0; width: 3px; background: var(--rarity-6-line); pointer-events: none; }
+.operator-row.rarity-6 { --rarity-color: transparent; background-image: var(--rarity-6-line); background-position: left top; background-size: 3px 100%; background-repeat: no-repeat; background-origin: border-box; }
 .operator-row h3 { margin: 0; font-size: 18px; line-height: 1.2; white-space: nowrap; }
 .operator-meta { color: var(--muted); }
 .operator-info { min-width: 0; display: grid; gap: 8px; z-index: 2; }
@@ -373,6 +372,84 @@ tr:hover td { background: var(--panel-hover); }
 .material-line { display: grid; grid-template-columns: minmax(160px, 1fr) auto auto; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); }
 .material-line:last-child { border-bottom: 0; }
 .craft-tree { margin: 7px 0 0 18px; padding-left: 13px; border-left: 1px solid var(--line); color: var(--muted); }
+.plan-detail-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.plan-detail-skill { width: 52px; height: 52px; object-fit: contain; border-radius: 5px; }
+.plan-detail-heading h2 { margin: 0; font-size: 20px; }
+.plan-detail-heading p { margin: 3px 0 0; color: var(--muted); }
+.plan-status-icon { width: 17px; height: 17px; flex-shrink: 0; vertical-align: middle; }
+.plan-exchange-summary { padding: 12px 14px; border: 1px solid var(--accent-border); border-radius: 8px; background: var(--accent-soft); }
+.plan-exchange-summary h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 15px; }
+.plan-exchange-summary h3 small { margin-left: auto; color: var(--muted); font-size: 12px; font-weight: normal; }
+.plan-exchange-grid, .plan-total-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+.plan-exchange-item { display: flex; align-items: center; padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
+.plan-exchange-item .plan-material-token { flex-direction: row; gap: 8px; width: auto; }
+.plan-exchange-item .plan-material-token img { width: 40px; height: 40px; }
+.plan-exchange-item .plan-material-token strong { font-size: 16px; }
+.plan-material-token { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 76px; flex-shrink: 0; border-radius: 5px; }
+.plan-material-token img { width: 64px; height: 64px; object-fit: contain; }
+.plan-material-token strong { font-size: 17px; font-variant-numeric: tabular-nums; }
+.plan-material-token:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.plan-material-token:focus-visible::after { content: attr(title); position: absolute; z-index: 2; top: 100%; width: max-content; max-width: 180px; padding: 4px 8px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; color: var(--text); font-size: 12px; }
+.plan-no-exchange { display: flex; align-items: center; gap: 6px; color: var(--ok); }
+.plan-summary-books { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.plan-summary-books .plan-material-token { flex-direction: row; width: auto; gap: 5px; }
+.plan-summary-books .plan-material-token img { width: 32px; height: 32px; }
+.plan-summary-books .plan-material-token strong { font-size: 14px; }
+.plan-stage-heading { display: flex; align-items: center; gap: 9px; }
+.plan-stage-heading img { width: 32px; height: 32px; object-fit: contain; }
+.plan-stage-heading > span { color: var(--muted); font-weight: normal; }
+.plan-material-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.plan-material-card { min-width: 0; height: 176px; display: grid; grid-template-rows: minmax(0, 1fr) 18px 28px 24px; justify-items: center; align-items: center; gap: 3px; padding: 10px 12px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); transition: border-color .15s; }
+.plan-material-card.selected { border-color: var(--accent); }
+.plan-material-card > .plan-material-token img { width: 48px; height: 48px; }
+.plan-material-card > .plan-material-token strong { font-size: 16px; }
+.plan-material-card > .plan-material-status { align-content: center; line-height: 14px; }
+.plan-card-footer { width: 100%; height: 24px; border-top: 1px solid var(--line); text-align: center; }
+.plan-recipe-toggle { display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; height: 24px; padding: 2px 0 0; border: 0; border-radius: 3px; background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; }
+.plan-recipe-toggle:hover, .plan-recipe-toggle[aria-expanded="true"] { color: var(--accent); background: transparent; }
+.plan-recipe-toggle[aria-expanded="true"] .plan-expand-arrow { transform: rotate(180deg); }
+.plan-card-footer-static { display: inline-block; padding-top: 3px; color: var(--muted); font-size: 11px; }
+.plan-stage-recipe { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 7px; background: var(--panel); }
+.plan-recipe-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.plan-recipe-heading h4 { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 13px; font-weight: normal; }
+.plan-recipe-heading h4 > span { display: grid; gap: 2px; }
+.plan-recipe-heading small { color: var(--muted); font-size: 11px; }
+.plan-recipe-heading .plan-material-token { flex-direction: row; gap: 4px; width: auto; }
+.plan-recipe-heading .plan-material-token img { width: 32px; height: 32px; }
+.plan-recipe-heading .plan-material-token strong { font-size: 12px; }
+.plan-recipe-close { width: 28px; height: 28px; padding: 0; border: 0; background: transparent; color: var(--muted); font-size: 20px; }
+.plan-recipe-close:hover { color: var(--text); background: var(--panel-2); }
+.plan-recipe-toggle:focus-visible, .plan-recipe-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.plan-stock { color: var(--muted); font-size: 12px; }
+.plan-stock strong { color: var(--text); font-weight: normal; font-variant-numeric: tabular-nums; }
+.plan-material-status { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; }
+.plan-material-status > span { display: inline-flex; align-items: center; gap: 4px; }
+.plan-status-exchange { color: var(--blue); }
+.plan-status-craft { color: var(--muted); }
+.plan-status-ready { color: var(--ok); }
+.plan-recipe { width: 100%; margin-top: 3px; border-top: 1px solid var(--line); }
+.plan-recipe > summary { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 8px 0 0; color: var(--muted); cursor: pointer; list-style: none; font-size: 12px; }
+.plan-recipe > summary::-webkit-details-marker { display: none; }
+.plan-recipe > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.plan-expand-arrow { margin-left: 3px; transition: transform .15s; }
+.plan-recipe[open] > summary > .plan-expand-arrow { transform: rotate(180deg); }
+.plan-recipe-body { min-width: 0; padding: 10px 0 0; }
+.plan-recipe-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 4px 0; }
+.plan-recipe-term { display: flex; align-items: center; gap: 12px; }
+.plan-recipe-input, .plan-recipe-output { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 106px; flex-shrink: 0; }
+.plan-recipe-flow .plan-material-token img { width: 44px; height: 44px; }
+.plan-recipe-flow .plan-material-token strong { font-size: 14px; }
+.plan-recipe-flow .plan-material-status { min-height: 28px; align-content: center; line-height: 14px; font-size: 11px; }
+.plan-recipe-output::after { content: ''; height: 28px; }
+.plan-recipe-flow .plan-status-icon { width: 14px; height: 14px; }
+.plan-recipe-flow small { color: var(--muted); font-size: 11px; }
+.plan-flow-symbol { flex-shrink: 0; color: var(--muted); font-size: 20px; }
+.plan-recipe-nested { width: auto; padding: 0 0 4px 12px; border-top: 0; border-left: 1px solid var(--line); margin: 8px 0 0 12px; }
+.plan-recipe-nested > summary { justify-content: flex-start; }
+.plan-recipe-nested > summary > .plan-material-token { flex-direction: row; gap: 4px; width: auto; }
+.plan-recipe-nested > summary > .plan-material-token img { width: 30px; height: 30px; }
+.plan-recipe-nested > summary > .plan-material-token strong { font-size: 12px; }
+.plan-recipe-nested > summary > .plan-expand-arrow { margin-left: auto; }
 .qr-wrap { text-align: center; }
 .qr-wrap img { width: 320px; max-width: 100%; background: white; padding: 8px; }
 .toast { position: fixed; bottom: 24px; right: 24px; z-index: 40; background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; padding: 11px 15px; opacity: 0; transform: translateY(10px); pointer-events: none; transition: .2s; max-width: 460px; }

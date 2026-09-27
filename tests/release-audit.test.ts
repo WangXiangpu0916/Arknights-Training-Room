@@ -3,56 +3,29 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 
-test('发布包仅包含运行时文件与合规声明', () => {
-  const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
-  const files = packageJson.build.files as string[];
-
-  assert.deepEqual(
-    files,
-    [
-      'build/icon.png',
-      'dist/src/**/*',
-      'dist/renderer/**/*',
-      'dist/THIRD_PARTY_LICENSES.txt',
-      'LICENSE',
-      'THIRD_PARTY_NOTICES.md',
-      'package.json',
-    ],
-  );
-  assert.ok(!files.includes('dist/**/*'));
-  assert.ok(!files.includes('renderer/**/*'));
+test('生产包使用原生程序、明确能力权限并禁用 QA 入口', () => {
+ const pkg=JSON.parse(readFileSync('package.json','utf8'));
+ assert.equal(pkg.dependencies,undefined);
+ for(const key of Object.keys(pkg.devDependencies)) assert.ok(!key.startsWith('electron'));
+ const config=JSON.parse(readFileSync('src-tauri/tauri.conf.json','utf8'));
+ assert.deepEqual(config.app.security.capabilities[0].permissions,['core:event:allow-listen','core:event:allow-unlisten']);
+ assert.equal(config.bundle.windows.webviewInstallMode.type,'downloadBootstrapper');
+ const main=readFileSync('src-tauri/src/main.rs','utf8');
+ assert.match(main,/deny_unknown_fields/);assert.match(main,/on_navigation\(trusted\)/);
+ assert.match(main,/PermissionResponse::Deny/);assert.match(main,/NewWindowResponse::Deny/);
+ assert.match(main,/cfg!\(any\(debug_assertions, feature = "qa"\)\)/);
+ assert.doesNotMatch(pkg.scripts.build,/--features qa/);assert.doesNotMatch(pkg.scripts.dist,/--features qa/);
+ const native=readFileSync('src-tauri/Cargo.toml','utf8');assert.match(native,/default = \[\]/);
 });
-
-test('发布版启用 Electron 防护并禁用 QA 环境入口', () => {
-  const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
-  assert.deepEqual(packageJson.build.electronFuses, {
-    runAsNode: false,
-    enableCookieEncryption: true,
-    enableNodeOptionsEnvironmentVariable: false,
-    enableNodeCliInspectArguments: false,
-    enableEmbeddedAsarIntegrityValidation: true,
-    onlyLoadAppFromAsar: true,
-  });
-
-  const main = readFileSync('src/main.ts', 'utf8');
-  assert.match(main, /const qaEnvironmentEnabled = !app\.isPackaged/);
-  assert.match(main, /devTools: qaEnvironmentEnabled/);
-  assert.match(main, /event\.sender !== mainWindow\.webContents/);
-  assert.match(main, /event\.senderFrame !== event\.sender\.mainFrame/);
-  assert.match(main, /pathToFileURL\(path\.join\(__dirname, '\.\.', 'renderer', 'index\.html'\)\)/);
-  assert.match(main, /setWindowOpenHandler\(\(\) => \(\{ action: 'deny' \}\)\)/);
-  assert.match(main, /on\('will-navigate', event => event\.preventDefault\(\)\)/);
-  assert.match(main, /on\('will-redirect', event => event\.preventDefault\(\)\)/);
-  assert.match(main, /setPermissionRequestHandler/);
+test('构建生成原生依赖许可证清单', () => {
+ const notices=readFileSync('dist/THIRD_PARTY_LICENSES.txt','utf8');
+ assert.match(notices,/tauri 2\./);assert.match(notices,/qrcode 0\./);
+ assert.match(notices,/Permission is hereby granted/);
+ assert.doesNotMatch(notices,/electron-updater|electron-builder/);
 });
-
-test('构建生成生产依赖许可证清单', () => {
-  const notices = readFileSync('dist/THIRD_PARTY_LICENSES.txt', 'utf8');
-  assert.match(notices, /electron-updater 6\.8\.9/);
-  assert.match(notices, /qrcode 1\.5\.4/);
-  assert.match(notices, /Permission is hereby granted/);
-  assert.doesNotMatch(notices, /\nelectron-builder \d/);
-  assert.doesNotMatch(notices, /\ntypescript \d/);
+test('WebView2 兼容样式仅固定原生单选按钮的原配色', () => {
+ const css=readFileSync('renderer/platform.css','utf8').replace(/\/\*[\s\S]*?\*\//g,'').trim();
+ assert.equal(css,'.radio-stack input { accent-color: #0075ff; }');
 });
 
 test('素材声明区分项目 MIT、游戏权利与上游许可', () => {
@@ -73,7 +46,7 @@ test('仓库忽略本地凭证、账号缓存与环境文件', () => {
 
 test('发布工作流先完成构建并仅在产物齐全后公开预发布', () => {
   const workflow = readFileSync('.github/workflows/release.yml', 'utf8');
-  const buildIndex = workflow.indexOf('npm run dist -- --publish never');
+  const buildIndex = workflow.indexOf('npm run dist');
   const createIndex = workflow.indexOf('gh release create');
   const uploadIndex = workflow.indexOf('gh release upload');
   const publishIndex = workflow.indexOf('gh release edit $tag --draft=false --prerelease');
@@ -84,8 +57,8 @@ test('发布工作流先完成构建并仅在产物齐全后公开预发布', ()
   assert.doesNotMatch(workflow, /--publish always/);
 });
 
-test('包含截图的 Electron QA 使用可见窗口，跳过截图时才隐藏', () => {
-  const qa = readFileSync('scripts/qa-electron.mjs', 'utf8');
+test('包含截图的 WebView2 QA 使用可见窗口，跳过截图时才隐藏', () => {
+  const qa = readFileSync('scripts/qa-desktop.mjs', 'utf8');
   assert.match(qa, /const screenshotsEnabled = process\.env\.ATR_QA_SKIP_SCREENSHOTS !== '1'/);
   assert.match(qa, /if \(!screenshotsEnabled\) env\.ATR_QA_HIDDEN = '1'/);
   assert.doesNotMatch(qa, /if \(!process\.env\.ATR_QA_SCREENSHOTS\) env\.ATR_QA_HIDDEN/);

@@ -7,7 +7,7 @@ import {
   MasteryLevel,
   OperatorDefinition,
 } from '../src/domain/types';
-import { buildAccountStatistics } from '../src/engine/statistics';
+import { buildAccountStatistics } from './native-core';
 
 const requirement = { 1: [{ itemId: 'a', quantity: 1 }], 2: [{ itemId: 'b', quantity: 1 }], 3: [{ itemId: 'c', quantity: 1 }] };
 const operator = (

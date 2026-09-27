@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { GameData, OperatorDefinition, OwnedOperator } from '../src/domain/types';
-import { directCraftableQuantity, recursiveCraftableQuantity } from '../src/engine/crafting';
-import { ModulePlanner } from '../src/engine/module';
-import { PromotionPlanner } from '../src/engine/promotion';
+import { recursiveCraftableQuantity } from './native-core';
+import { ModulePlanner } from './native-core';
+import { PromotionPlanner } from './native-core';
 
 const operator: OperatorDefinition = {
   operatorId: 'op', name: '测试干员', rarity: 6, profession: '术师', subProfession: '中坚术师',
@@ -73,7 +73,9 @@ test('递归可合成数量按完整依赖链共享库存且防循环', () => {
   assert.equal(recursiveCraftableQuantity({}, cyclic[0], cyclic), 0);
 });
 
-test('直接可合成数量覆盖无配方、恰好一次、多次、多产物和瓶颈', () => {
+const directCraftableQuantity = (inventory: Record<string, number>, recipe?: import('../src/domain/types').Recipe) => recursiveCraftableQuantity(inventory, recipe, recipe ? [recipe] : []);
+
+test('单层配方可合成数量覆盖无配方、恰好一次、多次、多产物和瓶颈', () => {
   const recipe = { productItemId: 'P', outputQuantity: 1, ingredients: [{ itemId: 'A', quantity: 2 }, { itemId: 'B', quantity: 3 }] };
   assert.equal(directCraftableQuantity({ A: 99, B: 99 }), 0);
   assert.equal(directCraftableQuantity({ A: 2, B: 3 }, recipe), 1);

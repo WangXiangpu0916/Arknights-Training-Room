@@ -1,0 +1,14 @@
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+const version = JSON.parse(await readFile('package.json','utf8')).version;
+const cargo = await readFile('src-tauri/Cargo.toml','utf8');
+if (cargo.match(/^version = "([^"]+)"/m)?.[1] !== version) throw new Error('package.json 与 Cargo.toml 版本不一致；构建不会自动修改版本号。');
+const root='dist/desktop';
+await mkdir(`${root}/dist/renderer`,{recursive:true});
+await cp('renderer',`${root}/dist/renderer`,{recursive:true});
+await mkdir(`${root}/build`,{recursive:true});
+await cp('build/icon.png',`${root}/build/icon.png`);
+let html=await readFile('renderer/index.html','utf8');
+html=html.replace(/  <meta http-equiv="Content-Security-Policy"[^>]+>\r?\n/,'');
+html=html.replace('</head>','  <link rel="stylesheet" href="platform.css">\n</head>');
+html=html.replace('<script src="app.js"></script>','<script src="plan-order.js"></script>\n  <script src="platform.js"></script>\n  <script src="app.js"></script>');
+await writeFile(`${root}/dist/renderer/index.html`,html);

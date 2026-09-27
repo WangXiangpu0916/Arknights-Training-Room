@@ -9,10 +9,10 @@ import {
   OwnedOperator,
   Recipe,
 } from '../src/domain/types';
-import { CraftingEngine } from '../src/engine/crafting';
-import { MasteryPlanner } from '../src/engine/mastery';
+import { CraftingEngine } from './native-core';
+import { MasteryPlanner } from './native-core';
 import { professionFromToolboxId, PRTS_PROFESSIONS } from '../src/domain/professions';
-import { masteryMaterialIds, unlimitedMaterialGroups } from '../src/domain/mastery-materials';
+import { masteryMaterialIds, unlimitedMaterialGroups } from './native-core';
 
 const recipes: Recipe[] = [
   { productItemId: 'B', outputQuantity: 1, ingredients: [{ itemId: 'A', quantity: 3 }] },
@@ -78,6 +78,8 @@ test('Case 1: 直接库存完全足够', () => {
   const result = makeEngine().fulfill({ A: 5 }, [{ itemId: 'A', quantity: 4 }]);
   assert.equal(result.feasible, true);
   assert.equal(result.remainingInventory.A, 1);
+  assert.equal(result.steps[0].availableInventory, 5);
+  assert.equal(result.steps[0].fromInventory, 4);
 });
 
 test('职业编号按 PRTS 八职业正确归一化', () => {
@@ -265,10 +267,86 @@ test('Case 10: 无限原料参与有限高级材料合成', () => {
   assert.deepEqual(result.unlimitedRoots, ['A']);
 });
 
-test('Case 11: 所有输入无限时产物无限', () => {
+test('Case 11: 所有输入无限时仍展开加工链并记录兑换量', () => {
   const result = makeEngine(['A']).fulfill({}, [{ itemId: 'C', quantity: 1000 }]);
   assert.equal(result.feasible, true);
-  assert.equal(result.steps[0].batches, 0);
+  assert.equal(result.steps[0].batches, 1000);
+  assert.deepEqual(result.exchanges, [{ itemId: 'A', quantity: 6000 }]);
+});
+
+test('无限池先使用真实库存，只兑换直接缺口且不修改原始仓库', () => {
+  const inventory = { A: 5 };
+  const result = makeEngine(['A']).fulfill(inventory, [{ itemId: 'A', quantity: 12 }]);
+  assert.deepEqual(result.exchanges, [{ itemId: 'A', quantity: 7 }]);
+  assert.equal(result.steps[0].fromInventory, 5);
+  assert.equal(result.steps[0].exchangeQuantity, 7);
+  assert.equal(result.remainingInventory.A, 0);
+  assert.deepEqual(inventory, { A: 5 });
+  const enough = makeEngine(['A']).fulfill({ A: 12 }, [{ itemId: 'A', quantity: 12 }]);
+  assert.deepEqual(enough.exchanges, []);
+  assert.deepEqual(enough.unlimitedRoots, []);
+});
+
+test('多层加工先用高级与中间材料库存，兑换清单只包含基础原料', () => {
+  const result = makeEngine(['A']).fulfill({ C: 1, B: 1, A: 2 }, [{ itemId: 'C', quantity: 3 }]);
+  assert.deepEqual(result.exchanges, [{ itemId: 'A', quantity: 7 }]);
+  assert.equal(result.steps[0].fromInventory, 1);
+  assert.equal(result.steps[0].batches, 2);
+  assert.equal(result.steps[0].children[0].fromInventory, 1);
+  assert.equal(result.steps[0].children[0].children[0].exchangeQuantity, 7);
+});
+
+test('两种材料共用原料时仅扣一次库存，并合并兑换缺口', () => {
+  const result = makeEngine(['A']).fulfill({ A: 4 }, [{ itemId: 'B', quantity: 2 }, { itemId: 'D', quantity: 2 }]);
+  assert.deepEqual(result.exchanges, [{ itemId: 'A', quantity: 6 }]);
+  assert.equal(result.remainingInventory.A, 0);
+});
+
+test('无限池材料可用低级库存加工时，先加工再兑换剩余缺口', () => {
+  const result = makeEngine(['B']).fulfill({ B: 1, A: 3 }, [{ itemId: 'B', quantity: 3 }]);
+  assert.deepEqual(result.exchanges, [{ itemId: 'B', quantity: 1 }]);
+  assert.equal(result.steps[0].fromInventory, 1);
+  assert.equal(result.steps[0].batches, 1);
+  assert.equal(result.steps[0].exchangeQuantity, 1);
+  assert.equal(result.remainingInventory.A, 0);
+});
+
+test('连续专精共享库存，兑换数量按全部阶段合计', () => {
+  const [candidate] = new MasteryPlanner(gameData).continuous([owned([0])], { A: 4, B: 1 }, ['A']);
+  assert.equal(candidate.to, 3);
+  assert.deepEqual(candidate.stages.map(stage => stage.craft.exchanges), [[], [], [{ itemId: 'A', quantity: 4 }]]);
+  assert.equal(candidate.stages[0].craft.remainingInventory.A, 2);
+  assert.equal(candidate.stages[1].craft.remainingInventory.B, 0);
+});
+
+test('可兑换材料的加工不能抢走其他需求的有限原料', () => {
+  const result = makeEngine(['B']).fulfill({ A: 3 }, [{ itemId: 'B', quantity: 1 }, { itemId: 'D', quantity: 1 }]);
+  assert.equal(result.feasible, true);
+  assert.deepEqual(result.exchanges, [{ itemId: 'B', quantity: 1 }]);
+  assert.equal(result.remainingInventory.A, 1);
+});
+
+test('连续加工保留多产物余量，后续阶段无需重复兑换', () => {
+  const engine = makeEngine(['A']);
+  const first = engine.fulfill({ A: 1 }, [{ itemId: 'PAIR', quantity: 1 }]);
+  const second = engine.fulfill(first.remainingInventory, [{ itemId: 'PAIR', quantity: 1 }]);
+  assert.deepEqual(first.exchanges, [{ itemId: 'A', quantity: 2 }]);
+  assert.equal(first.remainingInventory.PAIR, 1);
+  assert.deepEqual(second.exchanges, []);
+  assert.equal(second.steps[0].fromInventory, 1);
+});
+
+test('连续专精保留后续阶段必需的有限原料，不因提前加工缩短路线', () => {
+  const skill = { ...operator.skills[0], requirements: {
+    1: [{ itemId: 'B', quantity: 1 }],
+    2: [{ itemId: 'D', quantity: 1 }],
+    3: [{ itemId: 'D', quantity: 1 }],
+  } };
+  const planner = new MasteryPlanner({ ...gameData, operators: [{ ...operator, skills: [skill] }] });
+  const [candidate] = planner.continuous([owned([0])], { A: 4 }, ['B']);
+  assert.equal(candidate.to, 3);
+  assert.deepEqual(candidate.stages[0].craft.exchanges, [{ itemId: 'B', quantity: 1 }]);
+  assert.equal(candidate.remainingInventory.A, 0);
 });
 
 test('Case 12: 部分输入无限、部分有限仍受有限材料约束', () => {

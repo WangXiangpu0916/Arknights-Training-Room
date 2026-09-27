@@ -107,8 +107,8 @@ resources.yml 每小时 / 手动运行：现有测试 → 真实 Renderer E2E �
 npm test
 npm run resource:build
 npm run qa:resource
-npm run qa:electron
-npm run qa:packaged # 先构建 release/win-unpacked
+npm run qa:desktop
+npm run qa:packaged # 显式 QA 优化构建验证资源后，恢复正式构建并同步 win-unpacked
 # 实际公开 HTTPS 更新：先 fetch-resource-baseline，再 qa:packaged -- --update
 # 在线准备，命令需要 gh 能读取公开 API
 npm run resource:prepare

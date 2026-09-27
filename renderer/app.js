@@ -965,14 +965,81 @@ async function beginLogin() {
 function showCandidate(candidate) {
   const materials = materialMap();
   const totals = new Map();
+  const exchanges = new Map();
   candidate.stages.forEach(stage => stage.requirements.forEach(x => totals.set(x.itemId, (totals.get(x.itemId) || 0) + x.quantity)));
-  showModal(`<h2>${esc(candidate.operator.name)} · S${candidate.skill.index} ${esc(candidate.skill.name)}</h2>
-    <p>当前 M${candidate.from} → 可达到 M${candidate.to} ${candidate.usesUnlimited ? `<span class="badge blue">依赖无限：${candidate.unlimitedRoots.map(id => esc(materials.get(id)?.name || id)).join('、')}</span>` : '<span class="badge ok">仅真实仓库</span>'}</p>
-    ${candidate.stages.map(stage => `<section class="stage-block"><h3>M${stage.from} → M${stage.to}</h3>${stage.requirements.map(requirement => {
+  candidate.stages.forEach(stage => stage.craft.exchanges.forEach(x => exchanges.set(x.itemId, (exchanges.get(x.itemId) || 0) + x.quantity)));
+  const summaries = new Set(state.skillSummaryItemIds);
+  const shop = [...exchanges].filter(([id]) => !summaries.has(id));
+  const books = [...exchanges].filter(([id]) => summaries.has(id));
+  let inventory = state.account.inventory;
+  const stages = candidate.stages.map((stage, stageIndex) => {
+    const cards = stage.requirements.map(requirement => {
       const step = stage.craft.steps.find(x => x.itemId === requirement.itemId);
-      return `<div class="material-line"><span>${esc(materials.get(requirement.itemId)?.name || requirement.itemId)} ×${requirement.quantity}</span><span>实际 ${state.account.inventory[requirement.itemId] ?? 0}</span><span class="${step?.batches ? 'infinity' : 'success'}">${step?.unlimitedRoots.length ? '∞ 供应' : step?.batches ? `加工 ${step.batches} 次` : '满足'}</span></div>${step ? craftTree(step, materials) : ''}`;
-    }).join('')}</section>`).join('')}
-    ${candidate.stages.length > 1 ? `<section class="stage-block"><h3>连续专精总材料</h3>${[...totals].map(([id, quantity]) => `<div class="material-line"><span>${esc(materials.get(id)?.name || id)}</span><strong>×${quantity}</strong><span></span></div>`).join('')}</section>` : ''}`);
+      return `<article class="plan-material-card">${planMaterialToken(requirement.itemId, requirement.quantity, materials)}
+        <div class="plan-stock" title="本阶段开始时的可用库存，已扣除前面阶段的消耗">库存 <strong>${inventory[requirement.itemId] ?? 0}</strong></div>
+        ${planMaterialStatus(step)}<div class="plan-card-footer">${step?.batches ? `<button type="button" class="plan-recipe-toggle" data-plan-recipe-toggle="${esc(requirement.itemId)}" aria-controls="plan-recipe-${stageIndex}" aria-expanded="false">${planStatusIcon('craft')}配方<span class="plan-expand-arrow">⌄</span></button>` : '<span class="plan-card-footer-static">无需加工</span>'}</div>
+      </article>`;
+    }).join('');
+    inventory = stage.craft.remainingInventory;
+    return `<section class="stage-block plan-stage"><h3 class="plan-stage-heading"><img src="${masteryIcon(stage.from)}" alt="M${stage.from}"><span>→</span><img src="${masteryIcon(stage.to)}" alt="M${stage.to}"></h3><div class="plan-material-grid">${cards}</div><div class="plan-stage-recipe" id="plan-recipe-${stageIndex}" role="region" hidden></div></section>`;
+  }).join('');
+  showModal(`<div class="plan-detail-heading"><img class="plan-detail-skill" src="${skillIcon(candidate.skill.skillId)}" alt="" data-img-fallback="skill"><div><h2>${esc(candidate.operator.name)} · S${candidate.skill.index}</h2><p>${esc(candidate.skill.name)} · M${candidate.from} → M${candidate.to}</p></div></div>
+    <section class="plan-exchange-summary"><h3>${planStatusIcon('shop')}还需兑换${candidate.stages.length > 1 ? '<small>连续专精合计</small>' : ''}</h3>
+      ${shop.length ? `<div class="plan-exchange-grid">${shop.map(([id, quantity]) => `<div class="plan-exchange-item" data-exchange-item="${esc(id)}" data-exchange-quantity="${quantity}">${planMaterialToken(id, quantity, materials)}</div>`).join('')}</div>` : `<div class="plan-no-exchange">${planStatusIcon('check')}无需兑换材料</div>`}
+      ${books.length ? `<div class="plan-summary-books"><span>技巧概要还需准备</span><div class="plan-exchange-grid">${books.map(([id, quantity]) => planMaterialToken(id, quantity, materials)).join('')}</div></div>` : ''}
+    </section>${stages}
+    ${candidate.stages.length > 1 ? `<section class="stage-block"><h3>专精总需求</h3><div class="plan-total-grid">${[...totals].map(([id, quantity]) => planMaterialToken(id, quantity, materials)).join('')}</div></section>` : ''}`);
+  modalContent.querySelectorAll('.plan-stage').forEach((stageElement, index) => {
+    const panel = stageElement.querySelector('.plan-stage-recipe');
+    const buttons = [...stageElement.querySelectorAll('[data-plan-recipe-toggle]')];
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const opening = button.getAttribute('aria-expanded') !== 'true';
+      buttons.forEach(other => {
+        other.setAttribute('aria-expanded', String(opening && other === button));
+        other.closest('.plan-material-card').classList.toggle('selected', opening && other === button);
+      });
+      panel.hidden = !opening;
+      if (!opening) return;
+      const step = candidate.stages[index].craft.steps.find(item => item.itemId === button.dataset.planRecipeToggle);
+      const name = materials.get(step.itemId)?.name || step.itemId;
+      panel.setAttribute('aria-label', `${name}的加工配方`);
+      panel.innerHTML = `<div class="plan-recipe-heading"><h4>${planMaterialToken(step.itemId, step.crafted, materials)}<span>${esc(name)}<small>加工 ×${step.batches}</small></span></h4><button type="button" class="plan-recipe-close" aria-label="收起加工配方">×</button></div>${planRecipeVisual(step, materials)}`;
+      panel.querySelector('.plan-recipe-close').addEventListener('click', () => { button.click(); button.focus(); });
+      bindImageFallbacks(panel);
+    }));
+  });
+}
+
+function planStatusIcon(kind) {
+  const paths = {
+    shop: '<path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+    craft: '<path d="m14 5 5 5M3 21l11-11M12 7l5-5 5 5-5 5Z"/>',
+    check: '<path d="m5 12 4 4L19 6"/>',
+  };
+  return `<svg class="plan-status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[kind]}</svg>`;
+}
+
+function planMaterialToken(itemId, quantity, materials) {
+  const name = materials.get(itemId)?.name || itemId;
+  return `<div class="plan-material-token" tabindex="0" title="${esc(name)} ×${quantity}" aria-label="${esc(name)}，数量 ${quantity}"><img src="${itemIcon(itemId)}" alt="${esc(name)}" data-img-fallback><strong>×${quantity}</strong></div>`;
+}
+
+function planMaterialStatus(step) {
+  if (!step) return '';
+  const needsExchange = step.unlimitedRoots.length > 0;
+  const isSummary = state.skillSummaryItemIds.includes(step.itemId);
+  const exchangeLabel = step.exchangeQuantity ? `${isSummary ? '待补充' : '待兑换'} ×${step.exchangeQuantity}` : '待兑换原料';
+  return `<div class="plan-material-status">
+    ${needsExchange ? `<span class="plan-status-exchange">${planStatusIcon('shop')}${exchangeLabel}</span>` : ''}
+    ${step.batches ? `<span class="plan-status-craft">${planStatusIcon('craft')}加工 ×${step.batches}</span>` : ''}
+    ${!needsExchange && !step.batches ? `<span class="plan-status-ready">${planStatusIcon('check')}已满足</span>` : ''}
+  </div>`;
+}
+
+function planRecipeVisual(step, materials) {
+  return `<div class="plan-recipe-body"><div class="plan-recipe-flow">${step.children.map(child => `<div class="plan-recipe-term"><div class="plan-recipe-input">${planMaterialToken(child.itemId, child.requested, materials)}<small title="这次加工前的可用库存，已扣除前面步骤的消耗">库存 ${child.availableInventory}</small>${planMaterialStatus(child)}</div></div>`).join('')}<div class="plan-recipe-term"><span class="plan-flow-symbol">→</span><div class="plan-recipe-output">${planMaterialToken(step.itemId, step.crafted, materials)}<small>产出</small></div></div></div>
+    ${step.children.filter(child => child.batches).map(child => `<details class="plan-recipe plan-recipe-nested"><summary>${planMaterialToken(child.itemId, child.requested, materials)}${planStatusIcon('craft')}配方<span class="plan-expand-arrow">⌄</span></summary>${planRecipeVisual(child, materials)}</details>`).join('')}
+  </div>`;
 }
 
 function showPlanCandidate(candidate, kind) {
@@ -999,7 +1066,7 @@ function craftTree(step, materials) {
   return `<div class="craft-tree">加工 ${esc(materials.get(step.itemId)?.name || step.itemId)}：${step.batches} 次，产出 ${step.crafted}${step.children.map(child => `<div>${esc(materials.get(child.itemId)?.name || child.itemId)} ×${child.requested}${craftTree(child, materials)}</div>`).join('')}</div>`;
 }
 
-function showModal(html) { modalContent.innerHTML = html; modal.classList.remove('hidden'); }
+function showModal(html) { modalContent.innerHTML = html; modal.classList.remove('hidden'); bindImageFallbacks(modalContent); }
 
 document.querySelectorAll('.nav').forEach(button => button.addEventListener('click', () => {
   page = button.dataset.page;

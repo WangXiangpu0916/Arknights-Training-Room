@@ -1,88 +1,33 @@
 {
   "name": "arknights-training-room",
-  "version": "0.0.20-beta.16",
+  "version": "0.1.0",
   "description": "训练室（测试版）：明日方舟本地专精规划桌面应用",
   "repository": "https://github.com/WangXiangpu0916/Arknights-Training-Room.git",
-  "main": "dist/src/main.js",
   "author": "Arknights Training Room contributors",
   "license": "MIT",
   "scripts": {
     "clean": "node scripts/clean.mjs",
     "metadata:sync": "node scripts/sync-prts-metadata.mjs",
     "assets:sync": "node scripts/sync-prts-assets.mjs",
-    "build": "npm run clean && tsc && node scripts/copy-static.mjs && node scripts/generate-third-party-licenses.mjs && node scripts/build-resource.mjs",
+    "build:assets": "npm run clean && tsc && node scripts/copy-static.mjs && node scripts/build-resource.mjs && node scripts/prepare-native.mjs && node scripts/generate-third-party-licenses.mjs",
+    "build": "npm run build:assets && tauri build --no-bundle && node scripts/sync-local-app.mjs",
     "resource:build": "tsc && node scripts/build-resource.mjs",
     "resource:prepare": "node scripts/prepare-resource.mjs",
-    "qa:resource": "node scripts/qa-resource-update.mjs",
-    "qa:packaged": "node scripts/qa-packaged-resource.mjs",
-    "start": "npm run build && electron .",
-    "test": "npm run build && node --test dist/tests/*.test.js",
-    "benchmark:performance": "npm run build && node scripts/benchmark-performance.mjs",
-    "qa:electron": "node scripts/qa-electron.mjs",
-    "dist": "npm test && electron-builder --win nsis portable"
+    "start": "npm run build:assets && tauri dev",
+    "test": "npm run build:assets && cargo test --manifest-path src-tauri/Cargo.toml --lib --test resources && cargo build --manifest-path src-tauri/Cargo.toml --example domain-check && node --test dist/tests/*.test.js && node scripts/qa-domain.mjs",
+    "qa:desktop": "tauri build --debug --no-bundle && node scripts/qa-desktop.mjs",
+    "qa:production": "node scripts/qa-production.mjs",
+    "qa:resource": "tauri build --debug --no-bundle && node scripts/qa-resource-update.mjs",
+    "qa:packaged": "tauri build --no-bundle --features qa && node scripts/qa-packaged-resource.mjs && tauri build --no-bundle && node scripts/sync-local-app.mjs",
+    "benchmark:performance": "cargo build --manifest-path src-tauri/Cargo.toml --release --example domain-check && node scripts/benchmark-performance.mjs",
+    "benchmark:desktop": "tauri build --no-bundle --features qa && node scripts/benchmark-core-flow.mjs native && tauri build --no-bundle && node scripts/sync-local-app.mjs",
+    "dist": "npm test && tauri build --bundles nsis && node scripts/sync-local-app.mjs && node scripts/package-native.mjs"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "2.11.5",
     "@types/node": "^24.3.0",
-    "@types/qrcode": "^1.5.5",
-    "electron": "^37.2.6",
-    "electron-builder": "^26.0.12",
     "pinyin-pro": "^3.29.3",
-    "typescript": "^5.9.2"
-  },
-  "dependencies": {
-    "electron-updater": "^6.8.9",
-    "qrcode": "^1.5.4"
-  },
-  "build": {
-    "appId": "io.github.arknights.trainingroom",
-    "productName": "训练室",
-    "directories": {
-      "output": "release"
-    },
-    "files": [
-      "build/icon.png",
-      "dist/src/**/*",
-      "dist/renderer/**/*",
-      "dist/THIRD_PARTY_LICENSES.txt",
-      "LICENSE",
-      "THIRD_PARTY_NOTICES.md",
-      "package.json"
-    ],
-    "extraResources": [
-      {
-        "from": "dist/resource/snapshot",
-        "to": "training-room-resource"
-      }
-    ],
-    "win": {
-      "icon": "build/icon.png",
-      "target": "nsis"
-    },
-    "publish": {
-      "provider": "github",
-      "owner": "WangXiangpu0916",
-      "repo": "Arknights-Training-Room",
-      "releaseType": "prerelease"
-    },
-    "asar": true,
-    "electronFuses": {
-      "runAsNode": false,
-      "enableCookieEncryption": true,
-      "enableNodeOptionsEnvironmentVariable": false,
-      "enableNodeCliInspectArguments": false,
-      "enableEmbeddedAsarIntegrityValidation": true,
-      "onlyLoadAppFromAsar": true
-    },
-    "nsis": {
-      "artifactName": "Arknights-Training-Room-${version}-Setup-${arch}.${ext}",
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "训练室"
-    },
-    "portable": {
-      "artifactName": "Arknights-Training-Room-${version}-Portable-${arch}.${ext}"
-    }
+    "typescript": "^5.9.2",
+    "pngjs": "^7.0.0"
   }
 }
