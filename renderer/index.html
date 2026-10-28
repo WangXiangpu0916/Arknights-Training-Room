@@ -11,7 +11,6 @@
 <body>
   <div id="app">
     <aside class="sidebar">
-      <div class="sidebar-brand"><img src="../../build/icon.png" alt=""><strong>训练室</strong></div>
       <nav class="sidebar-nav-primary">
         <button class="nav active" data-page="dashboard"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path><path d="m16 9-5.5 5.5L8 12"></path></svg>专精规划</button>
         <button class="nav" data-page="promotion"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m17 11-5-5-5 5"></path><path d="m17 18-5-5-5 5"></path></svg>精英化规划</button>
@@ -27,29 +26,19 @@
       <div class="sidebar-status" id="sidebar-status"></div>
     </aside>
     <main>
-      <header class="topbar">
-        <div>
-          <h1 id="page-title">当前可以专精</h1>
-          <p id="page-subtitle">基于真实仓库与加工站配方的确定性计算</p>
-        </div>
-        <div class="top-actions">
-          <button id="refresh-button" class="primary">刷新账号数据</button>
-          <span id="sync-badge" class="sync-status">正在读取本地数据</span>
-        </div>
-      </header>
       <section id="content" class="content"><div class="loading">正在载入……</div></section>
     </main>
   </div>
-  <div id="data-notice-region" class="data-notice-region" aria-live="polite"></div>
-  <div id="toast" class="toast"></div>
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <dialog id="modal" class="modal hidden" aria-modal="true">
     <div class="modal-backdrop" data-close-modal></div>
     <div class="modal-panel">
-      <button class="modal-close" data-close-modal aria-label="关闭">×</button>
+      <button class="modal-close" data-close-modal aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
       <div id="modal-content"></div>
     </div>
-  </div>
+  </dialog>
   <script src="operator-filter.js"></script>
+  <script src="skill-details.js"></script>
   <script src="inventory-catalog.js"></script>
   <script src="app.js"></script>
 </body>

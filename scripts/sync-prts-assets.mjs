@@ -46,10 +46,10 @@ await mkdir(moduleTypeDir, { recursive: true });
 await mkdir(moduleStageDir, { recursive: true });
 
 const skillNames = JSON.parse(await readFile(path.join('resources', 'game-data', 'skill-cn.json'), 'utf8'));
-const cultivate = JSON.parse(await readFile(path.join('resources', 'game-data', 'cultivate.json'), 'utf8'));
+const skillData = JSON.parse(await readFile(path.join('resources', 'game-data', 'skill-details.json'), 'utf8'));
 const moduleMetadata = JSON.parse(await readFile(path.join('resources', 'game-data', 'uniequip-metadata.json'), 'utf8'));
-const skillIds = [...new Set(Object.values(cultivate).flatMap(operator =>
-  (operator.skills?.elite ?? []).map(skill => skill.name),
+const skillIds = [...new Set(Object.values(skillData.operators).flatMap(operator =>
+  operator.skills.map(skill => skill.skillId),
 ))].sort();
 const moduleTypeIds = [...new Set(Object.values(moduleMetadata).map(module => module.typeIcon).filter(Boolean))].sort();
 const titles = [

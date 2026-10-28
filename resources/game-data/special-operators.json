@@ -1,0 +1,24 @@
+{
+  "4195_radian": {
+    "maxElitePhase": 2,
+    "skillIds": [
+      "skchr_radian_1",
+      "skchr_radian_2",
+      "skchr_radian_3"
+    ],
+    "modules": [
+      {
+        "moduleId": "uniequip_002_radian",
+        "name": "电弧特勤证章",
+        "typeIcon": "so-a",
+        "typeLabel": "α 型模组"
+      },
+      {
+        "moduleId": "uniequip_003_radian",
+        "name": "新起点",
+        "typeIcon": "so-b",
+        "typeLabel": "β 型模组"
+      }
+    ]
+  }
+}

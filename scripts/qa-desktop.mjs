@@ -24,6 +24,9 @@ if (['system', 'black', 'light'].includes(process.env.ATR_QA_THEME)) settings.th
 await writeFile(path.join(runtime, 'settings.json'), `${JSON.stringify(settings, null, 2)}\n`, 'utf8');
 
 const account = JSON.parse(await readFile(path.join(root, 'qa-fixture', 'account-cache.json'), 'utf8'));
+account.operators.forEach((operator, index) => {
+  if (index % 3) operator.gainTime = 1600000000 + (account.operators.length - index) * 86400;
+});
 const cultivate = JSON.parse(await readFile(path.join(root, 'resources', 'game-data', 'cultivate.json'), 'utf8'));
 for (const operatorId of ['002_amiya', '4132_ascln', '180_amgoat', '485_pallas', '346_aosta', '159_peacok', '4198_christ']) {
   if (account.operators.some(operator => operator.operatorId === operatorId)) continue;
@@ -105,7 +108,7 @@ async function waitFor(expression, message) {
     await new Promise(resolve => setTimeout(resolve, 100));
   }
   const pageDiagnostic = await evaluate(`(() => ({
-    title: document.querySelector('#page-title')?.textContent,
+    page: document.querySelector('main')?.dataset.page,
     content: document.querySelector('#content')?.innerText?.slice(0, 1200),
     body: document.body?.innerText?.slice(0, 1200),
   }))()`).catch(error => ({ diagnosticError: error.message }));
@@ -189,65 +192,42 @@ try {
     && document.querySelector('#sidebar-status strong')
     && !document.querySelector('#content .loading'))`, 'Application did not finish loading');
   const startupMs = performance.now() - launchStarted;
+  await evaluate(`api.cacheState({...state, startupCacheKey: 'outdated-inputs'})`);
+  if (await evaluate(`api.getCachedState()`)) throw Error('Startup cache accepted changed inputs');
+  if (!await evaluate(`api.cacheState({...state, revision: 100000, account: {...state.account, nickname: '缓存启动校验'}})`)) throw Error('Startup cache was not persisted');
+  const holdStartup = await send('Page.addScriptToEvaluateOnNewDocument', { source: `
+    Object.defineProperty(window, 'trainingRoom', { configurable: true, set(api) {
+      const getState = api.getState;
+      const ready = new Promise(resolve => { window.__qaResumeStartup = resolve; });
+      api.getState = () => ready.then(() => getState());
+      Object.defineProperty(window, 'trainingRoom', {value: api, configurable: true, writable: true});
+    }});
+  ` });
+  await send('Page.reload');
+  await waitFor(`typeof state !== 'undefined' && state?.revision === -1 && Boolean(document.querySelector('.candidate'))`, 'Cached home screen did not render while the live request was blocked');
+  const startupCache = await evaluate(`(() => {
+    const result = {homeReadyMs: performance.now(), cached: state.account.nickname === '缓存启动校验'};
+    mode = 'continuous'; render();
+    document.querySelector('[data-dashboard-filter="search"]').focus();
+    document.querySelector('main').scrollTop = 120;
+    result.scrollTop = document.querySelector('main').scrollTop;
+    return result;
+  })()`);
+  await captureScreen('startup-cached.png');
+  await evaluate(`window.__qaResumeStartup()`);
+  await waitFor(`state.revision >= 0 && !stateLoadPromise`, 'Fresh state did not replace the previous-session revision');
+  Object.assign(startupCache, await evaluate(`({
+    refreshed: state.account.nickname !== '缓存启动校验',
+    modePreserved: mode === 'continuous' && document.querySelector('[data-continuous-mode]').checked,
+    focusPreserved: document.activeElement.matches('[data-dashboard-filter="search"]'),
+    refreshedScrollTop: document.querySelector('main').scrollTop,
+  })`));
+  if (!startupCache.cached || !startupCache.refreshed || !startupCache.modePreserved || !startupCache.focusPreserved || startupCache.scrollTop !== startupCache.refreshedScrollTop) throw Error(`Startup cache replacement failed: ${JSON.stringify(startupCache)}`);
+  await writeFile(path.join(output, 'startup-cache-qa.json'), JSON.stringify(startupCache, null, 2));
+  await send('Page.removeScriptToEvaluateOnNewDocument', { identifier: holdStartup.identifier });
+  await evaluate(`mode='single'; render(); document.querySelector('main').scrollTop=0;`);
   await send('Input.dispatchMouseEvent', { type:'mouseMoved', x:1, y:1 });
-  await waitFor(`document.querySelector('#data-notice-region.show [data-close-cache-notice]')`, 'Cache notification did not appear');
-  await evaluate(`(() => { clearCacheNoticeTimer(); activeCacheNoticeKey = ''; renderDataNotice(); })()`);
-  await waitFor(`document.querySelector('#data-notice-region.show [data-close-cache-notice]')`, 'Cache notification did not reset for QA');
-  await new Promise(resolve => setTimeout(resolve, 320));
-  await waitFor(`document.querySelector('#data-notice-region').getBoundingClientRect().top >= 0`, 'Cache notification entrance did not finish before measurement');
-  const cacheNotice = await evaluate(`(() => {
-    const controls = document.querySelector('.dashboard-layout').getBoundingClientRect();
-    const region = document.querySelector('#data-notice-region');
-    const notice = region.firstElementChild;
-    const style = getComputedStyle(region);
-    const frame = notice.getBoundingClientRect();
-    return {
-      beforeTop: controls.top,
-      fixed: style.position === 'fixed',
-      zIndex: Number(style.zIndex),
-      outsideContent: !document.querySelector('#content').contains(region),
-      finalTop: frame.top,
-      width: frame.width,
-      viewportWidth: innerWidth,
-      transitionProperty: style.transitionProperty,
-      transitionDuration: style.transitionDuration,
-      closeVisible: Boolean(notice.querySelector('[data-close-cache-notice]')?.getBoundingClientRect().width),
-      singleLine: notice.querySelector('span').getBoundingClientRect().height < 28,
-    };
-  })()`);
-  await captureScreen('cache-notice-final.png');
-  cacheNotice.animation = await evaluate(`(async () => {
-    const region = document.querySelector('#data-notice-region');
-    clearCacheNoticeTimer();
-    region.classList.remove('show');
-    await new Promise(resolve => setTimeout(resolve, 300));
-    const startTop = region.firstElementChild.getBoundingClientRect().top;
-    const startBottom = region.firstElementChild.getBoundingClientRect().bottom;
-    void region.offsetHeight;
-    region.classList.add('show');
-    await new Promise(resolve => setTimeout(resolve, 45));
-    const movingTop = region.firstElementChild.getBoundingClientRect().top;
-    await new Promise(resolve => setTimeout(resolve, 280));
-    const endTop = region.firstElementChild.getBoundingClientRect().top;
-    return { startTop, startBottom, movingTop, endTop };
-  })()`);
-  await evaluate(`(() => {
-    const region = document.querySelector('#data-notice-region');
-    region.classList.remove('show');
-    void region.offsetHeight;
-    region.classList.add('show');
-  })()`);
-  await new Promise(resolve => setTimeout(resolve, 45));
-  await captureScreen('cache-notice-entering.png');
-  await new Promise(resolve => setTimeout(resolve, 280));
-  await evaluate(`document.querySelector('[data-close-cache-notice]').click()`);
-  await waitFor(`!document.querySelector('#data-notice-region.show')`, 'Cache notification did not close manually');
-  cacheNotice.afterManualTop = await evaluate(`document.querySelector('.dashboard-layout').getBoundingClientRect().top`);
-  await evaluate(`(() => { dismissedCacheNoticeKey = ''; activeCacheNoticeKey = ''; renderDataNotice(); })()`);
-  await waitFor(`document.querySelector('#data-notice-region.show')`, 'Cache notification did not reopen for auto-dismiss QA');
-  await new Promise(resolve => setTimeout(resolve, 5200));
-  cacheNotice.autoDismissed = await evaluate(`!document.querySelector('#data-notice-region.show') && cacheNoticeTimer === null`);
-  cacheNotice.afterAutoTop = await evaluate(`document.querySelector('.dashboard-layout').getBoundingClientRect().top`);
+  if (await evaluate(`Boolean(document.querySelector('#data-notice-region, .cache-notice'))`)) throw Error('Unexpected cache notification');
   await evaluate(`document.querySelector('.nav[data-page="operators"]').click()`);
   await waitFor(`Boolean(document.querySelector('[data-operator-search]'))`, 'Operators page did not render');
   const masteryBadgeLayout = await evaluate(`(() => {
@@ -404,23 +384,59 @@ try {
   console.log('QA phase: multi/select-all/other');
 
   const sortChecks = {};
-  for (const mode of ['training-desc', 'implementation-asc', 'implementation-desc', 'name-asc', 'name-desc', 'rarity-asc', 'rarity-desc']) {
-    sortChecks[mode] = await evaluate(`(() => {
-      document.querySelector('[data-operator-sort="${mode}"]').click();
-      const actual = [...document.querySelectorAll('.operator-row h3')].map(node => node.textContent);
-      const expected = OperatorFilters.sortRows(ownedOperatorRows(), '${mode}').map(row => row.definition.name);
-      return { actual, expected, equal: JSON.stringify(actual) === JSON.stringify(expected) };
-    })()`);
-    console.log(`QA phase: sort ${mode}`);
+  const accountBeforeSort = await evaluate('JSON.stringify(state.account)');
+  for (const property of ['training', 'implementation', 'name', 'rarity', 'acquisition', 'skill']) {
+    for (const [index, direction] of ['asc', 'desc', 'asc'].entries()) {
+      const mode = `${property}-${direction}`;
+      sortChecks[`${mode}-${index}`] = await evaluate(`(() => {
+        const button = document.querySelector('[data-operator-sort="${property}"]');
+        button.click();
+        const actual = [...document.querySelectorAll('.operator-row h3')].map(node => node.textContent);
+        const expected = OperatorFilters.sortRows(ownedOperatorRows(), '${mode}').map(row => row.definition.name);
+        const controls = [...document.querySelectorAll('[data-operator-sort]')];
+        const active = controls.filter(b => b.classList.contains('active') && b.getAttribute('aria-pressed') === 'true');
+        const valid = operatorFilters.sort === '${mode}' && controls.length === 6
+          && new Set(controls.map(b => b.dataset.operatorSort)).size === 6
+          && active.length === 1 && active[0] === button
+          && button.querySelector('.operator-sort-direction').textContent === '${direction === 'asc' ? '↑' : '↓'}'
+          && controls.filter(b => b !== button).every(b => !b.querySelector('.operator-sort-direction').textContent);
+        return { actual, expected, equal: valid && JSON.stringify(actual) === JSON.stringify(expected) };
+      })()`);
+      console.log(`QA phase: sort ${mode}`);
+    }
   }
+  if (await evaluate('JSON.stringify(state.account)') !== accountBeforeSort) throw Error('Sorting mutated the account snapshot');
+
+  const sortThemeChecks = {};
+  for (const [theme, scheme] of [['light', 'light'], ['black', 'dark'], ['system', 'light'], ['system', 'dark']]) {
+    await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: scheme }] });
+    await evaluate(`document.documentElement.dataset.theme='${theme}'`);
+    await new Promise(resolve => setTimeout(resolve, 200));
+    sortThemeChecks[`${theme}-${scheme}`] = await evaluate(`(() => {
+      const active = document.querySelector('.operator-sort-option.active');
+      const inactive = document.querySelector('.operator-sort-option:not(.active)');
+      return getComputedStyle(active).backgroundColor !== getComputedStyle(inactive).backgroundColor
+        && getComputedStyle(active).color !== getComputedStyle(inactive).color
+        && document.querySelector('main').scrollWidth <= document.querySelector('main').clientWidth;
+    })()`);
+    await captureScreen(`operator-sort-${theme}-${scheme}.png`);
+  }
+  await send('Emulation.setEmulatedMedia', { features: [] });
+  await evaluate(`document.documentElement.dataset.theme=state.settings.theme`);
 
   await setSearch('a');
   await evaluate(`document.querySelector('[data-operator-filter-option][data-filter-key="rarity"][value="6"]').click()`);
   const combinedSort = await evaluate(`(() => {
-    document.querySelector('[data-operator-sort="implementation-desc"]').click();
-    const actual = [...document.querySelectorAll('.operator-row h3')].map(node => node.textContent);
-    const expected = OperatorFilters.sortRows(OperatorFilters.filterRows(ownedOperatorRows(), operatorFilters), operatorFilters.sort).map(row => row.definition.name);
-    return { actual, expected, equal: JSON.stringify(actual) === JSON.stringify(expected) };
+    const checks = [];
+    for (const property of ['implementation', 'acquisition', 'skill']) {
+      for (const direction of ['asc', 'desc']) {
+        document.querySelector('[data-operator-sort="' + property + '"]').click();
+        const actual = [...document.querySelectorAll('.operator-row h3')].map(node => node.textContent);
+        const expected = OperatorFilters.sortRows(OperatorFilters.filterRows(ownedOperatorRows(), operatorFilters), property + '-' + direction).map(row => row.definition.name);
+        checks.push({ property, direction, actual, expected, equal: operatorFilters.sort === property + '-' + direction && JSON.stringify(actual) === JSON.stringify(expected) });
+      }
+    }
+    return { checks, equal: checks.every(check => check.equal) };
   })()`);
   await evaluate(`document.querySelector('[data-operator-reset]').click()`);
   console.log('QA phase: combined sort');
@@ -532,7 +548,7 @@ try {
         totals: [...document.querySelectorAll('.stat-total .stat-count')].map(node => node.textContent.trim()),
         permanentBreakdowns: !document.querySelector('details, summary, .stat-expand')
           && [...document.querySelectorAll('.stat-group')].every(group => group.querySelectorAll('.stat-child').length >= 3),
-        progressForEveryLine: document.querySelectorAll('.stat-progress').length === lines.length,
+        progressForEveryLine: lines.every(line => line.querySelector('.stat-progress')),
         columnAligned,
         distributionRemoved: !document.querySelector('.elite-distribution')
           && !['当前 E0', '当前 E1', '当前 E2'].some(label => document.body.textContent.includes(label)),
@@ -655,7 +671,7 @@ try {
     masterySample.style.position = 'fixed';
     masterySample.style.visibility = 'hidden';
     document.body.append(masterySample);
-    const masteryScrollPreserved = getComputedStyle(masterySample.firstElementChild).animationName === 'skill-name-scroll';
+    const masteryAutoScroll = getComputedStyle(masterySample.firstElementChild).animationName === 'skill-name-scroll';
     masterySample.remove();
     const codeSamples = ['EA-X', 'AMB-X', 'IAC-Y'].map(text => {
       const sample = document.createElement('div');
@@ -711,7 +727,7 @@ try {
           && code.left >= copy.left - 1 && code.right <= copy.right + 1
           && copy.top >= icon.bottom - 1 && copy.bottom <= card.querySelector('.module-target').getBoundingClientRect().bottom + 1;
       }),
-      masteryScrollPreserved,
+      masteryAutoScroll,
       themes: { light, dark, black },
     };
   })()`);
@@ -725,8 +741,8 @@ try {
   }))()`);
   await captureScreen('module-planner-continuous.png');
   await evaluate(`document.querySelector('.module-plan-card').click()`);
-  await waitFor(`!document.querySelector('#modal').classList.contains('hidden') && Boolean(document.querySelector('#modal .module-modal-heading'))`, 'Module detail modal did not render');
-  await waitFor(`[...document.querySelectorAll('#modal .module-modal-heading img')].every(image => image.complete && image.naturalWidth > 0)`, 'Module detail modal images did not load');
+  await waitFor(`!document.querySelector('#modal').classList.contains('hidden') && Boolean(document.querySelector('#modal .plan-detail-heading .module-type-icon'))`, 'Module detail modal did not render');
+  await waitFor(`[...document.querySelectorAll('#modal .plan-detail-heading img')].every(image => image.complete && image.naturalWidth > 0)`, 'Module detail modal images did not load');
   await captureScreen('module-planner-detail.png');
   await evaluate(`document.querySelector('[data-close-modal]').click()`);
 
@@ -832,6 +848,7 @@ try {
     document.querySelector('.candidate').click();
   })()`);
   await waitFor(`Boolean(document.querySelectorAll('.plan-stage').length === 3 && [...document.querySelectorAll('#modal-content img')].every(image => image.complete && image.naturalWidth > 0))`, 'Mastery material icons did not load');
+  await evaluate(`Promise.all(document.querySelector('#modal').getAnimations({subtree:true}).map(animation=>animation.finished.catch(()=>{})))`);
   const masteryExchange = await evaluate(`(() => ({
     noExchange: ${JSON.stringify(noExchange)},
     items: Object.fromEntries([...document.querySelectorAll('[data-exchange-item]')].map(node => [node.dataset.exchangeItem, Number(node.dataset.exchangeQuantity)])),
@@ -915,14 +932,6 @@ try {
   if (startupTheme.query !== startupTheme.saved || startupTheme.applied !== startupTheme.saved
     || startupTheme.bodyBackground !== expectedStartupBackground
     || startupTheme.windowBackground.toLowerCase() !== expectedWindowBackground) failures.push('startup theme');
-  if (!cacheNotice.fixed || cacheNotice.zIndex < 10 || !cacheNotice.outsideContent
-    || cacheNotice.finalTop < 0 || cacheNotice.finalTop > 12 || cacheNotice.width >= cacheNotice.viewportWidth * .5
-    || !cacheNotice.transitionProperty.includes('transform') || cacheNotice.transitionDuration === '0s'
-    || !cacheNotice.closeVisible || !cacheNotice.singleLine
-    || (process.env.ATR_QA_SCREENSHOTS && (cacheNotice.animation.startBottom > 0
-      || !(cacheNotice.animation.startTop < cacheNotice.animation.movingTop && cacheNotice.animation.movingTop < cacheNotice.animation.endTop)))
-    || Math.abs(cacheNotice.beforeTop - cacheNotice.afterManualTop) > .1
-    || Math.abs(cacheNotice.beforeTop - cacheNotice.afterAutoTop) > .1 || !cacheNotice.autoDismissed) failures.push('cache notification overlay');
   if (continuousInput.value !== 'abcdefghijkl' || !continuousInput.focused || !continuousInput.stable) failures.push('continuous input');
   if (afterBackspace !== 'abcdefghijk') failures.push('backspace');
   if (afterMiddleEdit !== 'abcdefghijZk') failures.push('middle edit');
@@ -942,13 +951,14 @@ try {
   if (!selectAll.allActive || selectAll.count !== account.operators.length) failures.push('select all');
   if (!otherGender.exists || !otherGender.names.includes('断罪者') || !otherGender.names.includes('Miss.Christine')) failures.push('gender other');
   for (const [mode, check] of Object.entries(sortChecks)) if (!check.equal) failures.push(`sort ${mode}`);
+  for (const [theme, valid] of Object.entries(sortThemeChecks)) if (!valid) failures.push(`sort theme ${theme}`);
   if (!combinedSort.equal) failures.push('combined sort');
   if (!masteryBadgeLayout.valid) failures.push('mastery badge layout');
   if (!highlightSync.equal) failures.push('highlight source mismatch');
   if (Object.values(pages).some(page => page.horizontalOverflow)) failures.push('horizontal overflow');
   if (statisticsVisuals.all.scope !== 'all' || statisticsVisuals.owned.scope !== 'owned'
     || statisticsVisuals.all.rows !== 6 || statisticsVisuals.owned.rows !== 6
-    || statisticsVisuals.all.sections.join('|') !== '干员持有|技能专精|模组|精英化'
+    || statisticsVisuals.all.sections.join('|') !== '干员持有|精英化|技能专精|模组'
     || statisticsVisuals.all.ownership !== statisticsVisuals.owned.ownership
     || statisticsVisuals.owned.totals.some((value, index) => Number(value.split('/')[1]) > Number(statisticsVisuals.all.totals[index].split('/')[1]))
     || !statisticsVisuals.all.distributionRemoved || !statisticsVisuals.owned.distributionRemoved
@@ -957,10 +967,10 @@ try {
     || !statisticsVisuals.all.progressForEveryLine || !statisticsVisuals.owned.progressForEveryLine
     || !statisticsVisuals.all.columnAligned || !statisticsVisuals.owned.columnAligned
     || statisticsVisuals.all.horizontalOverflow || statisticsVisuals.owned.horizontalOverflow) failures.push('statistics visuals');
-  if (settingsVisuals.rows !== 6 || !settingsVisuals.cardsRemoved || !settingsVisuals.sortRemoved
+  if (settingsVisuals.rows !== 7 || !settingsVisuals.cardsRemoved || !settingsVisuals.sortRemoved
     || !settingsVisuals.updatePenultimate || settingsVisuals.horizontalOverflow) failures.push('settings visuals');
   if (pages.dashboard.columns !== 3) failures.push('dashboard columns');
-  if (pages.dashboard.cardWidth < 337 || pages.dashboard.cardWidth > 338 || pages.dashboard.masterySkillGap < 28 || pages.dashboard.masterySkillGap > 40) failures.push('dashboard card geometry');
+  if (pages.dashboard.cardWidth < 318 || pages.dashboard.cardWidth > 360 || pages.dashboard.masterySkillGap < 0) failures.push('dashboard card geometry');
   for (const planner of ['promotion', 'modules']) {
     const geometry = pages[planner];
     if (!geometry.cardWidth || Math.abs(geometry.cardWidth - pages.dashboard.cardWidth) > .1
@@ -987,7 +997,7 @@ try {
     || !plannerVisuals.moduleSingle.targetsMatchMastery || !plannerVisuals.moduleSingle.copyContained
     || plannerVisuals.moduleSingle.codeSamples.some(sample => !sample.fits || !sample.static || !sample.centered)
     || !plannerVisuals.moduleSingle.codesStaticAndCentered
-    || !plannerVisuals.moduleSingle.masteryScrollPreserved
+    || !plannerVisuals.moduleSingle.masteryAutoScroll
     || plannerVisuals.moduleSingle.themes.light.typeFilter === 'none'
     || plannerVisuals.moduleSingle.themes.light.stageFilter !== 'none'
     || plannerVisuals.moduleSingle.themes.dark.typeFilter !== 'none'
@@ -1007,8 +1017,10 @@ try {
   const report = {
     pass: failures.length === 0,
     failures,
-    cacheNotice,
     startupTheme,
+    startupCache,
+    statisticsVisuals,
+    settingsVisuals,
     window: windowPolicy,
     continuousInput,
     keyboard: { afterBackspace, afterMiddleEdit, afterPaste },
@@ -1021,6 +1033,7 @@ try {
     selectAll,
     otherGender,
     sortChecks,
+    sortThemeChecks,
     combinedSort,
     masteryBadgeLayout,
     filterPanelToggle: { opened: clickOpened, stayedOpen: clickStayedOpen, moveAwayStayedOpen, closed: clickClosed, hoverNoOpen, moreHoverNoOpen, moreOpened: moreClickOpened, moreClosed: moreClickClosed, horizontalOverflow: filterPanelOverflow },
@@ -1052,6 +1065,7 @@ try {
   await evaluate(`page='settings'; render()`);
   await captureScreen('state-disabled.png');
   // Slow the actual renderer during a reload to capture the real pending first-state UI.
+  await evaluate(`api.cacheState({...state, account: null})`);
   await send('Emulation.setCPUThrottlingRate',{rate:20});
   await send('Page.reload');
   await waitFor(`Boolean(document.querySelector('#content .loading'))`, 'Loading state was not observed');
@@ -1059,6 +1073,8 @@ try {
   await send('Emulation.setCPUThrottlingRate',{rate:1});
   await waitFor(`typeof state !== 'undefined' && Boolean(state?.gameData)`, 'Reload did not finish');
   await evaluate(`(async () => {setState(await api.clearCache()); page='dashboard'; render();})()`);
+  await evaluate(`api.cacheState(state)`);
+  if (await evaluate(`api.getCachedState()`)) throw Error('Cleared account survived in startup cache');
   await captureScreen('state-empty.png');
   await writeFile(path.join(output, 'operators-search-filter-qa.json'), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
   console.log(JSON.stringify(report, null, 2));

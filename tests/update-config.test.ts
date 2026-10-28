@@ -10,7 +10,8 @@ test('GitHub Releases 保留测试版、NSIS 和原安装标识', () => {
  assert.match(installer,/89035d73-f384-5e6c-bda4-e2c88d3f133f/);
  assert.match(updater,/beta.yml/);assert.match(updater,/latest.yml/);
  const workflow=readFileSync('.github/workflows/release.yml','utf8');
- assert.match(workflow,/Only test\/pre-release versions may be published/);
+ assert.doesNotMatch(workflow,/Only test\/pre-release versions may be published/);
+ assert.match(workflow,/Tag must be \$expected/);
  assert.match(workflow,/gh release create[\s\S]*--prerelease/);
 });
 
@@ -24,7 +25,8 @@ test('专精规划筛选器和模式提示按当前规则精简', () => {
   const renderer = readFileSync('renderer/app.js', 'utf8');
   assert.doesNotMatch(renderer, /全部技能|一技能|二技能|三技能/);
   assert.doesNotMatch(renderer, /每个候选独立计算|排序：/);
-  assert.match(renderer, /mode === 'continuous' \? \[\[0,'M0'\],\[1,'M1'\]\] : \[\[0,'M0'\],\[1,'M1'\],\[2,'M2'\]\]/);
+  assert.match(renderer, /mode === 'continuous' \? \[0, 1\] : \[0, 1, 2\]/);
+  assert.match(renderer, /\['未专精', '专精一级', '专精二级', '专精三级'\]/);
   assert.match(renderer, /mode = event\.target\.checked \? 'continuous' : 'single'/);
   assert.match(renderer, /mode === 'continuous' && dashboardFilters\.mastery === '2'\) dashboardFilters\.mastery = ''/);
 });
@@ -40,9 +42,12 @@ test('应用主题使用青蓝重点色并降低最后同步信息权重', () =>
   assert.match(styles, /--accent-border: rgba\(0, 152, 220, 0\.55\);/);
   assert.doesNotMatch(html, /brand-mark|TRAINING ROOM|>TR</);
   assert.doesNotMatch(styles, /#ffd329|rgba\(255,211,41/);
-  assert.match(html, /refresh-button[\s\S]*sync-badge/);
-  assert.match(renderer, /badge\.className = 'sync-status'/);
-  assert.match(styles, /\.top-actions \{[^}]*flex-direction: column;[^}]*align-items: flex-end/);
+  assert.doesNotMatch(html, /refresh-button|sync-badge|top-actions/);
+  assert.equal((renderer.match(/<button[^>]*data-action="refresh-account"/g) ?? []).length, 1);
+  const settingsRenderer = renderer.slice(renderer.indexOf('function renderSettings('));
+  assert.match(settingsRenderer.slice(0, settingsRenderer.indexOf('\nfunction ', 1)), /data-action="refresh-account"/);
+  assert.match(renderer, /action === 'refresh-account'\) \{ await refreshAccountData\(\)/);
+  assert.match(styles, /main\[data-page="settings"\] \{[^}]*scrollbar-width: none/);
 });
 
 test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保持在展示层', () => {
@@ -63,7 +68,7 @@ test('干员技能图标、舒适宽度卡片网格与独立主区域滚动保�
   assert.match(styles, /\.operator-skill-icon \{[^}]*width: 100%; height: 100%/);
   assert.doesNotMatch(renderer, /class="skill-pills"|class="skill-pill/);
   assert.match(styles, /\.dashboard-layout \{[^}]*max-width: 1680px/);
-  assert.match(styles, /\.cards \{[^}]*grid-template-columns: repeat\(3, 338px\);[^}]*justify-content: start/);
+  assert.match(styles, /\.cards \{[^}]*grid-template-columns: repeat\(auto-fill, minmax\(min\(100%, 318px\), 1fr\)\);[^}]*justify-content: start/);
   assert.doesNotMatch(styles, /@container|repeat\(2, minmax\(0, 338px\)\)|repeat\(4, minmax\(0, 338px\)\)/);
   assert.doesNotMatch(styles, /\.cards \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(styles, /main \{[^}]*height: 100%;[^}]*overflow-y: auto/);
@@ -76,7 +81,8 @@ test('固定窗口锁定 1360×800 且不再运行 resize-only FLIP', () => {
   assert.match(main, /inner_size\(1360.0,800.0\)/);
   assert.match(main, /resizable\(false\)/);assert.match(main, /maximizable\(false\)/);
   assert.match(main, /minimizable\(true\)/);assert.match(main, /fullscreen\(false\)/);
-  assert.doesNotMatch(renderer, /ResizeObserver|gridColumnCount|data-card-motion|requestAnimationFrame/);
+  assert.doesNotMatch(renderer, /ResizeObserver|gridColumnCount|data-card-motion/);
+  assert.doesNotMatch(renderer.slice(renderer.indexOf('function candidateCard('), renderer.indexOf('function renderOperators(')), /requestAnimationFrame/);
   assert.match(main, /PageLoadEvent::Finished/);
 });
 
@@ -84,10 +90,10 @@ test('专精顶部控制区固定为筛选行与三个统一模式开关', () =>
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
   assert.match(renderer, /class="filters dashboard-filters"/);
-  assert.match(styles, /\.dashboard-filters \{[^}]*grid-template-columns: minmax\(220px, 520px\) repeat\(3, minmax\(118px, 144px\)\)/);
+  assert.match(styles, /\.dashboard-filters \{[^}]*grid-template-columns: minmax\(240px, 1fr\) repeat\(3, minmax\(136px, 168px\)\)/);
   assert.match(renderer, /class="dashboard-mode-row"[\s\S]*连续专精模式[\s\S]*技巧概要视为无限[\s\S]*使用无限池材料/);
-  assert.match(styles, /\.dashboard-mode-row \{[^}]*display: flex;[^}]*flex-wrap: nowrap/);
-  assert.match(styles, /\.dashboard-mode-toggle \{[^}]*min-height: 38px;[^}]*padding: 6px 10px/);
+  assert.match(styles, /\.dashboard-mode-row \{[^}]*display: flex;[^}]*flex-wrap: wrap/);
+  assert.match(styles, /\.dashboard-mode-toggle \{[^}]*min-height: 36px;[^}]*padding: 0 8px 0 12px/);
   assert.match(renderer, /operatorFilterRegion\('common', '筛选'[\s\S]*operatorFilterRegion\('more', '更多筛选'/);
   assert.match(styles, /\.operator-filter-group \{[^}]*grid-template-columns: 116px minmax\(0, 1fr\)/);
   assert.doesNotMatch(renderer, /operatorFilterMenu|operator-filter-popover/);
@@ -223,18 +229,14 @@ test('侧边栏使用统一矢量图标，精英化与模组规划保持同级�
   assert.doesNotMatch(renderer, /当前 Lv\./);
 });
 
-test('缓存状态使用可关闭悬浮通知且统计页面共享统一完成度结构', () => {
+test('缓存加载不弹出通知且统计页面共享统一完成度结构', () => {
   const html = readFileSync('renderer/index.html', 'utf8');
   const renderer = readFileSync('renderer/app.js', 'utf8');
   const styles = readFileSync('renderer/styles.css', 'utf8');
-  assert.match(html, /id="data-notice-region"/);
-  assert.match(renderer, /data-close-cache-notice/);
-  assert.match(renderer, /cacheNoticeTimer = setTimeout\(\(\) => dismissCacheNotice\(key\), 5000\)/);
-  assert.match(renderer, /beforeunload', \(\) => \{\s*clearCacheNoticeTimer\(\)/);
+  assert.doesNotMatch(html, /data-notice-region/);
+  assert.doesNotMatch(renderer, /renderDataNotice|cacheNoticeTimer|当前使用缓存数据/);
   assert.doesNotMatch(renderer, /class="cache-banner"/);
-  assert.match(styles, /\.data-notice-region \{ position: fixed; z-index: 40; inset: 0 0 auto;/);
-  assert.match(styles, /transform: translateY\(calc\(-100% - 2px\)\)[^}]*transition:[^}]*transform/);
-  assert.match(styles, /\.data-notice \{ width: max-content; max-width: calc\(100vw - 32px\)/);
+  assert.doesNotMatch(styles, /\.data-notice|\.cache-notice/);
   assert.match(renderer, /statistics\.scopes\[statisticsScope\]/);
   for (const key of ['mastery', 'moduleUnlocked', 'moduleStage3', 'elite1', 'elite2']) assert.match(renderer, new RegExp(`scoped\\.${key}`));
   assert.match(renderer, /class="statistics-toolbar"/);
@@ -247,7 +249,7 @@ test('缓存状态使用可关闭悬浮通知且统计页面共享统一完成�
   assert.doesNotMatch(statisticsRenderer, /<details|<summary|stat-expand/);
   assert.doesNotMatch(renderer, /statistics-heading"><h2>[^<]+<\/h2><p>/);
   assert.doesNotMatch(renderer, /stat-card|stat-row|elite-distribution|当前 E0|当前 E1|当前 E2/);
-  assert.match(styles, /\.stat-line \{[^}]*grid-template-columns: minmax\(0, 1fr\) var\(--stat-progress-width\) var\(--stat-count-width\) var\(--stat-rate-width\)/);
+  assert.match(styles, /\.stat-line \{[^}]*grid-template-columns: var\(--stat-label-width\) minmax\(80px, 1fr\) var\(--stat-count-width\) var\(--stat-rate-width\)/);
   assert.match(styles, /\.stat-child \.stat-label \{[^}]*padding-left: 1em;[^}]*font-weight: 400/);
   assert.match(styles, /\.stat-progress \{[^}]*height: 4px/);
   assert.doesNotMatch(styles, /\.stat-card|\.stat-row|\.stat-expand|\.elite-distribution/);
@@ -259,9 +261,9 @@ test('仓库详情栏固定独立滚动并展示递归可合成数量与 PRTS �
   assert.match(renderer, /detail\.material\.purpose/);
   assert.match(renderer, /detail\.material\.description/);
   assert.match(renderer, /可合成 × \$\{detail\.craftable\}/);
-  assert.match(styles, /\.inventory-detail \{[^}]*position: sticky;[^}]*top: 130px;[^}]*overflow-y: auto/);
+  assert.match(styles, /\.inventory-detail \{[^}]*position: sticky;[^}]*top: 20px;[^}]*overflow-y: auto/);
   assert.match(readFileSync('src-tauri/src/domain/planning.rs', 'utf8'), /recursive_quantity/);
-  assert.match(styles, /\.craftable-badge \{[^}]*position: absolute/);
+  assert.match(styles, /\.craftable-badge \{[^}]*grid-column: 1 \/ -1/);
   assert.match(styles, /\.inventory-copy-block p \{[^}]*overflow-wrap: anywhere;[^}]*word-break: break-word/);
   const metadata = JSON.parse(readFileSync('resources/game-data/material-metadata.json', 'utf8'));
   assert.equal(metadata['31094'].purpose, '具备良好光学性能和物理性能的特种光学材料。用于高级强化场合。');
@@ -283,9 +285,9 @@ test('应用壳使用窄侧栏与圆角工作区，主题支持系统、黑色�
   assert.ok(index.indexOf('<script src="theme-bootstrap.js"></script>') < index.indexOf('<link rel="stylesheet" href="styles.css">'));
   assert.match(bootstrap, /URLSearchParams\(window\.location\.search\)\.get\('theme'\)/);
   assert.match(bootstrap, /initialTheme === 'light' \|\| initialTheme === 'black'/);
-  assert.match(index, /class="sidebar-brand"/);
+  assert.doesNotMatch(index, /sidebar-brand|topbar|page-title|page-subtitle/);
   assert.match(index, /class="sidebar-spacer"/);
-  assert.match(styles, /#app \{[^}]*grid-template-columns: minmax\(0, 15fr\) minmax\(0, 85fr\)/);
+  assert.match(styles, /#app \{[^}]*grid-template-columns: minmax\(160px, 15fr\) minmax\(0, 85fr\)/);
   assert.match(styles, /main \{[^}]*border-radius: 18px/);
   assert.doesNotMatch(styles, /\.sidebar \{[^}]*border-right/);
   assert.match(renderer, /name="theme" value="system"/);
@@ -340,7 +342,7 @@ test('干员列表区分 Rank 与专精并提供默认培养排序、紧凑技�
     assert.equal(icon.readUInt32BE(20), 109, `${profession}职业图标应使用高清高度`);
   }
   assert.match(renderer, /definition\.skills\.length > 3 \? 'many-skills'/);
-  assert.match(styles, /\.operator-list \{[^}]*gap: 0;[^}]*border-top/);
+  assert.match(styles, /\.operator-list \{[^}]*gap: 0;[^}]*border: 1px solid var\(--line\)/);
   assert.match(styles, /\.operator-row \{[^}]*border-bottom: 1px solid var\(--line\);[^}]*border-radius: 0/);
   assert.match(styles, /\.operator-skills \{[^}]*justify-self: end/);
   assert.match(styles, /\.operator-skills\.many-skills \{[^}]*width: max-content/);

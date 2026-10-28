@@ -1,19 +1,24 @@
 {
-  "resourceVersion": "2026.09.12.1",
-  "buildTime": "2026-09-12T00:00:00.000Z",
+  "resourceVersion": "2026.10.28.1",
+  "buildTime": "2026-10-27T13:36:19.314Z",
   "minAppVersion": "0.0.20-beta.15",
   "sources": [
     {
       "repository": "https://github.com/arkntools/arknights-toolbox-data",
-      "commit": "5eebd23466e01e989d3bee0e7b6c730fee89c9c8"
+      "commit": "54787f06e4abc5397db2f57d831fd17345723274"
     },
     {
-      "repository": "https://github.com/WangXiangpu0916/Arknights-Training-Room",
-      "commit": "28e6f6b1efbea75fb4811209b27ce6de06cdd420"
+      "repository": "https://github.com/Kengxxiao/ArknightsGameData",
+      "commit": "fe7d8d05edc36cf5678a24bfe9e84e891f6cf7ad"
     },
     {
       "repository": "https://torappu.prts.wiki/assets/uniequip_type",
-      "dataVersion": "sha256:9dfad1751f493905af70e10af15e29d7fb53d333a4074c34783bdeb5c85d62dc"
+      "dataVersion": "sha256:64d0b356e001be2195b0b2a0eaf5e95f6d74e4f8af6367cfe0b85309c90afb72"
+    },
+    {
+      "repository": "https://github.com/WangXiangpu0916/Arknights-Training-Room",
+      "commit": "28e6f6b1efbea75fb4811209b27ce6de06cdd420",
+      "dataVersion": "seed-sha256:d4cefaa67d356aee0ec874cb5dabcb49b30908b70154fe923d4e8ee71c790940;dates-sha256:4e0bb5e91cfa265fb89d6bc0a847fcc85545e8ce122f97d120fbf55e37abd58b"
     }
   ]
 }

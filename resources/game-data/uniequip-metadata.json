@@ -26974,5 +26974,453 @@
         }
       ]
     }
+  },
+  "uniequip_002_makoto": {
+    "typeIcon": "pum-y",
+    "typeLabel": "Y 型模组",
+    "requirements": {
+      "1": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "30145",
+          "quantity": 2
+        },
+        {
+          "itemId": "4001",
+          "quantity": 80000
+        }
+      ],
+      "2": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "mod_update_token_1",
+          "quantity": 60
+        },
+        {
+          "itemId": "30165",
+          "quantity": 3
+        },
+        {
+          "itemId": "4001",
+          "quantity": 100000
+        }
+      ],
+      "3": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "mod_update_token_2",
+          "quantity": 20
+        },
+        {
+          "itemId": "30115",
+          "quantity": 4
+        },
+        {
+          "itemId": "4001",
+          "quantity": 120000
+        }
+      ]
+    }
+  },
+  "uniequip_002_aigis": {
+    "typeIcon": "brk-x",
+    "typeLabel": "X 型模组",
+    "requirements": {
+      "1": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "30054",
+          "quantity": 3
+        },
+        {
+          "itemId": "4001",
+          "quantity": 40000
+        }
+      ],
+      "2": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "mod_update_token_1",
+          "quantity": 20
+        },
+        {
+          "itemId": "31064",
+          "quantity": 4
+        },
+        {
+          "itemId": "4001",
+          "quantity": 50000
+        }
+      ],
+      "3": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "mod_update_token_2",
+          "quantity": 8
+        },
+        {
+          "itemId": "31084",
+          "quantity": 5
+        },
+        {
+          "itemId": "4001",
+          "quantity": 60000
+        }
+      ]
+    }
+  },
+  "uniequip_002_yukari": {
+    "typeIcon": "ran-x",
+    "typeLabel": "X 型模组",
+    "requirements": {
+      "1": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "30044",
+          "quantity": 3
+        },
+        {
+          "itemId": "4001",
+          "quantity": 40000
+        }
+      ],
+      "2": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "mod_update_token_1",
+          "quantity": 20
+        },
+        {
+          "itemId": "31044",
+          "quantity": 4
+        },
+        {
+          "itemId": "4001",
+          "quantity": 50000
+        }
+      ],
+      "3": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "mod_update_token_2",
+          "quantity": 8
+        },
+        {
+          "itemId": "31104",
+          "quantity": 5
+        },
+        {
+          "itemId": "4001",
+          "quantity": 60000
+        }
+      ]
+    }
+  },
+  "uniequip_003_qiubai": {
+    "typeIcon": "lor-y",
+    "typeLabel": "Y 型模组",
+    "requirements": {
+      "1": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "30155",
+          "quantity": 2
+        },
+        {
+          "itemId": "4001",
+          "quantity": 80000
+        }
+      ],
+      "2": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "mod_update_token_1",
+          "quantity": 60
+        },
+        {
+          "itemId": "30145",
+          "quantity": 3
+        },
+        {
+          "itemId": "4001",
+          "quantity": 100000
+        }
+      ],
+      "3": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "mod_update_token_2",
+          "quantity": 20
+        },
+        {
+          "itemId": "30165",
+          "quantity": 4
+        },
+        {
+          "itemId": "4001",
+          "quantity": 120000
+        }
+      ]
+    }
+  },
+  "uniequip_002_toledo": {
+    "typeIcon": "umd-y",
+    "typeLabel": "Y 型模组",
+    "requirements": {
+      "1": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "31054",
+          "quantity": 3
+        },
+        {
+          "itemId": "4001",
+          "quantity": 40000
+        }
+      ],
+      "2": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "mod_update_token_1",
+          "quantity": 20
+        },
+        {
+          "itemId": "31074",
+          "quantity": 4
+        },
+        {
+          "itemId": "4001",
+          "quantity": 50000
+        }
+      ],
+      "3": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "mod_update_token_2",
+          "quantity": 8
+        },
+        {
+          "itemId": "31014",
+          "quantity": 5
+        },
+        {
+          "itemId": "4001",
+          "quantity": 60000
+        }
+      ]
+    }
+  },
+  "uniequip_002_hbound": {
+    "typeIcon": "alc-x",
+    "typeLabel": "X 型模组",
+    "requirements": {
+      "1": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "31094",
+          "quantity": 3
+        },
+        {
+          "itemId": "4001",
+          "quantity": 40000
+        }
+      ],
+      "2": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "mod_update_token_1",
+          "quantity": 20
+        },
+        {
+          "itemId": "31114",
+          "quantity": 4
+        },
+        {
+          "itemId": "4001",
+          "quantity": 50000
+        }
+      ],
+      "3": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 2
+        },
+        {
+          "itemId": "mod_update_token_2",
+          "quantity": 8
+        },
+        {
+          "itemId": "30014",
+          "quantity": 5
+        },
+        {
+          "itemId": "4001",
+          "quantity": 60000
+        }
+      ]
+    }
+  },
+  "uniequip_003_ulpia": {
+    "typeIcon": "cru-y",
+    "typeLabel": "Y 型模组",
+    "requirements": {
+      "1": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "30165",
+          "quantity": 2
+        },
+        {
+          "itemId": "4001",
+          "quantity": 80000
+        }
+      ],
+      "2": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "mod_update_token_1",
+          "quantity": 60
+        },
+        {
+          "itemId": "30115",
+          "quantity": 3
+        },
+        {
+          "itemId": "4001",
+          "quantity": 100000
+        }
+      ],
+      "3": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "mod_update_token_2",
+          "quantity": 20
+        },
+        {
+          "itemId": "30155",
+          "quantity": 4
+        },
+        {
+          "itemId": "4001",
+          "quantity": 120000
+        }
+      ]
+    }
+  },
+  "uniequip_003_shu": {
+    "typeIcon": "gua-y",
+    "typeLabel": "Y 型模组",
+    "requirements": {
+      "1": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "30115",
+          "quantity": 2
+        },
+        {
+          "itemId": "4001",
+          "quantity": 80000
+        }
+      ],
+      "2": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "mod_update_token_1",
+          "quantity": 60
+        },
+        {
+          "itemId": "30155",
+          "quantity": 3
+        },
+        {
+          "itemId": "4001",
+          "quantity": 100000
+        }
+      ],
+      "3": [
+        {
+          "itemId": "mod_unlock_token",
+          "quantity": 4
+        },
+        {
+          "itemId": "mod_update_token_2",
+          "quantity": 20
+        },
+        {
+          "itemId": "30145",
+          "quantity": 4
+        },
+        {
+          "itemId": "4001",
+          "quantity": 120000
+        }
+      ]
+    }
   }
 }

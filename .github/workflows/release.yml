@@ -23,7 +23,6 @@ jobs:
         shell: pwsh
         run: |
           $version = (Get-Content package.json | ConvertFrom-Json).version
-          if ($version -notmatch '-(alpha|beta|rc)(\.|$)') { throw "Only test/pre-release versions may be published" }
           $expected = "v$version"
           if ("${{ github.ref_name }}" -ne $expected) { throw "Tag must be $expected" }
       - name: Build and test release artifacts

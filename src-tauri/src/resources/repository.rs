@@ -92,6 +92,10 @@ fn copy(source: &Path, target: &Path) -> Result<()> {
     Ok(())
 }
 
+fn resource_version(manifest: &Value) -> Vec<u64> {
+    text(&manifest["resourceVersion"]).split('.').map(|s| s.parse().unwrap_or(0)).collect()
+}
+
 impl Resources {
     pub fn initialize(store: &Store, bundled: &Path, version: &str) -> Result<Self> {
         let root = store.root.clone();
@@ -127,15 +131,34 @@ impl Resources {
         };
         let previous = snapshot(&backup, version).ok();
         let assets = Arc::new(RwLock::new(Assets::new(&active, previous.as_ref())));
-        Ok(Self {
+        let mut resources = Self {
             active,
             previous,
             assets,
             root,
             version: version.into(),
-        })
+        };
+        // Local rebuilds can correct bundled data without changing its version.
+        let bundled_manifest = fs::read(bundled.join("manifest.json")).ok()
+            .and_then(|bytes| serde_json::from_slice::<Value>(&bytes).ok());
+        if bundled_manifest.as_ref().is_some_and(|m| resource_version(m) > resource_version(&resources.active.manifest)
+            || resource_version(m) == resource_version(&resources.active.manifest) && m["files"] != resources.active.manifest["files"]) {
+            let result = (|| {
+                validate::load(bundled, version, Some(&resources.active.data), None)?;
+                copy(bundled, &next)?;
+                let (manifest, data) = validate::load(&next, version, Some(&resources.active.data), None)?;
+                resources.commit(manifest, data)
+            })();
+            remove(&next)?;
+            match result {
+                Ok(()) => store.log("bundled-resource-updated", "已同步内置资源"),
+                Err(error) => store.log("bundled-resource-update-failed", &error),
+            }
+        }
+        Ok(resources)
     }
-    pub fn update<T>(&mut self, prepare: impl FnOnce(&Value) -> Result<T>) -> Result<Option<T>> {
+    // Network I/O runs without the application state lock. Installation remains serialized.
+    pub fn download_update(current: &Value, version: &str) -> Result<Option<(Value, Vec<u8>)>> {
         let url = if cfg!(any(debug_assertions, feature = "qa")) {
             std::env::var("ATR_RESOURCE_MANIFEST_URL").unwrap_or_else(|_| MANIFEST_URL.into())
         } else {
@@ -143,18 +166,12 @@ impl Resources {
         };
         let remote: Value = serde_json::from_slice(&download(&url, 2 * 1024 * 1024, true)?)
             .map_err(|e| e.to_string())?;
-        validate::manifest(&remote, &self.version, true)?;
-        let parts = |v: &Value| {
-            text(v)
-                .split('.')
-                .map(|s| s.parse::<u64>().unwrap_or(0))
-                .collect::<Vec<_>>()
-        };
-        if parts(&remote["resourceVersion"]) <= parts(&self.active.manifest["resourceVersion"]) {
+        validate::manifest(&remote, version, true)?;
+        if resource_version(&remote) <= resource_version(current) {
             return Ok(None);
         }
         let bytes = download(text(&remote["package"]["url"]), MAX_PACKAGE, false)?;
-        self.install(&bytes, &remote, prepare).map(Some)
+        Ok(Some((remote, bytes)))
     }
     pub fn install<T>(
         &mut self,
@@ -164,9 +181,6 @@ impl Resources {
     ) -> Result<T> {
         validate::manifest(remote, &self.version, true)?;
         let next = self.root.join("game-data.next");
-        let backup = self.root.join("game-data.backup");
-        let journal = self.root.join("game-data.transaction.json");
-        let current = self.root.join("game-data");
         remove(&next)?;
         fs::create_dir_all(&next).map_err(|e| e.to_string())?;
         let result = (|| {
@@ -181,35 +195,7 @@ impl Resources {
             )?;
             // Complete derived-state validation before entering the disk transaction.
             let prepared = prepare(&data)?;
-            // Readers wait only for the short directory switch, never for HTTP or plan calculation.
-            let mut assets = self.assets.write().map_err(|_| "资源索引锁不可用")?;
-            remove(&backup)?;
-            self.previous = None;
-            write_json_atomic(
-                &journal,
-                &json!({"from":self.active.manifest["resourceVersion"],"to":remote["resourceVersion"]}),
-            )?;
-            fs::rename(&current, &backup).map_err(|e| e.to_string())?;
-            let commit = fs::rename(&next, &current)
-                .map_err(|e| e.to_string())
-                .and_then(|_| unlink(&journal));
-            if let Err(error) = commit {
-                remove(&current)?;
-                fs::rename(&backup, &current).map_err(|e| e.to_string())?;
-                unlink(&journal)?;
-                return Err(error);
-            }
-            let mut old = std::mem::replace(
-                &mut self.active,
-                Snapshot {
-                    manifest,
-                    data,
-                    directory: current,
-                },
-            );
-            old.directory = backup;
-            self.previous = Some(old);
-            *assets = Assets::new(&self.active, self.previous.as_ref());
+            self.commit(manifest, data)?;
             Ok(prepared)
         })();
         let cleaned = remove(&next);
@@ -225,6 +211,32 @@ impl Resources {
                 Err(error)
             }
         }
+    }
+
+    fn commit(&mut self, manifest: Value, data: Value) -> Result<()> {
+        let next = self.root.join("game-data.next");
+        let backup = self.root.join("game-data.backup");
+        let journal = self.root.join("game-data.transaction.json");
+        let current = self.root.join("game-data");
+        // Readers wait only for the directory switch, never for HTTP or plan calculation.
+        let mut assets = self.assets.write().map_err(|_| "资源索引锁不可用")?;
+        remove(&backup)?;
+        self.previous = None;
+        *assets = Assets::new(&self.active, None);
+        write_json_atomic(&journal, &json!({"from":self.active.manifest["resourceVersion"],"to":manifest["resourceVersion"]}))?;
+        fs::rename(&current, &backup).map_err(|e| e.to_string())?;
+        let commit = fs::rename(&next, &current).map_err(|e| e.to_string()).and_then(|_| unlink(&journal));
+        if let Err(error) = commit {
+            remove(&current)?;
+            fs::rename(&backup, &current).map_err(|e| e.to_string())?;
+            unlink(&journal)?;
+            return Err(error);
+        }
+        let mut old = std::mem::replace(&mut self.active, Snapshot { manifest, data, directory: current });
+        old.directory = backup;
+        self.previous = Some(old);
+        *assets = Assets::new(&self.active, self.previous.as_ref());
+        Ok(())
     }
 }
 

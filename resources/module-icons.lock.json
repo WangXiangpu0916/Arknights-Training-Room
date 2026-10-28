@@ -6,5 +6,13 @@
   "ran-x": {
     "url": "https://torappu.prts.wiki/assets/uniequip_type/ran-x.png",
     "sha256": "3f24e269b627e2361a42a7d272d04d7be3f5dd322261169503c4f33a7b94a905"
+  },
+  "so-a": {
+    "url": "https://torappu.prts.wiki/assets/uniequip_type/so-a.png",
+    "sha256": "792a9b283453a9727317c33b5afd565e1506b6751404067ce04cd890ee033f18"
+  },
+  "so-b": {
+    "url": "https://torappu.prts.wiki/assets/uniequip_type/so-b.png",
+    "sha256": "792a9b283453a9727317c33b5afd565e1506b6751404067ce04cd890ee033f18"
   }
 }

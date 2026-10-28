@@ -170,10 +170,11 @@ impl Skland {
             json!({"scanId":scan,"qrCode":qr_image(&format!("hypergryph://scan_login?scanId={scan}"))?}),
         )
     }
-    pub fn finish_qr(&self, store: &mut Store, scan: &str) -> Result<Value> {
+    pub fn finish_qr(&self, store: &mut Store, scan: &str, cancelled: &impl Fn() -> bool) -> Result<Value> {
         let deadline = Instant::now() + Duration::from_secs(120);
         let mut code = String::new();
         while Instant::now() < deadline {
+            if cancelled() { return Err("已取消扫码登录".into()); }
             match request(
                 self.send,
                 &format!("{HG}/general/v1/scan_status?scanId={}", encode(scan)),
@@ -186,7 +187,12 @@ impl Skland {
                         break;
                     }
                 }
-                Err(_) => std::thread::sleep(Duration::from_secs(2)),
+                Err(_) => {},
+            }
+            // Bound polling even when a successful response has no scan code yet.
+            for _ in 0..20 {
+                if cancelled() { return Err("已取消扫码登录".into()); }
+                std::thread::sleep(Duration::from_millis(100));
             }
         }
         if code.is_empty() {
@@ -202,6 +208,7 @@ impl Skland {
         let credentials = self
             .refresh_credentials(&json!({"accessToken":token["token"]}))
             .map_err(|e| e.message)?;
+        if cancelled() { return Err("已取消扫码登录".into()); }
         store.save_credentials(&credentials)?;
         self.bindings(store)
     }
@@ -224,13 +231,17 @@ impl Skland {
         if uid.is_empty() {
             return Err("请先选择要同步的游戏角色".into());
         }
-        normalize(
+        let mut account = normalize(
             uid,
             &self.signed_get(
                 store,
                 &format!("/api/v1/game/cultivate/player?uid={}", encode(uid)),
             )?,
-        )
+        )?;
+        let info = self.signed_get(store, &format!("/api/v1/game/player/info?uid={}", encode(uid)))?;
+        merge_gain_times(&info, &mut account);
+        account["training"] = normalize_training(&info, &account)?;
+        Ok(account)
     }
     fn signed_get(&self, store: &mut Store, path: &str) -> Result<Value> {
         let mut credentials = store.credentials().ok_or("尚未连接森空岛")?;
@@ -317,6 +328,51 @@ impl Skland {
         )?;
         Ok(json!({"accessToken":old["accessToken"],"cred":data["cred"],"credToken":data["token"]}))
     }
+}
+
+fn merge_gain_times(info: &Value, account: &mut Value) {
+    let amiya = regex::Regex::new(r"_amiya\d+$").unwrap();
+    let mut times = std::collections::HashMap::<&str, f64>::new();
+    for character in array(&info["chars"]) {
+        let time = character["gainTime"].as_f64()
+            .or_else(|| character["gainTime"].as_str()?.trim().parse().ok());
+        let Some(time) = time.filter(|n| n.is_finite() && n.fract() == 0.0 && *n > 0.0 && *n <= 9_007_199_254_740_991.0) else { continue; };
+        let id = text(&character["charId"]);
+        let id = id.strip_prefix("char_").unwrap_or(id);
+        let id = if amiya.is_match(id) { "002_amiya" } else { id };
+        // Merged forms share the earliest actual acquisition record.
+        times.entry(id).and_modify(|old| *old = old.min(time)).or_insert(time);
+    }
+    for owned in account["operators"].as_array_mut().unwrap() {
+        if let Some(time) = times.get(text(&owned["operatorId"])) {
+            owned["gainTime"] = json!(time);
+        }
+    }
+}
+
+fn normalize_training(info: &Value, account: &Value) -> Result<Value> {
+    let room = &info["building"]["training"];
+    let trainee = &room["trainee"];
+    let numeric = |value: &Value| value.as_f64().or_else(|| value.as_str()?.parse().ok());
+    if trainee.is_null() || numeric(&trainee["targetSkill"]) == Some(-1.0)
+        || numeric(&room["remainSecs"]).is_some_and(|n| n <= 0.0) {
+        return Ok(Value::Null);
+    }
+    let invalid = || "森空岛训练室数据不完整，未更新账号快照".to_string();
+    let index = numeric(&trainee["targetSkill"]).filter(|n| n.fract() == 0.0 && (0.0..=2.0).contains(n)).ok_or_else(invalid)? as usize;
+    let character = array(&info["chars"]).iter().find(|c| c["charId"] == trainee["charId"]).ok_or_else(invalid)?;
+    let skill = array(&character["skills"]).get(index).ok_or_else(invalid)?;
+    let from = numeric(&skill["specializeLevel"]).filter(|n| n.fract() == 0.0 && (0.0..=3.0).contains(n)).ok_or_else(invalid)? as u64;
+    if from == 3 { return Ok(Value::Null); }
+    let id = text(&trainee["charId"]);
+    let id = id.strip_prefix("char_").unwrap_or(id);
+    let id = if regex::Regex::new(r"_amiya\d+$").unwrap().is_match(id) { "002_amiya" } else { id };
+    let skill_id = regex::Regex::new(r"\[([0-9]+?)\]").unwrap().replace_all(text(&skill["id"]), "_${1}").into_owned();
+    let owned = array(&account["operators"]).iter().find(|o| o["operatorId"] == id).ok_or_else(invalid)?;
+    let current = array(&owned["skills"]).iter().find(|s| s["skillId"] == skill_id).ok_or_else(invalid)?;
+    // A completed cultivate snapshot must not be advanced again by older base data.
+    if numeric(&current["masteryLevel"]).is_some_and(|n| n > from as f64) { return Ok(Value::Null); }
+    Ok(json!({"operatorId":id,"skillId":skill_id,"from":from,"to":from+1}))
 }
 
 pub fn normalize(uid: &str, data: &Value) -> Result<Value> {
@@ -517,6 +573,90 @@ mod tests {
         assert_eq!(result["operators"][0]["skills"][0]["skillId"], "s_1");
         assert_eq!(number(&result["inventory"]["a"]), 12.0);
         assert!(result["inventory"].get("b").is_none());
+    }
+    #[test]
+    fn gain_times_use_actual_records_merge_forms_and_ignore_invalid_values() {
+        let mut account = normalize("fixture", &json!({"characters":[
+            {"id":"char_002_amiya"}, {"id":"char_1001_amiya2"}, {"id":"char_valid"},
+            {"id":"char_zero"}, {"id":"char_negative"}, {"id":"char_invalid"}, {"id":"char_missing"},
+            {"id":"char_fraction"}, {"id":"char_large"}, {"id":"char_nonfinite"}, {"id":"char_boolean"}
+        ],"items":[]})).unwrap();
+        let original = account.clone();
+        let info = json!({"chars":[
+            {"charId":"char_1001_amiya2","gainTime":1700000000},
+            {"charId":"char_002_amiya","gainTime":"1600000000"},
+            {"charId":"char_1037_amiya3","gainTime":1800000000},
+            {"charId":"char_valid","gainTime":"1650000000"},
+            {"charId":"char_unowned","gainTime":1500000000},
+            {"charId":"char_zero","gainTime":0}, {"charId":"char_negative","gainTime":-1},
+            {"charId":"char_invalid","gainTime":"bad"}, {"charId":"char_missing","gainTime":null},
+            {"charId":"char_fraction","gainTime":1.5}, {"charId":"char_large","gainTime":9007199254740992.0},
+            {"charId":"char_nonfinite","gainTime":"inf"}, {"charId":"char_boolean","gainTime":true}
+        ]});
+        merge_gain_times(&info, &mut account);
+        assert_eq!(number(&account["operators"][0]["gainTime"]), 1600000000.0);
+        assert_eq!(number(&account["operators"][1]["gainTime"]), 1650000000.0);
+        assert!(array(&account["operators"])[2..].iter().all(|o| o.get("gainTime").is_none()));
+        let with_times = account.clone();
+        merge_gain_times(&json!({}), &mut account);
+        assert_eq!(account, with_times);
+        for owned in account["operators"].as_array_mut().unwrap() { owned.as_object_mut().unwrap().remove("gainTime"); }
+        assert_eq!(account, original);
+    }
+    #[test]
+    fn training_uses_the_trainee_skill_index_and_keeps_owned_levels() {
+        for from in 0..3 {
+            let account = normalize("fixture", &json!({"characters":[{"id":"char_1001_amiya2","skills":[{"id":"s[1]","level":0},{"id":"s[2]","level":from}]}],"items":[]})).unwrap();
+            let original = account.clone();
+            let mut info = json!({"building":{"training":{"trainee":{"charId":"char_1001_amiya2","targetSkill":1},"trainer":{"charId":"char_other"},"remainSecs":3600}},"chars":[{"charId":"char_1001_amiya2","skills":[{"id":"s[1]","specializeLevel":0},{"id":"s[2]","specializeLevel":from}]}]});
+            assert_eq!(normalize_training(&info, &account).unwrap(), json!({"operatorId":"002_amiya","skillId":"s_2","from":from,"to":from+1}));
+            assert_eq!(account, original);
+            info["building"]["training"]["trainee"]["targetSkill"] = json!("1");
+            assert_eq!(normalize_training(&info, &account).unwrap()["to"], from + 1);
+            info["building"]["training"]["trainee"]["targetSkill"] = json!(9);
+            assert!(normalize_training(&info, &account).is_err());
+            info["building"]["training"]["trainee"]["targetSkill"] = json!(-1);
+            assert!(normalize_training(&info, &account).unwrap().is_null());
+            info["building"]["training"]["trainee"]["targetSkill"] = json!(1);
+            info["building"]["training"]["remainSecs"] = json!(0);
+            assert!(normalize_training(&info, &account).unwrap().is_null());
+            info["building"]["training"]["remainSecs"] = json!(3600);
+            info["chars"][0]["skills"][1]["specializeLevel"] = json!(3);
+            assert!(normalize_training(&info, &account).unwrap().is_null());
+            info["building"]["training"]["trainee"] = Value::Null;
+            assert!(normalize_training(&info, &account).unwrap().is_null());
+        }
+        assert!(normalize_training(&json!({}), &json!({})).unwrap().is_null());
+    }
+    #[test]
+    fn account_fetches_training_with_the_same_uid_and_clears_finished_tasks() {
+        let root = std::env::temp_dir().join(format!("atr-training-{}", std::process::id()));
+        let mut store = Store::new(root.clone()).unwrap();
+        store.save_credentials(&json!({"accessToken":"access","cred":"cred","credToken":"token"})).unwrap();
+        let skland = Skland { device: "fixture".into(), send: fake };
+        for training in [json!({"trainee":{"charId":"char_op","targetSkill":0},"remainSecs":100}), json!({"trainee":null})] {
+            let active = !training["trainee"].is_null();
+            RESPONSES.with(|q| *q.borrow_mut() = VecDeque::from([
+                ("/cultivate/player?uid=fixture",200,json!({"code":0,"data":{"characters":[{"id":"char_op","skills":[{"id":"skill","level":1}]}],"items":[]}})),
+                ("/player/info?uid=fixture",200,json!({"code":0,"data":{"building":{"training":training},"chars":[{"charId":"char_op","gainTime":1600000000,"skills":[{"id":"skill","specializeLevel":1}]}]}})),
+            ]));
+            let account = skland.account(&mut store, "fixture").unwrap();
+            assert_eq!(!account["training"].is_null(), active);
+            assert_eq!(number(&account["operators"][0]["skills"][0]["masteryLevel"]), 1.0);
+            assert_eq!(number(&account["operators"][0]["gainTime"]), 1600000000.0);
+            store.write("account-cache.json", &account).unwrap();
+            assert_eq!(store.account().unwrap(), account);
+        }
+        std::fs::remove_dir_all(root).unwrap();
+    }
+    #[test]
+    fn cancelled_qr_does_not_poll_or_save_credentials() {
+        let root = std::env::temp_dir().join(format!("atr-cancel-{}", std::process::id()));
+        let mut store = Store::new(root.clone()).unwrap();
+        let skland = Skland { device: "fixture".into(), send: fake };
+        assert_eq!(skland.finish_qr(&mut store, "cancelled", &|| true).unwrap_err(), "已取消扫码登录");
+        assert!(!root.join("credentials.bin").exists());
+        std::fs::remove_dir_all(root).unwrap();
     }
     #[test]
     fn qr_preserves_png_dimensions() {

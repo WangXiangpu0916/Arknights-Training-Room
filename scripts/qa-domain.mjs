@@ -39,7 +39,10 @@ for (const item of cases) {
     input:JSON.stringify({game,...item}), encoding:'utf8', maxBuffer:256*1024*1024, windowsHide:true,
   });
   assert.equal(child.status,0,child.stderr);
-  const digest = hash(presentPlans(JSON.parse(child.stdout)));
+  const result = presentPlans(JSON.parse(child.stdout));
+  assert.equal(result.training, null, 'Legacy fixtures have no active training');
+  delete result.training; // Compare the unchanged planning contract before training was added.
+  const digest = hash(result);
   assert.equal(digest,expected.cases.find(c=>c.name===item.name)?.sha256,item.name);
   console.log(item.name + ': ' + digest);
 }

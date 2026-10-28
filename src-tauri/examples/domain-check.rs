@@ -44,7 +44,7 @@ fn main() {
                 let continuous = input["continuous"] == true;
                 let run = || {
                     planner
-                        .plan(owned, &inventory, &unlimited, kind, continuous)
+                        .plan(owned, &inventory, &unlimited, kind, continuous, None)
                         .unwrap()
                 };
                 run();

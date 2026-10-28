@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pinyin } from 'pinyin-pro';
-import { officialMetadata } from './resource-metadata.mjs';
+import { officialMetadata, specialOperators, skillMetadata } from './resource-metadata.mjs';
 
 const api = 'https://prts.wiki/api.php';
 const headers = { 'User-Agent': 'Arknights-Training-Room/1.0' };
@@ -113,17 +113,23 @@ await writeFile(
 );
 
 const officialRoot = 'https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata/excel';
-const [moduleDataResponse, constantsResponse, itemsResponse] = await Promise.all([
+const [moduleDataResponse, constantsResponse, itemsResponse, charactersResponse, skillsResponse, patchesResponse] = await Promise.all([
   request(`${officialRoot}/uniequip_table.json`),
   request(`${officialRoot}/gamedata_const.json`),
   request(`${officialRoot}/item_table.json`),
+  request(`${officialRoot}/character_table.json`),
+  request(`${officialRoot}/skill_table.json`),
+  request(`${officialRoot}/char_patch_table.json`),
 ]);
-for (const [label, response] of [['模组', moduleDataResponse], ['成长常量', constantsResponse], ['物品', itemsResponse]]) {
+for (const [label, response] of [['模组', moduleDataResponse], ['成长常量', constantsResponse], ['物品', itemsResponse], ['干员', charactersResponse], ['技能', skillsResponse], ['升变', patchesResponse]]) {
   if (!response.ok) throw new Error(`${label}数据请求失败：HTTP ${response.status}`);
 }
-const [moduleData, constants, officialItems] = await Promise.all([
-  moduleDataResponse.json(), constantsResponse.json(), itemsResponse.json(),
+const [moduleData, constants, officialItems, characters, skills, patches] = await Promise.all([
+  moduleDataResponse.json(), constantsResponse.json(), itemsResponse.json(), charactersResponse.json(), skillsResponse.json(), patchesResponse.json(),
 ]);
+Object.assign(characters, patches.patchChars);
+await writeFile(path.join('resources', 'game-data', 'skill-details.json'), `${JSON.stringify(skillMetadata(characters, skills), null, 2)}\n`);
+await writeFile(path.join('resources', 'game-data', 'special-operators.json'), `${JSON.stringify(specialOperators(characters, moduleData), null, 2)}\n`);
 const { moduleMetadata, progression } = officialMetadata(moduleData, constants, officialItems, moduleNames);
 await writeFile(
   path.join('resources', 'game-data', 'uniequip-metadata.json'),

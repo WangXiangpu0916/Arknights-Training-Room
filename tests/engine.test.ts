@@ -11,6 +11,7 @@ import {
 } from '../src/domain/types';
 import { CraftingEngine } from './native-core';
 import { MasteryPlanner } from './native-core';
+import { native } from './native-core';
 import { professionFromToolboxId, PRTS_PROFESSIONS } from '../src/domain/professions';
 import { masteryMaterialIds, unlimitedMaterialGroups } from './native-core';
 
@@ -73,6 +74,46 @@ function owned(levels: MasteryLevel[], overrides: Partial<OwnedOperator> = {}): 
     ...overrides,
   };
 }
+
+test('在训等级仅作为规划起点，材料和实际完成统计互不混用', () => {
+  for (const from of [0, 1, 2] as const) {
+    const account = { operators: [owned([from, 0, 0])], inventory: { B: 1, C: 1 },
+      training: { operatorId: 'op', skillId: 'skill_1', from, to: from + 1 } };
+    const before = structuredClone(account);
+    const result = native({ game: gameData, account, unlimited: ['A'] });
+    assert.equal(result.training.to, from + 1);
+    for (const key of ['single', 'singleReal', 'continuous', 'continuousReal']) {
+      const candidate = result[key].find((x: any) => x.skill.skillId === 'skill_1');
+      if (from === 2 || key.startsWith('continuous') && from === 1) {
+        assert.equal(candidate, undefined);
+      } else {
+        assert.equal(candidate.from, from + 1);
+        assert.ok(candidate.stages.every((s: any) => s.from >= from + 1));
+        assert.ok(candidate.stages.every((s: any) => s.requirements.every((r: any) => r.itemId !== 'A')));
+      }
+    }
+    assert.equal(result.single.find((x: any) => x.skill.skillId === 'skill_2').from, 0);
+    assert.equal(result.statistics.scopes.owned.mastery.completed, 0);
+    assert.deepEqual(account, before);
+    // A refresh that clears the room restores the real starting level.
+    const idle = native({ game: gameData, account: { ...account, training: null }, unlimited: ['A'] });
+    assert.equal(idle.training, null);
+    assert.equal(idle.single.find((x: any) => x.skill.skillId === 'skill_1').from, from);
+  }
+});
+
+test('无效或过期训练不能跳级，也不能影响相同技能的其他干员', () => {
+  const game = { ...gameData, operators: [operator, { ...operator, operatorId: 'other' }] };
+  const account = { operators: [owned([1, 0, 0]), owned([0, 0, 0], { operatorId: 'other' })], inventory: { A: 99, B: 99, C: 99 } };
+  for (const training of [undefined, { operatorId: 'op', skillId: 'missing', from: 1, to: 2 },
+    { operatorId: 'op', skillId: 'skill_1', from: 0, to: 1 }, { operatorId: 'op', skillId: 'skill_1', from: 1, to: 3 }]) {
+    const result = native({ game, account: { ...account, training } });
+    assert.equal(result.training, null);
+    assert.equal(result.single.find((x: any) => x.operator.operatorId === 'op' && x.skill.skillId === 'skill_1').from, 1);
+  }
+  const result = native({ game, account: { ...account, training: { operatorId: 'op', skillId: 'skill_1', from: 1, to: 2 } } });
+  assert.equal(result.single.find((x: any) => x.operator.operatorId === 'other' && x.skill.skillId === 'skill_1').from, 0);
+});
 
 test('Case 1: 直接库存完全足够', () => {
   const result = makeEngine().fulfill({ A: 5 }, [{ itemId: 'A', quantity: 4 }]);

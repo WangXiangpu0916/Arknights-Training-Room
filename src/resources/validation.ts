@@ -80,6 +80,18 @@ export function validateGameData(value: unknown, manifest: SnapshotManifest, pre
     costs(item.recipe.ingredients, item.itemId, true);
   }
   const operators = new Set(), modules = new Set();
+  if (d.skillDetails !== undefined) {
+    ensure(object(d.skillDetails), '技能详情结构无效');
+    for (const [key, levels] of Object.entries(d.skillDetails) as Array<[string, any]>) {
+      ensure(id(key) && Array.isArray(levels) && levels.length >= 1 && levels.length <= 10, '技能详情等级无效');
+      for (const level of levels) {
+        ensure(object(level) && text(level.name) && typeof level.description === 'string' && level.description.length <= 16000
+          && !/\{[^{}]+\}/.test(level.description) && text(level.skillType) && (text(level.spType) || integer(level.spType, 0, 20)), '技能详情文本无效');
+        for (const field of ['spCost', 'initialSp', 'maxCharges', 'duration']) ensure(typeof level[field] === 'number'
+          && Number.isFinite(level[field]) && level[field] >= (field === 'duration' ? -1 : 0), `技能详情 ${field} 无效`);
+      }
+    }
+  }
   for (const op of d.operators) {
     ensure(object(op) && id(op.operatorId) && !operators.has(op.operatorId) && text(op.name) && integer(op.rarity, 1, 6)
       && PRTS_PROFESSIONS.includes(op.profession) && text(op.subProfession) && integer(op.maxElitePhase, 0, 2), '干员结构 / ID / 职业无效');
@@ -87,21 +99,29 @@ export function validateGameData(value: unknown, manifest: SnapshotManifest, pre
     for (const key of ['searchPinyin', 'searchPinyinInitials', 'implementationDate', 'gender', 'position']) ensure(op[key] === undefined || typeof op[key] === 'string', `干员 ${key} 无效`);
     for (const key of ['obtainMethods', 'races', 'birthPlaces', 'organizations', 'teams', 'tags']) ensure(op[key] === undefined || Array.isArray(op[key]) && op[key].every((v: any) => typeof v === 'string'), `干员 ${key} 无效`);
     ensure(op.birthdayMonth === undefined || integer(op.birthdayMonth, 1, 12), '生日月份无效');
+    ensure(op.specialTraining === undefined || typeof op.specialTraining === 'boolean', '特勤培养标记无效');
     ensure(object(op.promotionRequirements) && Array.isArray(op.skills) && Array.isArray(op.modules), '干员培养结构无效');
-    for (const level of [1, 2]) costs(op.promotionRequirements[level], `${op.operatorId} E${level}`, op.rarity >= 4 && level <= op.maxElitePhase);
+    for (const level of [1, 2]) costs(op.promotionRequirements[level], `${op.operatorId} E${level}`, !op.specialTraining && op.rarity >= 4 && level <= op.maxElitePhase);
     const skills = new Set();
+    if (op.skillLevelRequirements !== undefined) {
+      ensure(Array.isArray(op.skillLevelRequirements) && op.skillLevelRequirements.length <= 6, '普通技能升级材料无效');
+      op.skillLevelRequirements.forEach((rows: any) => costs(rows, `${op.operatorId} 普通技能`, !op.specialTraining));
+    }
     for (const skill of op.skills) {
       ensure(object(skill) && id(skill.skillId) && !skills.has(skill.skillId) && skill.operatorId === op.operatorId && integer(skill.index, 1, 20)
         && text(skill.name) && object(skill.requirements), '技能 ID / 干员关联无效');
       skills.add(skill.skillId);
-      for (const level of [1, 2, 3]) costs(skill.requirements[level], `${skill.skillId} M${level}`, true);
+      ensure(skill.maxLevel === undefined || integer(skill.maxLevel, 1, 10), '技能上限无效');
+      if (d.skillDetails) ensure(integer(skill.maxLevel, 1, 10) && d.skillDetails[skill.skillId]?.length >= skill.maxLevel
+        && op.skillLevelRequirements?.length === Math.min(6, skill.maxLevel - 1), `缺少技能详情 / 普通材料 ${skill.skillId}`);
+      for (const level of [1, 2, 3]) costs(skill.requirements[level], `${skill.skillId} M${level}`, !op.specialTraining && (skill.maxLevel ?? 10) >= level + 7);
     }
     ensure(op.rarity < 4 || op.skills.length > 0, `高星干员缺少技能 ${op.operatorId}`);
     for (const mod of op.modules) {
       ensure(object(mod) && id(mod.moduleId) && !modules.has(mod.moduleId) && text(mod.name) && text(mod.typeIcon) && text(mod.typeLabel)
         && object(mod.requirements), '模组结构 / ID 无效');
       modules.add(mod.moduleId);
-      for (const level of [1, 2, 3]) costs(mod.requirements[level], `${mod.moduleId} Lv${level}`, true);
+      for (const level of [1, 2, 3]) costs(mod.requirements[level], `${mod.moduleId} Lv${level}`, !op.specialTraining);
     }
   }
   const p = d.progression;
@@ -113,6 +133,7 @@ export function validateGameData(value: unknown, manifest: SnapshotManifest, pre
   }
   ensure(d.operators.some((o: any) => o.rarity === 6) && modules.size > 0, '六星干员 / 模组数据消失');
   if (previous) {
+    ensure(!previous.skillDetails || d.skillDetails, '更新资源缺少技能详情，请使用最新资源构建流程');
     const counts = (g: GameData) => [g.operators.length, g.materials.length, g.operators.filter(o => o.rarity === 6).length,
       g.operators.reduce((n, o) => n + o.skills.length, 0), g.operators.reduce((n, o) => n + (o.modules?.length ?? 0), 0),
       g.operators.filter(o => o.subProfession !== '未知分支').length];

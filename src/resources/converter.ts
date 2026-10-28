@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { GameData, Material, MaterialAmount, OperatorDefinition, ProgressionData } from '../domain/types';
+import { GameData, Material, MaterialAmount, ModuleDefinition, OperatorDefinition, ProgressionData, SkillDefinition, SkillLevelDetail } from '../domain/types';
 import { professionFromToolboxId } from '../domain/professions';
 
 type Dict<T> = Record<string, T>;
@@ -57,11 +57,17 @@ interface ModuleMetadata {
   requirements: Record<1 | 2 | 3, MaterialAmount[]>;
 }
 
+interface SpecialOperator {
+  maxElitePhase: 0 | 1 | 2;
+  skillIds: string[];
+  modules: Omit<ModuleDefinition, 'requirements'>[];
+}
+
 
 // Build-time adapter. The application only reads the resulting stable GameData.
 export class ToolboxResourceConverter {
   async convert(directory: string): Promise<GameData> {
-    const [characters, cultivate, items, characterNames, materialNames, skillNames, moduleNames, subProfessionNames, operatorMetadata, materialMetadata, moduleMetadata, progression, metadata] = await Promise.all([
+    const [characters, cultivate, items, characterNames, materialNames, skillNames, moduleNames, subProfessionNames, operatorMetadata, materialMetadata, moduleMetadata, progression, metadata, specialOperators, skillData] = await Promise.all([
       this.json<Dict<RawCharacter>>(directory, 'character.json'),
       this.json<Dict<RawCultivate>>(directory, 'cultivate.json'),
       this.json<Dict<RawItem>>(directory, 'item.json'),
@@ -75,6 +81,8 @@ export class ToolboxResourceConverter {
       this.json<Dict<ModuleMetadata>>(directory, 'uniequip-metadata.json'),
       this.json<ProgressionData>(directory, 'progression.json'),
       this.json<{ version: string; updatedAt: string; sourceCommit?: string }>(directory, 'data-version.json'),
+      this.json<Dict<SpecialOperator>>(directory, 'special-operators.json'),
+      this.json<{ operators: Dict<{ skills: Pick<SkillDefinition, 'skillId' | 'maxLevel' | 'requirements'>[]; skillLevelRequirements: MaterialAmount[][] }>; skills: Dict<SkillLevelDetail[]> }>(directory, 'skill-details.json'),
     ]);
 
     const materials: Material[] = Object.entries(items).map(([itemId, item]) => ({
@@ -101,13 +109,15 @@ export class ToolboxResourceConverter {
     const operators: OperatorDefinition[] = [];
     for (const [operatorId, character] of Object.entries(characters)) {
       const raw = cultivate[operatorId] ?? {};
-      const elite = raw.skills?.elite ?? [];
-      // Locale tables may already contain announced operators without released cultivation data.
-      if (!characterNames[operatorId] || !cultivate[operatorId] || character.star >= 4 && !elite.length) continue;
+      const special = specialOperators[operatorId];
+      const elite = special ? special.skillIds.map(name => ({ name, cost: [] })) : raw.skills?.elite ?? [];
+      // Low-star and officially available special operators do not require a normal cultivation table.
+      if (!characterNames[operatorId] || !special && (character.star >= 3 && !cultivate[operatorId] || character.star >= 4 && !elite.length)) continue;
+      if (character.star >= 3 && !skillData.operators[operatorId]) throw new Error(`缺少干员技能资料 ${operatorId}`);
       const profile = operatorMetadata[operatorId] ?? {};
       const hasE1Data = Boolean(raw.evolve?.[0] && Object.keys(raw.evolve[0]).length);
       const hasE2Data = Boolean(raw.evolve?.[1] && Object.keys(raw.evolve[1]).length);
-      const maxElitePhase = hasE2Data ? 2 : hasE1Data || character.star === 3 ? 1 : 0;
+      const maxElitePhase = special?.maxElitePhase ?? (hasE2Data ? 2 : hasE1Data || character.star === 3 ? 1 : 0);
       operators.push({
         operatorId,
         name: characterNames[operatorId],
@@ -127,11 +137,12 @@ export class ToolboxResourceConverter {
         birthdayMonth: profile.birthdayMonth,
         tags: profile.tags ?? [],
         maxElitePhase,
+        ...(special ? { specialTraining: true } : {}),
         promotionRequirements: {
           1: this.amounts(raw.evolve?.[0] ?? {}),
           2: this.amounts(raw.evolve?.[1] ?? {}),
         },
-        modules: (raw.uniequip ?? []).map(module => ({
+        modules: special ? special.modules.map(module => ({ ...module, requirements: { 1: [], 2: [], 3: [] } })) : (raw.uniequip ?? []).map(module => ({
           moduleId: module.id,
           name: moduleNames[module.id] ?? module.id,
           typeIcon: moduleMetadata[module.id]?.typeIcon ?? '',
@@ -142,18 +153,29 @@ export class ToolboxResourceConverter {
             3: this.amounts(module.cost[2] ?? {}),
           },
         })),
-        skills: elite.map((skill, index) => ({
-          skillId: skill.name,
+        skillLevelRequirements: skillData.operators[operatorId]?.skillLevelRequirements,
+        skills: (skillData.operators[operatorId]?.skills ?? []).map((skill, index) => ({
+          ...skill,
           operatorId,
           index: index + 1,
-          name: skillNames[skill.name] ?? `技能 ${index + 1}`,
-          requirements: {
-            1: this.amounts(skill.cost[0] ?? {}),
-            2: this.amounts(skill.cost[1] ?? {}),
-            3: this.amounts(skill.cost[2] ?? {}),
-          },
+          name: skillData.skills[skill.skillId]?.[0]?.name ?? skillNames[skill.skillId] ?? `技能 ${index + 1}`,
         })),
       });
+    }
+
+    // Account snapshots merge Amiya's forms under the caster ID; resource definitions must match.
+    const amiya = operators.find(op => op.operatorId === '002_amiya');
+    for (const form of operators.filter(op => /_amiya\d+$/.test(op.operatorId)).sort((a, b) => a.operatorId.localeCompare(b.operatorId))) {
+      if (!amiya) throw new Error('阿米娅形态缺少本体资料');
+      for (const skill of form.skills) {
+        if (!amiya.skills.some(existing => existing.skillId === skill.skillId)) {
+          amiya.skills.push({ ...skill, operatorId: amiya.operatorId, index: amiya.skills.length + 1 });
+        }
+      }
+      for (const module of form.modules ?? []) {
+        if (!amiya.modules!.some(existing => existing.moduleId === module.moduleId)) amiya.modules!.push(module);
+      }
+      operators.splice(operators.indexOf(form), 1);
     }
 
     return {
@@ -163,6 +185,7 @@ export class ToolboxResourceConverter {
       operators,
       materials,
       progression,
+      skillDetails: Object.fromEntries([...new Set(operators.flatMap(op => op.skills.map(s => s.skillId)))].map(id => [id, skillData.skills[id]])),
     };
   }
 

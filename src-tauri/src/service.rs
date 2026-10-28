@@ -13,6 +13,7 @@ pub struct Service {
     pub resources: Resources,
     pub skland: Skland,
     pub settings: Value,
+    pub resource_update: Value,
     account: Value,
     planner: Planner,
     revision: u64,
@@ -49,6 +50,7 @@ impl Service {
             resources,
             skland: Skland::new()?,
             settings,
+            resource_update: json!({"phase":"idle","message":"启动时及每小时自动检查，更新后立即生效。"}),
             account,
             planner,
             revision: 0,
@@ -76,6 +78,13 @@ impl Service {
             .map(|v| text(v).into())
             .collect()
     }
+    pub fn startup_cache_key(&mut self) -> String {
+        let inputs = json!([
+            "startup-state-1", env!("CARGO_PKG_VERSION"), self.account, self.settings,
+            self.resources.active.manifest, self.store.credentials().is_some()
+        ]);
+        crate::resources::validation::hash(&serde_json::to_vec(&inputs).unwrap())
+    }
     pub fn state(&mut self) -> Result<Value> {
         if let Some(state) = &self.cached_state {
             return Ok(state.clone());
@@ -93,8 +102,10 @@ impl Service {
             text(&self.resources.active.manifest["resourceVersion"])
         ));
         state["settings"] = self.settings.clone();
+        state["resourceUpdate"] = self.resource_update.clone();
         state["usingCache"] = json!(!self.account.is_null() && self.using_cache);
         state["lastError"] = json!(self.last_error);
+        state["startupCacheKey"] = json!(self.startup_cache_key());
         self.cached_state = Some(state.clone());
         Ok(state)
     }
@@ -168,34 +179,19 @@ impl Service {
         }
         self.state()
     }
-    pub fn update_resources(&mut self) -> Result<Value> {
+    pub fn install_resources(&mut self, bytes: &[u8], manifest: &Value) -> Result<()> {
         let account = &self.account;
         let unlimited = self.unlimited();
-        match self.resources.update(|data| {
+        let (planner, plans) = self.resources.install(bytes, manifest, |data| {
             let planner = Planner::new(data.clone())?;
             let plans = planner.complete(account, &unlimited)?;
             Ok((planner, plans))
-        }) {
-            Ok(next) => {
-                if let Some((planner, plans)) = next {
-                    self.planner = planner;
-                    self.cached_plans = Some(plans);
-                }
-                self.last_error.clear();
-                self.invalidate(false);
-                self.store.log(
-                    "game-data-update-success",
-                    text(&self.resources.active.data["version"]),
-                );
-            }
-            Err(error) => {
-                self.last_error = error;
-                self.invalidate(false);
-                self.store.log("game-data-update-failure", &self.last_error);
-                return Err(self.last_error.clone());
-            }
-        }
-        self.state()
+        })?;
+        self.planner = planner;
+        self.cached_plans = Some(plans);
+        self.invalidate(false);
+        self.store.log("game-data-update-success", text(&manifest["resourceVersion"]));
+        Ok(())
     }
     pub fn logout(&mut self) -> Result<Value> {
         self.store.clear_credentials()?;

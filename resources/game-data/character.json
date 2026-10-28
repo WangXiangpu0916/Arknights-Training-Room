@@ -43,6 +43,23 @@
       16
     ]
   },
+  "4220_kormr": {
+    "pinyin": {
+      "full": "hulangwan",
+      "head": "hlw"
+    },
+    "romaji": "",
+    "appellation": "Koromaru",
+    "star": 1,
+    "recruitment": {},
+    "position": 9,
+    "profession": 1,
+    "tags": [
+      13,
+      12,
+      28
+    ]
+  },
   "376_therex": {
     "pinyin": {
       "full": "",
@@ -190,11 +207,14 @@
       "full": "GALLUS²",
       "head": "GALLUS²"
     },
-    "romaji": "",
+    "romaji": "GALLUS²",
     "appellation": "GALLUS²",
     "star": 1,
     "recruitment": {
-      "cn": 2
+      "cn": 2,
+      "us": 2,
+      "jp": 2,
+      "kr": 2
     },
     "position": 10,
     "profession": 6,
@@ -2992,6 +3012,21 @@
       21
     ]
   },
+  "4218_aigis": {
+    "pinyin": {
+      "full": "aiguisi",
+      "head": "ags"
+    },
+    "romaji": "",
+    "appellation": "Aegis",
+    "star": 5,
+    "recruitment": {},
+    "position": 10,
+    "profession": 2,
+    "tags": [
+      21
+    ]
+  },
   "002_amiya": {
     "pinyin": {
       "full": "amiya",
@@ -3724,7 +3759,7 @@
       "full": "wujiu",
       "head": "wj"
     },
-    "romaji": "",
+    "romaji": "ukushiku",
     "appellation": "Укусик",
     "star": 5,
     "recruitment": {},
@@ -4216,7 +4251,7 @@
       "full": "liexiang",
       "head": "lx"
     },
-    "romaji": "",
+    "romaji": "kurakkubon",
     "appellation": "Crackborne",
     "star": 5,
     "recruitment": {},
@@ -4540,6 +4575,7 @@
       "cn": 1,
       "us": 1,
       "jp": 1,
+      "kr": 1,
       "tw": 1
     },
     "position": 10,
@@ -4555,6 +4591,21 @@
     },
     "romaji": "rushira",
     "appellation": "Lucilla",
+    "star": 5,
+    "recruitment": {},
+    "position": 10,
+    "profession": 5,
+    "tags": [
+      24
+    ]
+  },
+  "393_toledo": {
+    "pinyin": {
+      "full": "de·tuolaiduo",
+      "head": "d·tld"
+    },
+    "romaji": "",
+    "appellation": "de Toledo",
     "star": 5,
     "recruitment": {},
     "position": 10,
@@ -4857,7 +4908,7 @@
       "full": "baitani",
       "head": "btn"
     },
-    "romaji": "",
+    "romaji": "botani",
     "appellation": "Ботани",
     "star": 5,
     "recruitment": {},
@@ -4867,6 +4918,22 @@
       29
     ],
     "appellationTransl": "Botani"
+  },
+  "4219_yukari": {
+    "pinyin": {
+      "full": "yueyuyoujiali",
+      "head": "yyyjl"
+    },
+    "romaji": "",
+    "appellation": "Yukari Takeba",
+    "star": 5,
+    "recruitment": {},
+    "position": 10,
+    "profession": 5,
+    "tags": [
+      19,
+      16
+    ]
   },
   "4234_pedro": {
     "pinyin": {
@@ -5108,6 +5175,22 @@
     "tags": [
       24,
       16
+    ]
+  },
+  "4232_hbound": {
+    "pinyin": {
+      "full": "lvgu",
+      "head": "lg"
+    },
+    "romaji": "",
+    "appellation": "Homebound",
+    "star": 5,
+    "recruitment": {},
+    "position": 10,
+    "profession": 7,
+    "tags": [
+      24,
+      23
     ]
   },
   "4191_tippi": {
@@ -5563,7 +5646,7 @@
       "full": "keluxier",
       "head": "klxe"
     },
-    "romaji": "",
+    "romaji": "kuroja",
     "appellation": "Closure",
     "star": 6,
     "recruitment": {},
@@ -5896,7 +5979,7 @@
       "full": "weiyi",
       "head": "wy"
     },
-    "romaji": "",
+    "romaji": "bii",
     "appellation": "Вий",
     "star": 6,
     "recruitment": {},
@@ -6466,6 +6549,23 @@
       25
     ]
   },
+  "4217_makoto": {
+    "pinyin": {
+      "full": "jiechengli",
+      "head": "jcl"
+    },
+    "romaji": "",
+    "appellation": "Makoto Yuki",
+    "star": 6,
+    "recruitment": {},
+    "position": 9,
+    "profession": 7,
+    "tags": [
+      19,
+      25,
+      15
+    ]
+  },
   "4048_doroth": {
     "pinyin": {
       "full": "duoluoxi",
@@ -6702,7 +6802,7 @@
       "full": "kaierxi·sihengtuo",
       "head": "kex·sht"
     },
-    "romaji": "",
+    "romaji": "kerushi･esuperanta",
     "appellation": "Kal'tsit·Esperanta",
     "star": 6,
     "recruitment": {},
@@ -7172,7 +7272,7 @@
       "full": "nuchaolindong",
       "head": "ncld"
     },
-    "romaji": "",
+    "romaji": "ikashiozuima",
     "appellation": "Zima the Raging Tide",
     "star": 6,
     "recruitment": {},
@@ -7394,7 +7494,10 @@
     "appellation": "Pallas",
     "star": 6,
     "recruitment": {
-      "cn": 1
+      "cn": 1,
+      "us": 1,
+      "jp": 1,
+      "kr": 1
     },
     "position": 9,
     "profession": 1,
@@ -7488,6 +7591,22 @@
     },
     "romaji": "shiteireizu",
     "appellation": "Leizi the Thunderbringer",
+    "star": 6,
+    "recruitment": {},
+    "position": 9,
+    "profession": 1,
+    "tags": [
+      19,
+      13
+    ]
+  },
+  "4231_clemnt": {
+    "pinyin": {
+      "full": "kelaimensha",
+      "head": "klms"
+    },
+    "romaji": "",
+    "appellation": "Clementia",
     "star": 6,
     "recruitment": {},
     "position": 9,
@@ -7672,6 +7791,38 @@
     "tags": [
       19,
       20
+    ]
+  },
+  "1001_amiya2": {
+    "pinyin": {
+      "full": "amiya",
+      "head": "amy"
+    },
+    "romaji": "amiya (zenei)",
+    "appellation": "Amiya",
+    "star": 5,
+    "recruitment": {},
+    "position": 9,
+    "profession": 1,
+    "tags": [
+      19,
+      16
+    ]
+  },
+  "1037_amiya3": {
+    "pinyin": {
+      "full": "amiya",
+      "head": "amy"
+    },
+    "romaji": "amiya (iryo)",
+    "appellation": "Amiya",
+    "star": 5,
+    "recruitment": {},
+    "position": 10,
+    "profession": 4,
+    "tags": [
+      15,
+      19
     ]
   }
 }

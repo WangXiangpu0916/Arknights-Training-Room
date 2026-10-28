@@ -7914,6 +7914,24 @@
       "width": 128,
       "height": 128,
       "sha1": "abe00935395fd714f7cb7c36e610018aafac6905"
+    },
+    "skchr_stward_1": {
+      "name": "强力击·α型",
+      "prtsTitle": "文件:技能 强力击·α型.png",
+      "sourceUrl": "https://media.prts.wiki/b/bf/%E6%8A%80%E8%83%BD_%E5%BC%BA%E5%8A%9B%E5%87%BB%C2%B7%CE%B1%E5%9E%8B.png",
+      "sha1": "0ce50baf100e924e1d563418a92b226878f228f7"
+    },
+    "skchr_midn_1": {
+      "name": "武器附魔·α型",
+      "prtsTitle": "文件:技能 武器附魔·α型.png",
+      "sourceUrl": "https://media.prts.wiki/d/dd/%E6%8A%80%E8%83%BD_%E6%AD%A6%E5%99%A8%E9%99%84%E9%AD%94%C2%B7%CE%B1%E5%9E%8B.png",
+      "sha1": "536a72f1ca211624b2495db26a4a42d0938a190d"
+    },
+    "skchr_catap_1": {
+      "name": "爆破范围提升·α型",
+      "prtsTitle": "文件:技能 爆破范围提升·α型.png",
+      "sourceUrl": "https://media.prts.wiki/c/c8/%E6%8A%80%E8%83%BD_%E7%88%86%E7%A0%B4%E8%8C%83%E5%9B%B4%E6%8F%90%E5%8D%87%C2%B7%CE%B1%E5%9E%8B.png",
+      "sha1": "105698c027fea7a065f2b527d3dc541a96a9d76a"
     }
   },
   "missing": []

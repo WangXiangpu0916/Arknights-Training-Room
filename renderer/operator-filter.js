@@ -5,8 +5,8 @@
   ];
 
   const SORT_MODES = [
-    'training-desc', 'implementation-asc', 'implementation-desc', 'name-asc', 'name-desc',
-    'rarity-asc', 'rarity-desc',
+    'training-desc', 'training-asc', 'implementation-asc', 'implementation-desc', 'name-asc', 'name-desc',
+    'rarity-asc', 'rarity-desc', 'acquisition-asc', 'acquisition-desc', 'skill-asc', 'skill-desc',
   ];
   const PROFESSION_ORDER = new Map(['近卫', '狙击', '重装', '医疗', '辅助', '术师', '特种', '先锋']
     .map((name, index) => [name, index]));
@@ -111,10 +111,45 @@
       || compareIdentity(a, b);
   }
 
+  function nextSort(mode, property) {
+    return mode === `${property}-asc` ? `${property}-desc` : `${property}-asc`;
+  }
+
+  function compareAcquisition(a, b, direction) {
+    const aTime = a.owned.gainTime;
+    const bTime = b.owned.gainTime;
+    const aMissing = !Number.isSafeInteger(aTime) || aTime <= 0;
+    const bMissing = !Number.isSafeInteger(bTime) || bTime <= 0;
+    if (aMissing !== bMissing) return aMissing ? 1 : -1;
+    return (aMissing ? 0 : (aTime - bTime) * direction)
+      || a.definition.operatorId.localeCompare(b.definition.operatorId, 'en');
+  }
+
+  function skillKey(owned) {
+    const levels = (owned.skills ?? [])
+      .map(skill => Number.isInteger(skill.masteryLevel) && skill.masteryLevel >= 0 && skill.masteryLevel <= 3 ? skill.masteryLevel : 0)
+      .sort((a, b) => b - a);
+    const rank = Number.isInteger(owned.skillLevel) && owned.skillLevel >= 1 && owned.skillLevel <= 7 ? owned.skillLevel : 1;
+    return [rank, levels.reduce((sum, level) => sum + level, 0), ...levels];
+  }
+
   function sortRows(rows, mode) {
     const selectedMode = SORT_MODES.includes(mode) ? mode : SORT_MODES[0];
+    const direction = selectedMode.endsWith('-asc') ? 1 : -1;
+    const skillKeys = selectedMode.startsWith('skill-') ? new Map(rows.map(row => [row, skillKey(row.owned)])) : null;
     return [...rows].sort((a, b) => {
       if (selectedMode === 'training-desc') return compareTraining(a, b);
+      if (selectedMode === 'training-asc') return compareTraining(b, a);
+      if (selectedMode.startsWith('acquisition-')) return compareAcquisition(a, b, direction);
+      if (skillKeys) {
+        const aKey = skillKeys.get(a);
+        const bKey = skillKeys.get(b);
+        for (let i = 0; i < Math.max(aKey.length, bKey.length); i += 1) {
+          const difference = (aKey[i] ?? 0) - (bKey[i] ?? 0);
+          if (difference) return difference * direction;
+        }
+        return a.definition.operatorId.localeCompare(b.definition.operatorId, 'en') * direction;
+      }
       if (selectedMode === 'implementation-asc') return compareImplementation(a, b) || compareIdentity(a, b);
       if (selectedMode === 'implementation-desc') return compareImplementation(a, b, -1) || compareIdentity(a, b);
       if (selectedMode === 'name-asc') return compareIdentity(a, b);
@@ -144,7 +179,7 @@
 
   const exported = {
     DIMENSIONS, SORT_MODES, createState, normalizeSearch, matchesSearch,
-    normalizeDimensionValue, dimensionValues, matches, filterRows, sortRows,
+    normalizeDimensionValue, dimensionValues, matches, filterRows, sortRows, nextSort,
     hasActive, reset, valuesForRows,
   };
   root.OperatorFilters = exported;

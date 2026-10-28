@@ -34,7 +34,19 @@ export interface SkillDefinition {
   operatorId: string;
   index: number;
   name: string;
+  maxLevel?: number;
   requirements: Record<1 | 2 | 3, MaterialAmount[]>;
+}
+
+export interface SkillLevelDetail {
+  name: string;
+  description: string;
+  skillType: string;
+  spType: string | number;
+  spCost: number;
+  initialSp: number;
+  maxCharges: number;
+  duration: number;
 }
 
 export interface OperatorDefinition {
@@ -56,6 +68,8 @@ export interface OperatorDefinition {
   birthdayMonth?: number;
   tags?: string[];
   maxElitePhase?: 0 | 1 | 2;
+  specialTraining?: boolean;
+  skillLevelRequirements?: MaterialAmount[][];
   promotionRequirements?: Partial<Record<1 | 2, MaterialAmount[]>>;
   modules?: ModuleDefinition[];
   skills: SkillDefinition[];
@@ -68,6 +82,8 @@ export interface OwnedSkill {
 
 export interface OwnedOperator {
   operatorId: string;
+  /** Actual acquisition time from Skland, in Unix seconds; absent in older snapshots. */
+  gainTime?: number;
   level: number;
   experience?: number;
   elitePhase: number;
@@ -82,6 +98,7 @@ export interface AccountSnapshot {
   syncedAt: string;
   operators: OwnedOperator[];
   inventory: Record<string, number>;
+  training?: { operatorId: string; skillId: string; from: MasteryLevel; to: MasteryLevel } | null;
 }
 
 export interface Settings {
@@ -187,6 +204,7 @@ export interface GameData {
   operators: OperatorDefinition[];
   materials: Material[];
   progression: ProgressionData;
+  skillDetails?: Record<string, SkillLevelDetail[]>;
 }
 
 export interface CompletionCount {

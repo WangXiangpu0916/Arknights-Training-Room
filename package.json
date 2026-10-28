@@ -1,6 +1,6 @@
 {
   "name": "arknights-training-room",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "训练室（测试版）：明日方舟本地专精规划桌面应用",
   "repository": "https://github.com/WangXiangpu0916/Arknights-Training-Room.git",
   "author": "Arknights Training Room contributors",
@@ -14,7 +14,7 @@
     "resource:build": "tsc && node scripts/build-resource.mjs",
     "resource:prepare": "node scripts/prepare-resource.mjs",
     "start": "npm run build:assets && tauri dev",
-    "test": "npm run build:assets && cargo test --manifest-path src-tauri/Cargo.toml --lib --test resources && cargo build --manifest-path src-tauri/Cargo.toml --example domain-check && node --test dist/tests/*.test.js && node scripts/qa-domain.mjs",
+    "test": "npm run build:assets && cargo test --manifest-path src-tauri/Cargo.toml --lib --test resources && cargo build --manifest-path src-tauri/Cargo.toml --example domain-check && node --test dist/tests/*.test.js tests/*.test.mjs && node scripts/qa-domain.mjs",
     "qa:desktop": "tauri build --debug --no-bundle && node scripts/qa-desktop.mjs",
     "qa:production": "node scripts/qa-production.mjs",
     "qa:resource": "tauri build --debug --no-bundle && node scripts/qa-resource-update.mjs",

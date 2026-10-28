@@ -243,6 +243,20 @@ pub fn game(d: &Value, m: &Value, previous: Option<&Value>) -> Result<()> {
     }
     let mut operators = BTreeSet::new();
     let mut modules = BTreeSet::new();
+    if let Some(details) = d.get("skillDetails") {
+        let details = details.as_object().ok_or("技能详情结构无效")?;
+        for (key, levels) in details {
+            ensure(matches(key, r"^[A-Za-z0-9_-]+$") && levels.is_array() && (1..=10).contains(&array(levels).len()), "技能详情等级无效")?;
+            for level in array(levels) {
+                ensure(level.is_object() && valid_text(&level["name"])
+                    && level["description"].as_str().is_some_and(|s| s.encode_utf16().count() <= 16000 && !matches(s, r"\{[^{}]+\}"))
+                    && valid_text(&level["skillType"]) && (valid_text(&level["spType"]) || integer(&level["spType"], 0.0, 20.0)), "技能详情文本无效")?;
+                for field in ["spCost", "initialSp", "maxCharges", "duration"] {
+                    ensure(level[field].as_f64().is_some_and(|n| n.is_finite() && n >= if field == "duration" {-1.0} else {0.0}), format!("技能详情 {field} 无效"))?;
+                }
+            }
+        }
+    }
     for op in array(&d["operators"]) {
         ensure(
             op.is_object()
@@ -289,6 +303,11 @@ pub fn game(d: &Value, m: &Value, previous: Option<&Value>) -> Result<()> {
             "生日月份无效",
         )?;
         ensure(
+            op.get("specialTraining").is_none() || op["specialTraining"].is_boolean(),
+            "特勤培养标记无效",
+        )?;
+        let special = op["specialTraining"] == true;
+        ensure(
             op["promotionRequirements"].is_object()
                 && op["skills"].is_array()
                 && op["modules"].is_array(),
@@ -298,10 +317,14 @@ pub fn game(d: &Value, m: &Value, previous: Option<&Value>) -> Result<()> {
             costs(
                 &op["promotionRequirements"][level.to_string()],
                 &format!("{} E{level}", text(&op["operatorId"])),
-                number(&op["rarity"]) >= 4.0 && level as f64 <= number(&op["maxElitePhase"]),
+                !special && number(&op["rarity"]) >= 4.0 && level as f64 <= number(&op["maxElitePhase"]),
             )?;
         }
         let mut skills = BTreeSet::new();
+        if let Some(cost) = op.get("skillLevelRequirements") {
+            ensure(cost.is_array() && array(cost).len() <= 6, "普通技能升级材料无效")?;
+            for rows in array(cost) { costs(rows, "普通技能", !special)?; }
+        }
         for skill in array(&op["skills"]) {
             ensure(
                 skill.is_object()
@@ -313,11 +336,17 @@ pub fn game(d: &Value, m: &Value, previous: Option<&Value>) -> Result<()> {
                     && skill["requirements"].is_object(),
                 "技能 ID / 干员关联无效",
             )?;
+            ensure(skill.get("maxLevel").is_none() || integer(&skill["maxLevel"], 1.0, 10.0), "技能上限无效")?;
+            if d.get("skillDetails").is_some() {
+                ensure(integer(&skill["maxLevel"], 1.0, 10.0)
+                    && array(&d["skillDetails"][text(&skill["skillId"])]).len() >= number(&skill["maxLevel"]) as usize
+                    && array(&op["skillLevelRequirements"]).len() == 6.min(number(&skill["maxLevel"]) as usize - 1), "缺少技能详情 / 普通材料")?;
+            }
             for level in 1..=3 {
                 costs(
                     &skill["requirements"][level.to_string()],
                     &format!("{} M{level}", text(&skill["skillId"])),
-                    true,
+                    !special && skill.get("maxLevel").and_then(Value::as_u64).unwrap_or(10) >= level + 7,
                 )?;
             }
         }
@@ -340,7 +369,7 @@ pub fn game(d: &Value, m: &Value, previous: Option<&Value>) -> Result<()> {
                 costs(
                     &module["requirements"][level.to_string()],
                     &format!("{} Lv{level}", text(&module["moduleId"])),
-                    true,
+                    !special,
                 )?;
             }
         }
@@ -384,6 +413,7 @@ pub fn game(d: &Value, m: &Value, previous: Option<&Value>) -> Result<()> {
         "六星干员 / 模组数据消失",
     )?;
     if let Some(previous) = previous {
+        ensure(previous.get("skillDetails").is_none() || d.get("skillDetails").is_some(), "更新资源缺少技能详情，请使用最新资源构建流程")?;
         let counts = |g: &Value| {
             let ops = array(&g["operators"]);
             [

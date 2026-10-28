@@ -70,6 +70,86 @@ fn fixture(root: &Path, version: &str) -> (Value, Vec<u8>) {
 }
 
 #[test]
+fn newer_bundled_resources_upgrade_existing_profiles_without_changing_user_files() {
+    let root = std::env::temp_dir().join(format!("atr-bundled-resource-{}", std::process::id()));
+    fs::create_dir_all(&root).unwrap();
+    let old = root.join("old");
+    let new = root.join("new");
+    fixture(&old, "2026.09.12.1");
+    fixture(&new, "2026.10.28.1");
+    let store = Store::new(root.join("profile")).unwrap();
+    store.write("settings.json", &json!({"theme":"light"})).unwrap();
+    store.write("account-cache.json", &json!({"inventory":{"item_0":42}})).unwrap();
+    let settings = fs::read(store.root.join("settings.json")).unwrap();
+    let account = fs::read(store.root.join("account-cache.json")).unwrap();
+    Resources::initialize(&store, &old, "0.1.0").unwrap();
+    let upgraded = Resources::initialize(&store, &new, "0.1.0").unwrap();
+    assert_eq!(upgraded.active.data["version"], "2026.10.28.1");
+    assert_eq!(upgraded.previous.unwrap().data["version"], "2026.09.12.1");
+    let restarted = Resources::initialize(&store, &old, "0.1.0").unwrap();
+    assert_eq!(restarted.active.data["version"], "2026.10.28.1");
+    let corrupt = root.join("corrupt");
+    fixture(&corrupt, "2026.10.29.1");
+    fs::write(corrupt.join("data/game.json"), b"{}").unwrap();
+    let retained = Resources::initialize(&store, &corrupt, "0.1.0").unwrap();
+    assert_eq!(retained.active.data["version"], "2026.10.28.1");
+    assert_eq!(fs::read(store.root.join("settings.json")).unwrap(), settings);
+    assert_eq!(fs::read(store.root.join("account-cache.json")).unwrap(), account);
+    fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn corrected_same_version_bundle_replaces_cache_without_touching_user_data() {
+    let root = std::env::temp_dir().join(format!("atr-corrected-bundle-{}", std::process::id()));
+    let bundled = root.join("bundled");
+    let (mut manifest, _) = fixture(&bundled, "2026.10.28.1");
+    let store = Store::new(root.join("profile")).unwrap();
+    store.write("account-cache.json", &json!({"operators":[{"operatorId":"op_0","skills":[{"skillId":"skill_0","masteryLevel":3}]}]})).unwrap();
+    let account = fs::read(store.root.join("account-cache.json")).unwrap();
+    Resources::initialize(&store, &bundled, "0.1.0").unwrap();
+    let mut game: Value = serde_json::from_slice(&fs::read(bundled.join("data/game.json")).unwrap()).unwrap();
+    game["operators"][0]["name"] = json!("本地修正");
+    let bytes = serde_json::to_vec(&game).unwrap();
+    fs::write(bundled.join("data/game.json"), &bytes).unwrap();
+    manifest["files"]["data/game.json"] = json!({"size":bytes.len(),"sha256":hash(&bytes)});
+    write_json_atomic(&bundled.join("manifest.json"), &manifest).unwrap();
+    for _ in 0..2 {
+        let updated = Resources::initialize(&store, &bundled, "0.1.0").unwrap();
+        assert_eq!(updated.active.data["operators"][0]["name"], "本地修正");
+        assert_eq!(updated.previous.unwrap().data["operators"][0]["name"], "干员 0");
+    }
+    manifest["files"]["data/game.json"]["sha256"] = json!("0".repeat(64));
+    write_json_atomic(&bundled.join("manifest.json"), &manifest).unwrap();
+    let retained = Resources::initialize(&store, &bundled, "0.1.0").unwrap();
+    assert_eq!(retained.active.data["operators"][0]["name"], "本地修正");
+    assert_eq!(fs::read(store.root.join("account-cache.json")).unwrap(), account);
+    fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
+fn skill_detail_validation_checks_levels_costs_and_prevents_incomplete_updates() {
+    let root = std::env::temp_dir().join(format!("atr-skill-validation-{}", std::process::id()));
+    let (manifest, _) = fixture(&root, "2026.10.28.1");
+    let mut game: Value = serde_json::from_slice(&fs::read(root.join("data/game.json")).unwrap()).unwrap();
+    let cost = json!([{"itemId":"item_0","quantity":1}]);
+    game["operators"][0]["skills"][0]["maxLevel"] = json!(7);
+    game["operators"][0]["skills"][0]["requirements"] = json!({"1":[],"2":[],"3":[]});
+    game["operators"][0]["skillLevelRequirements"] = json!(vec![cost; 6]);
+    game["skillDetails"] = json!({"skill_0":vec![json!({"name":"技能","description":"攻击力+20%","skillType":"AUTO","spType":"INCREASE_WITH_TIME","spCost":10,"initialSp":0,"maxCharges":1,"duration":4});7]});
+    training_room::resources::validation::game(&game, &manifest, None).unwrap();
+    let mut invalid = game.clone();
+    invalid["skillDetails"]["skill_0"][0]["spCost"] = json!(-1);
+    assert!(training_room::resources::validation::game(&invalid, &manifest, None).is_err());
+    invalid = game.clone();
+    invalid["operators"][0]["skillLevelRequirements"][0][0]["itemId"] = json!("unknown");
+    assert!(training_room::resources::validation::game(&invalid, &manifest, None).is_err());
+    invalid = game.clone();
+    invalid.as_object_mut().unwrap().remove("skillDetails");
+    assert!(training_room::resources::validation::game(&invalid, &manifest, Some(&game)).is_err());
+    fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
 fn resource_transaction_rejects_corruption_and_recovers_interrupted_commit() {
     let root = std::env::temp_dir().join(format!("atr-native-resource-{}", std::process::id()));
     fs::create_dir_all(&root).unwrap();
@@ -181,6 +261,8 @@ fn resource_transaction_rejects_corruption_and_recovers_interrupted_commit() {
         .unwrap()
         .read("2026.09.13.1", "../settings.json")
         .is_err());
+    let reopened = Resources::initialize(&store, &a, "0.0.20-beta.16").unwrap();
+    assert_eq!(reopened.active.manifest["resourceVersion"], "2026.09.13.1");
     write_json_atomic(
         &store.root.join("game-data.transaction.json"),
         &json!({"from":"2026.09.12.1","to":"2026.09.13.1"}),
@@ -212,6 +294,8 @@ fn service_preserves_legacy_cache_settings_and_separates_logout_from_clear_cache
     let original = fs::read(profile.join("account-cache.json")).unwrap();
     let mut service = Service::initialize(profile.clone(), &bundled, "0.0.20-beta.16").unwrap();
     let first = service.state().unwrap();
+    assert_eq!(first["startupCacheKey"], service.startup_cache_key());
+    assert_eq!(first["startupCacheKey"], Service::initialize(profile.clone(), &bundled, "0.0.20-beta.16").unwrap().startup_cache_key());
     assert_eq!(first, service.state().unwrap());
     assert_eq!(first["settings"]["theme"], "black");
     assert_eq!(first["usingCache"], true);
@@ -226,9 +310,25 @@ fn service_preserves_legacy_cache_settings_and_separates_logout_from_clear_cache
     let changed = service.update_settings(json!({"theme":"light"})).unwrap();
     assert_eq!(changed["single"], first["single"]);
     assert_eq!(changed["settings"]["theme"], "light");
+    assert_ne!(first["startupCacheKey"], changed["startupCacheKey"]);
+    let settings = fs::read(profile.join("settings.json")).unwrap();
+    let (manifest, bytes) = fixture(&root.join("resource-b"), "2026.09.13.1");
+    assert!(service.install_resources(b"corrupt package", &manifest).is_err());
+    assert_eq!(service.state().unwrap()["gameData"]["version"], "2026.09.12.1");
+    service.install_resources(&bytes, &manifest).unwrap();
+    let updated = service.state().unwrap();
+    assert_eq!(updated["gameData"]["version"], "2026.09.13.1");
+    assert_ne!(changed["startupCacheKey"], updated["startupCacheKey"]);
+    assert_eq!(updated["resourceAssetBase"], "http://atr-resource.localhost/2026.09.13.1/images/");
+    assert!(updated["revision"].as_u64().unwrap() > changed["revision"].as_u64().unwrap());
+    assert_eq!(updated["account"], changed["account"]);
+    assert_eq!(updated["lastError"], changed["lastError"], "resource update must not overwrite account errors");
+    assert_eq!(fs::read(profile.join("settings.json")).unwrap(), settings);
+    assert_eq!(fs::read(profile.join("account-cache.json")).unwrap(), original);
     let credentials = json!({"accessToken":"fixture","cred":"fixture","credToken":"fixture"});
     service.store.save_credentials(&credentials).unwrap();
     service.invalidate(false);
+    assert_ne!(updated["startupCacheKey"], service.startup_cache_key());
     let logged_out = service.logout().unwrap();
     assert_eq!(logged_out["loggedIn"], false);
     assert_eq!(logged_out["account"]["uid"], "fixture");
@@ -238,6 +338,7 @@ fn service_preserves_legacy_cache_settings_and_separates_logout_from_clear_cache
     let cleared = service.clear_cache().unwrap();
     assert_eq!(cleared["loggedIn"], true);
     assert!(cleared["account"].is_null());
+    assert_ne!(logged_out["startupCacheKey"], cleared["startupCacheKey"]);
     assert!(!profile.join("account-cache.json").exists());
     assert!(profile.join("credentials.bin").exists());
     fs::remove_dir_all(root).unwrap();

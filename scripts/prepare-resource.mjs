@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pinyin } from 'pinyin-pro';
-import { officialMetadata } from './resource-metadata.mjs';
+import { officialMetadata, specialOperators, skillMetadata, fetchImplementationDates } from './resource-metadata.mjs';
 import { lockInputs } from './lock-resource-inputs.mjs';
 
 const args = process.argv.slice(2);
@@ -21,7 +21,7 @@ const moduleIcons = JSON.parse(await readFile(path.join(seed, 'module-icons.lock
 const moduleSource = { repository: 'https://torappu.prts.wiki/assets/uniequip_type', dataVersion: `sha256:${createHash('sha256').update(JSON.stringify(moduleIcons)).digest('hex')}` };
 const dependencies = [
   { repository: 'arkntools/arknights-toolbox-data', branch: 'main', paths: ['assets/data', 'assets/locales/cn', 'assets/img/avatar', 'assets/img/item', 'assets/img/skill'] },
-  { repository: 'Kengxxiao/ArknightsGameData', branch: 'master', paths: ['zh_CN/gamedata/excel/character_table.json', 'zh_CN/gamedata/excel/uniequip_table.json', 'zh_CN/gamedata/excel/gamedata_const.json', 'zh_CN/gamedata/excel/item_table.json'] },
+  { repository: 'Kengxxiao/ArknightsGameData', branch: 'master', paths: ['zh_CN/gamedata/excel/character_table.json', 'zh_CN/gamedata/excel/char_patch_table.json', 'zh_CN/gamedata/excel/skill_table.json', 'zh_CN/gamedata/excel/uniequip_table.json', 'zh_CN/gamedata/excel/gamedata_const.json', 'zh_CN/gamedata/excel/item_table.json'] },
 ];
 // Resolve ALL revisions first. Every later download / checkout uses these exact SHAs.
 for (const dependency of dependencies) {
@@ -29,10 +29,13 @@ for (const dependency of dependencies) {
   if (!/^[a-f0-9]{40}$/.test(dependency.commit)) throw new Error('Upstream commit resolution failed');
 }
 await mkdir(output, { recursive: true });
+// Dates can be corrected independently of the game-data repositories.
+const implementationDates = await fetchImplementationDates();
+const datesDigest = createHash('sha256').update(JSON.stringify(implementationDates)).digest('hex');
 await rm(path.join(output, 'unchanged'), { force: true });
 if (args.includes('--skip-unchanged') && baselineManifest
   && dependencies.every(d => baselineManifest.sources.some(s => s.repository === `https://github.com/${d.repository}` && s.commit === d.commit))
-  && baselineManifest.sources.some(s => s.dataVersion === `seed-sha256:${seedDigest}`)) {
+  && baselineManifest.sources.some(s => s.dataVersion === `seed-sha256:${seedDigest};dates-sha256:${datesDigest}`)) {
   await writeFile(path.join(output, 'unchanged'), 'All fixed upstream and seed inputs unchanged');
   console.log('Upstream / seed commits unchanged; no resource publication needed.'); process.exit(0);
 }
@@ -64,9 +67,9 @@ async function acquire(dependency, remote, destination, cached) {
     const cache = path.join(output, 'blob-cache', blob);
     bytes = await readFile(cache).catch(() => undefined);
     if (!bytes || gitHash(bytes) !== blob) {
-      const result = await github(`repos/${dependency.repository}/git/blobs/${blob}`);
-      if (result.encoding !== 'base64') throw new Error('Unsupported Git blob encoding');
-      bytes = Buffer.from(result.content, 'base64');
+      const response = await fetch(`https://raw.githubusercontent.com/${dependency.repository}/${dependency.commit}/${remote}`, { signal: AbortSignal.timeout(60_000) });
+      if (!response.ok) throw new Error(`Pinned input download failed: ${remote} HTTP ${response.status}`);
+      bytes = Buffer.from(await response.arrayBuffer());
       if (gitHash(bytes) !== blob) throw new Error(`Git blob checksum mismatch: ${remote}`);
       await mkdir(path.dirname(cache), { recursive: true }); await writeFile(cache, bytes);
     }
@@ -95,22 +98,47 @@ for (const [remote, local] of [
   ['locales/cn/character.json', 'character-cn.json'], ['locales/cn/material.json', 'material-cn.json'],
   ['locales/cn/skill.json', 'skill-cn.json'], ['locales/cn/uniequip.json', 'uniequip-cn.json'],
 ]) await acquire(dependencies[0], `assets/${remote}`, path.join(input, 'game-data', local), path.join(seed, 'game-data', local));
-for (const name of ['character_table.json', 'uniequip_table.json', 'gamedata_const.json', 'item_table.json'])
+for (const name of ['character_table.json', 'char_patch_table.json', 'skill_table.json', 'uniequip_table.json', 'gamedata_const.json', 'item_table.json'])
   await acquire(dependencies[1], `zh_CN/gamedata/excel/${name}`, path.join(official, name));
 const characterInput = await json(path.join(input, 'game-data/character.json'));
 const cultivateInput = await json(path.join(input, 'game-data/cultivate.json'));
+const officialCharacters = { ...await json(path.join(official, 'character_table.json')), ...(await json(path.join(official, 'char_patch_table.json'))).patchChars };
+const skillData = skillMetadata(officialCharacters, await json(path.join(official, 'skill_table.json')));
+await save('skill-details.json', skillData);
 const imageJobs = [
-  ...Object.keys(characterInput).filter(id => cultivateInput[id]).map(id => ['avatar', id]),
+  ...Object.keys(characterInput).filter(id => characterInput[id].star <= 2 || cultivateInput[id]).map(id => ['avatar', id]),
   ...[...new Set([...Object.keys(await json(path.join(input, 'game-data/item.json'))), '4001', '2001', '2002', '2003', '2004'])].map(id => ['item', id]),
-  ...[...new Set(Object.values(cultivateInput).flatMap(o => (o.skills?.elite ?? []).map(s => s.name)))].map(id => ['skill', id]),
+  ...[...new Set(Object.keys(characterInput).flatMap(id => (skillData.operators[id]?.skills ?? []).map(s => s.skillId)))].map(id => ['skill', id]),
 ];
+const prtsAssets = await json(path.join(input, 'images/prts-assets.json'));
+async function acquireMissingSkillIcon(id) {
+  const destination = path.join(input, 'images/skill', `${id}.png`);
+  if (await readFile(destination).then(() => true, () => false)) return;
+  const name = skillData.skills[id]?.[0]?.name;
+  const url = new URL('https://prts.wiki/api.php');
+  url.search = new URLSearchParams({ action: 'query', format: 'json', formatversion: '2', prop: 'imageinfo',
+    iiprop: 'url|mime|sha1', titles: `文件:技能 ${name}.png` });
+  const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
+  if (!response.ok) throw new Error(`技能图标查询失败：${id} HTTP ${response.status}`);
+  const payload = await response.json();
+  if (payload.error) throw new Error(`技能图标查询失败：${id}`);
+  const image = payload.query?.pages?.[0]?.imageinfo?.[0];
+  if (!image) { console.log(`Skill icon unavailable; declared placeholder: ${id}`); return; }
+  const download = await fetch(image.url, { signal: AbortSignal.timeout(30_000) });
+  if (!download.ok || image.mime !== 'image/png') throw new Error(`技能图标下载失败：${id}`);
+  const bytes = Buffer.from(await download.arrayBuffer());
+  const hash = createHash('sha1').update(bytes).digest('hex');
+  if (hash !== image.sha1 && BigInt(`0x${hash}`).toString(36).padStart(31, '0') !== image.sha1) throw new Error(`技能图标校验失败：${id}`);
+  await writeFile(destination, bytes);
+  prtsAssets.skills[id] = { name, prtsTitle: `文件:技能 ${name}.png`, sourceUrl: image.url, sha1: image.sha1 };
+}
 let nextJob = 0;
 await Promise.all(Array.from({ length: 6 }, async () => {
   while (nextJob < imageJobs.length) {
     const [type, id] = imageJobs[nextJob++];
+    if (type === 'skill' && prtsAssets.skills[id] && await readFile(path.join(input, 'images/skill', `${id}.png`)).then(() => true, () => false)) continue;
     if (type === 'skill' && !dependencies[0].tree.has(`assets/img/skill/${id}.png`)) {
-      // PRTS icons already vendored in the pinned seed remain valid when toolbox omits an icon.
-      console.log(`Skill icon retained from fixed seed / placeholder: ${id}`);
+      await acquireMissingSkillIcon(id);
       continue;
     }
     const cached = baseline ? path.join(baseline, 'images', type, `${id}.png`) : path.join(seed, 'images', type, `${id}.png`);
@@ -118,9 +146,10 @@ await Promise.all(Array.from({ length: 6 }, async () => {
     if (nextJob % 100 === 0) console.log(`Pinned image inputs: ${nextJob}/${imageJobs.length}`);
   }
 }));
+await writeFile(path.join(input, 'images/prts-assets.json'), JSON.stringify(prtsAssets, null, 2));
 const [moduleData, constants, items, chars, moduleNames, names, metadata, branches, materialMetadata] = await Promise.all([
   json(path.join(official, 'uniequip_table.json')), json(path.join(official, 'gamedata_const.json')),
-  json(path.join(official, 'item_table.json')), json(path.join(official, 'character_table.json')),
+  json(path.join(official, 'item_table.json')), officialCharacters,
   json(path.join(input, 'game-data/uniequip-cn.json')), json(path.join(input, 'game-data/character-cn.json')),
   json(path.join(input, 'game-data/operator-metadata.json')), json(path.join(input, 'game-data/subprofession-cn.json')),
   json(path.join(input, 'game-data/material-metadata.json')),
@@ -132,6 +161,7 @@ for (const [key, char] of Object.entries(chars)) {
   if (!names[id]) continue;
   const syllables = pinyin(names[id], { toneType: 'none', type: 'array' }).map(v => v.toLowerCase().replace(/[^a-z0-9]/g, '')).filter(Boolean);
   metadata[id] = { ...metadata[id], name: names[id], pinyin: syllables.join(''), pinyinInitials: syllables.map(v => v[0]).join(''),
+    implementationDate: implementationDates[id] ?? metadata[id]?.implementationDate,
     position: char.position === 'MELEE' ? '近战位' : '远程位', tags: char.tagList ?? [] };
   branches[id] = branchesById.get(char.subProfessionId) ?? branches[id] ?? '未知分支';
 }
@@ -139,6 +169,7 @@ for (const [id, item] of Object.entries(items.items)) {
   materialMetadata[id] = { purpose: item.usage ?? '', description: item.description ?? '' };
 }
 const converted = officialMetadata(moduleData, constants, items, moduleNames);
+await save('special-operators.json', specialOperators(chars, moduleData));
 await save('operator-metadata.json', metadata); await save('subprofession-cn.json', branches);
 await save('material-metadata.json', materialMetadata); await save('uniequip-metadata.json', converted.moduleMetadata);
 await save('progression.json', converted.progression);
@@ -150,7 +181,7 @@ const config = { resourceVersion: version, buildTime: new Date().toISOString(), 
     seedConfig.sources.find(s => s.repository === 'https://github.com/WangXiangpu0916/Arknights-Training-Room')] };
 await writeFile(path.join(input, 'resource-build.json'), JSON.stringify(config, null, 2));
 const digest = await lockInputs(input);
-config.sources.at(-1).dataVersion = `seed-sha256:${seedDigest}`;
+config.sources.at(-1).dataVersion = `seed-sha256:${seedDigest};dates-sha256:${datesDigest}`;
 await writeFile(path.join(input, 'resource-build.json'), JSON.stringify(config, null, 2));
 await rm(checkouts, { recursive: true, force: true });
 console.log(JSON.stringify({ input, resourceVersion: version, sources: config.sources }));

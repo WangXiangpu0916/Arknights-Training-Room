@@ -154,6 +154,7 @@ impl Planner {
     pub fn complete(&self, account: &Value, unlimited: &[String]) -> Result<Value> {
         let mastery = self.group(account, unlimited, "mastery")?;
         let mut result = mastery;
+        result["training"] = self.training(account).unwrap_or(Value::Null);
         result["promotions"] = self.group(account, unlimited, "promotion")?;
         result["modules"] = self.group(account, unlimited, "module")?;
         result["statistics"] = self.statistics(account);
@@ -166,9 +167,10 @@ impl Planner {
             return Ok(json!({"single":[],"continuous":[],"singleReal":[],"continuousReal":[]}));
         }
         let inventory = inventory(&account["inventory"])?;
-        let single_real = self.plan(array(&account["operators"]), &inventory, &[], kind, false)?;
+        let training = self.training(account);
+        let single_real = self.plan(array(&account["operators"]), &inventory, &[], kind, false, training.as_ref())?;
         let continuous_real =
-            self.plan(array(&account["operators"]), &inventory, &[], kind, true)?;
+            self.plan(array(&account["operators"]), &inventory, &[], kind, true, training.as_ref())?;
         let single = if unlimited.is_empty() {
             single_real.clone()
         } else {
@@ -178,6 +180,7 @@ impl Planner {
                 unlimited,
                 kind,
                 false,
+                training.as_ref(),
             )?
         };
         let continuous = if unlimited.is_empty() {
@@ -189,11 +192,25 @@ impl Planner {
                 unlimited,
                 kind,
                 true,
+                training.as_ref(),
             )?
         };
         Ok(
             json!({"single":single,"continuous":continuous,"singleReal":single_real,"continuousReal":continuous_real}),
         )
+    }
+    fn training(&self, account: &Value) -> Option<Value> {
+        let training = &account["training"];
+        let from = training["from"].as_u64()?;
+        let to = training["to"].as_u64()?;
+        if from > 2 || to != from + 1 { return None; }
+        let op = &self.game["operators"][*self.definitions.get(text(&training["operatorId"]))?];
+        if op["specialTraining"] == true { return None; }
+        let skill = array(&op["skills"]).iter().find(|s| s["skillId"] == training["skillId"])?;
+        let owned = array(&account["operators"]).iter().find(|o| o["operatorId"] == training["operatorId"])?;
+        let current = array(&owned["skills"]).iter().find(|s| s["skillId"] == training["skillId"])?;
+        if number(&current["masteryLevel"]) > from as f64 { return None; }
+        Some(json!({"operator":op,"skill":skill,"from":from,"to":to}))
     }
     pub fn plan(
         &self,
@@ -202,6 +219,7 @@ impl Planner {
         unlimited: &[String],
         kind: &str,
         continuous: bool,
+        training: Option<&Value>,
     ) -> Result<Vec<Value>> {
         let planned_engine = Engine::new(&self.recipes, unlimited);
         let finite_engine = Engine::new(&self.recipes, &[]);
@@ -211,13 +229,19 @@ impl Planner {
                 continue;
             };
             let op = &self.game["operators"][*index];
+            // Special operators train through activity tasks, never through material plans.
+            if op["specialTraining"] == true {
+                continue;
+            }
             match kind {
                 "mastery" => {
                     if number(&owned["elitePhase"]) < 2.0 || number(&owned["skillLevel"]) < 7.0 {
                         continue;
                     }
                     for owned_skill in array(&owned["skills"]) {
-                        let from = number(&owned_skill["masteryLevel"]) as i32;
+                        // The live task changes only the planning start, never the owned skill.
+                        let from = training.filter(|t| t["operator"]["operatorId"] == owned["operatorId"] && t["skill"]["skillId"] == owned_skill["skillId"])
+                            .map_or(number(&owned_skill["masteryLevel"]) as i32, |t| number(&t["to"]) as i32);
                         if from >= 3 {
                             continue;
                         }
@@ -227,6 +251,9 @@ impl Planner {
                         else {
                             continue;
                         };
+                        if skill.get("maxLevel").and_then(Value::as_u64).is_some_and(|max| max <= 7) {
+                            continue;
+                        }
                         let requested = (from..if continuous {3} else {from+1}).map(|level|json!({"from":level,"to":level+1,"requirements":skill["requirements"][(level+1).to_string()].as_array().cloned().unwrap_or_default()})).collect::<Vec<_>>();
                         if continuous {
                             let planned = stages(&planned_engine, inventory, &requested, true)?;
@@ -492,7 +519,8 @@ impl Planner {
                     .copied()
                     .unwrap_or(&Value::Null);
                 for skill in array(&op["skills"]).iter().filter(|s| {
-                    (1..=3).all(|l| !array(&s["requirements"][l.to_string()]).is_empty())
+                    op["specialTraining"] == true
+                        || (1..=3).all(|l| !array(&s["requirements"][l.to_string()]).is_empty())
                 }) {
                     mastery.push((
                         rarity,

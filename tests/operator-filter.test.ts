@@ -6,6 +6,8 @@ const OperatorFilters = require('../renderer/operator-filter.js') as {
   matchesSearch: (operator: any, query: string) => boolean;
   filterRows: (rows: any[], state: any) => any[];
   sortRows: (rows: any[], mode: string) => any[];
+  SORT_MODES: string[];
+  nextSort: (mode: string, property: string) => string;
   dimensionValues: (operator: any, key: string) => string[];
   valuesForRows: (rows: any[], key: string) => string[];
   hasActive: (state: any) => boolean;
@@ -87,10 +89,11 @@ test('特殊档案文本按语义归类，不会污染原始 metadata', () => {
   assert.equal(special.gender, '断罪');
 });
 
-test('培养状态为默认排序且不插入星级，其他六种排序保持可用', () => {
+test('保留默认培养倒序及全部原有排序依据，培养升序反转完整规则', () => {
   assert.equal(OperatorFilters.createState().sort, 'training-desc');
   const expected = {
     'training-desc': ['艾雅法拉', '阿斯卡纶', '阿米娅'],
+    'training-asc': ['阿米娅', '阿斯卡纶', '艾雅法拉'],
     'implementation-asc': ['阿米娅', '艾雅法拉', '阿斯卡纶'],
     'implementation-desc': ['阿斯卡纶', '阿米娅', '艾雅法拉'],
     'name-asc': ['阿米娅', '阿斯卡纶', '艾雅法拉'],
@@ -103,4 +106,84 @@ test('培养状态为默认排序且不插入星级，其他六种排序保持�
     assert.deepEqual(sorted.map(row => row.definition.name), names, mode);
     assert.deepEqual(new Set(sorted), new Set(rows), `${mode} row set`);
   }
+});
+
+test('全部排序属性重复点击交替方向，切换属性一律从升序开始', () => {
+  const properties = [...new Set(OperatorFilters.SORT_MODES.map(mode => mode.split('-')[0]))];
+  assert.equal(properties.length, 6);
+  for (const property of properties) {
+    for (const previous of OperatorFilters.SORT_MODES) {
+      let mode = OperatorFilters.nextSort(previous, property);
+      assert.equal(mode, `${property}-${previous === `${property}-asc` ? 'desc' : 'asc'}`);
+      for (let i = 0; i < 4; i += 1) {
+        const next = OperatorFilters.nextSort(mode, property);
+        assert.notEqual(next, mode);
+        assert.ok(OperatorFilters.SORT_MODES.includes(next));
+        mode = next;
+      }
+    }
+  }
+});
+
+function sortRow(id: string, owned: Record<string, unknown>) {
+  return { definition: { ...operators[0], operatorId: id, name: `干员${id}` }, owned: { operatorId: id, ...owned } };
+}
+const ids = (rows: any[]) => rows.map(row => row.definition.operatorId);
+
+test('获取时间仅使用实际秒级记录，同秒按 ID 稳定排序，缺失或非法记录双向置后', () => {
+  const known = [sortRow('z', { gainTime: 1600000000 }), sortRow('a', { gainTime: 1700000000 }), sortRow('b', { gainTime: 1700000000 })];
+  const missing = [undefined, null, 0, -1, NaN, Infinity, '1700000000', 1.5].map((gainTime, i) => sortRow(`missing${i}`, { gainTime }));
+  const input = [...missing, ...known].reverse();
+  const before = structuredClone(input);
+  for (const [mode, expected] of [
+    ['acquisition-asc', ['z', 'a', 'b', ...ids(missing)]],
+    ['acquisition-desc', ['a', 'b', 'z', ...ids(missing)]],
+  ] as const) {
+    assert.deepEqual(ids(OperatorFilters.sortRows(input, mode)), expected);
+    assert.deepEqual(ids(OperatorFilters.sortRows([...input].reverse(), mode)), expected);
+  }
+  assert.deepEqual(input, before);
+});
+
+function skillRow(id: string, rank: number, levels: number[]) {
+  return sortRow(id, { skillLevel: rank, skills: levels.map((masteryLevel, i) => ({ skillId: `skill${i}`, masteryLevel })) });
+}
+
+test('技能等级依次比较 Rank、专精总和、降序分布及 ID，倒序完整反转', () => {
+  const expected = [
+    skillRow('rank1', 1, []), skillRow('rank6', 6, [3, 3, 3]),
+    skillRow('zero', 7, [0, 0, 0]), skillRow('sum2', 7, [2, 0, 0]),
+    skillRow('spread', 7, [1, 1, 1]), skillRow('mixed', 7, [2, 1, 0]),
+    skillRow('concentrated-a', 7, [3, 0, 0]), skillRow('concentrated-b', 7, [0, 3, 0]),
+    skillRow('sum4', 7, [3, 1, 0]),
+    skillRow('sum7-third-low', 7, [3, 2, 1, 1]), skillRow('sum7-third-high', 7, [3, 2, 2, 0]),
+    skillRow('sum7-second-high', 7, [3, 3, 1, 0]), skillRow('sum9', 7, [3, 3, 3]),
+  ];
+  const input = [...expected.slice(4), ...expected.slice(0, 4)].reverse();
+  const before = structuredClone(input);
+  assert.deepEqual(ids(OperatorFilters.sortRows(input, 'skill-asc')), ids(expected));
+  assert.deepEqual(ids(OperatorFilters.sortRows(input, 'skill-desc')), ids(expected).reverse());
+  assert.deepEqual(input, before);
+});
+
+test('技能缺失按 Rank 1/未专精处理，不同技能数量补零比较，不修改原始技能顺序', () => {
+  const expected = [sortRow('a', {}), skillRow('b', 1, [0]), skillRow('c', 1, [0, 0, 0]),
+    skillRow('d', NaN, [NaN, -1, 4]), skillRow('e', 7, [3]), skillRow('f', 7, [0, 3, 0, 0, 0])];
+  assert.deepEqual(ids(OperatorFilters.sortRows([...expected].reverse(), 'skill-asc')), ids(expected));
+  assert.deepEqual(ids(OperatorFilters.sortRows(expected, 'skill-desc')), ids(expected).reverse());
+  assert.deepEqual(OperatorFilters.sortRows([], 'skill-asc'), []);
+});
+
+test('所有排序与搜索、多维筛选组合后保持结果集合与账号数据不变', () => {
+  const state = OperatorFilters.createState();
+  state.search = 'a';
+  state.selected.rarity.add('6');
+  const before = structuredClone(rows);
+  const filtered = OperatorFilters.filterRows(rows, state);
+  for (const mode of OperatorFilters.SORT_MODES) {
+    const sorted = OperatorFilters.sortRows(filtered, mode);
+    assert.deepEqual(new Set(ids(sorted)), new Set(['4132_ascln', '180_amgoat']));
+    assert.deepEqual(OperatorFilters.sortRows([...filtered].reverse(), mode), sorted, mode);
+  }
+  assert.deepEqual(rows, before);
 });
