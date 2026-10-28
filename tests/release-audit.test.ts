@@ -53,7 +53,8 @@ test('发布工作流先完成构建并仅在产物齐全后公开预发布', ()
 
   assert.ok(buildIndex >= 0 && createIndex > buildIndex);
   assert.ok(uploadIndex > createIndex && publishIndex > uploadIndex);
-  assert.match(workflow, /if \(\$assets\.Count -lt 4\) \{ throw "Release artifacts are incomplete" \}/);
+  assert.match(workflow, /\$_\.Name -eq 'SHA256SUMS\.txt'/);
+  assert.match(workflow, /if \(\$assets\.Count -lt 5\) \{ throw "Release artifacts are incomplete" \}/);
   assert.doesNotMatch(workflow, /--publish always/);
 });
 

@@ -34,12 +34,13 @@ jobs:
         run: |
           $tag = "${{ github.ref_name }}"
           $assets = Get-ChildItem release -File | Where-Object {
+            $_.Name -eq 'SHA256SUMS.txt' -or
             $_.Name -eq 'latest.yml' -or
             $_.Name -like '*-Setup-*.exe' -or
             $_.Name -eq 'beta.yml' -or
             $_.Name -like '*-Portable-*.exe'
           } | ForEach-Object { $_.FullName }
-          if ($assets.Count -lt 4) { throw "Release artifacts are incomplete" }
+          if ($assets.Count -lt 5) { throw "Release artifacts are incomplete" }
 
           gh release view $tag 2>$null
           if ($LASTEXITCODE -ne 0) {
