@@ -23,8 +23,9 @@ export async function unpackSnapshot(bytes: Buffer, directory: string, expected:
   for (const [name, content] of Object.entries(envelope.files)) {
     safeResourcePath(name);
     const info = expected.files[name];
-    if (!info || typeof content !== 'string' || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(content)) throw new Error(`资源包文件无效：${name}`);
+    if (!info || typeof content !== 'string') throw new Error(`资源包文件无效：${name}`);
     const file = Buffer.from(content, 'base64');
+    if (file.toString('base64') !== content) throw new Error(`资源包文件无效：${name}`);
     if (file.length !== info.size || sha256(file) !== info.sha256) throw new Error(`资源包文件损坏：${name}`);
     const target = path.join(directory, name);
     await mkdir(path.dirname(target), { recursive: true });
