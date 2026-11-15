@@ -14,5 +14,13 @@
   "so-b": {
     "url": "https://torappu.prts.wiki/assets/uniequip_type/so-b.png",
     "sha256": "792a9b283453a9727317c33b5afd565e1506b6751404067ce04cd890ee033f18"
+  },
+  "csr-x": {
+    "url": "https://torappu.prts.wiki/assets/uniequip_type/csr-x.png",
+    "sha256": "84e07212255fbf1d6037aca2a7e331a9879a5d6c93c3bf30ad97325ef80d5447"
+  },
+  "tac-d": {
+    "url": "https://torappu.prts.wiki/assets/uniequip_type/tac-d.png",
+    "sha256": "90a9be9f72d23049f1fa07685b865cde1d6c780c89c59bda6912076c07d495ea"
   }
 }
